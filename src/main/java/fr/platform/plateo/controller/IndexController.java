@@ -13,10 +13,10 @@ public class IndexController {
 		return "index";
 	}
 
-	@GetMapping("/pro/proForm")
-	public String proForm() {
-		
-		return "proForm";
-	}
+//	@GetMapping("/pro/proForm")
+//	public String proForm() {
+//		
+//		return "/pro/proForm";
+//	}
 
 }
