@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<title>PLATEO - ADMINISTRATION</title>
+
+</head>
+
+<body>
+	<h1 class="text-center"></h1>
+ 	
+	<div class="container pt-3">
+		<div class="row justify-content-sm-center">
+			<div class="col-sm-6 col-md-4">
+				
+				<div class="card border-info text-center">
+					<div>
+						<img alt="logo Plateo"	th:src="@{/IMG/LOGO.jpg}">
+					</div>
+					<div class="card-header">
+						<img alt="Plateo"	th:src="@{/IMG/LOGO-TEXT.jpg}">
+					</div>
+
+					<div class="card-body">
+					
+						<div>
+							
+						</div>
+
+						<div>
+							<h5 class="text-center"></h5>
+						</div>
+
+							<form class="form-signin" th:action="@{/login}" method="post">
+	
+								<input type="text" class="form-control mb-2"
+									placeholder="Utilisateur" name="username" /> <input
+									type="password" class="form-control mb-2"
+									placeholder="Mot de passe" name="password" />
+	
+								<button class="btn btn-lg btn-primary btn-block mb-1"
+									type="submit">Valider</button>
+	
+								<div th:if="${param.error}" class="alert alert-danger"
+									role="alert">Utilisateur ou mot de passe incorrect</div>
+	
+								<div th:if="${param.logout}" class="alert alert-success"
+									role="alert">Vous avez été déconnecté avec succès</div>
+							</form>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
