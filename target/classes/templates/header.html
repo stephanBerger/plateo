@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+
+<body>
+	<header th:fragment="header">
+		<div class="divimgHeader">
+			<div class="imgHeaderLeft"></div>
+
+			<div class="imgHeader">
+				<img th:src="@{/IMG/IMG_HEADER.jpg}">
+			</div>
+
+			<div class="imgHeaderRight"></div>
+
+		</div>
+
+		<section class="menu centrer">
+			<a href="#index" class="imgLogo"> <img alt="logo Plateo"
+				th:src="@{/IMG/LOGO.jpg}"> <img alt="logo Plateo"
+				th:src="@{/IMG/LOGO-TEXT.jpg}">
+			</a>
+			<nav>
+				<ul class="menuUl">
+					<li><img th:src="@{/IMG/LOUPE.jpg}"> <a href="">Rechercher
+							un Pro</a></li>
+					<li><img th:src="@{/IMG/COEUR.jpg}"> <a href="">Mes
+							favoris</a></li>
+					<li><img th:src="@{/IMG/DEVIS.jpg}"> <a href="">Demander
+							un devis</a></li>
+					<li><img th:src="@{/IMG/MAIL.jpg}"> <a href="">Messagerie</a>
+					</li>
+					<!-- -->
+					<li><img th:src="@{/IMG/PROFIL.jpg}"> <a href="/clients/">Mon
+							profil</a></li>
+				</ul>
+			</nav>
+		</section>
+
+		<div class="sousMenu"></div>
+	</header>
+</body>
+</html>

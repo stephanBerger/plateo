@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+body{
+  }
+/*-------COLOR----------*/ 
+.blue{
+	color: #0073be;
+}
+.greyClair{
+	color: #bdbdbd;
+}
+/*----------------------*/ 
+.centrer{
+	display: flex;
+  	justify-content:center;
+    align-items:center;
+}
+
+
+/*-----------------------------HEADER-----------------------------------------*/
+/*-------IMG Header----------*/
+.menu{
+	justify-content: space-between;
+}
+.imgLogo{
+	margin-left:70px;
+}
+.divimgHeader{
+	display:flex;
+}
+.imgHeaderRight{
+	height:30px;
+	width:50%;
+	background-color: #ff9500;
+}
+.imgHeaderLeft{
+	height:30px;
+	width:50%;
+	background-color: #0073be;
+}
+/*-------MENU----------*/
+.menu nav ul{
+	height:130px;
+	margin:0;
+	margin-right:20px;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    font-size:1.3rem;
+}greyClair
+ul{
+    list-style-type: none;
+  }
+.menu li {
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right: 50px;
+  } 
+.menu li a {
+    text-decoration: none;
+    color :#39424E;
+    font-weight: 600;
+}
+.menu li img {
+   width:55px;
+   height:55px;
+   margin:0;
+   padding:0;
+}
+.sousMenu{
+	height:40px;
+	background-color: #0073be;
+}
+  /*-----------------------------FIN HEADER-----------------------------------------*/
+  
+  
+.sectionIdentifier{
+	background-image: url("../IMG/IMG-FOND1.jpg");
+	width:100%;
+	/*height:100%;*/
+	max-height:100%;
+	background-position: center; /* Center the image */
+  	background-repeat: no-repeat; /* Do not repeat the image */
+  	background-size: cover; /* Resize the background image to cover the entire container */
+}
+.sectionIdentifier h1{
+	padding-top:40px;
+}
+.identifier {
+	margin:0;
+	padding:0;
+	width:460px;
+	background-color: white;
+	flex-direction: column;
+	
+	box-shadow: 0px 0px 15px 5px black;
+} 
+ .formIdentifier{
+ 	flex-direction: column;
+ }
+.formIdentifier input{
+	margin:10px;
+	width:400px;
+}   
+::placeholder {
+	font-size:1.5rem;
+	color:#bdbdbd;
+}
+input[type="email"],input[type="text"], select.email {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:20px;
+}
+input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn{
+	width:200px;
+	margin-top:20px;
+	border-radius:10px;
+	background-color:#ff9500;
+	font-weight: 600;
+	color:white;
+	font-size:1.3rem;
+}
+.identifier h2{
+ 	padding-top:15px;
+ } 
+  
+  
