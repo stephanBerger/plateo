@@ -1,13 +1,32 @@
 @charset "UTF-8";
 
-body{
-  }
+html {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 /*-------COLOR----------*/ 
 .blue{
 	color: #0073be;
 }
 .greyClair{
 	color: #bdbdbd;
+}
+.greyFonce{
+	color: #808080;
+}
+/*-----COLOR BACKGROUND-----*/
+.bgOrange{
+	background-color:#ff9500;
+}
+.bgBlue{
+	background-color:#0073be;
+}
+.bgGreyFonce{
+	background-color: #808080;
 }
 /*----------------------*/ 
 .centrer{
@@ -25,6 +44,17 @@ body{
 .imgLogo{
 	margin-left:70px;
 }
+
+.imgLogoPlateo{
+	height:120px;
+	width:120px;
+}
+
+.imgLogoText{
+	height:66px;
+	width:200px;
+}
+
 .divimgHeader{
 	display:flex;
 }
@@ -47,8 +77,7 @@ body{
     display: flex;
     justify-content: flex-end;
     font-size:1.3rem;
-}greyClair
-ul{
+}greyClair ul{
     list-style-type: none;
   }
 .menu li {
@@ -75,18 +104,28 @@ ul{
 }
   /*-----------------------------FIN HEADER-----------------------------------------*/
   
-  
+/*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
 	background-image: url("../IMG/IMG-FOND1.jpg");
 	width:100%;
-	/*height:100%;*/
-	max-height:100%;
 	background-position: center; /* Center the image */
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
+  	overflow: hidden;
+  	margin: 0;
+  	min-height: calc(100% - 50px - 200px);
+  	padding: 0;
+  	/*display : inline-block;*/
+  	position:absolute;
+  	align-items:flex-start !important;
+  	
+  	/*padding-bottom: 50px;*/
 }
-.sectionIdentifier h1{
+.sectionIdentifier h2{
 	padding-top:40px;
+}
+.h2creerCompte{
+	padding-top:0px !important;
 }
 .identifier {
 	margin:0;
@@ -95,7 +134,8 @@ ul{
 	background-color: white;
 	flex-direction: column;
 	
-	box-shadow: 0px 0px 15px 5px black;
+	box-shadow: 0px 0px 15px 0px black;
+	justify-content:flex-start !important;
 } 
  .formIdentifier{
  	flex-direction: column;
@@ -123,18 +163,102 @@ input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
   box-shadow: none;
 }
 .btn{
-
-	width:200px;
-
+	width:160px;
 	margin-top:20px;
 	border-radius:10px;
-	background-color:#ff9500;
 	font-weight: 600;
 	color:white;
 	font-size:1.3rem;
 }
-.identifier h2{
+.btnWidthLong{
+	width:300px;
+}
+.btn:hover{
+	background-color:#e68200;
+	color:white;
+}
+.hoverBlue:hover{
+	background-color:#005c99 !important;
+}
+.btnPro{
+	margin-bottom:40px;
+}
+.identifier h4{
  	padding-top:15px;
  } 
-  
-  
+ /*-----------------------------FIN IDENTIFICATION-----------------------------------------*/
+ 
+ 
+ /*-----------------------------FOOTER-----------------------------------------*/ 
+.theFooter{
+	height:50px;
+	min-height:50px;
+	position: absolute;
+   	bottom: 0;
+	width:100%;
+}
+.ulFooter{
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	list-style-type: none;
+	color :white;
+	
+	margin-right:20px;
+    padding: 0;
+}
+.ulFooter li{
+	display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right: 50px;
+}
+
+.ulFooter a{
+	color :white;
+	text-decoration: none;
+    font-weight: 500;
+    vertical-align:middle;
+	line-height: 50px;
+}
+ul{
+	margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+}
+ /*-----------------------------FIN FOOTER-----------------------------------------*/ 
+ 
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */
+@media screen and (max-width: 1440px) {
+	body{
+		max-width:1440px;
+	}
+	.imgLogo{
+		margin-left:40px;
+	}
+	.imgLogoPlateo{
+		height:100px;
+		width:100px;
+	}
+	.imgLogoText{
+		width:160px;
+		height:auto;
+	}
+	/*-------MENU----------*/
+	.menu nav ul{
+	    font-size:1rem;
+	}
+	.menu li {
+	    margin-right: 40px;
+	  }
+	.menu li img {
+	   width:45px;
+	   height:45px;
+	}
+}
+ 
+ 
+ 
