@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="/clients/head :: head">
+<head th:replace="clients/head :: head">
 </head>
 
 <body>
-	<header th:replace="/clients/header :: header">
+	<header th:replace="header :: header">-->	
 	</header>
 
 	<form action="#" th:action="@{/clients/add}" th:object="${client}" method="post">
