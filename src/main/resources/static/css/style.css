@@ -123,11 +123,9 @@ input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
   box-shadow: none;
 }
 .btn{
-<<<<<<< HEAD
-	width:120px;
-=======
+
 	width:200px;
->>>>>>> 1b777d9a87e3e9625a7e502c0a1dbcc58e1e05fe
+
 	margin-top:20px;
 	border-radius:10px;
 	background-color:#ff9500;

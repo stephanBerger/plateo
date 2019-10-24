@@ -1,4 +1,3 @@
-package fr.platform.plateo.controller;
 
 import java.io.IOException;
 import java.util.Date;
@@ -45,7 +44,7 @@ public class ClientController {
 
 		
 	// login du site
-	@GetMapping({ "/", "/login" })
+	@GetMapping({"/login" })
 	public String index() {
 		return "login";
 	}
