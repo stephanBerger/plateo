@@ -1,3 +1,5 @@
+.settings/org.eclipse.wst.common.component
+target/
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
