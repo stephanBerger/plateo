@@ -2,9 +2,9 @@
 <html xmlns:th="www.thymeleaf.org">
 <head>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<!---------------------------------------LINK CSS ------------------------------------->
+		<link th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" rel="stylesheet">
+		<link href="/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
@@ -22,11 +22,11 @@
 			<div class="col-sm-6 col-md-4">
 				
 				<div class="card border-info text-center">
-					<div>
-						<img alt="logo Plateo"	th:src="@{/IMG/LOGO.jpg}">
+					<div class="divImgLogo">
+						<img class="imgLogo" alt="logo Plateo"	th:src="@{/IMG/LOGO-BD.png}">
 					</div>
 					<div class="card-header">
-						<img alt="Plateo"	th:src="@{/IMG/LOGO-TEXT.jpg}">
+						<img class="imgLogoText" alt="Plateo"	th:src="@{/IMG/logo-texte-BD.png}">
 					</div>
 
 					<div class="card-body">
