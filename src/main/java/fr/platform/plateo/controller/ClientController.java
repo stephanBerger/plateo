@@ -1,3 +1,4 @@
+package fr.platform.plateo.controller;
 
 import java.io.IOException;
 import java.util.Date;
