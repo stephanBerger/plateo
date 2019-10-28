@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="head :: head"></head>
-<body>
-	<form method="get" th:action="@{/pro/dashboardPro}">
-		<fieldset>
-			<label for="nom_societe">Dénomination social </label> <input
-				class="form-control" id="nom_societe" name="nom_societe" type="text"
-				placeholder="Nom société" required> <label for="nom_gerant">Nom
-				du gérant </label> <input id="nom_gerant" name="nom_gerant" type="text"
-				placeholder="Nom du gérant" required> <label
-				for="prenom_gerant">Prénom du gérant </label> <input
-				id="prenom_gerant" name="prenom_gerant" type="text"
-				placeholder="Prénom du gérant" required> <label for="siren">SIREN
-			</label> <input class="form-control" id="siren" name="siren" type="number"
-				placeholder="" pattern="[0-9]{9}" required> <label
-				for="code_postal">Code Postal </label> <input class="form-control"
-				id="code_postal" name="code_postal" type="number" placeholder=""
-				pattern="[0-9]{5}" required>
 
+<head th:replace="head :: head"></head>
+
+<body>
+	<form method="post" th:action="@{/pro/create}">
+		<fieldset>
+			<label for="nom_societe">Dénomination social </label>
+			<input class="form-control" id="nom_societe" name="nom_societe" type="text" placeholder="Nom société"
+				required>
+			<label for="nom_pro">Nom du gérant </label>
+			<input id="nom_pro" name="nom_pro" type="text" placeholder="Nom du gérant" required> <label
+				for="prenom_pro">Prénom du gérant </label> <input id="prenom_pro" name="prenom_pro" type="text"
+				placeholder="Prénom du gérant" required>
+			<label for="siren">SIREN</label> <input class="form-control" id="siren" name="siren" type="text"
+				placeholder="N° Siren"  required>
+				
+			<label for="code_postal">Code Postal </label> <input class="form-control" id="code_postal"
+				name="code_postal" type="number" placeholder="" pattern="[0-9]{5}" required>
+			<label for="email">Email</label> <input type="email"class="form-control" name="email" placeholder="exemple@test.fr" >
 			<p>
-				<label for="passwordInput">Password: <input
-					class="form-control" type="password" id="passwordInput"
-					name="passwordInput"></label>
+				<label for="passwordInput">Password: <input class="form-control" type="password" id="passwordInput"
+						name="mot_passe_pro" required></label>
 			</p>
 			<p>
-				<label for="confirmPasswordInput">Confirm Password: <input
-					class="form-control" type="password" id="confirmPasswordInput"
-					name="confirmPasswordInput"></label>
+				<label for="confirmPasswordInput">Confirm Password: <input class="form-control" type="password"
+						id="confirmPasswordInput" name="confirmPasswordInput" required></label>
 			</p>
 			<p>
-			<div class="" id="passwordStrength"></div>
+				<div class="" id="passwordStrength"></div>
 			</p>
-			<p>
-				<input type="submit" value="Change Password" class="btn">
-			</p>
+
 
 			<input type="submit" value="Envoyer">
 
 		</fieldset>
 	</form>
 </body>
+
 </html>
