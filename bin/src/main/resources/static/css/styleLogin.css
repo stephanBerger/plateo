@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.divImgLogo{
+	padding-top:20px;
+}
+.imgLogo{
+	height:120px;
+	width:120px;	
+}
+.imgLogoText{
+	height:75px;
+	width:200px;	
+}
+.card-header{
+	background-color :white; 
+	padding-top:20px;
+}

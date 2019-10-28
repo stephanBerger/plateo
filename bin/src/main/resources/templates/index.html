@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+
+<body>
+	<header th:replace="header :: header">-->	
+	</header>
+			
+	<section class="sectionIdentifier centrer">
+		<!---->  <div class="identifier centrer">
+			<h2 class="blue">
+				Identifiez-vous
+			</h2>
+			<form  class="formIdentifier centrer">
+	            <input type="email" class="email" placeholder="Saisir adresse email">
+	            <input type="text" class="email" placeholder="Saisir mot de passe">
+	            <button class="btn bgOrange">Valider</button>
+        	</form>
+			
+			<h4 class="greyClair">‒ ou ‒</h4>
+			<h2 class="h2creerCompte blue">Créez un compte</h2> 
+			<a href="/clients/new_client" >
+			<button class="btn btnWidthLong hoverBlue bgBlue">PARTICULIER</button>	
+			</a>
+			<a href="/pro/proForm" >
+			<button class="btn btnPro btnWidthLong bgOrange">PROFESSIONNEL</button>	
+			</a>
+		</div>
+	</section>	
+	<footer class="theFooter bgGreyFonce">
+			<nav>
+				<ul class="ulFooter">
+					<li>
+						<a href="/footer/qui_sommes_nous" >
+							QUI SOMMES NOUS ?
+						</a>
+					</li>
+					<li>
+						<a href="/footer/mentions_legales" >
+							MENTIONS LEGALES
+						</a>
+					</li>
+					<li>
+						<a href="/footer/faq" >
+							FAQ
+						</a>
+					</li>
+				</ul>
+			</nav>
+	</footer>
+			
+</body>
