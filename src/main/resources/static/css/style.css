@@ -97,6 +97,9 @@ body {
     font-weight: 600;
     text-align:center;
 }
+.textIdentifier{
+	line-height: 1.1;
+}
 .menu li img {
    width:55px;
    height:55px;
@@ -295,4 +298,3 @@ ul{
 	   height:45px;
 	}
 }
- 
