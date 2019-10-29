@@ -34,6 +34,10 @@ body {
   	justify-content:center;
     align-items:center;
 }
+.left{
+	display: flex;
+  	justify-content: flex-start;
+}
 
 
 /*-----------------------------HEADER-----------------------------------------*/
@@ -294,4 +298,3 @@ ul{
 	   height:45px;
 	}
 }
- 

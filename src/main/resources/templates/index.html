@@ -4,7 +4,7 @@
 </head>
 
 <body>
-	<header th:replace="header :: header">-->	
+	<header th:replace="header :: header">-	
 	</header>
 			
 	<section class="sectionIdentifier centrer">
@@ -28,26 +28,7 @@
 			</a>
 		</div>
 	</section>	
-	<footer class="theFooter bgGreyFonce">
-			<nav>
-				<ul class="ulFooter">
-					<li>
-						<a href="/footer/qui_sommes_nous" >
-							QUI SOMMES NOUS ?
-						</a>
-					</li>
-					<li>
-						<a href="/footer/mentions_legales" >
-							MENTIONS LEGALES
-						</a>
-					</li>
-					<li>
-						<a href="/footer/faq" >
-							FAQ
-						</a>
-					</li>
-				</ul>
-			</nav>
+	<footer th:replace="footer :: footer">
 	</footer>
 			
 </body>

@@ -7,15 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/pro")
 public class proController {
+	
 	@GetMapping("/proForm")
 	public String proForm() {
-		return "/proForm";
+		return "pro/proForm";
 	}
 	
 	@GetMapping("/dashboardPro")
 	public String dashboardPro() {
 		
-		return "/dashboardPro";
+		return "dashboardPro";
 	}
 
 }

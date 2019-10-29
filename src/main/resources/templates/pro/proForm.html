@@ -1,43 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="head :: headBoot">
+<head th:replace="pro/head :: head">
+</head>
+
 <body>
-	<form method="get" th:action="@{/pro/dashboardPro}">
-		<fieldset>
-			<label for="nom_societe">Dénomination social </label> <input
-				class="form-control" id="nom_societe" name="nom_societe" type="text"
-				placeholder="Nom société" required> <label for="nom_gerant">Nom
-				du gérant </label> <input id="nom_gerant" name="nom_gerant" type="text"
-				placeholder="Nom du gérant" required> <label
-				for="prenom_gerant">Prénom du gérant </label> <input
-				id="prenom_gerant" name="prenom_gerant" type="text"
-				placeholder="Prénom du gérant" required> <label for="siren">SIREN
-			</label> <input class="form-control" id="siren" name="siren" type="number"
-				placeholder="" pattern="[0-9]{9}" required> <label
-				for="code_postal">Code Postal </label> <input class="form-control"
-				id="code_postal" name="code_postal" type="number" placeholder=""
-				pattern="[0-9]{5}" required>
-
-			<p>
-				<label for="passwordInput">Password: <input
-					class="form-control" type="password" id="passwordInput"
-					name="passwordInput"></label>
-			</p>
-			<p>
-				<label for="confirmPasswordInput">Confirm Password: <input
-					class="form-control" type="password" id="confirmPasswordInput"
-					name="confirmPasswordInput"></label>
-			</p>
-			<p>
+	<header th:replace="header :: header">	
+	</header>
+	
+	<section class="centrer">
+		<form class="centrer sectionFormClient" method="get" th:action="@{/pro/dashboardPro}">
+		<!--  <fieldset>
+			<div class="centrer sectionForm">-->
+			<div class="formIdentifierLeft">
+			<div class="form-group formIdentifier left">
+			<label for="nom_societe" class="col-form-label blue labelForm">Dénomination sociale </label>
+			<input class="email" id="nom_societe" name="nom_societe" type="text"
+				placeholder="Nom société" required/>
+			</div>	
+			<div class="form-group formIdentifier left">
+			<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
+			<input class="email"  id="nom_gerant" name="nom_gerant" type="text"
+				placeholder="Nom du gérant" required/>
+			</div>	
+			<div class="form-group formIdentifier left">
+			<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
+			<input class="email"  id="prenom_gerant" name="prenom_gerant" type="text"
+				placeholder="Prénom du gérant" required/>
+			</div>	
+			<div class="form-group formIdentifier left">
+			<label for="siren" class="col-form-label blue labelForm">SIREN</label>
+			<input class="email" id="siren" name="siren" type="number"
+				placeholder="" pattern="[0-9]{9}" required/>
+			</div>
+			</div>
+			<div class="formIdentifierRight">	
+			<div class="form-group formIdentifier left">
+			<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
+			<input class="email" id="code_postal" name="code_postal" type="number" placeholder=""
+				pattern="[0-9]{5}" required/>
+			</div>	
+			<div class="form-group formIdentifier left">
+			<label for="passwordInput" class="col-form-label blue labelForm">Password:</label>
+			<input class="email" type="password" id="passwordInput"
+					name="passwordInput"/>
+			</div>	
+			<div class="form-group formIdentifier left">
+			<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password:</label>
+			<input class="email" type="password" id="confirmPasswordInput"
+					name="confirmPasswordInput"/>
+			</div>
+			</div>
 			<div class="" id="passwordStrength"></div>
-			</p>
-			<p>
-				<input type="submit" value="Change Password" class="btn">
-			</p>
-
-			<input type="submit" value="Envoyer">
-
-		</fieldset>
-	</form>
+			<input type="submit" value="Change Password" class="btn"/>
+			<input type="submit" value="Envoyer"/>
+		<!--  </fieldset>
+		</div>-->
+		</form>
+	</section>
+	<footer th:replace="footer :: footer">
+	</footer>
 </body>
 </html>
