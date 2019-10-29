@@ -28,6 +28,12 @@ body {
 .bgGreyFonce{
 	background-color: #808080;
 }
+.bggreyClair{
+	color: #bdbdbd;
+}
+.bggreyTresClair{
+	color: #e6e6e6;
+}
 /*----------------------*/ 
 .centrer{
 	display: flex;
@@ -97,6 +103,10 @@ body {
     font-weight: 600;
     text-align:center;
 }
+.menu li a p {
+	margin-bottom:0;
+	
+}
 .textIdentifier{
 	line-height: 1.1;
 }
@@ -118,14 +128,13 @@ body {
 .sectionIdentifier{
 	background-image: url("../IMG/IMG-FOND1.jpg");
 	width:100%;
+	min-height: calc(100% - 50px - 181px);
 	background-position: center; /* Center the image */
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
   	overflow: hidden;
   	margin: 0;
-  	min-height: calc(100% - 50px - 200px);
   	padding: 0;
-  	/*display : inline-block;*/
   	position:absolute;
   	align-items:flex-start !important;
   	
@@ -154,11 +163,19 @@ body {
 	margin:10px;
 	width:400px;
 }   
+.labelForm{
+ 	font-weight: 500;
+  	line-height: 1.2;
+  	font-size: 1.6rem;
+ } 
 ::placeholder {
-	font-size:1.5rem;
+	/*font-size:1.5rem;
+	color:#bdbdbd;*/
+	font-size:1.3rem;
 	color:#bdbdbd;
+	font-style: italic;
 }
-input[type="email"],input[type="text"], select.email {
+input[type="email"],input[type="text"], select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -168,7 +185,7 @@ input[type="email"],input[type="text"], select.email {
   margin:10px;
   margin-top:20px;
 }
-input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
+input[type="email"]:focus,input[type="text"]:focus, select.champsFormulaire:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }

@@ -7,57 +7,128 @@
 	<header th:replace="header :: header">	
 	</header>
 	
-	<section class="centrer">
-		<form class="centrer sectionFormClient" method="get" th:action="@{/pro/dashboardPro}">
-		<!--  <fieldset>
-			<div class="centrer sectionForm">-->
-			<div class="formIdentifierLeft">
-			<div class="form-group formIdentifier left">
-			<label for="nom_societe" class="col-form-label blue labelForm">Dénomination sociale </label>
-			<input class="email" id="nom_societe" name="nom_societe" type="text"
-				placeholder="Nom société" required/>
-			</div>	
-			<div class="form-group formIdentifier left">
-			<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
-			<input class="email"  id="nom_gerant" name="nom_gerant" type="text"
-				placeholder="Nom du gérant" required/>
-			</div>	
-			<div class="form-group formIdentifier left">
-			<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
-			<input class="email"  id="prenom_gerant" name="prenom_gerant" type="text"
-				placeholder="Prénom du gérant" required/>
-			</div>	
-			<div class="form-group formIdentifier left">
-			<label for="siren" class="col-form-label blue labelForm">SIREN</label>
-			<input class="email" id="siren" name="siren" type="number"
-				placeholder="" pattern="[0-9]{9}" required/>
-			</div>
-			</div>
-			<div class="formIdentifierRight">	
-			<div class="form-group formIdentifier left">
-			<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
-			<input class="email" id="code_postal" name="code_postal" type="number" placeholder=""
-				pattern="[0-9]{5}" required/>
-			</div>	
-			<div class="form-group formIdentifier left">
-			<label for="passwordInput" class="col-form-label blue labelForm">Password:</label>
-			<input class="email" type="password" id="passwordInput"
-					name="passwordInput"/>
-			</div>	
-			<div class="form-group formIdentifier left">
-			<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password:</label>
-			<input class="email" type="password" id="confirmPasswordInput"
-					name="confirmPasswordInput"/>
-			</div>
-			</div>
-			<div class="" id="passwordStrength"></div>
-			<input type="submit" value="Change Password" class="btn"/>
-			<input type="submit" value="Envoyer"/>
-		<!--  </fieldset>
-		</div>-->
-		</form>
+	<section class="sectionNouvPro centrer">
+		<div class="centrer carreBlanc">
+			<form class="centrer sectionFormPro" method="get" th:action="@{/pro/dashboardPro}">
+				<div class="centrer sectionForm">
+					<div class="formIdentifierLeft">
+						<div class="form-group formIdentifier left">
+							<label for="nom_societe" class="col-form-label blue labelForm">Dénomination sociale </label>
+							<input class="champsFormulaire" id="nom_societe" name="nom_societe" type="text"
+									placeholder="Nom société" required/>
+						</div>	
+						<div class="form-group formIdentifier left">
+							<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
+							<input class="champsFormulaire"  id="nom_gerant" name="nom_gerant" type="text"
+									placeholder="Nom du gérant" required/>
+						</div>	
+						<div class="form-group formIdentifier left">
+							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
+							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
+									placeholder="Prénom du gérant" required/>
+						</div>	
+						<div class="form-group formIdentifier left">
+							<label for="siren" class="col-form-label blue labelForm">SIRET</label>
+							<input class="champsFormulaire" id="siren" name="siren" type="number"
+									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" required/>
+						</div>
+					</div>
+					<div class="formIdentifierRight">	
+						<div class="form-group formIdentifier left">
+							<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
+							<input class="champsFormulaire" id="code_postal" name="code_postal" type="number"
+									placeholder="Saisir son code postal" pattern="[0-9]{5}" required/>
+						</div>	
+						<div class="form-group formIdentifier left">
+							<label for="passwordInput" class="col-form-label blue labelForm">Password:</label>
+							<input class="champsFormulaire" type="password" id="passwordInput"
+									placeholder="Créez un mot de passe" name="passwordInput"/>
+						</div>	
+						<div class="form-group formIdentifier left">
+							<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password:</label>
+							<input class="champsFormulaire" type="password" id="confirmPasswordInput"
+									placeholder="Confirmez votre mot de passe" name="confirmPasswordInput"/>
+						</div>
+					</div>
+				</div>
+				<div class="" id="passwordStrength"></div>
+				<input type="submit" value="Change Password" class="btn"/>
+				<input type="submit" value="Envoyer"/>
+			<!--  </fieldset>
+			</div>-->
+			</form>
+		</div>
 	</section>
 	<footer th:replace="footer :: footer">
 	</footer>
 </body>
 </html>
+
+
+
+
+
+<!-- 
+
+						
+							
+						</div>
+					</div>	
+					<div class="formIdentifierLeft">
+						<div class="form-group formIdentifier left">	
+							
+							<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
+							<input class="champsFormulaire"  id="nom_gerant" name="nom_gerant" type="text"
+								placeholder="Nom du gérant" required/>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
+							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
+									placeholder="Prénom du gérant" required/>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
+							<input class="champsFormulaire" id="siret" name="siret" type="number"
+									placeholder="" pattern="[0-14]{14}" required/>
+						</div>
+					</div>	
+					<div class="formIdentifierLeft">
+						<div class="form-group formIdentifier left">
+							<label for="code_postal" class="col-form-label blue labelForm">Code Postal</label>
+							<input type="text" id="code_postal" th:field="*{code_postal}"
+								class="champsFormulaire" placeholder="Saisir code postal" />
+							<span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}" class="text-danger">
+							</span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="mot_de_passe" class="col-form-label blue labelForm">Mot de passe</label>
+							<input type="text" id="mot_de_passe" th:field="*{mot_de_passe}"
+									class="champsFormulaire" placeholder="Champs obligatoire" />
+							<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="text-danger">
+							</span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="mot_de_passe" class="col-form-label blue labelForm">Confirmer le mot de passe</label>
+							<input type="text" id="confirmPasswordInput" name="confirmPasswordInput" th:field="*{mot_de_passe}"
+									class="champsFormulaire" placeholder="Champs obligatoire" />
+							<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="text-danger">
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="centrer sectionButton">
+						<a href="/index">
+							<button type="submit" class="btn bgGreyFonce MarginClient">Annuler</button>
+						</a>
+						<a href="">
+							<button type="submit" class="btn bgOrange MarginClient">Valider</button>
+						</a>
+				</div>
+			</form>
+		</div>
+		<div class="divVide"></div>
+	</section>
+	<footer th:replace="footer :: footer">
+	</footer>
+</body>
+</html> -->

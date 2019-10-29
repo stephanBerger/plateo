@@ -22,7 +22,7 @@
 								<label for="nom" class="col-form-label">Nom</label> 
 								
 								<input
-									type="text" id="nom" th:field="*{nom}" class="form-control"
+									type="text" id="nom" th:field="*{nom}" class="champsFormulaire"
 									placeholder="Obligatoire" /> <span
 									th:if="${#fields.hasErrors('nom')}"
 									th:errors="*{nom}" class="text-danger"></span>
@@ -30,7 +30,7 @@
 
 							<div class="form-group">
 								<label for="prenom" class="col-form-label">Prénom</label> <input
-									type="text" id="prenom" th:field="*{prenom}" class="form-control"
+									type="text" id="prenom" th:field="*{prenom}" class="champsFormulaire"
 									placeholder="Obligatoire" /> <span
 									th:if="${#fields.hasErrors('prenom')}"
 									th:errors="*{prenom}" class="text-danger"></span>
@@ -38,7 +38,7 @@
 
 							<div class="form-group">
 								<label for="email" class="col-form-label">Email</label> <input
-									type="text" id="email" th:field="*{email}" class="form-control"
+									type="text" id="email" th:field="*{email}" class="champsFormulaire"
 									placeholder="Obligatoire" /> <span
 									th:if="${#fields.hasErrors('email')}"
 									th:errors="*{email}" class="text-danger"></span>
@@ -47,7 +47,7 @@
 							<div class="form-group">
 								<label for="mot_de_passe" class="col-form-label">Mot
 									de passe</label> <input type="text" id="mot_de_passe" th:field="*{mot_de_passe}"
-									class="form-control" placeholder="Obligatoire" /> <span
+									class="champsFormulaire" placeholder="Obligatoire" /> <span
 									th:if="${#fields.hasErrors('mot_de_passe')}"
 									th:errors="*{mot_de_passe}" class="text-danger"></span>
 							</div>

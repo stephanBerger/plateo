@@ -25,19 +25,44 @@
 }
 
   /*-----------------------------FIN HEADER-----------------------------------------*/
+ 
+ .sectionNouvClient{
+	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
+	width:100%;
+	min-height: calc(100% - 50px - 181px);
+	background-color:#e6e6e6;
+  	overflow: hidden;
+  	margin: 0;
+  	padding: 0;
+  	position:absolute;
+  	
+  	flex-direction:column;
+  	justify-content:space-between;
+}
+.carreBlanc{
+	margin:0;
+	padding:0;
+	background-color: white;
+	box-shadow: 0px 0px 15px 0px #bdbdbd;
+	min-height: calc(100% - 50px - 181px) !important;
+	
+	align-items:flex-start !important;
+	flex-grow: 1;
+}
+.divVide{
+	height:0px;
+}
  .sectionFormClient{
  	display:flex;
  	flex-direction:column;
  	justify-content:center;
  	padding-top:30px;
+ 	min-height: calc(100% - 50px - 181px) !important;
  }
  .sectionForm{
  	display:flex;
  	flex-direction:row;
  	justify-content:flex-start;
- }
- .sectionButton{
- 	
  }
  .formIdentifier label{
  	padding-left:10px;
@@ -46,26 +71,17 @@
  	padding-left:20px;
  	padding-right:20px;
  }
- .formIdentifierLeft{
- 	
- }
- .formIdentifierRight{
- 	
- }
  .MarginClient{
  	margin-left:40px;
  	margin-right:40px;
  }
- .labelForm{
- 	font-weight: 500;
-  	line-height: 1.2;
-  	font-size: 1.5rem;
- } 
+
  ::placeholder {
-	font-size:1.5rem;
+	font-size:1.3rem;
 	color:#bdbdbd;
+	font-style: italic;
 }
-input[type="email"],input[type="text"], select.email {
+input[type="email"],input[type="text"], select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -73,37 +89,8 @@ input[type="email"],input[type="text"], select.email {
   box-shadow: none;
   border-radius: 0;
   margin:10px;
-  margin-top:20px;
+  margin-top:5px;
 }
-input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.btn{
-	width:160px;
-	margin-top:20px;
-	border-radius:10px;
-	font-weight: 600;
-	color:white;
-	font-size:1.3rem;
-}
-.btnWidthLong{
-	width:300px;
-}
-.btn:hover{
-	background-color:#e68200;
-	color:white;
-}
-.hoverBlue:hover{
-	background-color:#005c99 !important;
-}
-.btnPro{
-	margin-bottom:40px;
-}
-.identifier h4{
- 	padding-top:15px;
- } 
-  
   
   
   

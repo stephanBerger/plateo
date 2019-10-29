@@ -5,6 +5,61 @@
 /*.divimgHeader{
 	display:flex;
 }*/
+.sectionNouvPro{
+	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
+	width:100%;
+	min-height: calc(100% - 50px - 181px);
+	background-color:#e6e6e6;
+  	overflow: hidden;
+  	margin: 0;
+  	padding: 0;
+  	position:absolute;
+  	
+  	flex-direction:column;
+  	justify-content:space-between;
+}
+.carreBlanc{
+	margin:0;
+	padding:0;
+	background-color: white;
+	box-shadow: 0px 0px 15px 0px #bdbdbd;
+	min-height: calc(100% - 50px - 181px) !important;
+	
+	align-items:flex-start !important;
+	flex-grow: 1;
+}
+.divVide{
+	height:0px;
+}
+ .sectionFormPro{
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:center;
+ 	padding-top:30px;
+ 	min-height: calc(100% - 50px - 181px) !important;
+ }
+ .sectionForm{
+ 	display:flex;
+ 	flex-direction:row;
+ 	justify-content:flex-start;
+ 	align-items:flex-start;
+ 	
+ }
+ .formIdentifier label{
+ 	padding-left:10px;
+ }
+ .formIdentifierLeft, .formIdentifierRight{
+ 	padding-left:20px;
+ 	padding-right:20px;
+ }
+ .MarginClient{
+ 	margin-left:40px;
+ 	margin-right:40px;
+ }
+ 
+ 
+ 
+ 
 .divimgHeader{
 	display:flex;
 	justify-content:space-between;
@@ -23,7 +78,16 @@
 	background-color: #ff9500;
 	flex-grow: 3;
 }
-
+input, select.champsFormulaire {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:5px !important;
+}
 /*.menu{
 	justify-content: space-between;
 }
