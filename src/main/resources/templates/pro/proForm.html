@@ -4,7 +4,7 @@
 </head>
 
 <body>
-	<header th:replace="header :: header">	
+	<header th:replace="pro/header :: header">	
 	</header>
 	
 	<section class="sectionNouvPro centrer">
@@ -23,38 +23,55 @@
 									placeholder="Nom du gérant" required/>
 						</div>	
 						<div class="form-group formIdentifier left">
-							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
-									placeholder="Prénom du gérant" required/>
-						</div>	
+							<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
+							<input class="champsFormulaire" id="code_postal" name="code_postal" type="number"
+									placeholder="Saisir son code postal" pattern="[0-9]{5}" required/>
+						</div>
+					</div>
+					<div class="formIdentifierRight">	
 						<div class="form-group formIdentifier left">
 							<label for="siren" class="col-form-label blue labelForm">SIRET</label>
 							<input class="champsFormulaire" id="siren" name="siren" type="number"
 									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" required/>
 						</div>
+						<div class="form-group formIdentifier left">
+							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
+							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
+									placeholder="Prénom du gérant" required/>
+						</div>
 					</div>
-					<div class="formIdentifierRight">	
+				</div>
+				<div class="sectionForm ">
+					<div class="formIdentifierRight sectionForm">	
 						<div class="form-group formIdentifier left">
-							<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
-							<input class="champsFormulaire" id="code_postal" name="code_postal" type="number"
-									placeholder="Saisir son code postal" pattern="[0-9]{5}" required/>
-						</div>	
-						<div class="form-group formIdentifier left">
-							<label for="passwordInput" class="col-form-label blue labelForm">Password:</label>
+							<label for="passwordInput" class="col-form-label blue labelForm">Password :</label>
 							<input class="champsFormulaire" type="password" id="passwordInput"
 									placeholder="Créez un mot de passe" name="passwordInput"/>
-						</div>	
+						</div>
+					</div>
+					<div class="formIdentifierRight sectionForm">		
 						<div class="form-group formIdentifier left">
-							<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password:</label>
+							<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password :</label>
 							<input class="champsFormulaire" type="password" id="confirmPasswordInput"
 									placeholder="Confirmez votre mot de passe" name="confirmPasswordInput"/>
 						</div>
 					</div>
 				</div>
+				<div class="centrer sectionButton">
+					<a href="" class="greyFonce changePassword">
+						Changer de mot de passe
+					</a>
+					<a href="/index">
+						<button type="submit" class="btn bgOrange MarginClient">Envoyer</button>
+					</a>
+						
+				</div>
+				
+				<!-- 
 				<div class="" id="passwordStrength"></div>
 				<input type="submit" value="Change Password" class="btn"/>
 				<input type="submit" value="Envoyer"/>
-			<!--  </fieldset>
+			 </fieldset>
 			</div>-->
 			</form>
 		</div>

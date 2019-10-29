@@ -4,6 +4,9 @@
 
 <body>
 	<header th:fragment="header">
+		<div class="textedivimgHeader centrer white">
+			PARTICULIER
+		</div>
 		<div class="divimgHeader">
 			<div class="imgHeaderLeft"></div>
 
@@ -15,18 +18,37 @@
 
 		</div>
 
+
 		<section class="menu centrer">
-			<a href="#index" class="imgLogo"> <img alt="logo Plateo"
-				th:src="@{/IMG/LOGO.jpg}"> <img alt="logo Plateo"
-				th:src="@{/IMG/LOGO-TEXT.jpg}">
+			<a href="/templates/index" th:href="@{/index}" class="imgLogo">
+				<img class="imgLogoPlateo" alt="logo Plateo" th:src="@{/IMG/LOGO-BD.png}">
+				<img  class="imgLogoText" alt="logo textuel Plateo" th:src="@{/IMG/logo-texte-BD.png}">
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
+					<li>
+						<img th:src="@{/IMG/LOUPE.jpg}">
+						<a href="">Rechercher un Pro</a>
+					</li>
+					<li>
+						<img th:src="@{/IMG/COEUR.jpg}">
+						<a href="">Mes favoris</a>
+					</li>
+					<li>
+						<img th:src="@{/IMG/DEVIS.jpg}">
+						<a href="">Demander un devis</a>
+					</li>
+					<li>
+						<img th:src="@{/IMG/MAIL.jpg}">
+						<a href="">Messagerie</a>
+					</li>
+					
+					<li>
+						<img th:src="@{/IMG/PROFIL.jpg}">
+						<a class="textIdentifier" href="/inscription">Mon profil</a>
+						<!-- <a class="textIdentifier" href="/templates/inscription" th:href="@{/inscription}" >S'identifier <p> ou s'inscrire </p></a>-->
+
+					</li>
 				</ul>
 			</nav>
 		</section>

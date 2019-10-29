@@ -5,7 +5,31 @@
 /*.divimgHeader{
 	display:flex;
 }*/
-.sectionNouvPro{
+
+ 
+ 
+ 
+.divimgHeader{
+	display:flex;
+	justify-content:space-between;
+	padding:0px;
+	margin:0px;
+}
+.imgHeader{
+	color:white;
+}
+.imgHeaderLeft{
+	width:20px !important;
+	background-color: #0073be;
+}
+.imgHeaderRight{
+	width:auto !important;
+	background-color: #ff9500;
+	flex-grow: 3;
+}
+  /*-----------------------------FIN HEADER-----------------------------------------*/
+ 
+ .sectionNouvPro{
 	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
 	width:100%;
 	min-height: calc(100% - 50px - 181px);
@@ -43,7 +67,16 @@
  	flex-direction:row;
  	justify-content:flex-start;
  	align-items:flex-start;
- 	
+ }
+ .changePassword{
+ 	line-height:2;
+ 	font-size: 1.2rem;
+    font-weight: 500;
+    /*margin-left :50px;*/
+ }
+ .sectionButton{
+ 	display:flex;
+ 	flex-direction:column;
  }
  .formIdentifier label{
  	padding-left:10px;
@@ -56,29 +89,7 @@
  	margin-left:40px;
  	margin-right:40px;
  }
- 
- 
- 
- 
-.divimgHeader{
-	display:flex;
-	justify-content:space-between;
-	padding:0px;
-	margin:0px;
-}
-.imgHeader{
-	color:white;
-}
-.imgHeaderLeft{
-	width:20px !important;
-	background-color: #0073be;
-}
-.imgHeaderRight{
-	width:auto !important;
-	background-color: #ff9500;
-	flex-grow: 3;
-}
-input, select.champsFormulaire {
+ input, select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -87,67 +98,7 @@ input, select.champsFormulaire {
   border-radius: 0;
   margin:10px;
   margin-top:5px !important;
-}
-/*.menu{
-	justify-content: space-between;
-}
-.imgLogo{
-	margin-left:70px;
-}
-
-.imgLogoPlateo{
-	height:120px;
-	width:120px;
-}
-
-.imgLogoText{
-	height:75px;
-	width:200px;
-}
-*/
-
-/*-------MENU----------*/
-/*.menu nav ul{
-	height:130px;
-	margin:0;
-	margin-right:20px;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-    font-size:1.3rem;
-}greyClair ul{
-    list-style-type: none;
-  }
-.menu li {
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin-right: 50px;
-  } 
-.menu li a {
-    text-decoration: none;
-    color :#39424E;
-    font-weight: 600;
-}
-.menu li img {
-   width:55px;
-   height:55px;
-   margin:0;
-   padding:0;
-}
-.sousMenu{
-	height:40px;
-	background-color: #0073be;
-}*/
-  /*-----------------------------FIN HEADER-----------------------------------------*/
-  
-  .sectionFormPro{
- 	display:flex;
- 	flex-direction:column;
- 	justify-content:flex-start;
- 	padding-top:30px;
- }
+} 
  
  
  
