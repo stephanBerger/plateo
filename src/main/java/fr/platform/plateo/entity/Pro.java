@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -34,6 +35,9 @@ public class Pro {
 	@Column(name = "siren", length = 9, nullable = false)
 	private String siren;
 
+	@NotBlank(message = "Email obligatoire")
+	@Email(message = "Email au mauvais format")
+	@Column(name = "email_pro", length = 50, nullable = false)
 	private String email_pro;
 
 	private String mot_passe_pro;
@@ -62,10 +66,11 @@ public class Pro {
 	public Pro() {
 	}
 
-	public Pro(@NotBlank(message = "Nom société obligatoire") String nom_societe,
-			@NotBlank(message = "Nom gérant obligatoire") String nom_pro,
-			@NotBlank(message = "Prénom gérant obligatoire") String prenom_pro,
-			@NotBlank(message = "Siren obligatoire") String siren, String email_pro,
+	public Pro(String nom_societe,
+			String nom_pro,
+			String prenom_pro,
+			String email_pro,
+			String siren,
 			String mot_passe_pro, Integer code_postal) {
 		this.nom_societe = nom_societe;
 		this.nom_pro = nom_pro;
