@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="head :: headBoot">
+<body>
+	<form method="get" th:action="@{/pro/dashboardPro}">
+		<fieldset>
+			<label for="nom_societe">Dénomination social </label> <input
+				class="form-control" id="nom_societe" name="nom_societe" type="text"
+				placeholder="Nom société" required> <label for="nom_gerant">Nom
+				du gérant </label> <input id="nom_gerant" name="nom_gerant" type="text"
+				placeholder="Nom du gérant" required> <label
+				for="prenom_gerant">Prénom du gérant </label> <input
+				id="prenom_gerant" name="prenom_gerant" type="text"
+				placeholder="Prénom du gérant" required> <label for="siren">SIREN
+			</label> <input class="form-control" id="siren" name="siren" type="number"
+				placeholder="" pattern="[0-9]{9}" required> <label
+				for="code_postal">Code Postal </label> <input class="form-control"
+				id="code_postal" name="code_postal" type="number" placeholder=""
+				pattern="[0-9]{5}" required>
+
+			<p>
+				<label for="passwordInput">Password: <input
+					class="form-control" type="password" id="passwordInput"
+					name="passwordInput"></label>
+			</p>
+			<p>
+				<label for="confirmPasswordInput">Confirm Password: <input
+					class="form-control" type="password" id="confirmPasswordInput"
+					name="confirmPasswordInput"></label>
+			</p>
+			<p>
+			<div class="" id="passwordStrength"></div>
+			</p>
+			<p>
+				<input type="submit" value="Change Password" class="btn">
+			</p>
+
+			<input type="submit" value="Envoyer">
+
+		</fieldset>
+	</form>
+</body>
+</html>

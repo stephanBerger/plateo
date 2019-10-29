@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/*-----------------------------HEADER-----------------------------------------*/
+/*-------IMG Header----------*/
+/*.divimgHeader{
+	display:flex;
+}*/
+.divimgHeader{
+	display:flex;
+	justify-content:space-between;
+	padding:0px;
+	margin:0px;
+}
+.imgHeader{
+	color:white;
+}
+.imgHeaderLeft{
+	width:auto !important;
+	background-color: #0073be;
+	flex-grow: 3;
+}
+.imgHeaderRight{
+	width:20px !important;
+	background-color: #ff9500;
+}
+
+/*.menu{
+	justify-content: space-between;
+}
+.imgLogo{
+	margin-left:70px;
+}
+
+.imgLogoPlateo{
+	height:120px;
+	width:120px;
+}
+
+.imgLogoText{
+	height:75px;
+	width:200px;
+}
+*/
+
+/*-------MENU----------*/
+/*.menu nav ul{
+	height:130px;
+	margin:0;
+	margin-right:20px;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    font-size:1.3rem;
+}greyClair ul{
+    list-style-type: none;
+  }
+.menu li {
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    margin-right: 50px;
+  } 
+.menu li a {
+    text-decoration: none;
+    color :#39424E;
+    font-weight: 600;
+}
+.menu li img {
+   width:55px;
+   height:55px;
+   margin:0;
+   padding:0;
+}
+.sousMenu{
+	height:40px;
+	background-color: #0073be;
+}*/
+  /*-----------------------------FIN HEADER-----------------------------------------*/
+  

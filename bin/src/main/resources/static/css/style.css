@@ -34,10 +34,6 @@ body {
   	justify-content:center;
     align-items:center;
 }
-.left{
-	display: flex;
-  	justify-content: flex-start;
-}
 
 
 /*-----------------------------HEADER-----------------------------------------*/
@@ -95,7 +91,6 @@ body {
     text-decoration: none;
     color :#39424E;
     font-weight: 600;
-    text-align:center;
 }
 .menu li img {
    width:55px;
@@ -103,10 +98,8 @@ body {
    margin:0;
    padding:0;
 }
-/*------------------SOUS MENU-----------------*/
 .sousMenu{
-	/*height:40px;*//*taille normale pour le sous menu*/
-	height:20px;
+	height:40px;
 	background-color: #0073be;
 }
   /*-----------------------------FIN HEADER-----------------------------------------*/
@@ -267,32 +260,5 @@ ul{
 	}
 }
  
- /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
-@media screen and (max-width: 1080px) {
-	body{
-		max-width:1080px;
-	}
-	.imgLogo{
-		margin-left:20px;
-	}
-	.imgLogoPlateo{
-		height:80px;
-		width:80px;
-	}
-	.imgLogoText{
-		width:130px;
-		height:auto;
-	}
-	/*-------MENU----------*/
-	.menu nav ul{
-	    font-size:1rem;
-	}
-	.menu li {
-	    margin-right: 40px;
-	  }
-	.menu li img {
-	   width:45px;
-	   height:45px;
-	}
-}
+ 
  
