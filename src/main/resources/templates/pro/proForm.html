@@ -4,23 +4,24 @@
 <head th:replace="head :: head"></head>
 
 <body>
-	<form method="post" th:action="@{/pro/create}">
+	<form method="post" th:action="@{/pro/create}" th:object="${pro}">
 		<fieldset>
 			<label for="nom_societe">Dénomination social </label>
 			<input class="form-control" id="nom_societe" name="nom_societe" type="text" placeholder="Nom société"
 				required>
 			<label for="nom_pro">Nom du gérant </label>
-			<input id="nom_pro" name="nom_pro" type="text" placeholder="Nom du gérant" required> <label
-				for="prenom_pro">Prénom du gérant </label> <input id="prenom_pro" name="prenom_pro" type="text"
+			<input id="nom_pro" name="nom_pro" th:field="*{nom_pro}" type="text" placeholder="Nom du gérant" required> <label
+				for="prenom_pro">Prénom du gérant </label> <input th:field="*{prenom_pro}" id="prenom_pro" name="prenom_pro" type="text"
 				placeholder="Prénom du gérant" required>
-			<label for="siren">SIREN</label> <input class="form-control" id="siren" name="siren" type="text"
+			<label for="siren">SIREN</label> <input th:field="*{siren}" class="form-control" id="siren" name="siren" type="text"
 				placeholder="N° Siren"  required>
 				
-			<label for="code_postal">Code Postal </label> <input class="form-control" id="code_postal"
+			<label for="code_postal">Code Postal </label> <input class="form-control" id="code_postal" th:field="*{code_postal}"
 				name="code_postal" type="number" placeholder="" pattern="[0-9]{5}" required>
-			<label for="email">Email</label> <input type="email"class="form-control" name="email" placeholder="exemple@test.fr" >
+
+			<label for="email">Email</label> <input th:field="*{email_pro}" value="ste@aol.fr" type="email" class="form-control" name="email_pro" placeholder="exemple@test.fr" >
 			<p>
-				<label for="passwordInput">Password: <input class="form-control" type="password" id="passwordInput"
+				<label for="passwordInput">Password: <input class="form-control" type="password" th:field="*{mot_passe_pro}"id="passwordInput"
 						name="mot_passe_pro" required></label>
 			</p>
 			<p>

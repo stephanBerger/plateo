@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,14 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.platform.plateo.entity.Pro;
-import fr.platform.plateo.service.ProRepository;
 import fr.platform.plateo.service.ProService;
 
 @Controller
 @RequestMapping("/pro")
 public class proController {
 	
-	
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(proController.class);
 	
 	@Autowired
 	private ProService proService;
@@ -31,14 +33,14 @@ public class proController {
 	public String addPro(@Valid Pro pro, BindingResult result, Model model) throws IOException {
 
 		if (result.hasErrors()) {
-			System.out.println(result.toString());
 			return "pro/proForm";
 		}
 		BCryptPasswordEncoder decrypt = new BCryptPasswordEncoder(4);
 		String password = decrypt.encode(pro.getMot_passe_pro());
+		pro.setMot_passe_pro(password);
 
-		proService.create(pro);
-
+		this.proService.create(pro);
+		LOGGER.debug(pro.getNom_pro()+" "+pro.getEmail_pro());
 		return "index";
 
 	}
@@ -49,7 +51,7 @@ public class proController {
 	}
 
 	@GetMapping("/proForm")
-	public String proForm() {
+	public String proForm(Pro pro) {
 		return "pro/proForm";
 	}
 
