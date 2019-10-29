@@ -32,7 +32,7 @@ public class Pro {
 	private String telephone_pro;
 
 	@NotBlank(message = "Siren obligatoire")
-	@Column(name = "siren", length = 9, nullable = false)
+	@Column(name = "siren", length = 12, nullable = false)
 	private String siren;
 
 	@NotBlank(message = "Email obligatoire")

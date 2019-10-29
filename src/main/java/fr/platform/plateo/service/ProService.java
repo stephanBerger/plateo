@@ -8,8 +8,6 @@ import fr.platform.plateo.entity.Pro;
 @Service("proService")
 public class ProService {
 	
-	
-	
 	private final ProRepository proRepository;
 
 	public ProService(ProRepository proRep) {

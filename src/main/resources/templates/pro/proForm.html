@@ -15,6 +15,9 @@
 				placeholder="Prénom du gérant" required>
 			<label for="siren">SIREN</label> <input th:field="*{siren}" class="form-control" id="siren" name="siren" type="text"
 				placeholder="N° Siren"  required>
+				<p>
+				<div class="" id="siretValidation"></div>
+			</p>
 				
 			<label for="code_postal">Code Postal </label> <input class="form-control" id="code_postal" th:field="*{code_postal}"
 				name="code_postal" type="number" placeholder="" pattern="[0-9]{5}" required>
@@ -32,8 +35,8 @@
 				<div class="" id="passwordStrength"></div>
 			</p>
 
-
-			<input type="submit" value="Envoyer">
+			<input class="tohide" type="submit" value="Envoyer">
+			
 
 		</fieldset>
 	</form>
