@@ -91,6 +91,10 @@ body {
     text-decoration: none;
     color :#39424E;
     font-weight: 600;
+    text-align:center;
+}
+.textIdentifier{
+	line-height: 1.1;
 }
 .menu li img {
    width:55px;
