@@ -24,57 +24,86 @@
 	background-color: #ff9500;
 }
 
-/*.menu{
-	justify-content: space-between;
-}
-.imgLogo{
-	margin-left:70px;
-}
-
-.imgLogoPlateo{
-	height:120px;
-	width:120px;
-}
-
-.imgLogoText{
-	height:75px;
-	width:200px;
-}
-*/
-
-/*-------MENU----------*/
-/*.menu nav ul{
-	height:130px;
-	margin:0;
-	margin-right:20px;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-    font-size:1.3rem;
-}greyClair ul{
-    list-style-type: none;
-  }
-.menu li {
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    margin-right: 50px;
-  } 
-.menu li a {
-    text-decoration: none;
-    color :#39424E;
-    font-weight: 600;
-}
-.menu li img {
-   width:55px;
-   height:55px;
-   margin:0;
-   padding:0;
-}
-.sousMenu{
-	height:40px;
-	background-color: #0073be;
-}*/
   /*-----------------------------FIN HEADER-----------------------------------------*/
+ .sectionFormClient{
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:center;
+ 	padding-top:30px;
+ }
+ .sectionForm{
+ 	display:flex;
+ 	flex-direction:row;
+ 	justify-content:flex-start;
+ }
+ .sectionButton{
+ 	
+ }
+ .formIdentifier label{
+ 	padding-left:10px;
+ }
+ .formIdentifierLeft, .formIdentifierRight{
+ 	padding-left:20px;
+ 	padding-right:20px;
+ }
+ .formIdentifierLeft{
+ 	
+ }
+ .formIdentifierRight{
+ 	
+ }
+ .MarginClient{
+ 	margin-left:40px;
+ 	margin-right:40px;
+ }
+ .labelForm{
+ 	font-weight: 500;
+  	line-height: 1.2;
+  	font-size: 1.5rem;
+ } 
+ ::placeholder {
+	font-size:1.5rem;
+	color:#bdbdbd;
+}
+input[type="email"],input[type="text"], select.email {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:20px;
+}
+input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.btn{
+	width:160px;
+	margin-top:20px;
+	border-radius:10px;
+	font-weight: 600;
+	color:white;
+	font-size:1.3rem;
+}
+.btnWidthLong{
+	width:300px;
+}
+.btn:hover{
+	background-color:#e68200;
+	color:white;
+}
+.hoverBlue:hover{
+	background-color:#005c99 !important;
+}
+.btnPro{
+	margin-bottom:40px;
+}
+.identifier h4{
+ 	padding-top:15px;
+ } 
+  
+  
+  
   
