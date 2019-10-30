@@ -7,10 +7,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 
 @SpringBootApplication
-@ComponentScan({ "fr.platform.plateo.presentation"})
-@ComponentScan({ "fr.platform.plateo.business.entity"})
-@ComponentScan({ "fr.platform.plateo.business.service"})
-@ComponentScan({ "fr.platform.plateo.persistence"})
+@ComponentScan({ "fr.platform.plateo.presentation", 
+				"fr.platform.plateo.business.entity",
+				"fr.platform.plateo.business.service",
+				"fr.platform.plateo.persistence",
+				"fr.platform.plateo.config"})
 @EnableWebSecurity
 public class PlateoApplication {
 
