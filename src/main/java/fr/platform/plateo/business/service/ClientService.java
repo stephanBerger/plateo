@@ -29,4 +29,12 @@ public class ClientService implements UserDetailsService {
         return clientRepo.findOneByUsername( username );
     }
 
+    public ClientRepository getClientRepo() {
+        return clientRepo;
+    }
+
+    public void setClientRepo( ClientRepository clientRepo ) {
+        this.clientRepo = clientRepo;
+    }
+
 }
