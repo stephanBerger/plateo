@@ -1,10 +1,15 @@
 package fr.platform.plateo.persistence;
 
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import fr.platform.plateo.business.entity.Client;
 
 /**
  * 
  */
-public interface ClientRepository {
+@Repository
+public interface ClientRepository extends JpaRepository<Client, Integer> {
+    Client findOneByUsername( final String Username );
 
 }
