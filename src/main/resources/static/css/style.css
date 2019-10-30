@@ -68,13 +68,14 @@ body {
 }
 
 .imgLogoPlateo{
-	height:120px;
-	width:120px;
+	height:100px;
+	width:100px;
 }
 
 .imgLogoText{
-	height:66px;
-	width:200px;
+	height:53px;
+	width:160px;
+	margin-left:10px;
 }
 
 .divimgHeader{
@@ -92,13 +93,13 @@ body {
 }
 /*-------MENU----------*/
 .menu nav ul{
-	height:130px;
+	height:115px;
 	margin:0;
 	margin-right:20px;
     padding: 0;
     display: flex;
     justify-content: flex-end;
-    font-size:1.3rem;
+    font-size:1.2rem;
 }greyClair ul{
     list-style-type: none;
   }
@@ -140,7 +141,7 @@ body {
 .sectionIdentifier{
 	background-image: url("../img/IMG-FOND1.jpg");
 	width:100%;
-	min-height: calc(100% - 50px - 181px);
+	min-height: calc(100% - 50px - 166px);
 	background-position: center; /* Center the image */
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
