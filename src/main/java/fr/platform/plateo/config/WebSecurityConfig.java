@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	//Authorisations anonyme
     	http.authorizeRequests()
     	.antMatchers(resources).permitAll()
-    	.antMatchers("/","/new/**").permitAll()
+    	.antMatchers("/","/public/**").permitAll()
     	.and()
     	.formLogin()
 	        .loginPage("/pro_login")
