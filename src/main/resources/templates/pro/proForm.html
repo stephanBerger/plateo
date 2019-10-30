@@ -13,47 +13,61 @@
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
-							<label for="nom_societe" class="col-form-label blue labelForm">Dénomination sociale </label>
-							<input class="champsFormulaire" id="nom_societe" name="nom_societe" type="text"
+							<label for="company_name" class="col-form-label blue labelForm">Dénomination sociale </label>
+							<input class="champsFormulaire" id="company_name" name="company_name" type="text"
 									placeholder="Nom société" required/>
+							<span th:if="${#fields.hasErrors('company_name')}" th:errors="*{company_name}" class="text-danger">
+							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
-							<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
-							<input class="champsFormulaire"  id="nom_gerant" name="nom_gerant" type="text"
+							<label for="manager_lastname" class="col-form-label blue labelForm">Nom du gérant </label>
+							<input class="champsFormulaire"  id="manager_lastname" name="manager_lastname" type="text"
 									placeholder="Nom du gérant" required/>
+							<span th:if="${#fields.hasErrors('manager_lastname')}" th:errors="*{manager_lastname}" class="text-danger">
+							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
-							<label for="code_postal" class="col-form-label blue labelForm">Code Postal </label>
-							<input class="champsFormulaire" id="code_postal" name="code_postal" type="number"
+							<label for="pro_postcode" class="col-form-label blue labelForm">Code Postal </label>
+							<input class="champsFormulaire" id="pro_postcode" name="pro_postcode" type="text"
 									placeholder="Saisir son code postal" pattern="[0-9]{5}" required/>
+							<span th:if="${#fields.hasErrors('pro_postcode')}" th:errors="*{pro_postcode}" class="text-danger">
+							</span>
 						</div>
 					</div>
 					<div class="formIdentifierRight">	
 						<div class="form-group formIdentifier left">
-							<label for="siren" class="col-form-label blue labelForm">SIRET</label>
-							<input class="champsFormulaire" id="siren" name="siren" type="number"
+							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
+							<input class="champsFormulaire" id="siret" name="siret" type="text"
 									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" required/>
+							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
+							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
+							<label for="manager_firstname" class="col-form-label blue labelForm">Prénom du gérant </label>
+							<input class="champsFormulaire"  id="manager_firstname" name="manager_firstname" type="text"
 									placeholder="Prénom du gérant" required/>
+							<span th:if="${#fields.hasErrors('manager_firstname')}" th:errors="*{manager_firstname}" class="text-danger">
+							</span>
 						</div>
 					</div>
 				</div>
 				<div class="sectionForm ">
 					<div class="formIdentifierRight sectionForm">	
 						<div class="form-group formIdentifier left">
-							<label for="passwordInput" class="col-form-label blue labelForm">Password :</label>
+							<label for="pro_password" class="col-form-label blue labelForm">Password :</label>
 							<input class="champsFormulaire" type="password" id="passwordInput"
-									placeholder="Créez un mot de passe" name="passwordInput"/>
+									placeholder="Créez un mot de passe" name="pro_password"/>
+							<span th:if="${#fields.hasErrors('pro_password')}" th:errors="*{pro_password}" class="text-danger">
+							</span>
 						</div>
 					</div>
 					<div class="formIdentifierRight sectionForm">		
 						<div class="form-group formIdentifier left">
-							<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirm Password :</label>
+							<label for="confirmpro_password" class="col-form-label blue labelForm">Confirm Password :</label>
 							<input class="champsFormulaire" type="password" id="confirmPasswordInput"
-									placeholder="Confirmez votre mot de passe" name="confirmPasswordInput"/>
+									placeholder="Confirmez votre mot de passe" name="confirmpro_password"/>
+							<span th:if="${#fields.hasErrors('pro_password')}" th:errors="*{pro_password}" class="text-danger">
+							</span>
 						</div>
 					</div>
 				</div>
@@ -95,13 +109,13 @@
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">	
 							
-							<label for="nom_gerant" class="col-form-label blue labelForm">Nom du gérant </label>
-							<input class="champsFormulaire"  id="nom_gerant" name="nom_gerant" type="text"
+							<label for="manager_lastname" class="col-form-label blue labelForm">Nom du gérant </label>
+							<input class="champsFormulaire"  id="manager_lastname" name="manager_lastname" type="text"
 								placeholder="Nom du gérant" required/>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="prenom_gerant" class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire"  id="prenom_gerant" name="prenom_gerant" type="text"
+							<label for="manager_firstname" class="col-form-label blue labelForm">Prénom du gérant </label>
+							<input class="champsFormulaire"  id="manager_firstname" name="manager_firstname" type="text"
 									placeholder="Prénom du gérant" required/>
 						</div>
 						<div class="form-group formIdentifier left">
@@ -112,10 +126,10 @@
 					</div>	
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
-							<label for="code_postal" class="col-form-label blue labelForm">Code Postal</label>
-							<input type="text" id="code_postal" th:field="*{code_postal}"
+							<label for="pro_postcode" class="col-form-label blue labelForm">Code Postal</label>
+							<input type="text" id="pro_postcode" th:field="*{pro_postcode}"
 								class="champsFormulaire" placeholder="Saisir code postal" />
-							<span th:if="${#fields.hasErrors('code_postal')}" th:errors="*{code_postal}" class="text-danger">
+							<span th:if="${#fields.hasErrors('pro_postcode')}" th:errors="*{pro_postcode}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
@@ -127,7 +141,7 @@
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="mot_de_passe" class="col-form-label blue labelForm">Confirmer le mot de passe</label>
-							<input type="text" id="confirmPasswordInput" name="confirmPasswordInput" th:field="*{mot_de_passe}"
+							<input type="text" id="confirmpro_password" name="confirmpro_password" th:field="*{mot_de_passe}"
 									class="champsFormulaire" placeholder="Champs obligatoire" />
 							<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="text-danger">
 							</span>
