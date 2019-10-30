@@ -138,7 +138,7 @@ body {
   
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	background-image: url("../IMG/IMG-FOND1.jpg");
+	background-image: url("../img/IMG-FOND1.jpg");
 	width:100%;
 	min-height: calc(100% - 50px - 181px);
 	background-position: center; /* Center the image */
