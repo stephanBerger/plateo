@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,24 +57,28 @@ public class Client implements UserDetails {
     /**
      * 
      */
+    @NotBlank( message = "Entrer le nom" )
     @Column( length = 45, nullable = false )
     private String  client_lastname;
 
     /**
      * 
      */
+    @NotBlank( message = "Entrer le prénom" )
     @Column( length = 45, nullable = false )
     private String  client_firstname;
 
     /**
      * 
      */
+    @NotBlank( message = "Entrer une adresse email valide" )
     @Column( length = 45, nullable = false )
     private String  client_email_address;
 
     /**
      * 
      */
+    @NotBlank( message = "Entrer un mot de passe valide" )
     @Column( nullable = false )
     private String  client_password;
 
