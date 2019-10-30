@@ -27,7 +27,7 @@ public class ClientService implements UserDetailsService {
     public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
 
         return null;
-    	//clientRepo.findOneByUsername( username );
+
     }
 
     public ClientRepository getClientRepo() {

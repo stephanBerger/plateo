@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 
-<head th:replace="pro/head :: head"></head>
+<head th:replace="/pro/head :: head"></head>
 <body>
-	<header th:replace="pro/header :: header">	
+	<header th:replace="/pro/header :: header">	
 	</header>
 	
 	<section class="sectionNouvPro centrer">
 		<div class="centrer carreBlanc">
-			<form class="centrer sectionFormPro" method="get" th:action="@{/pro/dashboardPro}">
+			<form class="centrer sectionFormPro" th:object="${pro}" method="post" th:action="@{/pro/dashboardPro}">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">

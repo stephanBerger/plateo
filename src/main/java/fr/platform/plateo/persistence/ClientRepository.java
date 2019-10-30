@@ -10,6 +10,5 @@ import fr.platform.plateo.business.entity.Client;
  */
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
-    //Client findOneByUsername( final String Username );
 
 }

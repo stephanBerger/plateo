@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import fr.platform.plateo.business.entity.Pro;
 
+
 @Repository
 public interface ProRepository extends JpaRepository<Pro,Integer>{
 
