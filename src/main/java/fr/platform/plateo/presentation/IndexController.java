@@ -13,22 +13,6 @@ import fr.platform.plateo.business.service.ProService;
 @Controller
 public class IndexController {
 
-    @GetMapping( "/" )
-    public String index() {
-
-        return "public/index";
-    }
-
-    @GetMapping( "/registration" )
-    public String registration() {
-        return "public/registration";
-    }
-
-    /**
-     * 
-     */
-    private ProService          proServ;
-
     private final static Logger LOGGER = LoggerFactory.getLogger( IndexController.class );
 
     @GetMapping( "/" )
