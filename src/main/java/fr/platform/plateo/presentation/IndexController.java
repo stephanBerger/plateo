@@ -14,7 +14,12 @@ public class IndexController {
 	@GetMapping("/")
 	public String index() {
 
-		return "index";
+		return "public/index";
+	}
+
+	@GetMapping("/registration")
+	public String registration() {
+		return "public/registration";
 	}
 
 	/**
@@ -25,6 +30,7 @@ public class IndexController {
 	/**
 	 * 
 	 */
+	@GetMapping("/")
 	public String proForm() {
 		return null;
 		// TODO implement here
