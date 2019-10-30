@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="head :: head">
+<head th:replace="public/head :: head">
 </head>
 
 <body>
-	<header th:replace="header :: header">-	
+	<header th:replace="public/header :: header">-	
 	</header>
 			
 	<section class="sectionIdentifier centrer">
@@ -20,10 +20,10 @@
 			
 			<h4 class="greyClair">‒ ou ‒</h4>
 			<h2 class="h2creerCompte blue">Créez un compte</h2> 
-			<a href="/clients/new_client" >
+			<a href="/public/new_client" >
 				<button class="btn btnWidthLong hoverBlue bgBlue">PARTICULIER</button>	
 			</a>
-			<a href="/pro/proForm" >
+			<a href="/public/proForm" >
 				<button class="btn btnPro btnWidthLong bgOrange">PROFESSIONNEL</button>	
 			</a>
 		</div>
