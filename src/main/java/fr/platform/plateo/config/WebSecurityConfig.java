@@ -15,31 +15,41 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+    	//Authorisations anonyme
     	http.authorizeRequests()
     	.antMatchers(resources).permitAll()
     	.antMatchers("/","/new/**").permitAll()
-        .antMatchers("/particulier*").hasRole("CLIENT")
-        .anyRequest()
-        .authenticated()
-        .and()
-        .authorizeRequests()
-        .antMatchers("/pro*").hasRole("PRO")
-        .anyRequest()
-        .authenticated()
-        .and()
-        .formLogin()
-        .loginPage("/login")
-        .permitAll()
-        // login ok route vers index du site
-        .defaultSuccessUrl("/")
-        .failureUrl("/login?error=true")
-        .usernameParameter("client_email_address")
-        .passwordParameter("client_password")
-        .and()
-        .logout()
-        .permitAll()
-        .logoutSuccessUrl("/");
-        
+    	.and()
+    	.formLogin()
+	        .loginPage("/pro_login")
+	        .permitAll()
+	        .failureUrl("/login?error=true")
+	        .usernameParameter("client_email_address")
+	        .passwordParameter("client_password")
+	        .and()
+	        .logout()
+	        .permitAll()
+	        .logoutSuccessUrl("/")
+	    .and()
+	    .formLogin()
+	    	.loginPage("client_login")
+    		.permitAll()
+    		.usernameParameter("pro_email_address")
+            .passwordParameter("pro_password")
+            .and()
+	        .logout()
+	        .permitAll()
+	        .logoutSuccessUrl("/");
+    		
+	    	
+    	//Auth client
+    	http.authorizeRequests()
+        .antMatchers("/client*").hasRole("CLIENT");
+    	
+        //Auth pro
+    	http.authorizeRequests()
+    	.antMatchers("/pro*").hasRole("PRO");
+    	
     }
 	
 }
