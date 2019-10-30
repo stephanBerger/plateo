@@ -1,7 +1,5 @@
 package fr.platform.plateo.presentation;
 
-import java.util.*;
-
 /**
  * 
  */
@@ -13,11 +11,6 @@ public class ProController {
     public ProController() {
     }
 
-    /**
-     * 
-     */
-    public void String dashboardPro() {
-        // TODO implement here
-    }
+   
 
 }

@@ -1,6 +1,6 @@
 package fr.platform.plateo.business.service;
 
-import java.util.*;
+import fr.platform.plateo.persistence.ProRepository;
 
 /**
  * 
@@ -13,9 +13,7 @@ public class ProService {
     public ProService() {
     }
 
-    /**
-     * 
-     */
+
     private ProRepository Prorepo;
 
 }
