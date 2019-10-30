@@ -16,11 +16,11 @@ public class Role {
     /**
      * 
      */
-    private void Integer id;
+    private Integer id;
 
     /**
      * 
      */
-    private void String name;
+    private String name;
 
 }

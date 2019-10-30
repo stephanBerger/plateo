@@ -1,6 +1,6 @@
 package fr.platform.plateo.business.entity;
 
-import java.util.*;
+import java.sql.Blob;
 
 /**
  * 

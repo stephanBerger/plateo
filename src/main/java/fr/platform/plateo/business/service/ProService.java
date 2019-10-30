@@ -16,6 +16,6 @@ public class ProService {
     /**
      * 
      */
-    private void ProRepository;
+    private ProRepository Prorepo;
 
 }

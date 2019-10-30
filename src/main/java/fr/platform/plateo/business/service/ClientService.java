@@ -1,6 +1,6 @@
 package fr.platform.plateo.business.service;
 
-import java.util.*;
+import fr.platform.plateo.persistence.ClientRepository;
 
 /**
  * 
@@ -16,6 +16,6 @@ public class ClientService {
     /**
      * 
      */
-    private void ClientRepository;
+    private ClientRepository ClientRepo;
 
 }

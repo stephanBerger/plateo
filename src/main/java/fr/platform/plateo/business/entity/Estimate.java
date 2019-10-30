@@ -51,7 +51,7 @@ public class Estimate {
     /**
      * 
      */
-    private void usable_parking_space;
+    private String usable_parking_space;
 
     /**
      * 
