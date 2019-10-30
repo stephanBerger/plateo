@@ -13,17 +13,14 @@
 
          
         if (validSiretSize.test($(this).val)===false) {
-            // Test si le Siret fait au moins 12 caractères
+            // Test si le Siret fait au moins 12 chiffres
                $('#"siretValidation"').removeClass().addClass('alert alert-danger').html('Le SIRET doit faire 12 chiffres');
  
-        } else if (strongRegex.test($(this).val())) {
-            // If reg ex matches strong password
+        } else if (validSiretSize.test($(this).val)===true) {
+            // If fait bien 12 chiffres
             $('#"siretValidation"').removeClass().addClass('alert alert-success').html('SIRET Ok!');
-        } else if (mediumRegex.test($(this).val())) {
-            // If medium password matches the reg ex
-            $('#"siretValidation"').removeClass().addClass('alert alert-info').html('Votre mot de passe n\'est pas assez fort!');
         } else {
-            // If password is ok
+            // FAire fonction test si les 9 premier chiffre sont un multiple de 10
             $('#"siretValidation"').removeClass().addClass('alert alert-warning').html('Mot de passe faible, essayez d’utiliser des chiffres et des lettres majuscules.');
         }
  
