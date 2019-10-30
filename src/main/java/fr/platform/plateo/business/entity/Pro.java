@@ -2,33 +2,50 @@ package fr.platform.plateo.business.entity;
 
 import java.sql.Blob;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "pro")
 public class Pro {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@NotBlank(message = "Entrer la raison sociale")
+	@Column(length = 45, nullable = false)
 	private String company_name;
 
+	@NotBlank(message = "Entrer le nom du gérant")
+	@Column(length = 45, nullable = false)
 	private String manager_lastname;
 
+	@NotBlank(message = "Entrer le prénom du gérant")
+	@Column(length = 45, nullable = false)
 	private String manager_firstname;
 
 	private String pro_phone_number;
-
+	
+	@NotBlank(message = "Entrer le Siret de la société")
+	@Column(length = 14, nullable = false)
 	private String siret;
-
+	
+	@NotBlank(message = "Entrer votre email")
+	@Column(length = 45, nullable = false)
 	private String pro_email_adress;
 
+	@NotBlank(message = "Entrer votre mot de passe")
+	@Column(length = 45, nullable = false)
 	private String pro_password;
-
+	
+	@NotBlank(message = "Entrer votre mot de passe")
+	@Column(length = 45, nullable = false)
 	private String pro_adress;
 
 	private String pro_postcode;

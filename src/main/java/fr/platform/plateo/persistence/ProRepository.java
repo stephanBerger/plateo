@@ -1,10 +1,11 @@
 package fr.platform.plateo.persistence;
 
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * 
- */
-public interface ProRepository {
+import fr.platform.plateo.business.entity.Pro;
+
+@Repository
+public interface ProRepository extends JpaRepository<Pro,Integer>{
 
 }
