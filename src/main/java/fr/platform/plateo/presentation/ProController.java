@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProController {
 	
+	
+	
 	@GetMapping("/public/proForm")
 	public String proForm()	{
 		return "public/proForm";
