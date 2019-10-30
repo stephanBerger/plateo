@@ -27,13 +27,7 @@ public class IndexController {
 	 */
 	private ProService proServ;
 
-	/**
-	 * 
-	 */
-	@GetMapping("/")
-	public String proForm() {
-		return null;
-		// TODO implement here
-	}
+	
+
 
 }
