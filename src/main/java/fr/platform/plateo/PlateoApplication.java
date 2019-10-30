@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 				"fr.platform.plateo.business.service",
 				"fr.platform.plateo.persistence",
 				"fr.platform.plateo.config"})
-@EnableWebSecurity
 public class PlateoApplication {
 
 	public static void main(String[] args) {

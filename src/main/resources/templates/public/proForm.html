@@ -2,7 +2,6 @@
 <html xmlns:th="www.thymeleaf.org">
 
 <head th:replace="pro/head :: head"></head>
-
 <body>
 	<header th:replace="pro/header :: header">	
 	</header>
@@ -90,77 +89,8 @@
 			</form>
 		</div>
 	</section>
-	<footer th:replace="footer :: footer">
+	<footer th:replace="/public/footer :: footer">
 	</footer>
 </body>
 
 </html>
-
-
-
-
-
-<!-- 
-
-						
-							
-						</div>
-					</div>	
-					<div class="formIdentifierLeft">
-						<div class="form-group formIdentifier left">	
-							
-							<label for="manager_lastname" class="col-form-label blue labelForm">Nom du gérant </label>
-							<input class="champsFormulaire"  id="manager_lastname" name="manager_lastname" type="text"
-								placeholder="Nom du gérant" required/>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="manager_firstname" class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire"  id="manager_firstname" name="manager_firstname" type="text"
-									placeholder="Prénom du gérant" required/>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
-							<input class="champsFormulaire" id="siret" name="siret" type="number"
-									placeholder="" pattern="[0-14]{14}" required/>
-						</div>
-					</div>	
-					<div class="formIdentifierLeft">
-						<div class="form-group formIdentifier left">
-							<label for="pro_postcode" class="col-form-label blue labelForm">Code Postal</label>
-							<input type="text" id="pro_postcode" th:field="*{pro_postcode}"
-								class="champsFormulaire" placeholder="Saisir code postal" />
-							<span th:if="${#fields.hasErrors('pro_postcode')}" th:errors="*{pro_postcode}" class="text-danger">
-							</span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="mot_de_passe" class="col-form-label blue labelForm">Mot de passe</label>
-							<input type="text" id="mot_de_passe" th:field="*{mot_de_passe}"
-									class="champsFormulaire" placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="text-danger">
-							</span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="mot_de_passe" class="col-form-label blue labelForm">Confirmer le mot de passe</label>
-							<input type="text" id="confirmpro_password" name="confirmpro_password" th:field="*{mot_de_passe}"
-									class="champsFormulaire" placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="text-danger">
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="centrer sectionButton">
-						<a href="/index">
-							<button type="submit" class="btn bgGreyFonce MarginClient">Annuler</button>
-						</a>
-						<a href="">
-							<button type="submit" class="btn bgOrange MarginClient">Valider</button>
-						</a>
-				</div>
-			</form>
-		</div>
-		<div class="divVide"></div>
-	</section>
-	<footer th:replace="footer :: footer">
-	</footer>
-</body>
-</html> -->
