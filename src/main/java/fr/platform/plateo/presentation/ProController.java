@@ -41,8 +41,9 @@ public class ProController {
 		} else {
 			LOGGER.info("Creation utlisateur PRO effectué");
 			this.proService.create(pro);
+			return "public/index";
 			}
-			return "redirect:/public/index";
+			
 		}
 	}
 	
