@@ -38,7 +38,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
 							<input class="champsFormulaire" id="siret" name="siret" type="text"
-									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" required/>
+									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" />
 							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
 							</span>
 						</div>
@@ -75,7 +75,7 @@
 					<a href="" class="greyFonce changePassword">
 						Changer de mot de passe
 					</a>
-					<a href="/index">
+					<a>
 						<button type="submit" class="btn bgOrange MarginClient">Envoyer</button>
 					</a>
 						
