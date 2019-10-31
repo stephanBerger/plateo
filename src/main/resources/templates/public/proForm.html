@@ -9,27 +9,27 @@
 	
 	<section class="sectionNouvPro section100pour100 centrer">
 		<div class="centrer carreBlanc section100pour100">
-			<form class="centrer sectionFormPro" th:object="${pro}" method="post" th:action="@{/pro/dashboardPro}">
+			<form class="centrer sectionFormPro" th:object="${pro}" method="post" th:action="@{/public/proForm}">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
 							<label for="companyName" class="col-form-label blue labelForm">Dénomination sociale </label>
 							<input class="champsFormulaire" id="companyName" name="companyName" type="text"
-									placeholder="Champs obligatoire" required/>
+									placeholder="Champs obligatoire"/>
 							<span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="text-danger">
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
 							<label for="managerLastname" class="col-form-label blue labelForm">Nom du gérant </label>
 							<input class="champsFormulaire"  id="managerLastname" name="managerLastname" type="text"
-									placeholder="Champs obligatoire" required/>
+									placeholder="Champs obligatoire"/>
 							<span th:if="${#fields.hasErrors('managerLastname')}" th:errors="*{managerLastname}" class="text-danger">
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
 							<label for="proPostcode" class="col-form-label blue labelForm">Code Postal </label>
 							<input class="champsFormulaire" id="proPostcode" name="proPostcode" type="text"
-									placeholder="Saisir son code postal à 5 chiffres" pattern="[0-9]{5}" required/>
+									placeholder="Saisir son code postal à 5 chiffres" pattern="[0-9]{5}"/>
 							<span th:if="${#fields.hasErrors('proPostcode')}" th:errors="*{proPostcode}" class="text-danger">
 							</span>
 						</div>
@@ -38,7 +38,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
 							<input class="champsFormulaire" id="siret" name="siret" type="text"
-									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-14]{14}" />
+									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-9]{14}" />
 							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
 							</span>
 						</div>

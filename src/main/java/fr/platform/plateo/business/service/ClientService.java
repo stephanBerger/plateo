@@ -17,23 +17,12 @@ public class ClientService implements UserDetailsService {
     @Autowired
     private ClientRepository clientRepo;
 
-    /**
-     * Default constructor
-     */
-    public ClientService() {
-    }
 
     @Override
     public UserDetails loadUserByUsername( String username ) throws UsernameNotFoundException {
         return null;
     }
 
-    public ClientRepository getClientRepo() {
-        return clientRepo;
-    }
-
-    public void setClientRepo( ClientRepository clientRepo ) {
-        this.clientRepo = clientRepo;
-    }
+    
 
 }

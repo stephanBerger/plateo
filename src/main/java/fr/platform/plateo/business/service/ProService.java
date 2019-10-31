@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.persistence.ProRepository;
 
 /**
@@ -14,27 +15,28 @@ import fr.platform.plateo.persistence.ProRepository;
 @Service
 public class ProService implements UserDetailsService {
 
-	/**
-	 * Default constructor
-	 */
-	public ProService() {
-	}
-
 	@Autowired
-	private ProRepository Prorepo;
-
-	public ProRepository getProrepo() {
-		return Prorepo;
-	}
-
-	public void setProrepo(ProRepository prorepo) {
-		this.Prorepo = prorepo;
-	}
+	private ProRepository Prorepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void create(Pro pro) {
+		this.Prorepository.save(pro);
+	}
+
+	public Pro read(Integer id) {
+		return this.Prorepository.getOne(id);
+	}
+
+	public void update(Pro pro) {
+		this.Prorepository.save(pro);
+	}
+
+	public void delete(Integer id) {
+		this.Prorepository.deleteById(id);
 	}
 
 }
