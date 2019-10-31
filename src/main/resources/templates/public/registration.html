@@ -4,7 +4,7 @@
 </head>
 
 <body>
-	<header th:replace="/public/header :: header">
+	<header th:replace="public/header :: header">
 	</header>
 	<section class="sectionIdentifier centrer">
 		<!---->  <div class="identifier centrer">
@@ -19,15 +19,15 @@
 			
 			<h4 class="greyClair">‒ ou ‒</h4>
 			<h2 class="h2creerCompte blue">Créez un compte</h2> 
-			<a href="/public/new_client" >
+			<a th:href="@{/public/new_client}" >
 				<button class="btn btnWidthLong hoverBlue bgBlue">PARTICULIER</button>	
 			</a>
-			<a href="/public/proForm" >
+			<a th:href="@{/public/proForm}" >
 				<button class="btn btnPro btnWidthLong bgOrange">PROFESSIONNEL</button>	
 			</a>
 		</div>
 	</section>	
-	<footer th:replace="/public/footer :: footer">
+	<footer th:replace="public/footer :: footer">
 	</footer>
 			
 </body>
