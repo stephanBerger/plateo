@@ -16,6 +16,12 @@ public class IndexController {
     private final static Logger LOGGER = LoggerFactory.getLogger( IndexController.class );
 
     @GetMapping( "/" )
+    public String base() {
+        LOGGER.info( "Une requête sur '/' est faite" );
+        return "public/index";
+    }
+
+    @GetMapping( "/index" )
     public String index() {
         LOGGER.info( "La page \"index\" est demandée" );
         return "public/index";
