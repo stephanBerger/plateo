@@ -4,11 +4,12 @@
 </head>
 
 <body>
-	 <header th:replace="public/header :: header">	
+
+	<header th:replace="clients/header :: header">	
 	</header>
 	 <section class="sectionNouvClient centrer">
 		<div class="centrer carreBlanc">
-			<form class="centrer sectionFormClient" action="#" th:action="@{/}" th:object="${client}" method="post">
+			<form class="centrer sectionFormClient" action="#" th:action="@{/public/new_client}" th:object="${client}" method="post">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						 <div class="form-group formIdentifier left">
@@ -26,7 +27,7 @@
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_client_password_adress" class="col-form-label blue labelForm">Email</label>
+							<label for="client_email_address" class="col-form-label blue labelForm">Email</label>
 							<input type="email" id="client_email_address" th:field="*{client_email_address}" class="champsFormulaire"
 									placeholder="Champs obligatoire" />
 							<span th:if="${#fields.hasErrors('client_email_address')}" th:errors="*{client_email_address}" class="text-danger">
@@ -34,14 +35,14 @@
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="client_password" class="col-form-label blue labelForm">Mot de passe</label>
-							<input type="text" id="client_password" th:field="*{client_password}"
+							<input type="password" id="client_password" th:field="*{client_password}"
 									class="champsFormulaire" placeholder="Champs obligatoire" />
 							<span th:if="${#fields.hasErrors('client_password')}" th:errors="*{client_password}" class="text-danger">
 							</span>
 						</div>
 					</div>
 					<div class="formIdentifierRight">
-						  <div class="form-group formIdentifier left">
+						<div class="form-group formIdentifier left">
 							<label for="client_address" class="col-form-label blue labelForm">Adresse</label>
 							<input type="text" id="client_address" th:field="*{client_address}"
 								class="champsFormulaire" placeholder="Saisir adresse" />
@@ -56,7 +57,7 @@
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_city" class="col-form-label blue labelForm">client_phone_number</label>
+							<label for="client_city" class="col-form-label blue labelForm">Ville</label>
 							<input type="text" id="client_city" th:field="*{client_city}" class="champsFormulaire"
 								placeholder="Saisir ville" />
 							<span th:if="${#fields.hasErrors('client_city')}" th:errors="*{client_city}" class="text-danger">
@@ -85,5 +86,6 @@
 	</section>
 	<footer th:replace="public/footer :: footer">
 	</footer>
-</body>
+	
+	</body>
 </html>

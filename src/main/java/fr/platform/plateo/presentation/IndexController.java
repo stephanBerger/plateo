@@ -1,6 +1,8 @@
 package fr.platform.plateo.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,32 +19,29 @@ public class IndexController {
 	@Autowired
 	private ClientRepository clientRepository;
 
-	@GetMapping("/")
-	public String index() {
+    private final static Logger LOGGER = LoggerFactory.getLogger( IndexController.class );
 
-		return "public/index";
-	}
+    @GetMapping( "/" )
+    public String base() {
+        LOGGER.info( "Une requête sur '/' est faite" );
+        return "public/index";
+    }
 
-	@GetMapping("/registration")
-	public String registration() {
-		return "public/registration";
-	}
-	
-	@GetMapping("/new_client")
-	public String newClient(Client client) {
-		
-		return "public/new_client";
-	}
-	
-	@GetMapping("/proForm")
-	public String proForm() {
-		return "public/proForm";
-	}
+    @GetMapping( "/index" )
+    public String index() {
+        LOGGER.info( "La page \"index\" est demandée" );
+        return "public/index";
+    }
 
+    @GetMapping( "/registration" )
+    public String registration() {
+        LOGGER.info( "La page \"registration\" est demandée" );
+        return "public/registration";
+    }
 
-	private ProService proServ;
-
-	
-
+    /**
+     * 
+     */
+    private ProService proServ;
 
 }
