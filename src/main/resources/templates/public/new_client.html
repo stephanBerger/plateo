@@ -36,7 +36,7 @@
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="clientPassword" class="col-form-label blue labelForm">Mot de passe</label>
-							<input type="text" id="clientPassword" th:field="*{clientPassword}"
+							<input type="password" id="clientPassword" th:field="*{clientPassword}"
 
 									class="champsFormulaire" placeholder="Champs obligatoire" />
 							<span th:if="${#fields.hasErrors('clientPassword')}" th:errors="*{clientPassword}" class="text-danger">
