@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig {
 	
 	static String[] resources = new String[] {
-			"/include/**","/css/**","/icons/**","/IMG/**","/js/**",
+			"/include/**","/css/**","/icons/**","/img/**","/js/**",
 			"/layer/**","/resources/","/static/**","/webjars/**"
 	};
 	
