@@ -137,11 +137,13 @@ body {
 }
   /*-----------------------------FIN HEADER-----------------------------------------*/
   
+ .section100pour100{
+ 	min-height: calc(100% - 50px - 166px);
+ }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
 	background-image: url("../img/IMG-FOND1.jpg");
 	width:100%;
-	min-height: calc(100% - 50px - 166px);
 	background-position: center; /* Center the image */
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
@@ -271,6 +273,13 @@ ul{
 }
  /*-----------------------------FIN FOOTER-----------------------------------------*/ 
  
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1680px   */
+@media screen and (max-width: 1680px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+	
+
+
+}
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */
 @media screen and (max-width: 1440px) {
 	body{

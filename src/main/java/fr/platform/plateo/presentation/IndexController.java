@@ -33,7 +33,7 @@ public class IndexController {
         return "public/index";
     }
 
-    @GetMapping( "/registration" )
+    @GetMapping( "/public/registration" )
     public String registration() {
         LOGGER.info( "La page \"registration\" est demandée" );
         return "public/registration";
