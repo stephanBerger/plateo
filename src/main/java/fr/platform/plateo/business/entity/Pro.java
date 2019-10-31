@@ -1,6 +1,7 @@
 package fr.platform.plateo.business.entity;
 
 import java.sql.Blob;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,103 +11,117 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 @Entity
 @Table(name = "pro")
-public class Pro {
+public class Pro implements UserDetailsService, UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank(message = "Entrer la raison sociale")
-	@Column(length = 45, nullable = false)
-	private String company_name;
+	@NotBlank(message = "Entrez la raison sociale")
+	@Column(name = "company_name", length = 45, nullable = false)
+	private String companyName;
 
-	@NotBlank(message = "Entrer le nom du gérant")
-	@Column(length = 45, nullable = false)
-	private String manager_lastname;
+	@NotBlank(message = "Entrez le nom du gérant")
+	@Column(name = "manager_lastname", length = 45, nullable = false)
+	private String managerLastname;
 
-	@NotBlank(message = "Entrer le prénom du gérant")
-	@Column(length = 45, nullable = false)
-	private String manager_firstname;
+	@NotBlank(message = "Entrez le prénom du gérant")
+	@Column(name = "manager_firstname", length = 45, nullable = false)
+	private String managerFirstname;
 
-	private String pro_phone_number;
-	
-	@NotBlank(message = "Entrer le Siret de la société")
-	@Column(length = 14, nullable = false)
+	@Column(name = "pro_phone_number", length = 20)
+	private String proPhoneNumber;
+
+	@NotBlank(message = "Entrez le Siret de la société")
+	@Column(name = "siret", length = 14, nullable = false)
 	private String siret;
-	
-	@NotBlank(message = "Entrer votre email")
-	@Column(length = 45, nullable = false)
-	private String pro_email_adress;
 
-	@NotBlank(message = "Entrer votre mot de passe")
-	@Column(length = 45, nullable = false)
-	private String pro_password;
-	
-	@NotBlank(message = "Entrer votre mot de passe")
-	@Column(length = 45, nullable = false)
-	private String pro_adress;
+	@NotBlank(message = "Entrez votre email")
+	@Column(name = "pro_email_address", length = 45, nullable = false)
+	private String proEmailAddress;
 
-	private String pro_postcode;
+	@NotBlank(message = "Entrez votre mot de passe")
+	@Column(name = "pro_password", length = 45, nullable = false)
+	private String proPassword;
 
-	private String pro_city;
+	@Column(name = "pro_address")
+	private String proAddress;
 
+	@NotBlank(message = "Entrez votre code postal")
+	@Column(name = "pro_postcode", length = 10, nullable = false)
+	private String proPostcode;
+
+	@Column(name = "pro_city")
+	private String proCity;
+
+	@Column(name = "kbis")
 	private Blob kbis;
 
+	@Column(name = "logo")
 	private Blob logo;
 
-	private String activity_description;
+	@Column(name = "activity_description")
+	private String activityDescription;
 
-	private Blob identity_card;
+	@Column(name = "identity_card")
+	private Blob identityCard;
 
+	@Column(name = "staffing")
 	private String staffing;
 
-	private Role pro_role;
+	@Column(name = "pro_role")
+	private Role proRole;
 
 	public Pro() {
 	}
 
-	public Pro(String company_name, String manager_lastname, String manager_firstname,
-			String siret, String pro_password, String pro_postcode) {
-		this.company_name = company_name;
-		this.manager_lastname = manager_lastname;
-		this.manager_firstname = manager_firstname;
+	public Pro(String company_name, String manager_lastname, String manager_firstname, String siret,
+			String pro_password, String pro_postcode) {
+		this.companyName = company_name;
+		this.managerLastname = manager_lastname;
+		this.managerFirstname = manager_firstname;
 		this.siret = siret;
-		this.pro_password = pro_password;
-		this.pro_postcode = pro_postcode;
+		this.proPassword = pro_password;
+		this.proPostcode = pro_postcode;
 	}
 
-	public String getCompany_name() {
-		return company_name;
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
-	public String getManager_lastname() {
-		return manager_lastname;
+	public String getManagerLastname() {
+		return managerLastname;
 	}
 
-	public void setManager_lastname(String manager_lastname) {
-		this.manager_lastname = manager_lastname;
+	public void setManagerLastname(String managerLastname) {
+		this.managerLastname = managerLastname;
 	}
 
-	public String getManager_firstname() {
-		return manager_firstname;
+	public String getManagerFirstname() {
+		return managerFirstname;
 	}
 
-	public void setManager_firstname(String manager_firstname) {
-		this.manager_firstname = manager_firstname;
+	public void setManagerFirstname(String managerFirstname) {
+		this.managerFirstname = managerFirstname;
 	}
 
-	public String getPro_phone_number() {
-		return pro_phone_number;
+	public String getProPhoneNumber() {
+		return proPhoneNumber;
 	}
 
-	public void setPro_phone_number(String pro_phone_number) {
-		this.pro_phone_number = pro_phone_number;
+	public void setProPhoneNumber(String proPhoneNumber) {
+		this.proPhoneNumber = proPhoneNumber;
 	}
 
 	public String getSiret() {
@@ -117,44 +132,44 @@ public class Pro {
 		this.siret = siret;
 	}
 
-	public String getPro_email_adress() {
-		return pro_email_adress;
+	public String getProEmailAddress() {
+		return proEmailAddress;
 	}
 
-	public void setPro_email_adress(String pro_email_adress) {
-		this.pro_email_adress = pro_email_adress;
+	public void setProEmailAddress(String proEmailAddress) {
+		this.proEmailAddress = proEmailAddress;
 	}
 
-	public String getPro_password() {
-		return pro_password;
+	public String getProPassword() {
+		return proPassword;
 	}
 
-	public void setPro_password(String pro_password) {
-		this.pro_password = pro_password;
+	public void setProPassword(String proPassword) {
+		this.proPassword = proPassword;
 	}
 
-	public String getPro_adress() {
-		return pro_adress;
+	public String getProAddress() {
+		return proAddress;
 	}
 
-	public void setPro_adress(String pro_adress) {
-		this.pro_adress = pro_adress;
+	public void setProAddress(String proAddress) {
+		this.proAddress = proAddress;
 	}
 
-	public String getPro_postcode() {
-		return pro_postcode;
+	public String getProPostcode() {
+		return proPostcode;
 	}
 
-	public void setPro_postcode(String pro_postcode) {
-		this.pro_postcode = pro_postcode;
+	public void setProPostcode(String proPostcode) {
+		this.proPostcode = proPostcode;
 	}
 
-	public String getPro_city() {
-		return pro_city;
+	public String getProCity() {
+		return proCity;
 	}
 
-	public void setPro_city(String pro_city) {
-		this.pro_city = pro_city;
+	public void setProCity(String proCity) {
+		this.proCity = proCity;
 	}
 
 	public Blob getKbis() {
@@ -173,20 +188,20 @@ public class Pro {
 		this.logo = logo;
 	}
 
-	public String getActivity_description() {
-		return activity_description;
+	public String getActivityDescription() {
+		return activityDescription;
 	}
 
-	public void setActivity_description(String activity_description) {
-		this.activity_description = activity_description;
+	public void setActivityDescription(String activityDescription) {
+		this.activityDescription = activityDescription;
 	}
 
-	public Blob getIdentity_card() {
-		return identity_card;
+	public Blob getIdentityCard() {
+		return identityCard;
 	}
 
-	public void setIdentity_card(Blob identity_card) {
-		this.identity_card = identity_card;
+	public void setIdentityCard(Blob identityCard) {
+		this.identityCard = identityCard;
 	}
 
 	public String getStaffing() {
@@ -197,16 +212,56 @@ public class Pro {
 		this.staffing = staffing;
 	}
 
-	public Role getPro_role() {
-		return pro_role;
-	}
-
-	public void setPro_role(Role pro_role) {
-		this.pro_role = pro_role;
-	}
-
 	public Integer getId() {
 		return id;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }
