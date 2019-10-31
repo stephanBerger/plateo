@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig {
 	
 	static String[] resources = new String[] {
-			"/include/**","/css/**","/icons/**","/IMG/**","/js/**",
+			"/include/**","/css/**","/icons/**","/img/**","/js/**",
 			"/layer/**","/resources/","/static/**","/webjars/**"
 	};
 	
@@ -28,8 +28,8 @@ public class SecurityConfig {
 
     	http.authorizeRequests()
     	.antMatchers(resources).permitAll()
-    	.antMatchers("/","/public/**").permitAll()
-    	.antMatchers("/pro*").hasRole("PRO")
+    	.antMatchers("/","/public/**","/pro/**").permitAll()
+    	//.antMatchers("/pro*").hasRole("PRO")
     	.and()
     	.formLogin()
 	    	.loginPage("/pro_login")
