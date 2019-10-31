@@ -233,7 +233,7 @@ input[type="email"]:focus,input[type="text"]:focus, select.champsFormulaire:focu
 .theFooter{
 	height:50px;
 	min-height:50px;
-	position: absolute;
+	position: fixed;
    	bottom: 0;
 	width:100%;
 }
