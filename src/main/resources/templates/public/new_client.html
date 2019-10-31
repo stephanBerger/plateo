@@ -12,61 +12,61 @@
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
-							<label for="client_lastname" class="col-form-label blue labelForm">Nom</label>
-							<input type="text" id="client_lastname" th:field="*{client_lastname}" class="champsFormulaire"
+							<label for="clientLastname" class="col-form-label blue labelForm">Nom</label>
+							<input type="text" id="clientLastname" th:field="*{clientLastname}" class="champsFormulaire"
 										placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('client_lastname')}" th:errors="*{client_lastname}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientLastname')}" th:errors="*{clientLastname}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_firstname" class="col-form-label blue labelForm">Prénom</label>
-							<input type="text" id="client_firstname" th:field="*{client_firstname}" class="champsFormulaire"
+							<label for="clientFirstname" class="col-form-label blue labelForm">Prénom</label>
+							<input type="text" id="clienFirstname" th:field="*{clientFirstname}" class="champsFormulaire"
 										placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('client_firstname')}" th:errors="*{client_firstname}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientFirstname')}" th:errors="*{clientFirstname}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_client_password_adress" class="col-form-label blue labelForm">Email</label>
-							<input type="email" id="client_email_adress" th:field="*{client_email_adress}" class="champsFormulaire"
+							<label for="clientEmailAddress" class="col-form-label blue labelForm">Email</label>
+							<input type="email" id="clientEmailAddress" th:field="*{clientEmailAddress}" class="champsFormulaire"
 									placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('client_email_adress')}" th:errors="*{client_email_adress}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientEmailAddress')}" th:errors="*{clientEmailAddress}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_password" class="col-form-label blue labelForm">Mot de passe</label>
-							<input type="text" id="client_password" th:field="*{client_password}"
+							<label for="clientPassword" class="col-form-label blue labelForm">Mot de passe</label>
+							<input type="text" id="clientPassword" th:field="*{clientPassword}"
 									class="champsFormulaire" placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('client_password')}" th:errors="*{client_password}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientPassword')}" th:errors="*{clientPassword}" class="text-danger">
 							</span>
 						</div>
 					</div>
 					<div class="formIdentifierRight">
 						<div class="form-group formIdentifier left">
-							<label for="client_adress" class="col-form-label blue labelForm">Adresse</label>
-							<input type="text" id="client_adress" th:field="*{client_adress}"
+							<label for="clientAddress" class="col-form-label blue labelForm">Adresse</label>
+							<input type="text" id="clientAddress" th:field="*{clientAddress}"
 								class="champsFormulaire" placeholder="Saisir adresse" />
-							<span th:if="${#fields.hasErrors('client_adress')}" th:errors="*{client_adress}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientAddress')}" th:errors="*{clientAddress}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_postcode" class="col-form-label blue labelForm">Code Postal</label>
-							<input type="text" id="client_postcode" th:field="*{client_postcode}"
+							<label for="clientPostcode" class="col-form-label blue labelForm">Code Postal</label>
+							<input type="text" id="clientPostcode" th:field="*{clientPostcode}"
 								class="champsFormulaire" placeholder="Saisir code postal" />
-							<span th:if="${#fields.hasErrors('client_postcode')}" th:errors="*{client_postcode}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientPostcode')}" th:errors="*{clientPostcode}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_city" class="col-form-label blue labelForm">client_phone_number</label>
-							<input type="text" id="client_city" th:field="*{client_city}" class="champsFormulaire"
+							<label for="clientCity" class="col-form-label blue labelForm">Ville</label>
+							<input type="text" id="clientCity" th:field="*{clientCity}" class="champsFormulaire"
 								placeholder="Saisir ville" />
-							<span th:if="${#fields.hasErrors('client_city')}" th:errors="*{client_city}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientCity')}" th:errors="*{clientCity}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-							<label for="client_phone_number" class="col-form-label blue labelForm">Téléphone</label>
-							<input type="text" id="client_phone_number" th:field="*{client_phone_number}"
+							<label for="clientPhoneNumber" class="col-form-label blue labelForm">Téléphone</label>
+							<input type="text" id="clientPhoneNumber" th:field="*{clientPhoneNumber}"
 								class="champsFormulaire" placeholder="Saisir numéro de téléphone" />
-							<span th:if="${#fields.hasErrors('client_phone_number')}" th:errors="*{client_phone_number}" class="text-danger">
+							<span th:if="${#fields.hasErrors('clientPhoneNumber')}" th:errors="*{clientPhoneNumber}" class="text-danger">
 							</span>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 		</div>
 		<div class="divVide"></div>
 	</section>
-	<footer th:replace="footer :: footer">
+	<footer th:replace="public/footer :: footer">
 	</footer>
 </body>
 </html>
