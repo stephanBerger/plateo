@@ -73,20 +73,8 @@
  	margin-left:40px;
  	margin-right:40px;
  }
-
- ::placeholder {
-	font-size:1.3rem;
-	color:#bdbdbd;
-	font-style: italic;
-}
-input[type="email"],input[type="text"], select.champsFormulaire {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #7d7d7d;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  margin:10px;
+ 
+input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
   margin-top:5px;
 }
   
