@@ -18,6 +18,9 @@ import fr.platform.plateo.persistence.ClientRepository;
  */
 @Controller
 public class ClientController {
+	
+	
+	
 
     private final static Logger LOGGER = LoggerFactory.getLogger( ClientController.class );
 

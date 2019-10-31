@@ -4,13 +4,15 @@
 </head>
 
 <body>
-<header th:replace="clients/header :: header">	
+
+	<header th:replace="clients/header :: header">	
 	</header>
-	<section class="sectionNouvClient centrer">
-		<div class="centrer carreBlanc">
+	 <section class="sectionNouvClient section100pour100 centrer">
+		<div class="centrer carreBlanc section100pour100">
 			<form class="centrer sectionFormClient" action="#" th:action="@{/public/new_client}" th:object="${client}" method="post">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
+
 						<div class="form-group formIdentifier left">
 							<label for="clientLastname" class="col-form-label blue labelForm">Nom</label>
 							<input type="text" id="clientLastname" th:field="*{clientLastname}" class="champsFormulaire"
@@ -88,6 +90,7 @@
 		</div>
 		<div class="divVide"></div>
 	</section>
+
 
 	<footer th:replace="/public/footer :: footer">
 
