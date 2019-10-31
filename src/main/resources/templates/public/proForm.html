@@ -27,10 +27,10 @@
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
-							<label for="proPostcode" class="col-form-label blue labelForm">Code Postal </label>
-							<input class="champsFormulaire" id="proPostcode" name="proPostcode" type="text"
-									placeholder="Saisir son code postal à 5 chiffres" pattern="[0-9]{5}"/>
-							<span th:if="${#fields.hasErrors('proPostcode')}" th:errors="*{proPostcode}" class="text-danger">
+							<label for="proEmailAddress" class="col-form-label blue labelForm">Email</label>
+							<input class="champsFormulaire" id="proEmailAddress" name="proEmailAddress" type="email"
+									placeholder="Champs obligatoire" required/>
+							<span th:if="${#fields.hasErrors('proEmailAddress')}" th:errors="*{proEmailAddress}" class="text-danger">
 							</span>
 						</div>
 					</div>
@@ -47,6 +47,13 @@
 							<input class="champsFormulaire"  id="managerFirstname" name="managerFirstname" type="text"
 									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('managerFirstname')}" th:errors="*{managerFirstname}" class="text-danger">
+							</span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="proPostcode" class="col-form-label blue labelForm">Code Postal </label>
+							<input class="champsFormulaire" id="proPostcode" name="proPostcode" type="text"
+									placeholder="Saisir son code postal à 5 chiffres" pattern="[0-9]{5}" required/>
+							<span th:if="${#fields.hasErrors('proPostcode')}" th:errors="*{proPostcode}" class="text-danger">
 							</span>
 						</div>
 					</div>

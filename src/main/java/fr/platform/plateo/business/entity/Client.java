@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -33,20 +34,6 @@ public class Client implements UserDetails {
     public Client() {
     }
 
-    public Client( String client_lastname, String client_firstname, String client_email_address, String client_password,
-            String client_phone_number, String client_address, String client_postcode, String client_city, Role role ) {
-
-        this.client_lastname = client_lastname;
-        this.client_firstname = client_firstname;
-        this.client_email_address = client_email_address;
-        this.client_password = client_password;
-        this.client_phone_number = client_phone_number;
-        this.client_address = client_address;
-        this.client_postcode = client_postcode;
-        this.client_city = client_city;
-        this.role = role;
-    }
-
     /**
      * 
      */
@@ -58,58 +45,59 @@ public class Client implements UserDetails {
      * 
      */
     @NotBlank( message = "Entrer le nom" )
-    @Column( length = 45, nullable = false )
-    private String  client_lastname;
+    @Column( name = "client_lastname", length = 45, nullable = false )
+    private String  clientLastname;
 
     /**
      * 
      */
     @NotBlank( message = "Entrer le prénom" )
-    @Column( length = 45, nullable = false )
-    private String  client_firstname;
+    @Column( name = "client_firstname", length = 45, nullable = false )
+    private String  clientFirstname;
 
     /**
      * 
      */
     @NotBlank( message = "Entrer une adresse email valide" )
-    @Column( length = 45, nullable = false )
-    private String  client_email_address;
+    @Column( name = "client_email_address", length = 45, nullable = false )
+    private String  clientEmailAddress;
 
     /**
      * 
      */
     @NotBlank( message = "Entrer un mot de passe valide" )
-    @Column( nullable = false )
-    private String  client_password;
+    @Column( name = "client_password", nullable = false )
+    private String  ClientPassword;
 
     /**
      * 
      */
-    @Column( length = 20 )
-    private String  client_phone_number;
+    @Column( name = "client_phone_number", length = 20 )
+    private String  clientPhoneNumber;
 
     /**
      * 
      */
-    @Column( length = 255 )
-    private String  client_address;
+    @Column( name = "client_address", length = 255 )
+    private String  clientAddress;
 
     /**
      * 
      */
-    @Column( length = 10 )
-    private String  client_postcode;
+    @Column( name = "client_postcode", length = 10 )
+    private String  clientPostcode;
 
     /**
      * 
      */
-    @Column( length = 100 )
-    private String  client_city;
+    @Column( name = "client_city", length = 100 )
+    private String  clientCity;
 
     /**
      * 
      */
-    @OneToOne
+    @ManyToOne
+    @JoinColumn( name = "role_id" )
     private Role    role;
 
     /**
@@ -145,80 +133,6 @@ public class Client implements UserDetails {
         return false;
     }
 
-    @Override
-    public String getUsername() {
-        return client_email_address;
-    }
-
-    @Override
-    public String getPassword() {
-        return client_password;
-    }
-
-    public String getClient_lastname() {
-        return client_lastname;
-    }
-
-    public void setClient_lastname( String client_lastname ) {
-        this.client_lastname = client_lastname;
-    }
-
-    public String getClient_firstname() {
-        return client_firstname;
-    }
-
-    public void setClient_firstname( String client_firstname ) {
-        this.client_firstname = client_firstname;
-    }
-
-    public String getClient_email_address() {
-        return client_email_address;
-    }
-
-    public void setClient_email_address( String client_email_address ) {
-        this.client_email_address = client_email_address;
-    }
-
-    public String getClient_password() {
-        return client_password;
-    }
-
-    public void setClient_password( String client_password ) {
-        this.client_password = client_password;
-    }
-
-    public String getClient_phone_number() {
-        return client_phone_number;
-    }
-
-    public void setClient_phone_number( String client_phone_number ) {
-        this.client_phone_number = client_phone_number;
-    }
-
-    public String getClient_address() {
-        return client_address;
-    }
-
-    public void setClient_address( String client_address ) {
-        this.client_address = client_address;
-    }
-
-    public String getClient_postcode() {
-        return client_postcode;
-    }
-
-    public void setClient_postcode( String client_postcode ) {
-        this.client_postcode = client_postcode;
-    }
-
-    public String getClient_city() {
-        return client_city;
-    }
-
-    public void setClient_city( String client_city ) {
-        this.client_city = client_city;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -229,6 +143,80 @@ public class Client implements UserDetails {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getClientLastname() {
+        return clientLastname;
+    }
+
+    public void setClientLastname( String clientLastname ) {
+        this.clientLastname = clientLastname;
+    }
+
+    public String getClientFirstname() {
+        return clientFirstname;
+    }
+
+    public void setClientFirstname( String clientFirstname ) {
+        this.clientFirstname = clientFirstname;
+    }
+
+    public String getClientEmailAddress() {
+        return clientEmailAddress;
+    }
+
+    public void setClientEmailAddress( String clientEmailAddress ) {
+        this.clientEmailAddress = clientEmailAddress;
+    }
+
+    public String getClientPassword() {
+        return ClientPassword;
+    }
+
+    public void setClientPassword( String clientPassword ) {
+        ClientPassword = clientPassword;
+    }
+
+    public String getClientPhoneNumber() {
+        return clientPhoneNumber;
+    }
+
+    public void setClientPhoneNumber( String clientPhoneNumber ) {
+        this.clientPhoneNumber = clientPhoneNumber;
+    }
+
+    public String getClientAddress() {
+        return clientAddress;
+    }
+
+    public void setClientAddress( String clientAddress ) {
+        this.clientAddress = clientAddress;
+    }
+
+    public String getClientPostcode() {
+        return clientPostcode;
+    }
+
+    public void setClientPostcode( String clientPostcode ) {
+        this.clientPostcode = clientPostcode;
+    }
+
+    public String getClientCity() {
+        return clientCity;
+    }
+
+    public void setClientCity( String clientCity ) {
+        this.clientCity = clientCity;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
     }
 
 }
