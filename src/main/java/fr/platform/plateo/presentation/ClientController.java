@@ -40,7 +40,7 @@ public class ClientController {
 			return "form";
 		} else {
 			clientService.create(client);
-			return "redirect:public/index";
+			return "public/index";
 		}
 	}
 	
