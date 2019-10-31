@@ -28,7 +28,7 @@ public class Pro {
 
 	@NotBlank(message = "Entrer le prénom du gérant")
 	@Column(length = 45, nullable = false)
-	private String manager_firstname;
+	private String managerFirstname;
 
 	private String pro_phone_number;
 	
@@ -71,7 +71,7 @@ public class Pro {
 			String siret, String pro_password, String pro_postcode) {
 		this.company_name = company_name;
 		this.manager_lastname = manager_lastname;
-		this.manager_firstname = manager_firstname;
+		this.managerFirstname = manager_firstname;
 		this.siret = siret;
 		this.pro_password = pro_password;
 		this.pro_postcode = pro_postcode;
@@ -94,11 +94,11 @@ public class Pro {
 	}
 
 	public String getManager_firstname() {
-		return manager_firstname;
+		return managerFirstname;
 	}
 
 	public void setManager_firstname(String manager_firstname) {
-		this.manager_firstname = manager_firstname;
+		this.managerFirstname = manager_firstname;
 	}
 
 	public String getPro_phone_number() {
