@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="clients/head :: head">
+<head th:replace="public/head :: head">
 </head>
 
 <body>
-	<header th:replace="clients/header :: header">	
+	 <header th:replace="public/header :: header">	
 	</header>
-	<section class="sectionNouvClient centrer">
+	 <section class="sectionNouvClient centrer">
 		<div class="centrer carreBlanc">
-			<form class="centrer sectionFormClient" action="#" th:action="@{/clients/add}" th:object="${client}" method="post">
+			<form class="centrer sectionFormClient" action="#" th:action="@{/}" th:object="${client}" method="post">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
-						<div class="form-group formIdentifier left">
+						 <div class="form-group formIdentifier left">
 							<label for="client_lastname" class="col-form-label blue labelForm">Nom</label>
 							<input type="text" id="client_lastname" th:field="*{client_lastname}" class="champsFormulaire"
 										placeholder="Champs obligatoire" />
@@ -27,9 +27,9 @@
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="client_client_password_adress" class="col-form-label blue labelForm">Email</label>
-							<input type="email" id="client_email_adress" th:field="*{client_email_adress}" class="champsFormulaire"
+							<input type="email" id="client_email_address" th:field="*{client_email_address}" class="champsFormulaire"
 									placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('client_email_adress')}" th:errors="*{client_email_adress}" class="text-danger">
+							<span th:if="${#fields.hasErrors('client_email_address')}" th:errors="*{client_email_address}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
@@ -41,11 +41,11 @@
 						</div>
 					</div>
 					<div class="formIdentifierRight">
-						<div class="form-group formIdentifier left">
-							<label for="client_adress" class="col-form-label blue labelForm">Adresse</label>
-							<input type="text" id="client_adress" th:field="*{client_adress}"
+						  <div class="form-group formIdentifier left">
+							<label for="client_address" class="col-form-label blue labelForm">Adresse</label>
+							<input type="text" id="client_address" th:field="*{client_address}"
 								class="champsFormulaire" placeholder="Saisir adresse" />
-							<span th:if="${#fields.hasErrors('client_adress')}" th:errors="*{client_adress}" class="text-danger">
+							<span th:if="${#fields.hasErrors('client_address')}" th:errors="*{client_address}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
@@ -83,7 +83,7 @@
 		</div>
 		<div class="divVide"></div>
 	</section>
-	<footer th:replace="footer :: footer">
+	<footer th:replace="public/footer :: footer">
 	</footer>
 </body>
 </html>

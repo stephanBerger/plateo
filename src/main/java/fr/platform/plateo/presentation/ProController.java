@@ -8,10 +8,10 @@ public class ProController {
 	
 	
 	
-	@GetMapping("/public/proForm")
+	/*@GetMapping("/public/proForm")
 	public String proForm()	{
 		return "public/proForm";
-	}
+	}*/
 	
 	@GetMapping("/pro/dashboard")
 	public String dahsbord() {
