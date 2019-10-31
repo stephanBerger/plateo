@@ -49,6 +49,13 @@
 							<span th:if="${#fields.hasErrors('manager_firstname')}" th:errors="*{manager_firstname}" class="text-danger">
 							</span>
 						</div>
+						<div class="form-group formIdentifier left">
+							<label for="pro_email_address" class="col-form-label blue labelForm">Email</label>
+							<input class="champsFormulaire" id="pro_email_address" th:field="*{pro_email_address}" type="email"
+									placeholder="Champs obligatoire" required/>
+							<span th:if="${#fields.hasErrors('pro_email_address')}" th:errors="*{pro_email_address}" class="text-danger">
+							</span>
+						</div>
 					</div>
 				</div>
 				<div class="sectionForm ">
