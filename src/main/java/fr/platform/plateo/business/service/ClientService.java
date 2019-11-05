@@ -3,7 +3,6 @@ package fr.platform.plateo.business.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,10 @@ public class ClientService implements UserDetailsService {
 	
 	public List<Client> listClients() {
 		return this.clientRepository.findAll();
+	}
+	
+	public Client findEmail(String email) {
+		return this.clientRepository.findOneByClientEmailAddress(email);
 	}
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -59,6 +60,7 @@ public class Client implements UserDetails {
      * 
      */
     @NotBlank( message = "Entrer une adresse email valide" )
+    @Email
     @Column( name = "client_email_address", length = 45, nullable = false )
     private String  clientEmailAddress;
 
@@ -67,7 +69,7 @@ public class Client implements UserDetails {
      */
     @NotBlank( message = "Entrer un mot de passe valide" )
     @Column( name = "client_password", nullable = false )
-    private String  ClientPassword;
+    private String  clientPassword;
 
     /**
      * 
@@ -92,6 +94,11 @@ public class Client implements UserDetails {
      */
     @Column( name = "client_city", length = 100 )
     private String  clientCity;
+    /**
+     * 
+     */
+    @Column( name = "enabled")
+    private boolean  enabled;
 
     /**
      * 
@@ -130,7 +137,7 @@ public class Client implements UserDetails {
     @Override
     public boolean isEnabled() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     public Role getRole() {
@@ -170,11 +177,11 @@ public class Client implements UserDetails {
     }
 
     public String getClientPassword() {
-        return ClientPassword;
+        return clientPassword;
     }
 
     public void setClientPassword( String clientPassword ) {
-        ClientPassword = clientPassword;
+       this.clientPassword = clientPassword;
     }
 
     public String getClientPhoneNumber() {
@@ -209,14 +216,20 @@ public class Client implements UserDetails {
         this.clientCity = clientCity;
     }
 
+    
+    public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	//security config
     @Override
     public String getPassword() {
-        return null;
+        return this.clientPassword;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.clientEmailAddress;
     }
     
 
