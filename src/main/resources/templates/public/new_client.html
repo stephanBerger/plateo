@@ -44,13 +44,13 @@
 							
 						</div>
 						<div class="form-group formIdentifier left">
-						<label for="clientEmailAddress"
-								class="col-form-label blue labelForm">Email</label>
-							<input type="email" id="clientEmailAddress"
-								th:field="*{clientEmailAddress}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required />
-							<span th:if="${#fields.hasErrors('clientEmailAddress')}"
-								th:errors="*{clientEmailAddress}" class="text-danger">
+							<label for="clientPassword" class="col-form-label blue labelForm">Mot
+								de passe</label>
+							<input type="password" id="clientPassword" th:field="*{clientPassword}"
+									class="champsFormulaire"
+									placeholder="Champs obligatoire" />
+							<span th:if="${#fields.hasErrors('clientPassword')}"
+								th:errors="*{clientPassword}" class="text-danger">
 							</span>
 						</div>
 					</div>
@@ -74,24 +74,13 @@
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
-						<label for="clientPhoneNumber" class="col-form-label blue labelForm">
-								Téléphone</label>
-							<input type="text" id="clientPhoneNumber" pattern="[0-9]{10}"
-								th:field="*{clientPhoneNumber}" class="champsFormulaire"
-								placeholder="Saisir numéro de téléphone" />
-							<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
-								th:errors="*{clientPhoneNumber}" class="text-danger">
-							</span>
-								
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="clientPassword" class="col-form-label blue labelForm">Mot
-								de passe</label>
-							<input type="password" id="clientPassword" th:field="*{clientPassword}"
-									class="champsFormulaire"
-									placeholder="Champs obligatoire" />
-							<span th:if="${#fields.hasErrors('clientPassword')}"
-								th:errors="*{clientPassword}" class="text-danger">
+							<label for="clientEmailAddress"
+								class="col-form-label blue labelForm">Email</label>
+							<input type="email" id="clientEmailAddress"
+								th:field="*{clientEmailAddress}" class="champsFormulaire"
+								placeholder="Champs obligatoire" required />
+							<span th:if="${#fields.hasErrors('clientEmailAddress')}"
+								th:errors="*{clientEmailAddress}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
