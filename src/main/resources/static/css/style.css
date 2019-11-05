@@ -43,6 +43,11 @@ body {
   	justify-content:center;
     align-items:center;
 }
+.top{
+	display: flex;
+  	justify-content:center;
+    align-items:flex-start;
+}
 .left{
 	display: flex;
   	justify-content: flex-start;
@@ -213,8 +218,12 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 .btnWidthLong{
 	width:300px;
 }
-.btn:hover{
+.btn.bgOrange:hover{
 	background-color:#e68200;
+	color:white;
+}
+.btn.bgGreyFonce:hover{
+	background-color:#595959;
 	color:white;
 }
 .hoverBlue:hover{
