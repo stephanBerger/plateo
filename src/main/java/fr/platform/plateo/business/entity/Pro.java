@@ -13,12 +13,12 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @Entity
 @Table(name = "pro")
-public class Pro implements UserDetailsService, UserDetails{
+public class Pro implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,16 +82,6 @@ public class Pro implements UserDetailsService, UserDetails{
 	public Pro() {
 	}
 
-//	public Pro(String company_name, String manager_lastname, String manager_firstname, String siret,
-//			String pro_password, String pro_postcode) {
-//		this.companyName = company_name;
-//		this.managerLastname = manager_lastname;
-//		this.managerFirstname = manager_firstname;
-//		this.siret = siret;
-//		this.proPassword = pro_password;
-//		this.proPostcode = pro_postcode;
-//	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -137,7 +127,7 @@ public class Pro implements UserDetailsService, UserDetails{
 	}
 
 	public void setProEmailAddress(String proEmailAddress) {
-		this.proEmailAddress = proEmailAddress;
+		this.proEmailAddress = proEmailAddress.toLowerCase();
 	}
 
 	public String getProPassword() {
@@ -214,12 +204,6 @@ public class Pro implements UserDetailsService, UserDetails{
 
 	public Integer getId() {
 		return id;
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

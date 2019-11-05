@@ -16,27 +16,27 @@ import fr.platform.plateo.persistence.ProRepository;
 public class ProService implements UserDetailsService {
 
 	@Autowired
-	private ProRepository Prorepository;
+	private ProRepository proRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return proRepository.findOneByProEmailAddress(email);
 	}
 
 	public void create(Pro pro) {
-		this.Prorepository.save(pro);
+		this.proRepository.save(pro);
 	}
 
 	public Pro read(Integer id) {
-		return this.Prorepository.getOne(id);
+		return this.proRepository.getOne(id);
 	}
 
 	public void update(Pro pro) {
-		this.Prorepository.save(pro);
+		this.proRepository.save(pro);
 	}
 
 	public void delete(Integer id) {
-		this.Prorepository.deleteById(id);
+		this.proRepository.deleteById(id);
 	}
 
 }
