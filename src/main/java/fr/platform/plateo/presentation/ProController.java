@@ -1,5 +1,10 @@
 package fr.platform.plateo.presentation;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -11,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
@@ -65,6 +71,7 @@ public class ProController {
 			String[] siren = pro.getSiret().substring(0, 9).split("");
 			int somme = 0;
 			int resultat = 0;
+			
 
 			for (int i = 1; i <= siren.length; i++) {
 				if (i % 2 != 0) {
