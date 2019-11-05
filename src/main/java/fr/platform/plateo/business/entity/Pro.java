@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -48,7 +50,7 @@ public class Pro implements UserDetails {
 	private String proEmailAddress;
 
 	@NotBlank(message = "Entrez votre mot de passe")
-	@Column(name = "pro_password", length = 45, nullable = false)
+	@Column(name = "pro_password", nullable = false)
 	private String proPassword;
 
 	@Column(name = "pro_address")
@@ -76,8 +78,9 @@ public class Pro implements UserDetails {
 	@Column(name = "staffing")
 	private String staffing;
 
-	@Column(name = "pro_role")
-	private Role proRole;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 
 	@Column(name = "enabled")
 	private boolean enabled;
@@ -256,12 +259,12 @@ public class Pro implements UserDetails {
 		this.enabled = enabled;
 	}
 
-	public Role getProRole() {
-		return proRole;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setProRole(Role proRole) {
-		this.proRole = proRole;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

@@ -38,7 +38,8 @@ public class ProController {
 	}
 
 	@PostMapping("/public/proForm")
-	public String save(@Valid Pro pro, BindingResult result,@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
+	public String save(@Valid Pro pro, BindingResult result,
+			@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
 		if (result.hasErrors()) {
 			LOGGER.info("Erreur dans le formulaire" + pro.getCompanyName());
 			System.out.println(result.toString());
@@ -50,15 +51,15 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString()
-					+ " " + pro.getProPassword());
+			LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
-		//Test de la longueur du SIRET et test sur la validité du siren
+			// Test de la longueur du SIRET et test sur la validité du siren
 		} else if (pro.getSiret().length() != 14) {
 			result.rejectValue("siret", null, "Le Siret doit contenir 14 chiffres.");
 			return null;
-			
+
 		} else if (pro.getSiret() != null) {
 
 			String[] siren = pro.getSiret().substring(0, 9).split("");
@@ -82,7 +83,7 @@ public class ProController {
 				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
 				return null;
 			} else {
-				
+
 				// si ok rajoute le client et redirect sur valid client
 				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 				String password = crypt.encode(pro.getProPassword());
@@ -93,18 +94,16 @@ public class ProController {
 
 				// id du role PRO
 				Role role = new Role();
-				role.setId(2);
-				pro.setProRole(role);
-				
+				role.setId(1);
+				pro.setRole(role);
 
-				
 				LOGGER.info("Creation utlisateur PRO effectué");
 				this.proService.create(pro);
 				return "public/index";
 			}
 
 		}
-		return null; 
-		
+		return null;
+
 	}
 }
