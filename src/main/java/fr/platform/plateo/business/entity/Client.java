@@ -218,5 +218,6 @@ public class Client implements UserDetails {
     public String getUsername() {
         return null;
     }
+    
 
 }
