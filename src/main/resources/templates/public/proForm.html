@@ -15,14 +15,14 @@
 						<div class="form-group formIdentifier left">
 							<label for="companyName" class="col-form-label blue labelForm">Dénomination sociale </label>
 							<input class="champsFormulaire" id="companyName" name="companyName" type="text"
-									placeholder="Champs obligatoire"/>
+									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="text-danger">
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
 							<label for="managerLastname" class="col-form-label blue labelForm">Nom du gérant </label>
 							<input class="champsFormulaire"  id="managerLastname" name="managerLastname" type="text"
-									placeholder="Champs obligatoire"/>
+									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('managerLastname')}" th:errors="*{managerLastname}" class="text-danger">
 							</span>
 						</div>	
@@ -38,7 +38,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
 							<input class="champsFormulaire" id="siret" name="siret" type="text"
-									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-9]{14}" />
+									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-9]{14}" required />
 							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
 							</span>
 						</div>
@@ -63,7 +63,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="proPassword" class="col-form-label blue labelForm">Mot de passe :</label>
 							<input class="champsFormulaire" type="password" id="passwordInput"
-									placeholder="Champs obligatoire" name="proPassword"/>
+									placeholder="Champs obligatoire" name="proPassword" required/>
 							<span th:if="${#fields.hasErrors('proPassword')}" th:errors="*{proPassword}" class="text-danger">
 							</span>
 						</div>
@@ -72,16 +72,14 @@
 						<div class="form-group formIdentifier left">
 							<label for="confirmproPassword" class="col-form-label blue labelForm">Confirmer votre mot de passe :</label>
 							<input class="champsFormulaire" type="password" id="confirmPasswordInput"
-									placeholder="Champs obligatoire" name="confirmproPassword"/>
+									placeholder="Champs obligatoire" name="confirmproPassword" required/>
 							<span th:if="${#fields.hasErrors('proPassword')}" th:errors="*{proPassword}" class="text-danger">
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="centrer sectionButton">
-					<a href="" class="greyFonce changePassword">
-						Changer de mot de passe
-					</a>
+					
 					<a>
 						<button type="submit" class="btn bgOrange MarginClient">Envoyer</button>
 					</a>

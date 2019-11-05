@@ -137,7 +137,7 @@ public class Pro implements UserDetailsService, UserDetails{
 	}
 
 	public void setProEmailAddress(String proEmailAddress) {
-		this.proEmailAddress = proEmailAddress;
+		this.proEmailAddress = proEmailAddress.toLowerCase();
 	}
 
 	public String getProPassword() {
