@@ -79,6 +79,9 @@ public class Pro implements UserDetails {
 	@Column(name = "pro_role")
 	private Role proRole;
 
+	@Column(name = "enabled")
+	private boolean enabled;
+
 	public Pro() {
 	}
 
@@ -246,6 +249,19 @@ public class Pro implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public void setEnabled(boolean enabled) {
+		// TODO Auto-generated method stub
+		this.enabled = enabled;
+	}
+
+	public Role getProRole() {
+		return proRole;
+	}
+
+	public void setProRole(Role proRole) {
+		this.proRole = proRole;
 	}
 
 }

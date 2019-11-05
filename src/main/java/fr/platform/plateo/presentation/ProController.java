@@ -11,8 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
@@ -93,13 +91,12 @@ public class ProController {
 				// enabled a true
 				pro.setEnabled(true);
 
-				// id du role CLIENT
+				// id du role PRO
 				Role role = new Role();
 				role.setId(2);
-				client.setRole(role);
+				pro.setProRole(role);
 				
-				
-				
+
 				
 				LOGGER.info("Creation utlisateur PRO effectué");
 				this.proService.create(pro);
