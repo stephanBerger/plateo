@@ -305,6 +305,89 @@ ul{
 	   width:45px;
 	   height:45px;
 	}
+	
+	
+	
+	.form-group {
+	    margin-bottom: 0.5rem;
+	}
+	.labelForm{
+	 	font-weight: 500;
+	  	line-height: 1;
+	  	font-size: 1.3rem;
+	 } 
+	/*.sectionIdentifier h2{
+		padding-top:40px;
+	}
+	.h2creerCompte{
+		padding-top:0px !important;
+	}
+	.identifier {
+		margin:0;
+		padding:0;
+		width:460px;
+		background-color: white;
+		flex-direction: column;
+		
+		box-shadow: 0px 0px 15px 0px black;
+		justify-content:flex-start !important;
+	} */
+	 .formIdentifier{
+	 	flex-direction: column;
+	 }
+	.formIdentifier input{
+		margin:10px;
+		width:400px;
+	}   
+	
+	::placeholder {
+		font-size:1rem;
+		color:#bdbdbd;
+		font-style: italic;
+	}
+	input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+	  background: transparent;
+	  border: none;
+	  border-bottom: 1px solid #7d7d7d;
+	  -webkit-box-shadow: none;
+	  box-shadow: none;
+	  border-radius: 0;
+	  margin:10px;
+	  margin-top:20px;
+	}
+	input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus, select.champsFormulaire:focus {
+	  -webkit-box-shadow: none;
+	  box-shadow: none;
+	}
+	.btn{
+		width:160px;
+		margin-top:20px;
+		border-radius:10px;
+		font-weight: 600;
+		color:white;
+		font-size:1.3rem;
+	}
+	.btnWidthLong{
+		width:300px;
+	}
+	.btn:hover{
+		background-color:#e68200;
+		color:white;
+	}
+	.hoverBlue:hover{
+		background-color:#005c99 !important;
+	}
+	.btnPro{
+		margin-bottom:40px;
+	}
+	.identifier h4{
+	 	padding-top:15px;
+	} 
+ 
+ 
+ 
+ 
+ 
 }
  
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */

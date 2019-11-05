@@ -98,7 +98,18 @@
   margin-top:5px !important;
 } 
  
+ /*---------------------------------------MEDIA QUERYS-------------------------------*/   
  
+  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */ 
+  @media screen and (max-width: 1440px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+
+	 .sectionFormPro{
+	 	padding-top:20px;
+	 }
+}
+  
+  
  
  
  

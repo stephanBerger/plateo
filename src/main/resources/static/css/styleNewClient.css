@@ -55,7 +55,6 @@
  	flex-direction:column;
  	justify-content:center;
  	padding-top:30px;
- 	min-height: calc(100% - 50px - 181px) !important;
  }
  .sectionForm{
  	display:flex;
@@ -77,6 +76,82 @@
 input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
   margin-top:5px;
 }
+  
+/*---------------------------------------MEDIA QUERYS-------------------------------*/   
+ 
+  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */ 
+  @media screen and (max-width: 1440px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+
+	 .sectionFormClient{
+	 	padding-top:20px;
+	 }
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*-----------------a supp------------*/
+  
+  
+ /* The subnavigation menu */
+.subnav {
+  float: right;
+  overflow: hidden;
+  font-size: 1.1rem;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+/* Add a red background color to navigation links on hover */
+.subnav:hover {
+  /*background-color:#0073be;*/
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top:150px;
+  background-color:#0073be;
+  width: 100%;
+  z-index: 1;
+   color: white;
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: right;
+  color: white;
+  text-decoration: none;
+}
+
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+  background-color:#0073be;
+  
+  color: white;
+}
+
+/* When you move the mouse over the subnav container, open the subnav content */
+.subnav:hover .subnav-content {
+  display: block;
+} 
+  
+  
+  
   
   
   
