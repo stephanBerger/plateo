@@ -27,6 +27,13 @@ public class ProController {
 		return "public/proForm";
 	}
 	
+	/* A SUPPRIMER */
+	@GetMapping("/public/proDashboard")
+	public String proDashboard(Pro pro) {
+		return "public/proDashboard";
+	}
+	/*  Fin de A SUPPRIMER*/
+	
 	@PostMapping("/pro/proDashboard")
 	public String index() {
 		LOGGER.info("La page \"proDashboard\" est demandée");

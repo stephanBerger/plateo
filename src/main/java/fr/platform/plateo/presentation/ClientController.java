@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.platform.plateo.business.entity.Client;
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.service.ClientService;
 
 /**
@@ -33,6 +34,14 @@ public class ClientController {
 		LOGGER.info("La page \"new_client\" est demandée");
 		return "public/new_client";
 	}
+
+	/* A SUPPRIMER */
+	@GetMapping("/public/clientDashboard")
+	public String clientDashboard(Client client) {
+		return "public/clientDashboard";
+	}
+	/*  Fin de A SUPPRIMER*/
+	
 
 	@PostMapping("public/new_client")
 	public String save(@Valid Client client, BindingResult result) {
