@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/*-----------------------------HEADER-----------------------------------------*/
+/*-------IMG Header----------*/
+/*.divimgHeader{
+	display:flex;
+}*/
+.divimgHeader{
+	display:flex;
+	justify-content:space-between;
+	padding:0px;
+	margin:0px;
+}
+.imgHeader{
+	color:white;
+}
+.imgHeaderLeft{
+	width:auto !important;
+	background-color: #0073be;
+	flex-grow: 3;
+}
+.imgHeaderRight{
+	width:20px !important;
+	background-color: #ff9500;
+}
+
+  /*-----------------------------FIN HEADER-----------------------------------------*/
+  
+  

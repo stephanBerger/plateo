@@ -22,19 +22,14 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String base() {
-		LOGGER.info("Une requête sur '/' est faite");
+		LOGGER.info("Une requête sur '/' est faite, la page 'index' est envoyée");
 		return "public/index";
 	}
 
-	@GetMapping("/index")
-	public String index() {
-		LOGGER.info("La page \"index\" est demandée");
-		return "public/index";
-	}
 
     @GetMapping( "/public/registration" )
     public String registration() {
-        LOGGER.info( "La page \"registration\" est demandée" );
+        LOGGER.info( "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée" );
         return "public/registration";
     }
 

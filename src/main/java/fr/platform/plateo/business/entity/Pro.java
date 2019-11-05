@@ -82,15 +82,15 @@ public class Pro implements UserDetailsService, UserDetails{
 	public Pro() {
 	}
 
-	public Pro(String company_name, String manager_lastname, String manager_firstname, String siret,
-			String pro_password, String pro_postcode) {
-		this.companyName = company_name;
-		this.managerLastname = manager_lastname;
-		this.managerFirstname = manager_firstname;
-		this.siret = siret;
-		this.proPassword = pro_password;
-		this.proPostcode = pro_postcode;
-	}
+//	public Pro(String company_name, String manager_lastname, String manager_firstname, String siret,
+//			String pro_password, String pro_postcode) {
+//		this.companyName = company_name;
+//		this.managerLastname = manager_lastname;
+//		this.managerFirstname = manager_firstname;
+//		this.siret = siret;
+//		this.proPassword = pro_password;
+//		this.proPostcode = pro_postcode;
+//	}
 
 	public String getCompanyName() {
 		return companyName;
