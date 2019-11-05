@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="/clients/head :: head">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
 </head>
 <body>
 	<header th:replace="/clients/header :: header"> </header>
@@ -9,9 +11,9 @@
 		<div>
 			<div>
 			
-				<form th:action="@{/clients/recherche}" method="get">
+				<form th:action="@{/clients/search}" method="get">
 					<label for="recherche">Nom client</label> 
-					<input type="text"  name="recherche" id="recherche" placeholder="Recherche" />
+					<input type="text"  name="search" id="search" placeholder="Recherche" />
 					<button type="submit">Rechercher</button>
 				</form>
 			</div><br>

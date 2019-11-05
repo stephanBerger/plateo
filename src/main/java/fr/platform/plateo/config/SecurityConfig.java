@@ -1,71 +1,79 @@
 package fr.platform.plateo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import fr.platform.plateo.service.UserDetailsServiceImpl;
-
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+public class SecurityConfig {
 	
-    String[] resources = new String[]{
-            "/include/**","/css/**","/icons/**","/IMG/**","/js/**","/layer/**"
-    };
+	static String[] resources = new String[] {
+			"/include/**","/css/**","/icons/**","/img/**","/js/**",
+			"/layer/**","/resources/","/static/**","/webjars/**"
+	};
 	
+	@Configuration
+	@Order(1)
+	public static class ProConfigurationAdapter extends WebSecurityConfigurerAdapter {
+	
+	public ProConfigurationAdapter() {
+		super();
+	}
+		
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-	        .antMatchers(resources).permitAll() 
-	        .antMatchers("/**","/login").permitAll()
-	        .antMatchers("/admin*").access("hasRole('ADMIN')")
-	        .antMatchers("/user*").access("hasRole('USER') or hasRole('ADMIN')")
-            .anyRequest().authenticated()
+
+    	http.authorizeRequests()
+    	.antMatchers(resources).permitAll()
+    	.antMatchers("/","/index","/public/**").permitAll()
+    	.antMatchers("/pro/**").hasRole("PRO")
+    	.anyRequest().authenticated()
+    	.and()
+    	.formLogin()
+	    	.loginPage("/pro_login")
+    		.permitAll()
+	        .failureUrl("/pro_login?error=true")
+    		.usernameParameter("pro_email_address")
+            .passwordParameter("pro_password")
             .and()
-            .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                // login ok route vers index du site
-                .defaultSuccessUrl("/index")
-                .failureUrl("/login?error=true")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and()
-            .logout()
-                .permitAll()
-                .logoutSuccessUrl("/login?logout");
-    }
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-    
-    
-  
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-		bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+	        .logout()
+	        .permitAll()
+	        .logoutSuccessUrl("/");
+    	
+    	}
+	}
+	
+	@Configuration
+	@Order(2)
+	public static class ClientConfigurationAdapter extends WebSecurityConfigurerAdapter {
+	
+	public ClientConfigurationAdapter() {
+		super();
+	}
 		
-        return bCryptPasswordEncoder;
-    }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+    	http.authorizeRequests()
+    	.antMatchers(resources).permitAll()
+    	.antMatchers("/","/public/**").permitAll()
+    	.antMatchers("/client/**").hasRole("CLIENT")
+    	.and()
+    	.formLogin()
+	        .loginPage("/client_login")
+	        .permitAll()
+	        .failureUrl("/client_login?error=true")
+	        .usernameParameter("client_email_address")
+	        .passwordParameter("client_password")
+	        .and()
+	        .logout()
+	        .permitAll()
+	        .logoutSuccessUrl("/");
+    	
+    	}
+	}
 	
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-	
-   
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
- 
-        // Setting Service to find User in the database.
-        // And Setting PassswordEncoder
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
-    }
-    
-    
 }

@@ -2,16 +2,13 @@ package fr.platform.plateo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan({ "fr.platform.plateo.presentation", "fr.platform.plateo.business.entity",
+		"fr.platform.plateo.business.service", "fr.platform.plateo.persistence", "fr.platform.plateo.config" })
 
-@SpringBootApplication
-@ComponentScan({ "fr.platform.plateo.config"})
-@ComponentScan({ "fr.platform.plateo.controller"})
-@ComponentScan({ "fr.platform.plateo.entity"})
-@ComponentScan({ " fr.platform.plateo.service"})
-@ComponentScan({ "fr.platform.plateo.util"})
-
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class PlateoApplication {
 
 	public static void main(String[] args) {

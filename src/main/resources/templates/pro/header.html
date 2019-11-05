@@ -5,7 +5,7 @@
 <body>
 	<header th:fragment="header">
 		<div class="textedivimgHeader centrer white">
-			PARTICULIER
+			PROFESSIONNEL
 		</div>
 		<div class="divimgHeader">
 			<div class="imgHeaderLeft"></div>
@@ -17,7 +17,6 @@
 			<div class="imgHeaderRight"></div>
 
 		</div>
-
 
 		<section class="menu centrer">
 			<a th:href="@{/}" class="imgLogo">
@@ -40,10 +39,8 @@
 					</li>
 					<li>
 						<a href="">
-							<div class="subnav">
-								<img th:src="@{/img/DEVIS.jpg}">
-								<p>Devis</p>
-							</div>
+							<img th:src="@{/img/DEVIS.jpg}">
+							<p>Demander un devis</p>
 						</a>
 					</li>
 					<li>
@@ -58,6 +55,7 @@
 							<img th:src="@{/img/PROFIL.jpg}">
 							<p>Mon profil</p>
 						</a>
+
 					</li>
 				</ul>
 			</nav>

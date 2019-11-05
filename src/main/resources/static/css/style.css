@@ -9,6 +9,9 @@ body {
   padding: 0;
 }
 /*-------COLOR----------*/ 
+.white{
+	color:White;
+}
 .blue{
 	color: #0073be;
 }
@@ -28,15 +31,39 @@ body {
 .bgGreyFonce{
 	background-color: #808080;
 }
+.bggreyClair{
+	color: #bdbdbd;
+}
+.bggreyTresClair{
+	color: #e6e6e6;
+}
 /*----------------------*/ 
 .centrer{
 	display: flex;
   	justify-content:center;
     align-items:center;
 }
+.top{
+	display: flex;
+  	justify-content:center;
+    align-items:flex-start;
+}
+.left{
+	display: flex;
+  	justify-content: flex-start;
+}
 
 
 /*-----------------------------HEADER-----------------------------------------*/
+.textedivimgHeader{
+	position:absolute;
+	margin-left: auto;
+  	margin-right: auto;
+  	width: 100%;
+  	font-weight: 600;
+  	font-size:1.3rem;
+  	line-height: 28px;
+}
 /*-------IMG Header----------*/
 .menu{
 	justify-content: space-between;
@@ -46,13 +73,14 @@ body {
 }
 
 .imgLogoPlateo{
-	height:120px;
-	width:120px;
+	height:100px;
+	width:100px;
 }
 
 .imgLogoText{
-	height:66px;
-	width:200px;
+	height:53px;
+	width:160px;
+	margin-left:10px;
 }
 
 .divimgHeader{
@@ -70,13 +98,13 @@ body {
 }
 /*-------MENU----------*/
 .menu nav ul{
-	height:130px;
+	height:115px;
 	margin:0;
 	margin-right:20px;
     padding: 0;
     display: flex;
     justify-content: flex-end;
-    font-size:1.3rem;
+    font-size:1.2rem;
 }greyClair ul{
     list-style-type: none;
   }
@@ -91,6 +119,14 @@ body {
     text-decoration: none;
     color :#39424E;
     font-weight: 600;
+    text-align:center;
+}
+.menu li a p {
+	margin-bottom:0;
+	
+}
+.textIdentifier{
+	line-height: 1.1;
 }
 .menu li img {
    width:55px;
@@ -98,24 +134,27 @@ body {
    margin:0;
    padding:0;
 }
+/*------------------SOUS MENU-----------------*/
 .sousMenu{
-	height:40px;
+	/*height:40px;*//*taille normale pour le sous menu*/
+	height:20px;
 	background-color: #0073be;
 }
   /*-----------------------------FIN HEADER-----------------------------------------*/
   
+ .section100pour100{
+ 	min-height: calc(100% - 50px - 166px);
+ }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	background-image: url("../IMG/IMG-FOND1.jpg");
+	background-image: url("../img/IMG-FOND1.jpg");
 	width:100%;
 	background-position: center; /* Center the image */
   	background-repeat: no-repeat; /* Do not repeat the image */
   	background-size: cover; /* Resize the background image to cover the entire container */
   	overflow: hidden;
   	margin: 0;
-  	min-height: calc(100% - 50px - 200px);
   	padding: 0;
-  	/*display : inline-block;*/
   	position:absolute;
   	align-items:flex-start !important;
   	
@@ -144,11 +183,17 @@ body {
 	margin:10px;
 	width:400px;
 }   
+.labelForm{
+ 	font-weight: 500;
+  	line-height: 1.2;
+  	font-size: 1.6rem;
+ } 
 ::placeholder {
-	font-size:1.5rem;
+	font-size:1.3rem;
 	color:#bdbdbd;
+	font-style: italic;
 }
-input[type="email"],input[type="text"], select.email {
+input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -158,7 +203,7 @@ input[type="email"],input[type="text"], select.email {
   margin:10px;
   margin-top:20px;
 }
-input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
+input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus, select.champsFormulaire:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -173,8 +218,12 @@ input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
 .btnWidthLong{
 	width:300px;
 }
-.btn:hover{
+.btn.bgOrange:hover{
 	background-color:#e68200;
+	color:white;
+}
+.btn.bgGreyFonce:hover{
+	background-color:#595959;
 	color:white;
 }
 .hoverBlue:hover{
@@ -193,7 +242,7 @@ input[type="email"]:focus,input[type="text"]:focus, select.email:focus {
 .theFooter{
 	height:50px;
 	min-height:50px;
-	position: absolute;
+	position: fixed;
    	bottom: 0;
 	width:100%;
 }
@@ -231,6 +280,13 @@ ul{
 }
  /*-----------------------------FIN FOOTER-----------------------------------------*/ 
  
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1680px   */
+@media screen and (max-width: 1680px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+	
+
+
+}
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */
 @media screen and (max-width: 1440px) {
 	body{
@@ -258,7 +314,116 @@ ul{
 	   width:45px;
 	   height:45px;
 	}
+	
+	
+	
+	.form-group {
+	    margin-bottom: 0.5rem;
+	}
+	.labelForm{
+	 	font-weight: 500;
+	  	line-height: 1;
+	  	font-size: 1.3rem;
+	 } 
+	/*.sectionIdentifier h2{
+		padding-top:40px;
+	}
+	.h2creerCompte{
+		padding-top:0px !important;
+	}
+	.identifier {
+		margin:0;
+		padding:0;
+		width:460px;
+		background-color: white;
+		flex-direction: column;
+		
+		box-shadow: 0px 0px 15px 0px black;
+		justify-content:flex-start !important;
+	} */
+	 .formIdentifier{
+	 	flex-direction: column;
+	 }
+	.formIdentifier input{
+		margin:10px;
+		width:400px;
+	}   
+	
+	::placeholder {
+		font-size:1rem;
+		color:#bdbdbd;
+		font-style: italic;
+	}
+	input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+	  background: transparent;
+	  border: none;
+	  border-bottom: 1px solid #7d7d7d;
+	  -webkit-box-shadow: none;
+	  box-shadow: none;
+	  border-radius: 0;
+	  margin:10px;
+	  margin-top:20px;
+	}
+	input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus, select.champsFormulaire:focus {
+	  -webkit-box-shadow: none;
+	  box-shadow: none;
+	}
+	.btn{
+		width:160px;
+		margin-top:20px;
+		border-radius:10px;
+		font-weight: 600;
+		color:white;
+		font-size:1.3rem;
+	}
+	.btnWidthLong{
+		width:300px;
+	}
+	.btn:hover{
+		background-color:#e68200;
+		color:white;
+	}
+	.hoverBlue:hover{
+		background-color:#005c99 !important;
+	}
+	.btnPro{
+		margin-bottom:40px;
+	}
+	.identifier h4{
+	 	padding-top:15px;
+	} 
+ 
+ 
+ 
+ 
+ 
 }
  
- 
- 
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
+@media screen and (max-width: 1080px) {
+	body{
+		max-width:1080px;
+	}
+	.imgLogo{
+		margin-left:20px;
+	}
+	.imgLogoPlateo{
+		height:80px;
+		width:80px;
+	}
+	.imgLogoText{
+		width:130px;
+		height:auto;
+	}
+	/*-------MENU----------*/
+	.menu nav ul{
+	    font-size:1rem;
+	}
+	.menu li {
+	    margin-right: 40px;
+	  }
+	.menu li img {
+	   width:45px;
+	   height:45px;
+	}
+}

@@ -1,0 +1,116 @@
+@charset "UTF-8";
+
+/*-----------------------------HEADER-----------------------------------------*/
+/*-------IMG Header----------*/
+/*.divimgHeader{
+	display:flex;
+}*/
+
+ 
+ 
+ 
+.divimgHeader{
+	display:flex;
+	justify-content:space-between;
+	padding:0px;
+	margin:0px;
+}
+.imgHeader{
+	color:white;
+}
+.imgHeaderLeft{
+	width:20px !important;
+	background-color: #0073be;
+}
+.imgHeaderRight{
+	width:auto !important;
+	background-color: #ff9500;
+	flex-grow: 3;
+}
+  /*-----------------------------FIN HEADER-----------------------------------------*/
+ 
+ .sectionNouvPro{
+	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
+	width:100%;
+	background-color:#e6e6e6;
+  	overflow: hidden;
+  	margin: 0;
+  	padding: 0;
+  	position:absolute;
+  	
+  	flex-direction:column;
+  	justify-content:space-between;
+}
+.carreBlanc{
+	margin:0;
+	padding:0;
+	background-color: white;
+	box-shadow: 0px 0px 15px 0px #bdbdbd;
+	
+	align-items:flex-start !important;
+	flex-grow: 1;
+}
+.divVide{
+	height:0px;
+}
+ .sectionFormPro{
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:center;
+ 	padding-top:30px;
+ 	min-height: calc(100% - 50px - 181px) !important;
+ }
+ .sectionForm{
+ 	display:flex;
+ 	flex-direction:row;
+ 	justify-content:flex-start;
+ 	align-items:flex-start;
+ }
+ .changePassword{
+ 	line-height:2;
+ 	font-size: 1.2rem;
+    font-weight: 500;
+    /*margin-left :50px;*/
+ }
+ .sectionButton{
+ 	display:flex;
+ 	flex-direction:column;
+ }
+ .formIdentifier label{
+ 	padding-left:10px;
+ }
+ .formIdentifierLeft, .formIdentifierRight{
+ 	padding-left:20px;
+ 	padding-right:20px;
+ }
+ .MarginClient{
+ 	margin-left:40px;
+ 	margin-right:40px;
+ }
+ input, select.champsFormulaire {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:5px !important;
+} 
+ 
+ /*---------------------------------------MEDIA QUERYS-------------------------------*/   
+ 
+  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */ 
+  @media screen and (max-width: 1440px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+
+	 .sectionFormPro{
+	 	padding-top:20px;
+	 }
+}
+  
+  
+ 
+ 
+ 
+  
