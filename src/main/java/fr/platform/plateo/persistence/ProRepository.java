@@ -9,5 +9,6 @@ import fr.platform.plateo.business.entity.Pro;
 @Repository
 public interface ProRepository extends JpaRepository<Pro,Integer>{
 
+	Pro findOneByProEmailAddress(String email);
 	
 }

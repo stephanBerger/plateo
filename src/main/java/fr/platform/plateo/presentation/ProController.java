@@ -38,7 +38,13 @@ public class ProController {
 			LOGGER.info("Erreur dans le formulaire");
 			System.out.println(result.toString());
 			return "public/proForm";
-		} else {
+			
+		} else if (this.proService.loadUserByUsername(pro.getProEmailAddress())!=null ){
+			LOGGER.info("Utilisateur existe déjà");
+			this.proService.create(pro);
+			return "public/index";
+			}
+		else {
 			LOGGER.info("Creation utlisateur PRO effectué");
 			this.proService.create(pro);
 			return "public/index";
