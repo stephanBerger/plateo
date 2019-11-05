@@ -61,4 +61,10 @@ public class Role implements GrantedAuthority, Serializable {
 		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	
+
 }
