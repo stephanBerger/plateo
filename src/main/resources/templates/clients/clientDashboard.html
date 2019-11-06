@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="/clients/head :: head">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
 </head>
-
 <body>
-	<header th:replace="/clients/headerdashboard :: headerdashboard">
-	</header>
 
-
-	<h1>DASHBOARD CLIENT</h1>
-	<h2>Youpi</h2>
-
+	<header th:replace="clients/headerdashboard :: headerdashboard">	
+	<h1>test</h1>
+	<footer th:replace="public/footer :: footer">
+	</footer>
+			
 </body>
-<footer th:replace="/public/footer :: footer"> </footer>
-</html>

@@ -272,17 +272,5 @@ public class Pro implements UserDetails {
 		return true;
 	}
 
-	public void setEnabled(boolean enabled) {
-		// TODO Auto-generated method stub
-		this.enabled = enabled;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
 
 }
