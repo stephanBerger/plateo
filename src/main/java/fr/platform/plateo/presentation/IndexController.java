@@ -14,6 +14,11 @@ import fr.platform.plateo.persistence.ClientRepository;
 @Controller
 public class IndexController {
 
+	/**
+	 * 
+	 */
+	private ProService proServ;
+
 	@Autowired
 	private ClientRepository clientRepository;
 
@@ -25,17 +30,5 @@ public class IndexController {
 		LOGGER.info("Une requête sur '/' est faite, la page 'index' est envoyée");
 		return "public/index";
 	}
-
-
-    @GetMapping( "/public/registration" )
-    public String registration() {
-        LOGGER.info( "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée" );
-        return "public/registration";
-    }
-
-	/**
-	 * 
-	 */
-	private ProService proServ;
 
 }

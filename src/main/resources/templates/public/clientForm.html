@@ -5,11 +5,11 @@
 
 <body>
 
-	<header th:replace="clients/header :: header"> </header>
+	<header th:replace="public/headerblanck :: headerblanck"> </header>
 	<section class="sectionNouvClient section100pour100 centrer">
 		<div class="centrer carreBlanc section100pour100">
 			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/public/new_client}" th:object="${client}"
+				th:action="@{/public/clientForm}" th:object="${client}"
 				method="post">
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
@@ -19,7 +19,7 @@
 
 							<input type="text" id="clientLastname"
 								th:field="*{clientLastname}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required /> <span
+								placeholder="Champs obligatoire" required/> <span
 								th:if="${#fields.hasErrors('clientLastname')}"
 								th:errors="*{clientLastname}" class="text-danger"> </span>
 						</div>
@@ -28,7 +28,7 @@
 								class="col-form-label blue labelForm">Prénom</label> <input
 								type="text" id="clienFirstname" th:field="*{clientFirstname}"
 								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span
+								required/> <span
 								th:if="${#fields.hasErrors('clientFirstname')}"
 								th:errors="*{clientFirstname}" class="text-danger"> </span>
 						</div>
@@ -37,7 +37,7 @@
 								class="col-form-label blue labelForm">Email</label> <input
 								type="email" id="clientEmailAddress"
 								th:field="*{clientEmailAddress}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required /> <span
+								placeholder="Champs obligatoire" required/> <span
 								th:if="${#fields.hasErrors('clientEmailAddress')}"
 								th:errors="*{clientEmailAddress}" class="text-danger"> </span>
 						</div>
@@ -45,7 +45,7 @@
 							<label for="clientPassword" class="col-form-label blue labelForm">Mot
 								de passe</label> <input type="password" id="clientPassword"
 								th:field="*{clientPassword}" class="champsFormulaire"
-								placeholder="Champs obligatoire" /> <span
+								placeholder="Champs obligatoire" required/> <span
 								th:if="${#fields.hasErrors('clientPassword')}"
 								th:errors="*{clientPassword}" class="text-danger"> </span>
 						</div>
@@ -54,7 +54,7 @@
 							<label for="confirmPasswordInput" class="col-form-label blue labelForm">Confirmez votre mot de
 								passe : </label> <input class="champsFormulaire" type="password"
 								id="confirmPasswordInput" name="confirmPasswordInput"
-								placeholder="Obligatoire" />
+								placeholder="Obligatoire" required/>
 						</div>
 
 					</div>

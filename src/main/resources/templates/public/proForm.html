@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="pro/head :: head">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
 </head>
-
 <body>
 	<header th:replace="pro/header :: header">	
 	</header>
@@ -14,21 +15,21 @@
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
 							<label for="companyName" class="col-form-label blue labelForm">Dénomination sociale </label>
-							<input class="champsFormulaire" id="companyName" name="companyName" type="text"
-									placeholder="Champs obligatoire"/>
+							<input class="champsFormulaire" id="companyName" th:field="*{companyName}" type="text"
+									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="text-danger">
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
 							<label for="managerLastname" class="col-form-label blue labelForm">Nom du gérant </label>
-							<input class="champsFormulaire"  id="managerLastname" name="managerLastname" type="text"
-									placeholder="Champs obligatoire"/>
+							<input class="champsFormulaire"  id="managerLastname" th:field="*{managerLastname}" type="text"
+									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('managerLastname')}" th:errors="*{managerLastname}" class="text-danger">
 							</span>
 						</div>	
 						<div class="form-group formIdentifier left">
 							<label for="proEmailAddress" class="col-form-label blue labelForm">Email</label>
-							<input class="champsFormulaire" id="proEmailAddress" name="proEmailAddress" type="email"
+							<input class="champsFormulaire" id="proEmailAddress" th:field="*{proEmailAddress}" type="email"
 									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('proEmailAddress')}" th:errors="*{proEmailAddress}" class="text-danger">
 							</span>
@@ -37,21 +38,21 @@
 					<div class="formIdentifierRight">	
 						<div class="form-group formIdentifier left">
 							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
-							<input class="champsFormulaire" id="siret" name="siret" type="text"
-									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-9]{14}" />
+							<input class="champsFormulaire" id="siret" th:field="*{siret}" type="text"
+									placeholder="numéro de SIRET : 14 chiffres" required />
 							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="managerFirstname" class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire"  id="managerFirstname" name="managerFirstname" type="text"
+							<input class="champsFormulaire"  id="managerFirstname" th:field="*{managerFirstname}" type="text"
 									placeholder="Champs obligatoire" required/>
 							<span th:if="${#fields.hasErrors('managerFirstname')}" th:errors="*{managerFirstname}" class="text-danger">
 							</span>
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="proPostcode" class="col-form-label blue labelForm">Code Postal </label>
-							<input class="champsFormulaire" id="proPostcode" name="proPostcode" type="text"
+							<input class="champsFormulaire" id="proPostcode" th:field="*{proPostcode}" type="text"
 									placeholder="Saisir son code postal à 5 chiffres" pattern="[0-9]{5}" required/>
 							<span th:if="${#fields.hasErrors('proPostcode')}" th:errors="*{proPostcode}" class="text-danger">
 							</span>
@@ -63,7 +64,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="proPassword" class="col-form-label blue labelForm">Mot de passe :</label>
 							<input class="champsFormulaire" type="password" id="passwordInput"
-									placeholder="Champs obligatoire" name="proPassword"/>
+									placeholder="Champs obligatoire" th:field="*{proPassword}" required/>
 							<span th:if="${#fields.hasErrors('proPassword')}" th:errors="*{proPassword}" class="text-danger">
 							</span>
 						</div>
@@ -72,16 +73,14 @@
 						<div class="form-group formIdentifier left">
 							<label for="confirmproPassword" class="col-form-label blue labelForm">Confirmer votre mot de passe :</label>
 							<input class="champsFormulaire" type="password" id="confirmPasswordInput"
-									placeholder="Champs obligatoire" name="confirmproPassword"/>
+									placeholder="Champs obligatoire" name="confirmProPassword" required/>
 							<span th:if="${#fields.hasErrors('proPassword')}" th:errors="*{proPassword}" class="text-danger">
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="centrer sectionButton">
-					<a href="" class="greyFonce changePassword">
-						Changer de mot de passe
-					</a>
+					
 					<a>
 						<button type="submit" class="btn bgOrange MarginClient">Envoyer</button>
 					</a>
