@@ -30,17 +30,25 @@ public class ProController {
 	@Autowired
 	private ProService proService;
 
-	@GetMapping("/public/proForm")
-	public String proForm(Model model) {
-		LOGGER.info("proForm du GET mapping");
-		model.addAttribute("pro", new Pro());
-		return "public/proForm";
+	// login pro method get
+	@GetMapping("/pro/proLogin")
+	public String pageLoginProGet() {
+		LOGGER.info("La page \"proLogin\" est demandée");
+		return "/pro/proLogin";
 	}
 
-	@PostMapping("/pro/proDashboard")
-	public String index() {
+	// dashboard pro
+	@GetMapping("/pro/proDashboard")
+	public String proDashboard() {
 		LOGGER.info("La page \"proDashboard\" est demandée");
-		return "pro/proDashboard";
+		return "/pro/proDashboard";
+	}
+
+	// nouveau pro method get
+	@GetMapping("/public/proForm")
+	public String proForm(Pro pro) {
+		LOGGER.info("La page \"proForm\" est demandée");
+		return "/public/proForm";
 	}
 
 	@PostMapping("/public/proForm")
@@ -113,4 +121,5 @@ public class ProController {
 		return null;
 
 	}
+
 }

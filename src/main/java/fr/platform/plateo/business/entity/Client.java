@@ -1,5 +1,6 @@
 package fr.platform.plateo.business.entity;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -14,7 +15,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -128,15 +128,13 @@ public class Client implements UserDetails {
         return true;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
+    public Collection<Role> getAuthorities() {
+		return Arrays.asList(this.role);
+	}
+    
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
         return true;
     }
 

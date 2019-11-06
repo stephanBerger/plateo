@@ -1,6 +1,7 @@
 package fr.platform.plateo.business.entity;
 
 import java.sql.Blob;
+import java.util.Arrays;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -8,19 +9,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "pro")
 public class Pro implements UserDetails {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 309196736745054629L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,13 +79,31 @@ public class Pro implements UserDetails {
 
 	@Column(name = "staffing")
 	private String staffing;
-
-	@ManyToOne
-	@JoinColumn(name = "role_id")
-	private Role role;
-
+	
 	@Column(name = "enabled")
 	private boolean enabled;
+	
+	// role
+	@OneToOne
+	private Role role;
+
+	/**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Collection<Role> getAuthorities() {
+		return Arrays.asList(this.role);
+	}
 
 	public Pro() {
 	}
@@ -212,22 +232,20 @@ public class Pro implements UserDetails {
 		return id;
 	}
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.proPassword;
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.proEmailAddress;
 	}
 
 	@Override
