@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
+</head>
 <body>
-
-	<header th:replace="public/header :: header">
+	<header th:replace="clients/header :: header">	
 	</header>
+	
 	<script type="text/javascript"> 
 		function valide() {
 			$("div.subnav-content").addClass('activeSubnavContent');

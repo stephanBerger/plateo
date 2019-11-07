@@ -55,6 +55,9 @@ body {
 
 
 /*-----------------------------HEADER-----------------------------------------*/
+header{
+	box-shadow: 0px 0px 10px 0px black;
+}
 .textedivimgHeader{
 	position:absolute;
 	margin-left: auto;
@@ -73,8 +76,8 @@ body {
 }
 
 .imgLogoPlateo{
-	height:100px;
-	width:100px;
+	height:90px;
+	width:90px;
 }
 
 .imgLogoText{
@@ -98,7 +101,7 @@ body {
 }
 /*-------MENU----------*/
 .menu nav ul{
-	height:115px;
+	height:105px;
 	margin:0;
 	margin-right:20px;
     padding: 0;
@@ -130,15 +133,15 @@ body {
 	cursor: pointer;
 }
 .menu li img {
-   width:55px;
-   height:55px;
+   width:45px;
+   height:45px;
    margin:0;
    padding:0;
 }
 /*------------------SOUS MENU-----------------*/
 .sousMenu{
 	/*height:40px;*//*taille normale pour le sous menu*/
-	height:20px;
+	height:10px;
 	background-color: #0073be;
 }
 .subnav {
@@ -149,7 +152,7 @@ body {
 	/*height:40px;*/
 	height:0px;
 	position: absolute;
-	top:145px;
+	top:135px;
 	right: 0;
 	/*background-color: brown;*/
 	z-index: 1;
@@ -179,7 +182,7 @@ body {
   float: right;
   text-decoration: none;
   line-height: 40px;
-  text-transform:uppercase;
+  text-transform:uppercase;form-group-vide
   font-size:1rem;
   padding:0px 25px;
 }
@@ -218,6 +221,14 @@ body {
 .sectionIdentifier h2{
 	padding-top:40px;
 }
+
+.sectionFormClient, .sectionFormPro{
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:center;
+ 	padding-top:20px;
+ 	min-height: calc(100% - 50px - 181px) !important;
+}
 .h2creerCompte{
 	padding-top:0px !important;
 }
@@ -237,7 +248,14 @@ body {
 .formIdentifier input{
 	margin:10px;
 	width:400px;
-}   
+} 
+.form-group{
+	margin-bottom: 0.6rem;
+} 
+.form-group-vide{
+	height:86px;
+	margin-bottom: 0.6rem;
+} 
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
@@ -332,7 +350,7 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 .theFooter{
 	height:50px;
 	min-height:50px;
-	//position: fixed;
+	position: fixed;
    	bottom: 0;
 	width:100%;
 }

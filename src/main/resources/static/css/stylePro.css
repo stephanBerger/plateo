@@ -5,10 +5,6 @@
 /*.divimgHeader{
 	display:flex;
 }*/
-
- 
- 
- 
 .divimgHeader{
 	display:flex;
 	justify-content:space-between;
@@ -53,13 +49,6 @@
 .divVide{
 	height:0px;
 }
- .sectionFormPro{
- 	display:flex;
- 	flex-direction:column;
- 	justify-content:center;
- 	padding-top:30px;
- 	min-height: calc(100% - 50px - 181px) !important;
- }
  .sectionForm{
  	display:flex;
  	flex-direction:row;
