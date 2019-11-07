@@ -39,7 +39,7 @@
 						<div class="form-group formIdentifier left">
 							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
 							<input class="champsFormulaire" id="siret" th:field="*{siret}" type="text"
-									placeholder="numéro de SIRET : 14 chiffres" pattern="[0-9]{14}" required />
+									placeholder="numéro de SIRET : 14 chiffres" required />
 							<span th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}" class="text-danger">
 							</span>
 						</div>

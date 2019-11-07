@@ -14,6 +14,10 @@ import fr.platform.plateo.persistence.ClientRepository;
 @Controller
 public class IndexController {
 
+	/**
+	 * 
+	 */
+
 	@Autowired
 	private ClientRepository clientRepository;
 

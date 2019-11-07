@@ -1,6 +1,7 @@
 package fr.platform.plateo.business.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,8 @@ public class ClientService implements UserDetailsService {
 
 	@Override
 	public Client loadUserByUsername(String email) throws UsernameNotFoundException {
-		return clientRepository.findOneByClientEmailAddress(email);
+		Client client = clientRepository.findOneByClientEmailAddress(email);
+		return client;
 	}
 	
 	public void create(Client client) {
@@ -38,6 +40,10 @@ public class ClientService implements UserDetailsService {
 	
 	public Client findEmail(String email) {
 		return this.clientRepository.findOneByClientEmailAddress(email);
+	}
+	
+	public Optional<Client> findId(Integer id) {
+		return this.clientRepository.findById(id);
 	}
 
 }
