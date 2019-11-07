@@ -2,8 +2,16 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <body>
+
 	<header th:replace="public/header :: header">
 	</header>
+	<script type="text/javascript"> 
+		function valide() {
+			$("div.subnav-content").addClass('activeSubnavContent');
+			$("#partSousMenu").addClass('bgOrange');
+		}
+		valide();
+	</script>
 	<section class="sectionIdentifier section100pour100 centrer">
 		<!---->  <div class="identifier centrer">
 			<h2 class="blue">
@@ -18,10 +26,7 @@
 			<h4 class="greyClair">‒ ou ‒</h4>
 			<h2 class="h2creerCompte blue">Créez un compte</h2> 
 			<a th:href="@{/public/new_client}" >
-				<button class="btn btnWidthLong bgBlue">PARTICULIER</button>	
-			</a>
-			<a th:href="@{/public/proForm}" >
-				<button class="btn btnPro btnWidthLong bgOrange">PROFESSIONNEL</button>	
+				<button class="btn btnClient btnWidthLong bgBlue">PARTICULIER</button>	
 			</a>
 		</div>
 	</section>	
