@@ -29,29 +29,33 @@
 					</li>
 					<li>
 						<a href="">
-							<img th:src="@{/img/COEUR.jpg}">
-							<p>Mes favoris</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
 							<img th:src="@{/img/DEVIS.jpg}">
 							<p>Demander un devis</p>
 						</a>
 					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/MAIL.jpg}">
-							<p>Messagerie</p>
-						</a>
-					</li>
-					
-					<li>
-						<a class="textIdentifier" th:href="@{/public/registration}" >
-							<img th:src="@{/img/PROFIL.jpg}">
-							<p>S'identifier <br>ou s'inscrire </p>
-						</a>
-
+					<li class="subnav">
+							<a class="textIdentifier"  ><!-- th:href="@{/public/registration}" -->
+								<img th:src="@{/img/PROFIL.jpg}">
+								<p>S'identifier <br>ou s'inscrire </p>
+							</a>
+							<div class="overFlowHidden"> <!--  -->
+								<script type="text/javascript">
+									$("li.subnav").hover(function() {
+										$("div.overFlowHidden").addClass("height40");
+										 $("div.subnav-content").animate({
+											    top: '0px', opacity: '1'},200);
+										}, function() {
+ 										    $('div.subnav-content')
+										    	.animate({top: '-40px', opacity: '0'}, 200)
+										    	/*.setTimeout (function(){("div.overFlowHidden").removeClass("height40")}, 300);*/
+										},
+									);
+								</script>
+								<div class="subnav-content"> <!-- ajout de activeSubnavContent au .subnav:hover -->
+									<a id="partSousMenu" class="white texteSousMenu" th:href="@{/public/clientRegistration}">Particulier</a>
+									<a id="proSousMenu" class="white texteSousMenu" th:href="@{/public/proRegistration}">Professionnel</a>
+								</div>
+							</div>
 					</li>
 				</ul>
 			</nav>

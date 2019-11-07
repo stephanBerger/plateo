@@ -26,11 +26,20 @@ public class IndexController {
 		return "public/index";
 	}
 
-
-    @GetMapping( "/public/registration" )
+	/*@GetMapping( "/public/registration" )
     public String registration() {
         LOGGER.info( "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée" );
         return "public/registration";
+    }*/
+    @GetMapping( "/public/clientRegistration" )
+    public String clientRegistration() {
+        LOGGER.info( "Une requête sur '/public/clientRegistration' est faite, la page 'clientRegistration' est envoyée" );
+        return "public/clientRegistration";
+    }
+    @GetMapping( "/public/proRegistration" )
+    public String proRegistration() {
+        LOGGER.info( "Une requête sur '/public/proRegistration' est faite, la page 'proRegistration' est envoyée" );
+        return "public/proRegistration";
     }
 
 	/**
