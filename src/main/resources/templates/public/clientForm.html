@@ -4,12 +4,13 @@
 </head>
 <head>
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css" >
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
 </head>
 
 <body>
 
 	<header th:replace="public/headerblanck :: headerblanck"> </header>
-	<section class="sectionNouvClient section100pour100 centrer">
+	<section class="sectionNouvCliFormulaireent section100pour100 centrer">
 		<div class="centrer carreBlanc section100pour100">
 			<form class="centrer sectionFormClient" action="#"
 				th:action="@{/public/clientForm}" th:object="${client}"
