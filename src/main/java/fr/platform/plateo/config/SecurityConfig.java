@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.ProService;
@@ -18,9 +17,14 @@ import fr.platform.plateo.business.service.ProService;
 @EnableWebSecurity
 public class SecurityConfig {
 
+	private static final String[] RESOURCES = new String[] { "/include/**",
+			"/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**",
+			"/resources/**", "/static/**", "/webjars/**", "/photos/**" };
+
 	@Configuration
 	@Order(1)
-	public static class App1ConfigurationAdapter extends WebSecurityConfigurerAdapter {
+	public static class App1ConfigurationAdapter
+			extends WebSecurityConfigurerAdapter {
 
 		@Autowired
 		private ClientService clientAuthService;
@@ -28,42 +32,37 @@ public class SecurityConfig {
 		@Autowired
 		private BCryptPasswordEncoder decrypt;
 
+		@Override
 		@Autowired
-		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(clientAuthService).passwordEncoder(decrypt);
+		public void configure(AuthenticationManagerBuilder auth)
+				throws Exception {
+			auth.userDetailsService(this.clientAuthService)
+					.passwordEncoder(this.decrypt);
 		}
-
-		String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/IMG/**", "/js/**", "/layer/**",
-				"/resources/**", "/static/**", "/webjars/**", "/photos/**" };
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http
-				.antMatcher("/clients/**").authorizeRequests()
+			http.antMatcher("/clients/**").authorizeRequests()
+					.antMatchers(SecurityConfig.RESOURCES).permitAll()
+					.anyRequest().hasAuthority("CLIENT").and()
+				
+					.formLogin()
+					.loginPage("/clients/clientLogin").permitAll()
+					.failureUrl("/clients/clientLogin?error=loginError")
+					.defaultSuccessUrl("/")
+					.usernameParameter("email")
+					.and()
 					
-				.antMatchers("/clients/*").hasRole("CLIENT")
-				.antMatchers("/pro/**").hasRole("PRO")
-				
-				.anyRequest().authenticated()
-				.and()
-				
-	            
-				.formLogin().loginPage("/clients/clientLogin").permitAll()
-				.failureUrl("/clients/clientLogin?error=loginError").defaultSuccessUrl("/")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.and()
-
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/clients/logout"))
-				.logoutSuccessUrl("/").permitAll().and().exceptionHandling().accessDeniedPage("/403");
-
+					.logout().logoutUrl("/clients/logout")
+					.logoutSuccessUrl("/").permitAll();
 		}
 
 	}
 
 	@Configuration
 	@Order(2)
-	public static class App2ConfigurationAdapter extends WebSecurityConfigurerAdapter {
+	public static class App2ConfigurationAdapter
+			extends WebSecurityConfigurerAdapter {
 		public App2ConfigurationAdapter() {
 			super();
 		}
@@ -74,37 +73,28 @@ public class SecurityConfig {
 		@Autowired
 		private BCryptPasswordEncoder decrypt;
 
+		@Override
 		@Autowired
-		public void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.userDetailsService(proAuthService).passwordEncoder(decrypt);
+		public void configure(AuthenticationManagerBuilder auth)
+				throws Exception {
+			auth.userDetailsService(this.proAuthService)
+					.passwordEncoder(this.decrypt);
 		}
-
-		String[] resources = new String[] { "/include/**", "/css/**", "/icons/**", "/IMG/**", "/js/**", "/layer/**",
-				"/resources/**", "/static/**", "/webjars/**", "/photos/**" };
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http
-				.antMatcher("/pro/**").authorizeRequests()
-			
-				.antMatchers("/pro/**").hasRole("PRO")		
-				.antMatchers("/clients/**").hasRole("CLIENT")
-				
-				.anyRequest()
-				.authenticated()
-				.and()
-
-	            
-				.formLogin()
-				.loginPage("/pro/proLogin")
-				.permitAll()
-				.failureUrl("/pro/proLogin?error=loginError")
-				.defaultSuccessUrl("/").usernameParameter("email")
-				.passwordParameter("password").and()
-
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/pro/logout")).logoutSuccessUrl("/")
-				.permitAll().and().exceptionHandling().accessDeniedPage("/403");
-
+			http.antMatcher("/pro/**").authorizeRequests()
+					.antMatchers(SecurityConfig.RESOURCES).permitAll()
+					.anyRequest().hasAuthority("PRO").and()
+					
+					.formLogin()
+					.loginPage("/pro/proLogin").permitAll()
+					.failureUrl("/pro/proLogin?error=loginError")
+					.defaultSuccessUrl("/").usernameParameter("email")
+					.and()
+					
+					.logout().logoutUrl("/pro/logout")
+					.logoutSuccessUrl("/").permitAll();
 		}
 	}
 
