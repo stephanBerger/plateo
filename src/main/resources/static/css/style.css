@@ -201,22 +201,29 @@ header{
   /*-----------------------------FIN HEADER-----------------------------------------*/
   
  .section100pour100{
- 	min-height: calc(100% - 50px - 166px);
+ 	min-height: calc(100% - 50px - 145px);
  }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	/*background-image: url("../img/IMG-FOND1.jpg");*/
+	/*background-image: url("../img/img-index.jpg");*/
 	width:100%;
-	background-position: center; /* Center the image */
-  	background-repeat: no-repeat; /* Do not repeat the image */
-  	background-size: cover; /* Resize the background image to cover the entire container */
-  	overflow: hidden;
+	/*background-position: center;  */
+  /*	background-repeat: no-repeat;
+  	background-size: cover;*/
+  	/*overflow: hidden;*/
+  	overflow-x: hidden;
+  	overflow-y:scroll;
   	margin: 0;
   	padding: 0;
   	position:absolute;
   	align-items:flex-start !important;
   	
   	/*padding-bottom: 50px;*/
+}
+
+.imgindex{
+	
+	width:100%;
 }
 .sectionIdentifier h2{
 	padding-top:40px;
@@ -227,7 +234,7 @@ header{
  	flex-direction:column;
  	justify-content:center;
  	padding-top:20px;
- 	min-height: calc(100% - 50px - 181px) !important;
+ 	min-height: calc(100% - 50px - 145px) !important;
 }
 .h2creerCompte{
 	padding-top:0px !important;
