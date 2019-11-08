@@ -4,7 +4,7 @@
 
 <body>
 	<header th:fragment="headerdashboard">
-		<div class="textedivimgHeader centrer white">CLIENT</div>
+		<div class="textedivimgHeader centrer white">PARTICULIER</div>
 		<div class="divimgHeader">
 			<div class="imgHeaderLeft"></div>
 
@@ -54,7 +54,7 @@
 					th:text="${#request.userPrincipal.principal.username}"></span>
 				<form th:action="@{/clients/logout}" method="post"
 					class="form-inline my-2 my-lg-0">
-					<button class="btn btn-danger my-2 my-sm-0" type="submit">Déconnexion</button>
+					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
 				</form>
 			</div>
 		</section>
