@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import fr.platform.plateo.business.service.BusinessProcessModelService;
 import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.persistence.ClientRepository;
 
 /**
- * 
+ *
  */
 @Controller
 public class IndexController {
@@ -20,21 +21,27 @@ public class IndexController {
 	@Autowired
 	private Logger LOGGER;
 
+	@Autowired
+	private BusinessProcessModelService bpmService;
+
 	@GetMapping("/")
 	public String base() {
-		LOGGER.info("Une requête sur '/' est faite, la page 'index' est envoyée");
+		this.LOGGER.info(
+				"Une requête sur '/' est faite, la page 'index' est envoyée");
+		this.LOGGER
+				.info("Tâches en cours : " + this.bpmService.getTasks());
 		return "public/index";
 	}
 
-
-    @GetMapping( "/public/registration" )
-    public String registration() {
-        LOGGER.info( "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée" );
-        return "public/registration";
-    }
+	@GetMapping("/public/registration")
+	public String registration() {
+		this.LOGGER.info(
+				"Une requête sur '/public/registration' est faite, la page 'registration' est envoyée");
+		return "public/registration";
+	}
 
 	/**
-	 * 
+	 *
 	 */
 	private ProService proServ;
 
