@@ -35,20 +35,7 @@
 								S'identifier <br>ou s'inscrire
 							</p>
 					</a>
-						<div class="overFlowHidden">
-							<!--  -->
-							<script type="text/javascript">
-									$("li.subnav").hover(function() {
-										$("div.overFlowHidden").addClass("height40");
-										 $("div.subnav-content").animate({
-											    top: '0px', opacity: '1'},500);
-										}, function() {
- 										    $('div.subnav-content')
-										    	.animate({top: '-40px', opacity: '0'}, 500)
-										    	/*.setTimeout (function(){("div.overFlowHidden").removeClass("height40")}, 300);*/
-										},
-									);
-								</script>
+						<div class="overFlowHidden height40">
 							<div class="subnav-content">
 								<!-- ajout de activeSubnavContent au .subnav:hover -->
 								<a id="partSousMenu" class="white texteSousMenu"
@@ -68,8 +55,15 @@
 				</form>
 			</div>
 		</section>
-
 		<div class="sousMenu"></div>
+		
+		<script type="text/javascript">
+			$("li.subnav").hover(function() {
+				$("div.subnav-content").animate({ top: '0px', opacity: '1'}, 500)
+			}, function() {
+			    $('div.subnav-content').animate({top: '-40px', opacity: '0'}, 500);
+			});
+		</script>
 	</header>
 </body>
 </html>
