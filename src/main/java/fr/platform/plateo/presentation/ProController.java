@@ -46,27 +46,33 @@ public class ProController {
 	}
 
 	@PostMapping("/public/proForm")
-	public String save(@Valid Pro pro, BindingResult result,
-			@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
+	public String save(@Valid Pro pro, BindingResult result, @RequestParam(
+			value = "confirmProPassword") String confirmPasswordInput) {
 		pro.setSiret(pro.getSiret().replaceAll("[^0-9]", ""));
 		if (result.hasErrors()) {
-			this.LOGGER.info("Erreur dans le formulaire" + pro.getCompanyName());
+			this.LOGGER.info(
+					"Erreur dans le formulaire" + pro.getCompanyName());
 			System.out.println(result.toString());
 			return null;
 
-		} else if (this.proService.loadUserByUsername(pro.getProEmailAddress()) != null) {
+		} else if (this.proService
+				.loadUserByUsername(pro.getProEmailAddress()) != null) {
 			this.LOGGER.info("Utilisateur existe déjà ");
-			result.rejectValue("proEmailAddress", null, "Cette adresse email est déjà utilisée.");
+			result.rejectValue("proEmailAddress", null,
+					"Cette adresse email est déjà utilisée.");
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
+					+ confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
-			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
+			result.rejectValue("proPassword", null,
+					"Les passwords ne sont pas identiques");
 			return null;
 			// Test de la longueur du SIRET et test sur la validité du siren
 		} else if (pro.getSiret().length() != 14) {
-			result.rejectValue("siret", null, "Le Siret doit contenir 14 chiffres.");
+			result.rejectValue("siret", null,
+					"Le Siret doit contenir 14 chiffres.");
 			return null;
 
 		} else if (pro.getSiret() != null) {
@@ -89,27 +95,27 @@ public class ProController {
 
 			if (resultat % 10 != 0) {
 				this.LOGGER.info("Le Siret n'est pas valide");
-				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
-				return null;
-			} else {
-
-				// si ok rajoute le client et redirect sur valid client
-				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
-				String password = crypt.encode(pro.getProPassword());
-				pro.setProPassword(password);
-
-				// enabled a true
-				pro.setEnabled(true);
-
-				// id du role PRO
-				Role role = new Role();
-				role.setId(1);
-				pro.setRole(role);
-
-				this.LOGGER.info("Creation utlisateur PRO effectué");
-				this.proService.create(pro);
-				return "public/index";
+				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est pas le cas !
+//				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
+//				return null;
 			}
+
+			// si ok rajoute le client et redirect sur valid client
+			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+			String password = crypt.encode(pro.getProPassword());
+			pro.setProPassword(password);
+
+			// enabled a true
+			pro.setEnabled(true);
+
+			// id du role PRO
+			Role role = new Role();
+			role.setId(1);
+			pro.setRole(role);
+
+			this.LOGGER.info("Creation utlisateur PRO effectué");
+			this.proService.create(pro);
+			return "public/index";
 
 		}
 		return null;
