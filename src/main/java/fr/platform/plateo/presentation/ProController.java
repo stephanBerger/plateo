@@ -86,7 +86,7 @@ public class ProController {
 					somme = Integer.parseInt(siren[i - 1]);
 				} else {
 					somme = 2 * Integer.parseInt(siren[i - 1]);
-					if (somme > 10) {
+					if (somme >= 10) {
 						somme = somme % 10 + somme / 10;
 					}
 				}

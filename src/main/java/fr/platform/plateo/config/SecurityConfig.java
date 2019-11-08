@@ -44,11 +44,16 @@ public class SecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/clients/**").authorizeRequests()
 					.antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.anyRequest().hasAuthority("CLIENT").and().formLogin()
+					.anyRequest().hasAuthority("CLIENT").and()
+				
+					.formLogin()
 					.loginPage("/clients/clientLogin").permitAll()
 					.failureUrl("/clients/clientLogin?error=loginError")
-					.defaultSuccessUrl("/").usernameParameter("email")
-					.and().logout().logoutUrl("/clients/logout")
+					.defaultSuccessUrl("/")
+					.usernameParameter("email")
+					.and()
+					
+					.logout().logoutUrl("/clients/logout")
 					.logoutSuccessUrl("/").permitAll();
 		}
 
@@ -80,11 +85,15 @@ public class SecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/pro/**").authorizeRequests()
 					.antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.anyRequest().hasAuthority("PRO").and().formLogin()
+					.anyRequest().hasAuthority("PRO").and()
+					
+					.formLogin()
 					.loginPage("/pro/proLogin").permitAll()
 					.failureUrl("/pro/proLogin?error=loginError")
 					.defaultSuccessUrl("/").usernameParameter("email")
-					.and().logout().logoutUrl("/pro/logout")
+					.and()
+					
+					.logout().logoutUrl("/pro/logout")
 					.logoutSuccessUrl("/").permitAll();
 		}
 	}
