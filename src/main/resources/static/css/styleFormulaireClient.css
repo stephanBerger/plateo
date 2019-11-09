@@ -23,17 +23,11 @@
 .divVide{
 	height:0px;
 }
- .sectionFormClient{
- 	display:flex;
- 	flex-direction:column;
- 	justify-content:center;
- 	padding-top:30px;
- 	min-height: calc(100% - 50px - 181px) !important;
- }
  .sectionForm{
  	display:flex;
  	flex-direction:row;
  	justify-content:flex-start;
+ 	align-items:flex-start;
  }
  .formIdentifier label{
  	padding-left:10px;

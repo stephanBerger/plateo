@@ -37,11 +37,6 @@ public class Role implements GrantedAuthority, Serializable {
 	 */
 	private String name;
 
-	//@ManyToMany(mappedBy = "role")
-	//private Collection<Pro> pros;
-
-	//@ManyToMany(mappedBy = "role")
-	//private Collection<Client> clients;
 
 	@Override
 	@Transient

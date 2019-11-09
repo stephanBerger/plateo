@@ -10,7 +10,7 @@ body {
 }
 /*-------COLOR----------*/ 
 .white{
-	color:White;
+	color:White !important;
 }
 .blue{
 	color: #0073be;
@@ -55,6 +55,9 @@ body {
 
 
 /*-----------------------------HEADER-----------------------------------------*/
+header{
+	/*box-shadow: 0px -4px 10px 0px black;*/
+}
 .textedivimgHeader{
 	position:absolute;
 	margin-left: auto;
@@ -73,8 +76,8 @@ body {
 }
 
 .imgLogoPlateo{
-	height:100px;
-	width:100px;
+	height:90px;
+	width:90px;
 }
 
 .imgLogoText{
@@ -98,7 +101,7 @@ body {
 }
 /*-------MENU----------*/
 .menu nav ul{
-	height:115px;
+	height:105px;
 	margin:0;
 	margin-right:20px;
     padding: 0;
@@ -127,32 +130,89 @@ body {
 }
 .textIdentifier{
 	line-height: 1.1;
+	cursor: pointer;
 }
 .menu li img {
-   width:55px;
-   height:55px;
+   width:45px;
+   height:45px;
    margin:0;
    padding:0;
 }
 /*------------------SOUS MENU-----------------*/
 .sousMenu{
 	/*height:40px;*//*taille normale pour le sous menu*/
-	height:20px;
+	height:10px;
 	background-color: #0073be;
 }
+.subnav {
+	overflow: hidden;
+}
+.overFlowHidden{
+	width: 100%;
+	/*height:40px;*/
+	height:0px;
+	position: absolute;
+	top:135px;
+	right: 0;
+	/*background-color: brown;*/
+	z-index: 1;
+	overflow: hidden;
+}
+.height40{
+	height:40px !important;
+}
+.subnav-content {
+	width: 100%;
+	height:40px;
+	/*display: none;*/
+	position: absolute;
+	top:-40px;
+	right: 0;
+	background-color: #0073be;
+	z-index: 1;
+	opacity:0;
+	padding-right:45px;
+}
+.activeSubnavContent{
+	top:0px !important;
+	opacity:1 !important;
+	display: block !important;
+}
+.texteSousMenu {
+  float: right;
+  text-decoration: none;
+  line-height: 40px;
+  text-transform:uppercase;
+  font-size:1rem;
+  padding:0px 25px;
+}
+.texteSousMenu:hover {
+	/*Orange*/
+  background-color:#ff9500;
+  color: white;
+ /* transform: skewX(20deg);*/
+}
+.subnav:hover .subnav-content{
+	/*display: block;*/
+}
+
+
+
   /*-----------------------------FIN HEADER-----------------------------------------*/
   
  .section100pour100{
- 	min-height: calc(100% - 50px - 166px);
+ 	min-height: calc(100% - 50px - 145px);
  }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	background-image: url("../img/IMG-FOND1.jpg");
+	/*background-image: url("../img/img-index.jpg");*/
 	width:100%;
-	background-position: center; /* Center the image */
-  	background-repeat: no-repeat; /* Do not repeat the image */
-  	background-size: cover; /* Resize the background image to cover the entire container */
-  	overflow: hidden;
+	/*background-position: center;  */
+  /*	background-repeat: no-repeat;
+  	background-size: cover;*/
+  	/*overflow: hidden;*/
+  	overflow-x: hidden;
+  	overflow-y:scroll;
   	margin: 0;
   	padding: 0;
   	position:absolute;
@@ -160,8 +220,21 @@ body {
   	
   	/*padding-bottom: 50px;*/
 }
+
+.imgindex{
+	
+	width:100%;
+}
 .sectionIdentifier h2{
 	padding-top:40px;
+}
+
+.sectionFormClient, .sectionFormPro{
+ 	display:flex;
+ 	flex-direction:column;
+ 	justify-content:center;
+ 	padding-top:20px;
+ 	min-height: calc(100% - 50px - 145px) !important;
 }
 .h2creerCompte{
 	padding-top:0px !important;
@@ -182,7 +255,14 @@ body {
 .formIdentifier input{
 	margin:10px;
 	width:400px;
-}   
+} 
+.form-group{
+	margin-bottom: 0.6rem;
+} 
+.form-group-vide{
+	height:86px;
+	margin-bottom: 0.6rem;
+} 
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
@@ -222,22 +302,57 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	background-color:#e68200;
 	color:white;
 }
+.btn.bgBlue:hover{
+	background-color:#005c99 !important;
+	color:white;
+}
 .btn.bgGreyFonce:hover{
 	background-color:#595959;
 	color:white;
 }
-.hoverBlue:hover{
-	background-color:#005c99 !important;
-}
-.btnPro{
+.btnPro, .btnClient{
 	margin-bottom:40px;
 }
+
 .identifier h4{
  	padding-top:15px;
  } 
  /*-----------------------------FIN IDENTIFICATION-----------------------------------------*/
+ /*-----------------------------PLUS PRODUITS-----------------------------------------*/
+ .plusProduits {
+	/*margin:0;
+	padding:0;
+	width:100%;
+	flex-direction: row;
+	align-items:stretch;*/
+} 
+
+ .plusProduitsClient, .plusProduitsPro{
+ 	/*min-height:600px;
+ 	opacity:0;*/
+ }
+ 
+.plusProduitsClient{
+	/*width:60%;
+	margin-left:-200px;
+	transform: skewX(-20deg);*/
+}
+ .plusProduitsPro{
+	/* width:60%;
+	 margin-right:-200px;
+	 transform: skewX(-20deg);*/
+ } 
  
  
+ 
+ .plusProduitsClient:hover, .plusProduitsPro:hover{
+ 	/*opacity:1;
+ 	transition: all 0.3s ease-out;*/
+ }
+ 
+ 
+ 
+ /*-----------------------------FIN PLUS PRODUITS-----------------------------------------*/
  /*-----------------------------FOOTER-----------------------------------------*/ 
 .theFooter{
 	height:50px;
@@ -400,7 +515,7 @@ ul{
 }
  
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1280px) {
 	body{
 		max-width:1080px;
 	}

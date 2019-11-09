@@ -20,7 +20,8 @@ public class ProService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return proRepository.findOneByProEmailAddress(email);
+		Pro pro = proRepository.findOneByProEmailAddress(email);
+		return pro;
 	}
 
 	public void create(Pro pro) {
@@ -31,12 +32,16 @@ public class ProService implements UserDetailsService {
 		return this.proRepository.getOne(id);
 	}
 
-	public void update(Pro pro) {
+	public void idupdate(Pro pro) {
 		this.proRepository.save(pro);
 	}
 
 	public void delete(Integer id) {
 		this.proRepository.deleteById(id);
+	}
+	
+	public Pro findEmail(String email) {
+		return this.proRepository.findOneByProEmailAddress(email);
 	}
 
 }

@@ -1,6 +1,7 @@
 package fr.platform.plateo.business.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -41,6 +42,10 @@ public class ClientService implements UserDetailsService {
 
 	public Client findEmail(String email) {
 		return this.clientRepository.findOneByClientEmailAddress(email);
+	}
+	
+	public Optional<Client> findId(Integer id) {
+		return this.clientRepository.findById(id);
 	}
 
 }

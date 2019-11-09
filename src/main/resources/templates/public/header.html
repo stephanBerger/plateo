@@ -15,46 +15,57 @@
 		</div>
 
 		<section class="menu centrer">
-			<a th:href="@{/}" class="imgLogo">
-				<img class="imgLogoPlateo" alt="logo Plateo" th:src="@{/img/LOGO-BD.png}">
-				<img  class="imgLogoText" alt="logo textuel Plateo" th:src="@{/img/logo-texte-BD.png}">
+			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo"
+				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
+				class="imgLogoText" alt="logo textuel Plateo"
+				th:src="@{/img/logo-texte-BD.png}">
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li>
-						<a href="">
-							<img th:src="@{/img/LOUPE.jpg}">
+					<li><a href=""> <img th:src="@{/img/LOUPE.jpg}">
 							<p>Rechercher un Pro</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/COEUR.jpg}">
-							<p>Mes favoris</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/DEVIS.jpg}">
+					</a></li>
+					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
 							<p>Demander un devis</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/MAIL.jpg}">
-							<p>Messagerie</p>
-						</a>
-					</li>
-					
-					<li>
-						<a class="textIdentifier" th:href="@{/public/registration}" >
+					</a></li>
+					<li class="subnav"><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
 							<img th:src="@{/img/PROFIL.jpg}">
-							<p>S'identifier <br>ou s'inscrire </p>
-						</a>
-
-					</li>
+							<p>
+								S'identifier <br>ou s'inscrire
+							</p>
+					</a>
+						<div class="overFlowHidden">
+							<!--  -->
+							<script type="text/javascript">
+									$("li.subnav").hover(function() {
+										$("div.overFlowHidden").addClass("height40");
+										 $("div.subnav-content").animate({
+											    top: '0px', opacity: '1'},500);
+										}, function() {
+ 										    $('div.subnav-content')
+										    	.animate({top: '-40px', opacity: '0'}, 500)
+										    	/*.setTimeout (function(){("div.overFlowHidden").removeClass("height40")}, 300);*/
+										},
+									);
+								</script>
+							<div class="subnav-content">
+								<!-- ajout de activeSubnavContent au .subnav:hover -->
+								<a id="partSousMenu" class="white texteSousMenu"
+									th:href="@{/clients/clientDashboard}">Particulier</a> <a
+									id="proSousMenu" class="white texteSousMenu"
+									th:href="@{/pro/proDashboard}">Professionnel</a>
+							</div>
+						</div></li>
 				</ul>
 			</nav>
+			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
+				<span class="nav-link d-inline-flex align-items-center p-2"
+					th:text="${#request.userPrincipal.principal.username}"></span>
+				<form th:action="@{/logout}" method="post"
+					class="form-inline my-2 my-lg-0">
+					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
+				</form>
+			</div>
 		</section>
 
 		<div class="sousMenu"></div>

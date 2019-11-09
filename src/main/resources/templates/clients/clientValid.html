@@ -5,21 +5,21 @@
 	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
 </head>
 <body>
-	<header th:replace="/clients/header :: header"> </header>
+	<header th:replace="/clients/headerblanck :: headerblanck"> </header>
 <body>
 	<div>
-		<h3 align="center">Votre compte client à bien été créer</h3>
-		<h3 align="center">Veuillez vous authentifiez pour accéder au site PLATEO</h3>
+		<h3 align="center">Votre compte client a bien été créé</h3>
+		<h3 align="center">Veuillez vous authentifier pour accéder au site</h3>
 	</div>
 	
 	<div class="row">
 		<div align="center" class="col-md-3"></div>
 		<div align="center" class="col-md-3">
-			<a href="/index" class="btn">Accueil</a>
+			<a href="/" class="btn bgOrange MarginClient">Accueil</a>
 		</div>
 
 		<div align="center" class="col-md-3">
-			<a href="/index" class="btn">Se Connecter</a>
+			<a href="/clients/clientDashboard" class="btn bgOrange MarginClient">Se Connecter</a>
 		</div>
 		<div align="center" class="col-md-3"></div>
 
