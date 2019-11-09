@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<h1 class="text-center" th:text="${task.name}"></h1>
+	
+	
+	<footer th:replace="public/footer :: footer"></footer>
+</body>
+</html>

@@ -1,22 +1,19 @@
 package fr.platform.plateo.business.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- */
 @Entity
-@Table(name = "service")
-public class Service implements Serializable {
+@Table(name = "profession")
+public class Profession implements Serializable {
 
 	/**
 	 *
@@ -30,30 +27,17 @@ public class Service implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	/**
-	 *
-	 */
-	@Column(name = "service_name")
+	@Column(name = "profession_name")
 	private String name;
 
-	/**
-	 *
-	 */
-	@Column(name = "service_code", unique = true)
+	@Column(name = "profession_code", length = 3, unique = true)
 	private String code;
 
-	/**
-	 *
-	 */
-	@Column(name = "service_enabled")
+	@Column(name = "profession_enabled")
 	private Boolean enabled;
 
-	/**
-	 *
-	 */
-	@ManyToOne
-	@JoinColumn(name = "profession_id")
-	private Profession profession;
+	@OneToMany(mappedBy = "profession")
+	private List<Service> services;
 
 	public Integer getId() {
 		return this.id;
@@ -87,12 +71,12 @@ public class Service implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Profession getProfession() {
-		return this.profession;
+	public List<Service> getServices() {
+		return this.services;
 	}
 
-	public void setProfession(Profession profession) {
-		this.profession = profession;
+	public void setServices(List<Service> services) {
+		this.services = services;
 	}
 
 }
