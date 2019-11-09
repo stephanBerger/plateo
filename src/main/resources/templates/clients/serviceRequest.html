@@ -6,9 +6,21 @@
 </head>
 <body>
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	<h1 class="text-center" th:text="${task.name}"></h1>
-	
-	
+	<div class="container">
+		<h1 class="text-center" th:text="${task.name}"></h1>
+
+		<form th:action="@{/clients/serviceProcess/} + ${task.processInstanceId} + '/' + ${task.id}" method="post">
+			<th:block th:each="property : ${properties}">
+				<div class="form-check" th:if="${property.type.name == 'boolean'}">
+					<input class="form-check-input" type="checkbox" value="true"
+						th:id="${property.id}" th:name="${property.id}"> <label
+						class="form-check-label" th:text="${property.name}"
+						th:for="${property.id}"></label>
+				</div>
+			</th:block>
+			<button class="btn btn-primary">Valider</button>
+		</form>
+	</div>
 	<footer th:replace="public/footer :: footer"></footer>
 </body>
 </html>

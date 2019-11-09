@@ -20,18 +20,6 @@
 		<java.version>11</java.version>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.activiti.dependencies</groupId>
-				<artifactId>activiti-dependencies</artifactId>
-				<version>7.0.0.GA</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,12 +41,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -95,9 +77,25 @@
 			<artifactId>jquery</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.activiti</groupId> -->
+		<!-- <artifactId>activiti-spring-boot-starter-basic</artifactId> -->
+		<!-- <version>6.0.0</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.activiti</groupId>
-			<artifactId>activiti-spring-boot-starter</artifactId>
+			<artifactId>activiti-engine</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-form-engine</artifactId>
+			<version>6.0.0</version>
 		</dependency>
 	</dependencies>
 

@@ -2,23 +2,23 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
   <process id="makeEstimate-PLM-MAT_NEW" name="Prestation de plomberie" isExecutable="true">
     <startEvent id="startevent1" name="SuperStart"></startEvent>
-    <userTask id="form-1" name="Conditions d'installation" activiti:assignee="${account.id}" activiti:formKey="test">
+    <userTask id="form-1" name="Conditions d'installation" default="flow7" activiti:assignee="${account.id}">
       <extensionElements>
         <activiti:formProperty id="deposeMaterielExistant" name="Dépose du matériel existant" type="boolean" variable="deposeMaterielExistant" default="false"></activiti:formProperty>
-        <activiti:formProperty id="evacuationMaterielExistant" name="Évacuation du matériel existant" type="boolean" default="false"></activiti:formProperty>
-        <activiti:formProperty id="modificationEmplacement" name="Modification de l'emplacement ou pose du nouvel appareil au même endroit" type="boolean" default="false"></activiti:formProperty>
+        <activiti:formProperty id="evacuationMaterielExistant" name="Évacuation du matériel existant" type="boolean" variable="evacuationMaterielExistant" default="false"></activiti:formProperty>
+        <activiti:formProperty id="modificationEmplacement" name="Modification de l'emplacement ou pose du nouvel appareil au même endroit" type="boolean" variable="modificationEmplacement" default="false"></activiti:formProperty>
       </extensionElements>
     </userTask>
     <sequenceFlow id="flow3" sourceRef="startevent1" targetRef="form-1"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="usertask1" name="Modification de l'emplacement" activiti:assignee="${account.id}"></userTask>
+    <sequenceFlow id="flow6" sourceRef="usertask1" targetRef="endevent1"></sequenceFlow>
     <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
-    <sequenceFlow id="flow4" sourceRef="form-1" targetRef="exclusivegateway1"></sequenceFlow>
-    <userTask id="usertask1" name="Modification de l'emplacement"></userTask>
-    <sequenceFlow id="flow5" name="modificationEmplacement" sourceRef="exclusivegateway1" targetRef="usertask1" skipExpression="aaaa">
+    <sequenceFlow id="flow7" sourceRef="form-1" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="exclusivegateway1" targetRef="usertask1">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${modificationEmplacement}]]></conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="flow6" sourceRef="usertask1" targetRef="endevent1"></sequenceFlow>
-    <sequenceFlow id="flow7" sourceRef="exclusivegateway1" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow9" sourceRef="exclusivegateway1" targetRef="endevent1"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_makeEstimate-PLM-MAT_NEW">
     <bpmndi:BPMNPlane bpmnElement="makeEstimate-PLM-MAT_NEW" id="BPMNPlane_makeEstimate-PLM-MAT_NEW">
@@ -31,27 +31,15 @@
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
         <omgdc:Bounds height="35.0" width="35.0" x="850.0" y="231.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
-        <omgdc:Bounds height="40.0" width="40.0" x="546.0" y="228.0"></omgdc:Bounds>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
         <omgdc:Bounds height="62.0" width="110.0" x="640.0" y="100.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="546.0" y="228.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="335.0" y="247.0"></omgdi:waypoint>
         <omgdi:waypoint x="380.0" y="247.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
-        <omgdi:waypoint x="501.0" y="247.0"></omgdi:waypoint>
-        <omgdi:waypoint x="546.0" y="248.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
-        <omgdi:waypoint x="566.0" y="228.0"></omgdi:waypoint>
-        <omgdi:waypoint x="566.0" y="131.0"></omgdi:waypoint>
-        <omgdi:waypoint x="640.0" y="131.0"></omgdi:waypoint>
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="48.0" width="100.0" x="570.0" y="171.0"></omgdc:Bounds>
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
         <omgdi:waypoint x="750.0" y="131.0"></omgdi:waypoint>
@@ -59,6 +47,15 @@
         <omgdi:waypoint x="867.0" y="231.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="501.0" y="247.0"></omgdi:waypoint>
+        <omgdi:waypoint x="546.0" y="248.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="566.0" y="228.0"></omgdi:waypoint>
+        <omgdi:waypoint x="566.0" y="131.0"></omgdi:waypoint>
+        <omgdi:waypoint x="640.0" y="131.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
         <omgdi:waypoint x="586.0" y="248.0"></omgdi:waypoint>
         <omgdi:waypoint x="850.0" y="248.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>

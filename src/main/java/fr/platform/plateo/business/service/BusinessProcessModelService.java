@@ -1,10 +1,13 @@
 package fr.platform.plateo.business.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.slf4j.Logger;
@@ -33,6 +36,9 @@ public class BusinessProcessModelService {
 	private ClientService clientService;
 
 	@Autowired
+	private ProcessEngine processEngine;
+
+	@Autowired
 	private ProfessionRepository professionRepo;
 
 	@Autowired
@@ -55,12 +61,25 @@ public class BusinessProcessModelService {
 						vars);
 		// TODO: Créer le devis avec EstimateHasService et data contenant le process
 		// instance Id.
-		Task task = this.taskService.createTaskQuery()
-				.processInstanceId(pi.getId())
-				.taskAssignee(assigneeId.toString()).singleResult();
-		System.out.println(task.getFormKey());
-		System.out.println(task.getProcessVariables());
-		System.out.println(task.getTaskLocalVariables());
+		Task task = this.getTaskByProcessInstanceIdAndAssigneeId(
+				assigneeId, pi.getProcessInstanceId());
 		return task;
+	}
+
+	public Task getTaskByProcessInstanceIdAndAssigneeId(Integer assigneeId,
+			String processInstanceId) {
+		return this.taskService.createTaskQuery()
+				.processInstanceId(processInstanceId)
+				.taskAssignee(assigneeId.toString()).singleResult();
+	}
+
+	public void save(String taskId, Map<String, Object> params) {
+		BusinessProcessModelService.LOGGER.info("PARAMS: {}", params);
+		this.taskService.complete(taskId, params);
+	}
+
+	public List<FormProperty> getFormData(String taskId) {
+		return this.processEngine.getFormService().getTaskFormData(taskId)
+				.getFormProperties();
 	}
 }

@@ -1,7 +1,11 @@
 package fr.platform.plateo.presentation;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.activiti.engine.form.FormProperty;
+import org.activiti.engine.impl.form.BooleanFormType;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -10,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.platform.plateo.business.entity.Client;
@@ -66,8 +72,42 @@ public class RequestController {
 			@ModelAttribute("assigneeId") Integer assigneeId) {
 		Task task = this.bpmService.startProcess(assigneeId, professionId,
 				serviceId);
-
 		model.addAttribute("task", task);
+		model.addAttribute("properties",
+				this.bpmService.getFormData(task.getId()));
 		return "clients/serviceRequest";
+	}
+
+	@PostMapping("/serviceProcess/{processInstanceId}/{taskId}")
+	public String serviceProcess(@PathVariable String processInstanceId,
+			@PathVariable String taskId,
+			@RequestParam Map<String, Object> params) {
+		for (FormProperty prop : this.bpmService.getFormData(taskId)) {
+			if (prop.getType() instanceof BooleanFormType) {
+				if (params.containsKey(prop.getId())) {
+					params.put(prop.getId(), true);
+				} else {
+					params.put(prop.getId(), false);
+				}
+			}
+		}
+		this.bpmService.save(taskId, params);
+		return "redirect:/clients/serviceTask/" + processInstanceId;
+	}
+
+	@GetMapping("/serviceTask/{processInstanceId}")
+	public String serviceTask(@PathVariable String processInstanceId,
+			@ModelAttribute("assigneeId") Integer assigneeId,
+			Model model) {
+		Task task = this.bpmService
+				.getTaskByProcessInstanceIdAndAssigneeId(assigneeId,
+						processInstanceId);
+		if (task != null) {
+			model.addAttribute("task", task);
+			model.addAttribute("properties",
+					this.bpmService.getFormData(task.getId()));
+			return "clients/serviceRequest";
+		}
+		return "redirect:/clients/clientDashboard";
 	}
 }
