@@ -28,34 +28,20 @@
 					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
 							<p>Demander un devis</p>
 					</a></li>
-					<li class="subnav"><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
+					<div class="dropdown">
+					<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
 							<img th:src="@{/img/PROFIL.jpg}">
 							<p>
 								S'identifier <br>ou s'inscrire
 							</p>
 					</a>
-						<div class="overFlowHidden">
-							<!--  -->
-							<script type="text/javascript">
-									$("li.subnav").hover(function() {
-										$("div.overFlowHidden").addClass("height40");
-										 $("div.subnav-content").animate({
-											    top: '0px', opacity: '1'},500);
-										}, function() {
- 										    $('div.subnav-content')
-										    	.animate({top: '-40px', opacity: '0'}, 500)
-										    	/*.setTimeout (function(){("div.overFlowHidden").removeClass("height40")}, 300);*/
-										},
-									);
-								</script>
-							<div class="subnav-content">
-								<!-- ajout de activeSubnavContent au .subnav:hover -->
-								<a id="partSousMenu" class="white texteSousMenu"
-									th:href="@{/clients/clientDashboard}">Particulier</a> <a
-									id="proSousMenu" class="white texteSousMenu"
-									th:href="@{/pro/proDashboard}">Professionnel</a>
-							</div>
-						</div></li>
+							<div class="dropdown-content">
+	      <a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
+	      <a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
+	    </div>
+							</li>
+						</div>
+					
 				</ul>
 			</nav>
 			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
