@@ -115,7 +115,7 @@ public class ProController {
 
 			this.LOGGER.info("Creation utlisateur PRO effectué");
 			this.proService.create(pro);
-			return "public/index";
+			return "pro/proValid";
 
 		}
 		return null;
