@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="pro/head :: head">
+<head th:replace="public/head :: head">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,8 +25,11 @@
 
 		<section
 			class="sectionIdentifier sectionplusProduits section100pour100 centrer">
+
 			<!--  <div class="centrer section100pour100 carrePlusProduits">-->
 			<div class="plusProduits centrer section100pour100">
+				<img class="imgindex" alt="index Plateo"
+					th:src="@{/img/img-index.jpg}">
 				<div class="plusProduitsClient bgBlue section100pour100"></div>
 				<div class="plusProduitsPro bgOrange section100pour100"></div>
 			</div>
@@ -46,8 +49,7 @@
 							th:src="@{/img/logo-texte-BD.png}">
 						</a>
 
-						<button th:href="@{/}" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
+						<a th:href="@{/}">X</a>
 
 					</div>
 
@@ -76,7 +78,7 @@
 							</form>
 
 							<h4 class="greyClair">‒ ou ‒</h4>
-							
+
 
 							<a th:href="@{/public/proForm}">
 								<button class="btn btnPro btnWidthLong bgOrange">Créez un compte</button>
