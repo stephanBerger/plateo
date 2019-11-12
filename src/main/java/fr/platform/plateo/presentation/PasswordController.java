@@ -159,7 +159,7 @@ public class PasswordController {
 		return "/password/clientResetPassword";
 	}
 	
-	@GetMapping("/password/clientResetPassword")
+	@GetMapping("/password/proResetPassword")
 	public String proResetPassword(@RequestParam(required = false) String token, Model model) {
 
 		ResetPassword resetToken = this.resetRepository.findByToken(token);
