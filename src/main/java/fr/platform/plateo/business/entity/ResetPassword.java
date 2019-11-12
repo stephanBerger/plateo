@@ -22,6 +22,8 @@ public class ResetPassword {
     @JoinColumn(nullable = false, name = "user_id")
    
     private Client client;
+    
+    private Pro pro;
 
     public Long getId() {
         return id;
@@ -43,7 +45,7 @@ public class ResetPassword {
         return client;
     }
 
-    public void setParticulier(Client client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
@@ -64,4 +66,14 @@ public class ResetPassword {
     public boolean isExpired() {
         return new Date().after(this.expiryDate);
     }
+
+	public Pro getPro() {
+		return pro;
+	}
+
+	public void setPro(Pro pro) {
+		this.pro = pro;
+	}
+
+
 }
