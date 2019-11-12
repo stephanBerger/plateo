@@ -209,7 +209,7 @@ public class PasswordController {
 		return "redirect:/";
 	}
 
-	@PostMapping("/password/clientvalidresetpassword")
+	@PostMapping("/password/proValidResetPassword")
 	public String proValidResetPassword(@RequestParam("id") Integer id,
 			@RequestParam("proPassword") String proPassword,
 			@RequestParam("confirmPasswordInput") String confirmPasswordInput,
