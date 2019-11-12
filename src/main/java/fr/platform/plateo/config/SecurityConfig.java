@@ -53,8 +53,11 @@ public class SecurityConfig {
 					.usernameParameter("email")
 					.and()
 					
-					.logout().logoutUrl("/clients/logout")
-					.logoutSuccessUrl("/").permitAll();
+					.logout()
+					//.clearAuthentication(true)
+					.logoutUrl("/clients/logout")
+					.logoutSuccessUrl("/")
+					.permitAll();
 		}
 
 	}
@@ -93,7 +96,9 @@ public class SecurityConfig {
 					.defaultSuccessUrl("/").usernameParameter("email")
 					.and()
 					
-					.logout().logoutUrl("/pro/logout")
+					.logout()
+					//.clearAuthentication(true)
+					.logoutUrl("/pro/logout")
 					.logoutSuccessUrl("/").permitAll();
 		}
 	}
