@@ -72,9 +72,9 @@ public class SecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/pro/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.anyRequest().hasAuthority("PRO").and()
+					.antMatchers("/public/**").permitAll().anyRequest().hasAuthority("PRO").and()
 
-					.formLogin().loginPage("/pro/proLogin").permitAll().failureUrl("/pro/proLogin?error=loginError")
+					.formLogin().loginPage("/").permitAll().failureUrl("/public/index?error=loginError")
 					.defaultSuccessUrl("/").usernameParameter("email").and()
 
 					.logout().logoutUrl("/pro/logout").logoutSuccessUrl("/").permitAll();
