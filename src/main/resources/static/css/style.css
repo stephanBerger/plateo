@@ -316,14 +316,7 @@ header{
  }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	/*background-image: url("../img/img-index.jpg");*/
 	width:100%;
-	/*background-position: center;  */
-  /*	background-repeat: no-repeat;
-  	background-size: cover;*/
-  	/*overflow: hidden;*/
-  	overflow-x: hidden;
-  	overflow-y:scroll;
   	margin: 0;
   	padding: 0;
   	position:absolute;
