@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<<<<<<< HEAD
 <head th:replace="public/head :: head"></head>
 <head>
 <link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
-=======
-<head th:replace="public/head :: head">
->>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
 </head>
 <body>
-<<<<<<< HEAD
 	<header th:replace="public/header :: header"></header>
-
 	<div th:fragment="clientlogin">
 
 		<section th:replace="public/index :: sectionIndex"></section>
@@ -51,44 +45,11 @@
 							<a th:href="@{/public/clientForm}">
 								<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
 							</a>
-
 						</div>
 
 					</div>
 				</div>
 			</div>
-=======
-	<header th:replace="public/headerblanck :: headerblanck"> </header>
-	<section class="sectionIdentifier section100pour100 centrer">
-		<!---->
-		<div class="identifier centrer">
-			<h2 class="blue">CLIENT</h2>
-			<h2 class="blue">Identifiez-vous</h2>
-
-			<form class="formIdentifier centrer" th:action="@{/clients/clientLogin}"
-				method="post">
-				
-					<input type="email" name="email" class="champsFormulaire"
-						placeholder="Saisir adresse email"> <input type="password"
-						name="password" class="champsFormulaire"
-						placeholder="Saisir mot de passe">
-
-					<button class="btn btnWidthLong hoverBlue bgBlue" type="submit">Valider</button>
-				
-				<div th:if="${param.error}" class="alert alert-danger" role="alert">Utilisateur
-					ou mot de passe incorrect</div>
-
-				<div th:if="${param.logout}" class="alert alert-success"
-					role="alert">Vous avez été déconnecté avec succès</div>
-			</form>
-
-			<h4 class="greyClair">‒ ou ‒</h4>
-			<h2 class="h2creerCompte blue">Créez un compte</h2>
-
-			<a th:href="@{/public/clientForm}">
-				<button class="btn btnPro btnWidthLong bgBlue">CLIENT</button>
-			</a>
->>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
 		</div>
 	</div>
 	<script>

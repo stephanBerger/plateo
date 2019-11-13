@@ -6,22 +6,10 @@
 </head>
 <body>
 
-	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<header th:replace="clients/headerdashboard :: headerdashboard">	
 	
-	<!-- message -->
-	<div align="center" th:if="${msgok eq 'ok'}"
-		class="alert alert-success">
-		<strong>Modification du profil réussi avec succés</strong>
-	</div>
-	<!-- message fail-->
-	<div align="center" th:if="${msgfail eq 'fail'}"
-		class="alert alert-danger alert-dismissable">
-		<strong>Modification impossible !!! Cette adresse email existe déjà</strong>
-	</div>
-	<form class="centrer sectionFormClient" action="#"
-		th:action="@{/public/clientForm}" th:object="${client}" method="post">
-		
-	</form>
+	</header>
+	
 	<h1>Super Dashboard Particulier</h1>
 	<footer th:replace="public/footer :: footer">
 	</footer>

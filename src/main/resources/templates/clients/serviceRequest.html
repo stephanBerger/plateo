@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<div class="container">
+		<h1 class="text-center" th:text="${task.name}"></h1>
+
+		<form th:action="@{/clients/serviceProcess/} + ${task.processInstanceId} + '/' + ${task.id}" method="post">
+			<th:block th:each="property : ${properties}">
+				<div class="form-check" th:if="${property.type.name == 'boolean'}">
+					<input class="form-check-input" type="checkbox" value="true"
+						th:id="${property.id}" th:name="${property.id}"> <label
+						class="form-check-label" th:text="${property.name}"
+						th:for="${property.id}"></label>
+				</div>
+				<div class="form-group" th:if="${property.type.name == 'long'}">
+					<label for="${property.id}" th:text="${property.name}"></label>
+					<input type="number" th:name="${property.id}">
+				</div>
+				<div class="form-group" th:if="${property.type.name == 'enum'}">
+					<div class="custom-control custom-radio" th:each="value : ${property.type.getInformation('values')}">
+						<input type="radio" th:id="${#strings.arraySplit(value, '=')[0]}" th:name="${property.id}">
+						<label th:for="${#strings.arraySplit(value, '=')[0]}" th:text="${#strings.arraySplit(value, '=')[1]}"></label>
+					</div>
+				</div>
+			</th:block>
+			<button class="btn btn-primary">Valider</button>
+		</form>
+	</div>
+	<footer th:replace="public/footer :: footer"></footer>
+</body>
+</html>

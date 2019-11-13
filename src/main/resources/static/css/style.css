@@ -229,6 +229,30 @@ header{
 	/*height:40px;*//*taille normale pour le sous menu*/
 	height:10px;
 	background-color: #0073be;
+	z-index: 1;
+	padding-right:45px;
+}
+.activeSubnavContent{
+	top:0px !important;
+	opacity:1 !important;
+	display: block !important;
+}
+.texteSousMenu {
+  float: right;
+  text-decoration: none;
+  line-height: 40px;
+  text-transform:uppercase;
+  font-size:1rem;
+  padding:0px 25px;
+}
+.texteSousMenu:hover {
+	/*Orange*/
+  background-color:#ff9500;
+  color: white;
+ /* transform: skewX(20deg);*/
+}
+.subnav:hover .subnav-content{
+	/*display: block;*/
 }
 .subnav {
 	overflow: hidden;
@@ -320,11 +344,8 @@ header{
  	display:flex;
  	flex-direction:column;
  	justify-content:center;
-<<<<<<< HEAD
  	padding-top:10px;
-=======
- 	padding-top:20px;
->>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
+
  	min-height: calc(100% - 50px - 145px) !important;
 }
 .h2creerCompte{
@@ -608,7 +629,7 @@ ul{
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
 @media screen and (max-width: 1280px) {
 	body{
-		max-width:1080px;
+		max-width:1280px;
 	}
 	.imgLogo{
 		margin-left:20px;

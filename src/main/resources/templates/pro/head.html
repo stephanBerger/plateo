@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-	<head  th:fragment="head">
+	<head  th:fragment="headPro">
 <!---------------------------------------LINK CSS ------------------------------------->
 		<link th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}" rel="stylesheet">
-		<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+		<link href="/static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+		<link href="/static/css/styleNewPro.css" th:href="@{/css/styleNewPro.css}" rel="stylesheet" type="text/css" >
 <!---------------------------------------SCRIPT JS ------------------------------------->			
 		<script th:src="@{/webjars/jquery/3.4.1/dist/jquery.js}"></script>
-		<script th:src="@{/webjars/popper.js/1.15.0/dist/umd/popper.min.js}"></script>
+		<script th:src="@{/webjars/popper.js/1.15.0/dist/popper.js}"></script>
 		<script th:src="@{/webjars/bootstrap/4.3.1/dist/js/bootstrap.js}"></script>
 		
 <!---------------------------------------META BALISES---------------------------------->			

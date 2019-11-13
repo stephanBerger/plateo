@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<body>
+	<header th:fragment="header">
+		<div class="textedivimgHeader centrer white">
+			PARTICULIER
+		</div>
+		<div class="divimgHeader">
+			<div class="imgHeaderLeft"></div>
+
+			<div class="imgHeader">
+				<img th:src="@{/img/IMG_HEADER.jpg}">
+			</div>
+
+			<div class="imgHeaderRight"></div>
+
+		</div>
+
+
+		<section class="menu centrer">
+			<a th:href="@{/}" class="imgLogo">
+				<img class="imgLogoPlateo" alt="logo Plateo" th:src="@{/img/LOGO-BD.png}">
+				<img  class="imgLogoText" alt="logo textuel Plateo" th:src="@{/img/logo-texte-BD.png}">
+			</a>
+			<nav>
+				<ul class="menuUl">
+					<li>
+						<a href="">
+							<img th:src="@{/img/LOUPE.jpg}">
+							<p>Rechercher un Pro</p>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img th:src="@{/img/COEUR.jpg}">
+							<p>Mes favoris</p>
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<div class="subnav">
+								<img th:src="@{/img/DEVIS.jpg}">
+								<p>Devis</p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a class="textIdentifier" href="/">
+							<img th:src="@{/img/PROFIL.jpg}">
+							<p>Mon profil</p>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</section>
+
+		<div class="sousMenu"></div>
+	</header>
+</body>
+</html>

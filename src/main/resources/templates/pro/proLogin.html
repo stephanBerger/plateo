@@ -1,30 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="public/head :: head">
-<<<<<<< HEAD
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
-	rel="stylesheet">
-<link href="/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}"
-	rel="stylesheet" type="text/css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-=======
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
 </head>
->>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
 
-</head>
+
 <body>
-<<<<<<< HEAD
 	<header th:replace="public/header :: header"></header>
 	<div th:fragment="clientlogin">
 
@@ -83,7 +65,7 @@
 							</form>
 
 							<h4 class="greyClair">‒ ou ‒</h4>
-
+							
 
 							<a th:href="@{/public/proForm}">
 								<button class="btn btnPro btnWidthLong bgOrange">Créez un compte</button>
@@ -93,38 +75,6 @@
 					</div>
 				</div>
 			</div>
-=======
-	<header th:replace="public/headerblanck :: headerblanck"> </header>
-	<section class="sectionIdentifier section100pour100 centrer">
-		<!---->
-		<div class="identifier centrer">
-			<h2 class="blue">PROFESSIONNEL</h2>
-			<h2 class="blue">Identifiez-vous</h2>
-
-			<form class="formIdentifier centrer" th:action="@{/pro/proLogin}"
-				method="post">
-				
-					<input type="email" name="email" class="champsFormulaire"
-						placeholder="Saisir adresse email"> <input type="password"
-						name="password" class="champsFormulaire"
-						placeholder="Saisir mot de passe">
-
-					<button class="btn bgOrange" type="submit">Valider</button>
-				
-				<div th:if="${param.error}" class="alert alert-danger" role="alert">Utilisateur
-					ou mot de passe incorrect</div>
-
-				<div th:if="${param.logout}" class="alert alert-success"
-					role="alert">Vous avez été déconnecté avec succès</div>
-			</form>
-
-			<h4 class="greyClair">‒ ou ‒</h4>
-			<h2 class="h2creerCompte blue">Créez un compte</h2>
-
-			<a th:href="@{/public/proForm}">
-				<button class="btn btnPro btnWidthLong bgOrange">PROFESSIONNEL</button>
-			</a>
->>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
 		</div>
 	</div>
 

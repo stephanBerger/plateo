@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import fr.platform.plateo.business.service.ProService;
-import fr.platform.plateo.persistence.ClientRepository;
 
 /**
  *
@@ -19,9 +18,6 @@ public class IndexController {
 	 */
 
 	@Autowired
-	private ClientRepository clientRepository;
-
-	@Autowired
 	private Logger LOGGER;
 
 	@GetMapping("/")
@@ -30,6 +26,18 @@ public class IndexController {
 		return "public/index";
 	}
 
+	/*
+	 * @GetMapping( "/public/registration" ) public String registration() {
+	 * LOGGER.info(
+	 * "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée"
+	 * ); return "public/registration"; }
+	 */
+	@GetMapping("/public/clientRegistration")
+	public String clientRegistration() {
+		this.LOGGER.info(
+				"Une requête sur '/public/clientRegistration' est faite, la page 'clientRegistration' est envoyée");
+		return "public/clientRegistration";
+	}
 
 	
 	@GetMapping("/footer/qui_sommes_nous")
