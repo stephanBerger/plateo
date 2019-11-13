@@ -320,7 +320,11 @@ header{
  	display:flex;
  	flex-direction:column;
  	justify-content:center;
+<<<<<<< HEAD
  	padding-top:10px;
+=======
+ 	padding-top:20px;
+>>>>>>> cf4e8e8f551d35d1e07b7ae7921687bc23233550
  	min-height: calc(100% - 50px - 145px) !important;
 }
 .h2creerCompte{
