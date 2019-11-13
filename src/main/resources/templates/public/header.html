@@ -22,25 +22,34 @@
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li><a href=""> <img th:src="@{/img/LOUPE.jpg}">
+					<li>
+						<a href="">
+							<img th:src="@{/img/LOUPE.jpg}">
 							<p>Rechercher un Pro</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img th:src="@{/img/DEVIS.jpg}">
 							<p>Demander un devis</p>
-					</a></li>
+						</a>
+					</li>
 					<div class="dropdown">
-					<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
-							<img th:src="@{/img/PROFIL.jpg}">
-							<p>
-								S'identifier <br>ou s'inscrire
-							</p>
-					</a>
+						<li>
+							<a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
+								<img th:src="@{/img/PROFIL.jpg}">
+								<p>
+									S'identifier <br>ou s'inscrire
+								</p>
+							</a>
 							<div class="dropdown-content">
-	      <a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
-	      <a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
-	    </div>
-							</li>
-						</div>
+	     						<a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
+	      						<a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
+	    					</div>
+	    				</li>
+	    			</div>
+					
+						
 					
 				</ul>
 			</nav>

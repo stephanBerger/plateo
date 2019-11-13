@@ -3,6 +3,13 @@
 	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
 	width:100%;
 	background-color:#e6e6e6;
+	/*background-image: url("../img/maison-en-travaux.jpg");*/
+	background: no-repeat center url("../img/maison-en-travaux.jpg");
+	background-size: cover;
+	
+	/*background: no-repeat;*/
+	
+	/*filter : blur(5px);*/
   	overflow: hidden;
   	margin: 0;
   	padding: 0;
@@ -15,11 +22,19 @@
 	margin:0;
 	padding:0;
 	background-color: white;
-	box-shadow: 0px 0px 15px 0px #bdbdbd;
+	box-shadow: 0px 0px 20px -10px black;
 	
 	align-items:flex-start !important;
 	flex-grow: 1;
 }
+.borderradius{
+	border-radius: .5rem;
+}
+
+
+
+
+
 .divVide{
 	height:0px;
 }

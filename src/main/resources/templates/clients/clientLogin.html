@@ -1,63 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="public/head :: head">
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link th:href="@{/webjars/bootstrap/4.3.1/dist/css/bootstrap.min.css}"
-	rel="stylesheet">
-<link href="/static/css/styleLogin.css" th:href="@{/css/styleLogin.css}"
-	rel="stylesheet" type="text/css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="public/header :: header"></header>
 
 	<div th:fragment="clientlogin">
 
-		<section
-			class="sectionIdentifier sectionplusProduits section100pour100 centrer">
-
-			<!--  <div class="centrer section100pour100 carrePlusProduits">-->
-			<div class="plusProduits centrer section100pour100">
-				<img class="imgindex" alt="index Plateo"
-					th:src="@{/img/img-index.jpg}">
-				<div class="plusProduitsClient bgBlue section100pour100"></div>
-				<div class="plusProduitsPro bgOrange section100pour100"></div>
-			</div>
-			<!--  </div> -->
-			<div class="divVide"></div>
-		</section>
-
+		<section th:replace="public/index :: sectionIndex"></section>
+		
 		<div id="loginModal" class="modal fade" data-keyboard="false"
 			data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-
-						<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo"
-							alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
-							class="imgLogoText" alt="logo textuel Plateo"
-							th:src="@{/img/logo-texte-BD.png}">
-						</a> <a th:href="@{/}">X</a>
-
+				<div class="modal-content overFlowHidden">
+					<div class="bggreyTresClair lineHeightLogin">
+						<h3 class="white centrer"><strong>PARTICULIER</strong></h3>
 					</div>
-
 					<div class="modal-body">
-
-						<!---->
-						<div class="identifier centrer">
-
-							<h2 class="blue"><strong>PARTICULIER</strong></h2>
+						<div class="identifier-login centrer">
 
 							<h2 class="blue">Identifiez-vous</h2>
 
@@ -69,7 +31,7 @@
 									type="password" name="password" class="champsFormulaire"
 									placeholder="Saisir mot de passe" required>
 
-								<button class="btn btnWidthLong hoverBlue bgBlue" type="submit">Valider</button>
+								<button class="btn bgOrange" type="submit">Valider</button>
 								<br>
 
 								<div th:if="${param.error}" class="alert alert-danger"
@@ -77,14 +39,11 @@
 
 								<div th:if="${param.logout}" class="alert alert-success"
 									role="alert">Vous avez été déconnecté avec succès</div>
-
-
 							</form>
 
 							<h4 class="greyClair">‒ ou ‒</h4>
 
 							<a th:href="@{/public/clientForm}">
-
 								<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
 							</a>
 
@@ -95,9 +54,8 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
-		$('#loginModal').modal('show')
+		$('#loginModal').modal('show');
 	</script>
 
 </body>
