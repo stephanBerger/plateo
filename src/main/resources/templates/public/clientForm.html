@@ -2,18 +2,23 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet"
-	type="text/css">
+<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<header th:replace="public/headerblanck :: header"> </header>
-	<!--  <header th:replace="public/headerblanck :: headerblanck"> </header>-->
+	<header th:replace="public/header :: header"></header>
+	
 	<section class="sectionNouvClient section100pour100 centrer">
-		<div class="centrer carreBlanc section100pour100">
+		
+		<div class="centrer carreBlanc">
+			<!--  <div>
+			<h2 class="white titre-formulaires ">Créez un compte</h2>
+		</div>-->
 			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/public/clientForm}" th:object="${client}"
-				method="post">
+				th:action="@{/public/clientForm}" th:object="${client}" method="post">
+				
+				 <div>
+					<h2 class="blue titre-formulaires ">Créez un compte</h2>
+				</div>
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 
@@ -106,7 +111,7 @@
 				</div>
 			</form>
 		</div>
-		<div class="divVide"></div>
+		<!-- <div class="divVide"></div> -->
 	</section>
 
 

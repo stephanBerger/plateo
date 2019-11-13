@@ -2,10 +2,9 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <body>
-	<header th:replace="public/header :: header">-	
-	</header>
+	<header th:replace="public/header :: header"></header>
 			
-	<section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
+	<section th:fragment="sectionIndex" class="sectionIdentifier sectionplusProduits section100pour100 centrer">
 	
 		<!--  <div class="centrer section100pour100 carrePlusProduits">-->
 			<div class="plusProduits centrer section100pour100">

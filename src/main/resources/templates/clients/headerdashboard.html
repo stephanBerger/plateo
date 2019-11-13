@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 
-
 <body>
 	<header th:fragment="headerdashboard">
 		<div class="textedivimgHeader centrer white">PARTICULIER</div>
@@ -16,9 +15,6 @@
 
 		</div>
 
-
-
-
 		<section class="menu centrer">
 			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo"
 				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
@@ -27,35 +23,53 @@
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li><a href=""> <img th:src="@{/img/LOUPE.jpg}">
-							<p>Rechercher un</p>
-							<p>professionnel</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
-							<p>Demander</p>
-							<p>un devis</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
-							<p>Mes devis</p>
-							<p>en cours</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/COEUR.jpg}">
+					<li>
+						<a href="">
+						<img th:src="@{/img/LOUPE.jpg}">
+							<p>Rechercher un Pro</p>
+						</a>
+					</li>
+					<div class="dropdown">
+						<li>
+							<a href=""  class="texteDropDown"> <!-- th:href="@{/public/registration}" -->
+								<img th:src="@{/img/DEVIS.jpg}">
+								<p>Devis</p>
+							</a>
+							<div class="dropdown-content">
+	     						<a th:href="@{/clients/clientDashboard}">DEMANDER UN DEVIS</a>
+	      						<a th:href="@{/pro/proDashboard}">MES DEVIS EN COURS</a>
+	    					</div>
+	    				</li>
+	    			</div>
+					<li>
+						<a href="">
+						<img th:src="@{/img/COEUR.jpg}">
 							<p>Mes factures</p>
-					</a></li>
+						</a>
+					</li>
 
 
-					<li><a href=""> <img th:src="@{/img/PROFIL.jpg}">
+					<li><a th:href="@{/clients/clientEdit/{id}(id=${client.id})}">
+							<img th:src="@{/img/PROFIL.jpg}">
 							<p>Modifier mon profil</p>
 					</a></li>
 				</ul>
 			</nav>
 			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
-				<span class="nav-link d-inline-flex align-items-center p-2"
-					th:text="${#request.userPrincipal.principal.username}"></span>
-				<form th:action="@{/clients/logout}" method="post"
-					class="form-inline my-2 my-lg-0">
-					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
-				</form>
+				<div>
+					<b>
+						<span>Bonjour,</span>
+						<br>
+						<span th:text="${client.clientLastname}" />
+						<span th:text="${client.clientFirstname}" />
+					</b>
+				</div>
+				<div>
+					<form th:action="@{/clients/logout}" method="post"
+						class="form-inline my-2 my-lg-0">
+						<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
+					</form>
+				</div>
 			</div>
 		</section>
 
