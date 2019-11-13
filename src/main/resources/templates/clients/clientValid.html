@@ -2,27 +2,44 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
+<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<header th:replace="/clients/headerblanck :: headerblanck"> </header>
-<body>
-	<div>
-		<h3 align="center">Votre compte client a bien été créé</h3>
-		<h3 align="center">Veuillez vous authentifier pour accéder au site</h3>
-	</div>
-	
-	<div class="row">
-		<div align="center" class="col-md-3"></div>
-		<div align="center" class="col-md-3">
-			<a href="/" class="btn bgOrange MarginClient">Accueil</a>
-		</div>
+	<header th:replace="public/header :: header"></header>
 
-		<div align="center" class="col-md-3">
-			<a href="/clients/clientDashboard" class="btn bgOrange MarginClient">Se Connecter</a>
-		</div>
-		<div align="center" class="col-md-3"></div>
+	<div th:fragment="clientlogin">
 
+		<section th:replace="public/index :: sectionIndex"></section>
+		
+		<div id="loginModal" class="modal fade" data-keyboard="false"
+		data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content overFlowHidden">
+					<div class="modal-body">
+						<div class="identifier-login centrer">
+							<h3 class="blue">Votre compte</h3>
+							<h3 class="blue">a bien été créé</h3>
+						</div>
+					</div>
+					<div>
+						<div>
+							<div align="center">
+								<a class="btn btn-primary" th:href="@{/clients/clientDashboard}">Se
+								connecter</a> <a class="btn btn-primary" th:href="@{/}">Accueil</a>
+							</div>
+							<br>
+							<div align="center"></div>
+							<br>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<script>
+		$('#loginModal').modal('show');
+	</script>
+
 </body>
 </html>
