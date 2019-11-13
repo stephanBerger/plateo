@@ -13,13 +13,16 @@ import fr.platform.plateo.business.service.ProService;
 @Controller
 public class IndexController {
 
+	/**
+	 *
+	 */
+
 	@Autowired
 	private Logger LOGGER;
 
 	@GetMapping("/")
 	public String base() {
-		this.LOGGER.info(
-				"Une requête sur '/' est faite, la page 'index' est envoyée");
+		this.LOGGER.info("Une requête sur '/' est faite, la page 'index' est envoyée");
 		return "public/index";
 	}
 
@@ -36,13 +39,7 @@ public class IndexController {
 		return "public/clientRegistration";
 	}
 
-	@GetMapping("/public/proRegistration")
-	public String proRegistration() {
-		this.LOGGER.info(
-				"Une requête sur '/public/proRegistration' est faite, la page 'proRegistration' est envoyée");
-		return "public/proRegistration";
-	}
-
+	
 	@GetMapping("/footer/qui_sommes_nous")
 	public String aboutUs() {
 		return "public/aboutUs";

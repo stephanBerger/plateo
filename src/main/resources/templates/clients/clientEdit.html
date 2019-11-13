@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="/clients/head :: head">
+<head th:replace="/public/head :: head">
 </head>
 <body>
-	<header th:replace="/clients/headerblanck :: headerblanck"> </header>
 
+	<header th:replace="public/headerblanck :: headerblanck"> </header>
+
+	<th:block
+		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+
+	<!-- message -->
+	<div align="center" th:if="${msgok eq 'ok'}"
+		class="alert alert-success">
+		<strong>Modification du mot de passe réussi avec succés</strong>
+	</div>
+	
 	<form action="#"
-		th:action=""
+		th:action="@{/clients/clientEdit/{id}(id=${client.id})}"
 		th:object="${client}" method="post">
 		<div class="container register-form">
 			<div class="form">
@@ -42,23 +52,18 @@
 									placeholder="Champs obligatoire" required /> <span
 									th:if="${#fields.hasErrors('clientEmailAddress')}"
 									th:errors="*{clientEmailAddress}" class="text-danger"> </span>
+									
+									<input
+									type="hidden" id="OldEmail" name="OldEmail"
+									th:value="*{clientEmailAddress}" />
+								
 							</div>
 							<div class="form-group formIdentifier left">
-								<label for="clientPassword"
-									class="col-form-label blue labelForm">Mot de passe</label> <input
-									type="password" id="clientPassword"
+								<input type="hidden" id="clientPassword"
 									th:field="*{clientPassword}" class="champsFormulaire"
 									placeholder="Champs obligatoire" required /> <span
 									th:if="${#fields.hasErrors('clientPassword')}"
 									th:errors="*{clientPassword}" class="text-danger"> </span>
-							</div>
-
-							<div class="form-group formIdentifier left">
-								<label for="confirmPasswordInput"
-									class="col-form-label blue labelForm">Confirmez votre
-									mot de passe : </label> <input class="champsFormulaire" type="password"
-									id="confirmPasswordInput" name="confirmPasswordInput"
-									placeholder="Obligatoire" required />
 							</div>
 
 						</div>
@@ -104,7 +109,7 @@
 						</div>
 
 						<div align="center" class="col-md-6">
-							<a href="/particulier/listing" class="btn btn-primary">Annuler</a>
+							<a href="/clients/clientDashboard" class="btn btn-primary">Annuler</a>
 						</div>
 
 						<div align="center" class="col-md-6">
@@ -118,5 +123,13 @@
 		</div>
 	</form>
 
+<<<<<<< HEAD
+=======
+	<th:block th:if="${msg}">
+		<script>
+			$('#loginModal').modal('show')
+		</script>
+	</th:block>
+>>>>>>> dev
 </body>
 </html>

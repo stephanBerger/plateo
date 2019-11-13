@@ -1,11 +1,14 @@
 package fr.platform.plateo.business.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.persistence.ProRepository;
 
@@ -42,6 +45,10 @@ public class ProService implements UserDetailsService {
 	
 	public Pro findEmail(String email) {
 		return this.proRepository.findOneByProEmailAddress(email);
+	}
+
+	public Optional<Pro> findId(Integer id) {
+		return this.proRepository.findById(id);
 	}
 
 }

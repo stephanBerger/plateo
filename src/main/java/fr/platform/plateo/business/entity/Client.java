@@ -150,7 +150,12 @@ public class Client implements UserDetails {
         return id;
     }
 
-    public String getClientLastname() {
+    
+    public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getClientLastname() {
         return clientLastname;
     }
 

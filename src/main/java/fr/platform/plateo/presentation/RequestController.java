@@ -1,5 +1,6 @@
 package fr.platform.plateo.presentation;
 
+import java.security.Principal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,10 +48,12 @@ public class RequestController {
 
 	@GetMapping("/estimateRequest")
 	public String estimateRequest(Model model, HttpServletRequest req,
-			@ModelAttribute("assigneeId") Integer assigneeId) {
+			@ModelAttribute("assigneeId") Integer assigneeId,
+			Principal principal) {
+		Client client = this.clientService
+				.loadUserByUsername(req.getUserPrincipal().getName());
+		model.addAttribute("client", client);
 		if (assigneeId == null) {
-			Client client = this.clientService
-					.loadUserByUsername(req.getUserPrincipal().getName());
 			model.addAttribute("assigneeId", client.getId());
 		}
 		model.addAttribute("professions", this.professionService.getAll());
@@ -58,9 +61,12 @@ public class RequestController {
 	}
 
 	@GetMapping("/professionRequest/{id}")
-	public String professionRequest(@PathVariable Integer id,
-			Model model) {
+	public String professionRequest(@PathVariable Integer id, Model model,
+			Principal principal) {
 		Profession profession = this.professionService.read(id);
+		Client client = this.clientService
+				.loadUserByUsername(principal.getName());
+		model.addAttribute("client", client);
 		model.addAttribute("profession", profession);
 		model.addAttribute("services", profession.getServices());
 		return "clients/professionRequest";
@@ -69,9 +75,13 @@ public class RequestController {
 	@GetMapping("/serviceRequest/{professionId}/{serviceId}")
 	public String serviceRequest(@PathVariable Integer professionId,
 			@PathVariable Integer serviceId, Model model,
-			@ModelAttribute("assigneeId") Integer assigneeId) {
+			@ModelAttribute("assigneeId") Integer assigneeId,
+			Principal principal) {
 		Task task = this.bpmService.startProcess(assigneeId, professionId,
 				serviceId);
+		Client client = this.clientService
+				.loadUserByUsername(principal.getName());
+		model.addAttribute("client", client);
 		model.addAttribute("task", task);
 		model.addAttribute("properties",
 				this.bpmService.getFormData(task.getId()));
@@ -97,12 +107,15 @@ public class RequestController {
 
 	@GetMapping("/serviceTask/{processInstanceId}")
 	public String serviceTask(@PathVariable String processInstanceId,
-			@ModelAttribute("assigneeId") Integer assigneeId,
-			Model model) {
+			@ModelAttribute("assigneeId") Integer assigneeId, Model model,
+			Principal principal) {
 		Task task = this.bpmService
 				.getTaskByProcessInstanceIdAndAssigneeId(assigneeId,
 						processInstanceId);
 		if (task != null) {
+			Client client = this.clientService
+					.loadUserByUsername(principal.getName());
+			model.addAttribute("client", client);
 			model.addAttribute("task", task);
 			model.addAttribute("properties",
 					this.bpmService.getFormData(task.getId()));

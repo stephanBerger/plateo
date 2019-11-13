@@ -77,11 +77,6 @@
 			<artifactId>jquery</artifactId>
 			<version>3.4.1</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.activiti</groupId> -->
-		<!-- <artifactId>activiti-spring-boot-starter-basic</artifactId> -->
-		<!-- <version>6.0.0</version> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-engine</artifactId>
@@ -96,6 +91,10 @@
 			<groupId>org.activiti</groupId>
 			<artifactId>activiti-form-engine</artifactId>
 			<version>6.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 	</dependencies>
 
