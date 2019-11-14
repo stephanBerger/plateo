@@ -24,19 +24,6 @@
 	flex-grow: 3;
 }
   /*-----------------------------FIN HEADER-----------------------------------------*/
- 
- .sectionNouvPro{
-	/*background-image: url("../IMG/IMG-FOND1.jpg");*/
-	width:100%;
-	background-color:#e6e6e6;
-  	overflow: hidden;
-  	margin: 0;
-  	padding: 0;
-  	position:absolute;
-  	
-  	flex-direction:column;
-  	justify-content:space-between;
-}
 .carreBlanc{
 	margin:0;
 	padding:0;
