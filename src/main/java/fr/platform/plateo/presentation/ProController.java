@@ -57,6 +57,7 @@ public class ProController {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
 			return "redirect:/uploadStatus";
 		}
+		this.proService.addPhotos(id, photos);
 		return "redirect:/";
 	}
 
