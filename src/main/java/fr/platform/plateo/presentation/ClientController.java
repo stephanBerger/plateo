@@ -1,6 +1,7 @@
 package fr.platform.plateo.presentation;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Client;
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.ProService;
 
 /**
  *
@@ -36,6 +39,8 @@ public class ClientController {
 			.getLogger(ClientController.class);
 
 	@Autowired
+	private ProService    proService;
+	@Autowired
 	private ClientService clientService;
 
 	@Autowired
@@ -46,6 +51,17 @@ public class ClientController {
 	public String pageLoginClientGet() {
 		ClientController.LOGGER.info("La page login client est demandée");
 		return "/clients/clientLogin";
+	}
+
+	@GetMapping("/clients/proList")
+	public String listPro(Model model, Principal principal) {
+		ClientController.LOGGER.info("La page \"proList\" est demandée");
+		List<Pro> listPro = this.proService.readAll();
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+		model.addAttribute("listPro", listPro);
+		// model.addAttribute( "listProProfessions", listProfessions );
+		return "clients/proList";
 	}
 
 	// changement email client deconnexion obligatoire
