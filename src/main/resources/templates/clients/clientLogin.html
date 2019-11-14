@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header th:replace="public/header :: header"></header>
+
+	<section th:replace="public/index :: sectionIndex"></section>
+
+	<div id="loginModal" class="modal fade" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+	<!--  <div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >-->
+		<div class="modal-dialog">
+			<div class="modal-content overFlowHidden">
+				<div class="bggreyClair headermodal">
+					<h3 class="white centrer"><strong>PARTICULIER</strong></h3>
+					<a th:href="@{/}">&times;</a>
+					<!--  <button type="button" class="close btnModal" data-dismiss="modal">
+						<span>&times;</span>
+					</button>-->	
+				</div>
+				<div class="modal-body">
+					<div class="identifier-login centrer">
+
+						<h2 class="blue">Identifiez-vous</h2>
+
+						<form class="formIdentifier centrer"
+							th:action="@{/clients/clientLogin}" method="post">
+
+							<input type="email" name="email" class="champsFormulaire"
+								placeholder="Saisir adresse email" required>
+							<input type="password" name="password" class="champsFormulaire"
+								placeholder="Saisir mot de passe" required>
+
+							<button class="btn bgOrange" type="submit">Valider</button>
+							<br>
+
+							<div th:if="${param.error}" class="alert alert-danger"
+								role="alert">Utilisateur ou mot de passe incorrect</div>
+
+							<div th:if="${param.logout}" class="alert alert-success"
+								role="alert">Vous avez été déconnecté avec succès</div>
+						</form>
+
+						<h4 class="greyClair">‒ ou ‒</h4>
+
+						<a th:href="@{/public/clientForm}">
+							<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
+						</a>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#loginModal').modal('show')
+	</script>
+
+</body>
+</html>

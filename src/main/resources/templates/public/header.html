@@ -22,35 +22,25 @@
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li>
-						<a th:href="@{/public/proList}">
-							<img th:src="@{/img/LOUPE.jpg}">
-							<p>Rechercher un Pro</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/DEVIS.jpg}">
-							<p>Demander un devis</p>
-						</a>
-					</li>
+					<li><a href=""> <img th:src="@{/img/LOUPE.jpg}">
+							<span>Rechercher un Pro</span>
+					</a></li>
+					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
+							<span>Demander un devis</span>
+					</a></li>
 					<div class="dropdown">
-						<li>
-							<a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
-								<img th:src="@{/img/PROFIL.jpg}">
-								<p>
-									S'identifier <br>ou s'inscrire
-								</p>
+						<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
+							<img th:src="@{/img/PROFIL.jpg}">
+							<span>
+								S'identifier <br>ou s'inscrire
+							</span>
 							</a>
 							<div class="dropdown-content">
-	     						<a data-toggle="modal" data-target="#loginClientModal">PARTICULIER</a>
-								  <a data-toggle="modal" data-target="#loginProModal">PROFESSIONNEL</a>
-	    					</div>
-	    				</li>
-	    			</div>
-					
-						
-					
+								<a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
+								<a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
+						    	</div>
+						</li>
+					</div>
 				</ul>
 			</nav>
 			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
@@ -62,7 +52,6 @@
 				</form>
 			</div>
 		</section>
-
 		<div class="sousMenu"></div>
 	</header>
 </body>

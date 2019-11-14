@@ -41,11 +41,12 @@ public class ClientController {
 	private EmailService emailService;
 
 	// login client method get
-	/*
-	 * @GetMapping("/clients/clientLogin") public String pageLoginClientGet() {
-	 * ClientController.LOGGER.info("La page login client est demandée"); return
-	 * "/clients/clientLogin"; }
-	 */
+
+	@GetMapping("/clients/clientLogin")
+	public String pageLoginClientGet() {
+		ClientController.LOGGER.info("La page login client est demandée");
+		return "/clients/clientLogin";
+	}
 
 	// changement email client deconnexion obligatoire
 	@RequestMapping("/exit")
