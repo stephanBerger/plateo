@@ -1,7 +1,8 @@
 package fr.platform.plateo.presentation;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Pro;
+import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
 
@@ -37,27 +39,25 @@ public class ProController {
 		model.addAttribute("pro", pro);
 		model.addAttribute("fullAddress", pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
-		String encoding = "data:image/png;base64," + encoder.encodeToString(pro.getProPhotos());
-		model.addAttribute("photo", encoding);
+
+		List<String> encodings = new ArrayList<>();
+		for (ProPhotos photo : pro.getListProPhotos()) {
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			encodings.add(encoding);
+		}
+
+		model.addAttribute("photos", encodings);
 		return "/public/proProfile";
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
-	public String proAddPhoto(@PathVariable Integer id, @RequestParam("proPhotos") MultipartFile photo,
+	public String proAddPhoto(@PathVariable Integer id, @RequestParam("listProPhotos") List<MultipartFile> photos,
 			RedirectAttributes redirectAttributes) {
-		if (photo.isEmpty()) {
+		if (photos.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
-			return "redirect:uploadStatus";
+			return "redirect:/uploadStatus";
 		}
-		Pro pro = this.proService.read(id);
-
-		try {
-			pro.setProPhotos(photo.getBytes());
-		} catch (IOException e) {
-			this.LOGGER.info("Impossible d'ajouter la photo");
-		}
-		this.proService.create(pro);
-		return "/public/proProfile/" + pro.getId();
+		return "redirect:/";
 	}
 
 	// login pro method get

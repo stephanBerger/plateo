@@ -16,14 +16,14 @@
 			<div class="col-4">Images pro
 				<img th:src=*{photo}>
 				<form th:object="${pro}" th:action="@{/public/proAddPhoto/{id}(id=${pro.id})}" method="POST" enctype="multipart/form-data">
-				<label for="proPhotos">Sélectionner le fichier à envoyer</label>
-				<input type="file" id="proPhotos" th:field="*{proPhotos}" accept="image/png, image/jpeg" required>
-				<button>Envoyer</button>
-				<button onClick="this.form.reset()">Reset</button>
-				<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
+					<label for="proPhotos">Sélectionner le fichier à envoyer</label>
+					<input type="file" id="listProPhotos" name="listProPhotos" accept="image/png, image/jpeg" multiple required>
+					<button>Envoyer</button>
+					<button onClick="this.form.reset()">Reset</button>
+					<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 					<strong>Veuillez ajouter une photo</strong>
-				</div>
+					</div>
 				</form>
 			</div>
 			<div class="col-3 offset-3"> 
@@ -31,5 +31,12 @@
 				<div class="border border-info">Notes</div>
 			</div>
 		</div>
+	</div>
+	<div>
+	<table>
+	<tr th:each="photo: ${photos}">
+    <td><img th:src="${photo}"></td>
+	</tr>
+	</table>
 	</div>
 </body>
