@@ -90,11 +90,15 @@
 						<div class="form-group formIdentifier left">
 							<label for="listProfession" class="col-form-label blue labelForm">Listes des corps d'états</label>
       							
-      							<select> 
-							       <option th:each="profession : ${listProfessions}" 
-							           th:value="${profession.name}" 
-							           th:text="${profession.name}"/> 
-						      </select>
+<!--       							<select>  -->
+<!-- 							       <option th:each="profession : ${listProfessions}"  -->
+<!-- 							           th:value="${profession.name}"  -->
+<!-- 							           th:text="${profession.name}"/>  -->
+<!-- 						      </select> -->
+<select th:field="**{profession}">
+    <option th:each="prof : ${listProfessions}" th:value="${prof.name}" th:text="${prof.name}">
+    </option>
+</select>
 						</div>
 					</div>
 				</div>

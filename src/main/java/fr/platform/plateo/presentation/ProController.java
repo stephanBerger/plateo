@@ -60,10 +60,11 @@ public class ProController {
 
 	// nouveau pro method get
 	@GetMapping("/public/proForm")
-	public String proForm(Pro pro, Model model) {
+	public String proForm(Pro pro, Model model, Profession profession) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
 		List<Profession> listProfessions = this.professionService.getAll();
 		model.addAttribute("listProfessions", listProfessions);
+		model.addAttribute("profession", profession);
 		return "/public/proForm";
 	}
 
