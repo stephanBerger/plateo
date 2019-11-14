@@ -26,209 +26,211 @@ import fr.platform.plateo.persistence.ResetPasswordRepository;
 @Controller
 public class PasswordController {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
+    private final static Logger     LOGGER = LoggerFactory.getLogger( ClientController.class );
 
-	@Autowired
-	private ClientService clientService;
+    @Autowired
+    private ClientService           clientService;
 
-	@Autowired
-	private ProService proService;
+    @Autowired
+    private ProService              proService;
 
-	@Autowired
-	private EmailService emailService;
+    @Autowired
+    private EmailService            emailService;
 
-	@Autowired
-	private ResetPasswordRepository resetRepository;
+    @Autowired
+    private ResetPasswordRepository resetRepository;
 
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder   passwordEncoder;
 
-	// formulaire forgot password method get
-	@GetMapping("/password/clientForgotPassword")
-	public String ForgotPassword(Model model) {
-		return "/password/clientForgotPassword";
-	}
-	
-	@GetMapping("/password/proForgotPassword")
-	public String proForgotPassword() {
-		return "/password/proForgotPassword";
-	}
+    // formulaire forgot password method get
+    @GetMapping( "/password/clientForgotPassword" )
+    public String ForgotPassword( Model model ) {
+        return "/password/clientForgotPassword";
+    }
 
-	// formulaire forgot password method post
-	@PostMapping("/password/clientForgotPassword")
-	public String ValidForgotPassword(HttpServletRequest request, @RequestParam(value = "email") String email,
-			final RedirectAttributes redirectAttributes) {
+    @GetMapping( "/password/proForgotPassword" )
+    public String proForgotPassword() {
+        return "/password/proForgotPassword";
+    }
 
-		// verif si email existe dans BDD
-		Client client = this.clientService.findEmail(email);
-		if (client == null) {
-			PasswordController.LOGGER.info("Adresse email inconnu");
-			redirectAttributes.addFlashAttribute("msg", "fail");
-			return "redirect:/password/clientForgotPassword";
-		}
+    // formulaire forgot password method post
+    @PostMapping( "/password/clientForgotPassword" )
+    public String ValidForgotPassword( HttpServletRequest request, @RequestParam( value = "email" ) String email,
+            final RedirectAttributes redirectAttributes ) {
 
-		// si email dans BDD save token
-		ResetPassword token = new ResetPassword();
-		token.setToken(UUID.randomUUID().toString());
-		token.setClient(client);
-		token.setExpiryDate(30);
-		this.resetRepository.save(token);
+        // verif si email existe dans BDD
+        Client client = this.clientService.findEmail( email );
+        if ( client == null ) {
+            PasswordController.LOGGER.info( "Adresse email inconnu" );
+            redirectAttributes.addFlashAttribute( "msg", "fail" );
+            return "redirect:/password/clientForgotPassword";
+        }
 
-		// creation de URL reset password
-		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-		String url2 = url + "/password/clientResetPassword?token=" + token.getToken();
-		PasswordController.LOGGER.info("URL reset password : " + url2);
+        // si email dans BDD save token
+        ResetPassword token = new ResetPassword();
+        token.setToken( UUID.randomUUID().toString() );
+        token.setClient( client );
+        token.setExpiryDate( 30 );
+        this.resetRepository.save( token );
 
-		// envoi email réinitialisation du password
-		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
-				+ "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
-				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
+        // creation de URL reset password
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String url2 = url + "/password/clientResetPassword?token=" + token.getToken();
+        PasswordController.LOGGER.info( "URL reset password : " + url2 );
 
-		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
+        // envoi email réinitialisation du password
+        String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
+                + "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+                + url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
-		PasswordController.LOGGER.info("Email envoyé au client pour réinitialisation du password");
+        this.emailService.sendEmail( client.getClientEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE",
+                text );
 
-		redirectAttributes.addFlashAttribute("msg", "ok");
-		return "redirect:/password/clientForgotPassword";
+        PasswordController.LOGGER.info( "Email envoyé au client pour réinitialisation du password" );
 
-	}
+        redirectAttributes.addFlashAttribute( "msg", "ok" );
+        return "redirect:/password/clientForgotPassword";
 
-	@PostMapping("/password/proForgotPassword")
-	public String proValidForgotPassword(HttpServletRequest request, @RequestParam(value = "email") String email,
-			final RedirectAttributes redirectAttributes) {
+    }
 
-		// verif si email existe dans BDD
-		Pro pro = this.proService.findEmail(email);
-		if (pro == null) {
-			PasswordController.LOGGER.info("Adresse email inconnue");
-			redirectAttributes.addFlashAttribute("msg", "fail");
-			return "redirect:/password/proForgotPassword";
-		}
+    @PostMapping( "/password/proForgotPassword" )
+    public String proValidForgotPassword( HttpServletRequest request, @RequestParam( value = "email" ) String email,
+            final RedirectAttributes redirectAttributes ) {
 
-		// si email dans BDD save token
-		ResetPassword token = new ResetPassword();
-		token.setToken(UUID.randomUUID().toString());
-		token.setPro(pro);
-		token.setExpiryDate(30);
-		this.resetRepository.save(token);
+        // verif si email existe dans BDD
+        Pro pro = this.proService.findEmail( email );
+        if ( pro == null ) {
+            PasswordController.LOGGER.info( "Adresse email inconnue" );
+            redirectAttributes.addFlashAttribute( "msg", "fail" );
+            return "redirect:/password/proForgotPassword";
+        }
 
-		// creation de URL reset password
-		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-		String url2 = url + "/password/proResetPassword?token=" + token.getToken();
-		PasswordController.LOGGER.info("URL reset password : " + url2);
+        // si email dans BDD save token
+        ResetPassword token = new ResetPassword();
+        token.setToken( UUID.randomUUID().toString() );
+        token.setPro( pro );
+        token.setExpiryDate( 30 );
+        this.resetRepository.save( token );
 
-		// envoi email réinitialisation du password
-		String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
-				+ "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
-				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
+        // creation de URL reset password
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String url2 = url + "/password/proResetPassword?token=" + token.getToken();
+        PasswordController.LOGGER.info( "URL reset password : " + url2 );
 
-		this.emailService.sendEmail(pro.getProEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
+        // envoi email réinitialisation du password
+        String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
+                + "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+                + url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
-		PasswordController.LOGGER.info("Email envoyé au pro pour réinitialisation du mot de passe");
+        this.emailService.sendEmail( pro.getProEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text );
 
-		redirectAttributes.addFlashAttribute("msg", "ok");
-		return "redirect:/password/proForgotPassword";
+        PasswordController.LOGGER.info( "Email envoyé au pro pour réinitialisation du mot de passe" );
 
-	}
-	
-	// reset du password method get lorsquil click sur le lien recu par mail
-	@GetMapping("/password/clientResetPassword")
-	public String ResetPassword(@RequestParam(required = false) String token, Model model) {
+        redirectAttributes.addFlashAttribute( "msg", "ok" );
+        return "redirect:/password/proForgotPassword";
 
-		ResetPassword resetToken = this.resetRepository.findByToken(token);
+    }
 
-		// verifie si token existe
-		if (resetToken == null) {
-			System.out.println("Impossible de trouvez le TOKEN ...");
+    // reset du password method get lorsquil click sur le lien recu par mail
+    @GetMapping( "/password/clientResetPassword" )
+    public String ResetPassword( @RequestParam( required = false ) String token, Model model ) {
 
-			// verifie si token encore valide sur la durée de 30 minutes
-		} else if (resetToken.isExpired()) {
-			System.out.println("TOKEN expiré, refaite  un reset du mot de passe");
-		} else {
+        ResetPassword resetToken = this.resetRepository.findByToken( token );
 
-			// si token ok (existe et encore valide)
-			Integer id = resetToken.getClient().getId();
+        // verifie si token existe
+        if ( resetToken == null ) {
+            System.out.println( "Impossible de trouvez le TOKEN ..." );
 
-			Client client = this.clientService.findId(id)
-					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide n° : " + id));
-			PasswordController.LOGGER.info("Demande de réinitialisation du password par le client : "
-					+ client.getClientFirstname() + " " + client.getClientLastname());
-			model.addAttribute("client", client);
-		}
+            // verifie si token encore valide sur la durée de 30 minutes
+        } else if ( resetToken.isExpired() ) {
+            System.out.println( "TOKEN expiré, refaite  un reset du mot de passe" );
+        } else {
 
-		return "/password/clientResetPassword";
-	}
-	
-	@GetMapping("/password/proResetPassword")
-	public String proResetPassword(@RequestParam(required = false) String token, Model model) {
+            // si token ok (existe et encore valide)
+            Integer id = resetToken.getClient().getId();
 
-		ResetPassword resetToken = this.resetRepository.findByToken(token);
+            Client client = this.clientService.findId( id )
+                    .orElseThrow(
+                            () -> new IllegalArgumentException( "L' Id du particulier est invalide n° : " + id ) );
+            PasswordController.LOGGER.info( "Demande de réinitialisation du password par le client : "
+                    + client.getClientFirstname() + " " + client.getClientLastname() );
+            model.addAttribute( "client", client );
+        }
 
-		// verifie si token existe
-		if (resetToken == null) {
-			System.out.println("Impossible de trouver le TOKEN ...");
+        return "/password/clientResetPassword";
+    }
 
-			// verifie si token encore valide sur la durée de 30 minutes
-		} else if (resetToken.isExpired()) {
-			System.out.println("TOKEN expiré, veuillez refaire un reset du mot de passe");
-		} else {
+    @GetMapping( "/password/proResetPassword" )
+    public String proResetPassword( @RequestParam( required = false ) String token, Model model ) {
 
-			// si token ok (existe et encore valide)
-			Integer id = resetToken.getPro().getId();
+        ResetPassword resetToken = this.resetRepository.findByToken( token );
 
-			Pro pro = this.proService.findId(id)
-					.orElseThrow(() -> new IllegalArgumentException("L'id du pro est invalide n° : " + id));
-			PasswordController.LOGGER.info("Demande de réinitialisation du password par le pro : "
-					+ pro.getManagerFirstname() + " " + pro.getManagerLastname());
-			model.addAttribute("pro", pro);
-		}
+        // verifie si token existe
+        if ( resetToken == null ) {
+            System.out.println( "Impossible de trouver le TOKEN ..." );
 
-		return "/password/clientResetPassword";
-	}
+            // verifie si token encore valide sur la durée de 30 minutes
+        } else if ( resetToken.isExpired() ) {
+            System.out.println( "TOKEN expiré, veuillez refaire un reset du mot de passe" );
+        } else {
 
-	@PostMapping("/password/clientvalidresetpassword")
-	public String ValidResetPassword(@RequestParam("id") Integer id,
-			@RequestParam("clientPassword") String clientPassword,
-			@RequestParam("confirmPasswordInput") String confirmPasswordInput,
-			final RedirectAttributes redirectAttributes) {
+            // si token ok (existe et encore valide)
+            Integer id = resetToken.getPro().getId();
 
-		// verifie si les 2 mots de passe pareils
-		if (!clientPassword.equals(confirmPasswordInput)) {
-			redirectAttributes.addFlashAttribute("msg", "fail");
-			PasswordController.LOGGER.info("Les 2 mots de passe sont différents");
-			return "/password/clientResetPassword";
-		}
+            Pro pro = this.proService.findId( id )
+                    .orElseThrow( () -> new IllegalArgumentException( "L'id du pro est invalide n° : " + id ) );
+            PasswordController.LOGGER.info( "Demande de réinitialisation du password par le pro : "
+                    + pro.getManagerFirstname() + " " + pro.getManagerLastname() );
+            model.addAttribute( "pro", pro );
+        }
 
-		Client client = this.clientService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide n° : " + id));
+        return "/password/clientResetPassword";
+    }
 
-		String cryptPassword = this.passwordEncoder.encode(clientPassword);
-		client.setClientPassword(cryptPassword);
-		this.clientService.create(client);
+    @PostMapping( "/password/clientvalidresetpassword" )
+    public String ValidResetPassword( @RequestParam( "id" ) Integer id,
+            @RequestParam( "clientPassword" ) String clientPassword,
+            @RequestParam( "confirmPasswordInput" ) String confirmPasswordInput,
+            final RedirectAttributes redirectAttributes ) {
 
-		return "redirect:/";
-	}
+        // verifie si les 2 mots de passe pareils
+        if ( !clientPassword.equals( confirmPasswordInput ) ) {
+            redirectAttributes.addFlashAttribute( "msg", "fail" );
+            PasswordController.LOGGER.info( "Les 2 mots de passe sont différents" );
+            return "/password/clientResetPassword";
+        }
 
-	@PostMapping("/password/proValidResetPassword")
-	public String proValidResetPassword(@RequestParam("id") Integer id,
-			@RequestParam("proPassword") String proPassword,
-			@RequestParam("confirmPasswordInput") String confirmPasswordInput,
-			final RedirectAttributes redirectAttributes) {
+        Client client = this.clientService.findId( id )
+                .orElseThrow( () -> new IllegalArgumentException( "L' Id du particulier est invalide n° : " + id ) );
 
-		// verifie si les 2 mots de passe pareils
-		if (!proPassword.equals(confirmPasswordInput)) {
-			redirectAttributes.addFlashAttribute("msg", "fail");
-			PasswordController.LOGGER.info("Les 2 mots de passe sont différents");
-			return "/password/proResetPassword";
-		}
+        String cryptPassword = this.passwordEncoder.encode( clientPassword );
+        client.setClientPassword( cryptPassword );
+        this.clientService.create( client );
 
-		Pro pro = this.proService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du pro est invalide n° : " + id));
+        return "redirect:/";
+    }
 
-		String cryptPassword = this.passwordEncoder.encode(proPassword);
-		pro.setProPassword(cryptPassword);
-		this.proService.create(pro);
+    @PostMapping( "/password/proValidResetPassword" )
+    public String proValidResetPassword( @RequestParam( "id" ) Integer id,
+            @RequestParam( "proPassword" ) String proPassword,
+            @RequestParam( "confirmPasswordInput" ) String confirmPasswordInput,
+            final RedirectAttributes redirectAttributes ) {
 
-		return "redirect:/";
-	}
+        // verifie si les 2 mots de passe pareils
+        if ( !proPassword.equals( confirmPasswordInput ) ) {
+            redirectAttributes.addFlashAttribute( "msg", "fail" );
+            PasswordController.LOGGER.info( "Les 2 mots de passe sont différents" );
+            return "/password/proResetPassword";
+        }
+
+        Pro pro = this.proService.findId( id )
+                .orElseThrow( () -> new IllegalArgumentException( "L' Id du pro est invalide n° : " + id ) );
+
+        String cryptPassword = this.passwordEncoder.encode( proPassword );
+        pro.setProPassword( cryptPassword );
+        this.proService.create( pro );
+
+        return "redirect:/";
+    }
 }
