@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -24,76 +26,77 @@ public class Pro implements UserDetails {
     /**
      * 
      */
-    private static final long      serialVersionUID = 309196736745054629L;
+    private static final long serialVersionUID = 309196736745054629L;
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Integer                id;
+    private Integer           id;
 
     @NotBlank( message = "Entrez la raison sociale" )
     @Column( name = "company_name", length = 45, nullable = false )
-    private String                 companyName;
+    private String            companyName;
 
     @NotBlank( message = "Entrez le nom du gérant" )
     @Column( name = "manager_lastname", length = 45, nullable = false )
-    private String                 managerLastname;
+    private String            managerLastname;
 
     @NotBlank( message = "Entrez le prénom du gérant" )
     @Column( name = "manager_firstname", length = 45, nullable = false )
-    private String                 managerFirstname;
+    private String            managerFirstname;
 
     @Column( name = "pro_phone_number", length = 20 )
-    private String                 proPhoneNumber;
+    private String            proPhoneNumber;
 
     @NotBlank( message = "Entrez le Siret de la société" )
     @Column( name = "siret", length = 14, nullable = false )
-    private String                 siret;
+    private String            siret;
 
     @NotBlank( message = "Entrez votre email" )
     @Column( name = "pro_email_address", length = 45, nullable = false )
-    private String                 proEmailAddress;
+    private String            proEmailAddress;
 
     @NotBlank( message = "Entrez votre mot de passe" )
     @Column( name = "pro_password", nullable = false )
-    private String                 proPassword;
+    private String            proPassword;
 
     @Column( name = "pro_address" )
-    private String                 proAddress;
+    private String            proAddress;
 
     @NotBlank( message = "Entrez votre code postal" )
     @Column( name = "pro_postcode", length = 10, nullable = false )
-    private String                 proPostcode;
+    private String            proPostcode;
 
     @Column( name = "pro_city" )
-    private String                 proCity;
+    private String            proCity;
 
     @Column( name = "kbis" )
-    private Blob                   kbis;
+    private Blob              kbis;
 
     @Column( name = "logo" )
-    private Blob                   logo;
+    private Blob              logo;
 
     @Column( name = "activity_description" )
-    private String                 activityDescription;
+    private String            activityDescription;
 
     @Column( name = "identity_card" )
-    private Blob                   identityCard;
+    private Blob              identityCard;
 
     @Column( name = "staffing" )
-    private String                 staffing;
+    private String            staffing;
 
     @Column( name = "enabled" )
-    private boolean                enabled;
+    private boolean           enabled;
 
     // role
     @OneToOne
-    private Role                   role;
+    private Role              role;
 
     /**
     *
     */
-    @OneToMany( mappedBy = "pro" )
-    private List<ProHasProfession> listProProfessions;
+    @ManyToMany
+    @JoinTable( joinColumns = @JoinColumn( name = "pro_id" ), inverseJoinColumns = @JoinColumn( name = "profession_id" ) )
+    private List<Profession>  listProProfessions;
 
     /**
      * @return the role
@@ -245,11 +248,11 @@ public class Pro implements UserDetails {
         this.id = id;
     }
 
-    public List<ProHasProfession> getListProProfessions() {
+    public List<Profession> getListProProfessions() {
         return listProProfessions;
     }
 
-    public void setListProProfessions( List<ProHasProfession> listProProfessions ) {
+    public void setListProProfessions( List<Profession> listProProfessions ) {
         this.listProProfessions = listProProfessions;
     }
 

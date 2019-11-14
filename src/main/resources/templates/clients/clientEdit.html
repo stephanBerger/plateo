@@ -4,7 +4,7 @@
 </head>
 <body>
 
-	<header th:replace="public/headerblanck :: headerblanck"> </header>
+	<header th:replace="clients/headerdashboard :: headerdashboard"> </header>
 
 	<th:block
 		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
@@ -12,7 +12,7 @@
 	<!-- message -->
 	<div align="center" th:if="${msgok eq 'ok'}"
 		class="alert alert-success">
-		<strong>Modification du mot de passe réussi avec succés</strong>
+		<strong>Modification du mot de passe réussie avec succès</strong>
 	</div>
 	
 	<form action="#"

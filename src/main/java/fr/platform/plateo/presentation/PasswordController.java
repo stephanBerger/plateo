@@ -45,7 +45,7 @@ public class PasswordController {
 
     // formulaire forgot password method get
     @GetMapping( "/password/clientForgotPassword" )
-    public String ForgotPassword( Model model ) {
+    public String ForgotPassword() {
         return "/password/clientForgotPassword";
     }
 
@@ -100,6 +100,8 @@ public class PasswordController {
 
         // verif si email existe dans BDD
         Pro pro = this.proService.findEmail( email );
+        System.out.println( "test récup id pro : " + pro.getId() );
+
         if ( pro == null ) {
             PasswordController.LOGGER.info( "Adresse email inconnue" );
             redirectAttributes.addFlashAttribute( "msg", "fail" );
@@ -108,6 +110,7 @@ public class PasswordController {
 
         // si email dans BDD save token
         ResetPassword token = new ResetPassword();
+
         token.setToken( UUID.randomUUID().toString() );
         token.setPro( pro );
         token.setExpiryDate( 30 );

@@ -33,6 +33,8 @@
 
 								<button class="btn bgOrange" type="submit">Valider</button>
 								<br>
+								<a th:href="@{/password/clientForgotPassword}">Mot de passe oublié							
+								</a>
 
 								<div th:if="${param.error}" class="alert alert-danger"
 									role="alert">Utilisateur ou mot de passe incorrect</div>
@@ -49,6 +51,7 @@
 
 								<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
 							</a>
+							
 
 						</div>
 

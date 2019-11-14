@@ -56,6 +56,9 @@
 									placeholder="Saisir mot de passe">
 
 								<button class="btn bgOrange" type="submit">Valider</button><br>
+								
+								<a th:href="@{/password/proForgotPassword}">Mot de passe oublié							
+								</a>
 
 								<div th:if="${param.error}" class="alert alert-danger"
 									role="alert">Utilisateur ou mot de passe incorrect</div>
@@ -70,6 +73,7 @@
 							<a th:href="@{/public/proForm}">
 								<button class="btn btnPro btnWidthLong bgOrange">Créez un compte</button>
 							</a>
+							
 						</div>
 
 					</div>

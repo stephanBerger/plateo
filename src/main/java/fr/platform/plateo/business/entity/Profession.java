@@ -18,32 +18,26 @@ public class Profession implements Serializable {
     /**
      *
      */
-    private static final long      serialVersionUID = -2301537539869858022L;
+    private static final long serialVersionUID = -2301537539869858022L;
 
     /**
      *
      */
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Integer                id;
+    private Integer           id;
 
     @Column( name = "profession_name" )
-    private String                 name;
+    private String            name;
 
     @Column( name = "profession_code", length = 3, unique = true )
-    private String                 code;
+    private String            code;
 
     @Column( name = "profession_enabled" )
-    private Boolean                enabled;
+    private Boolean           enabled;
 
     @OneToMany( mappedBy = "profession" )
-    private List<Service>          services;
-
-    /**
-    *
-    */
-    @OneToMany( mappedBy = "profession" )
-    private List<ProHasProfession> listProProfessions;
+    private List<Service>     services;
 
     public Integer getId() {
         return this.id;
@@ -83,14 +77,6 @@ public class Profession implements Serializable {
 
     public void setServices( List<Service> services ) {
         this.services = services;
-    }
-
-    public List<ProHasProfession> getListProProfessions() {
-        return listProProfessions;
-    }
-
-    public void setListProProfessions( List<ProHasProfession> listProProfessions ) {
-        this.listProProfessions = listProProfessions;
     }
 
 }
