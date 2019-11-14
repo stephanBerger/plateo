@@ -43,13 +43,29 @@
 					</div>
 				</ul>
 			</nav>
-			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
-				<span class="nav-link d-inline-flex align-items-center p-2"
-					th:text="${#request.userPrincipal.principal.username}"></span>
-				<form th:action="@{/logout}" method="post"
-					class="form-inline my-2 my-lg-0">
-					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
-				</form>
+<!-- 			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}"> -->
+<!-- 				<span class="nav-link d-inline-flex align-items-center p-2" -->
+<!-- 					th:text="${#request.userPrincipal.principal.username}"></span> -->
+<!-- 				<form th:action="@{/logout}" method="post" -->
+<!-- 					class="form-inline my-2 my-lg-0"> -->
+<!-- 					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
+<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
+				<div>
+					<b>
+						<span>Bonjour,</span>
+						<br>
+						<span th:text="${client.clientLastname}" />
+						<span th:text="${client.clientFirstname}" />
+					</b>
+				</div>
+				<div>
+					<form th:action="@{/clients/logout}" method="post"
+						class="form-inline my-2 my-lg-0">
+						<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
+					</form>
+				</div>
 			</div>
 		</section>
 		<div class="sousMenu"></div>
