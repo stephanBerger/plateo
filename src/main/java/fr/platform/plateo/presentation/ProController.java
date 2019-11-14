@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.platform.plateo.business.entity.Pro;
+import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
+import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
 public class ProController {
@@ -28,6 +30,9 @@ public class ProController {
 	@Autowired
 	private ProService proService;
 
+	@Autowired
+	private ProfessionService professionService;
+
 	// login pro method get
 	@GetMapping("/pro/proLogin")
 	public String pageLoginProGet() {
@@ -37,7 +42,7 @@ public class ProController {
 
 	/*
 	 * // dashboard pro
-	 * 
+	 *
 	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
 	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
 	 * "/pro/proDashboard"; }
@@ -55,8 +60,10 @@ public class ProController {
 
 	// nouveau pro method get
 	@GetMapping("/public/proForm")
-	public String proForm(Pro pro) {
+	public String proForm(Pro pro, Model model) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
+		List<Profession> listProfessions = this.professionService.getAll();
+		model.addAttribute("listProfessions", listProfessions);
 		return "/public/proForm";
 	}
 
@@ -86,7 +93,8 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
+					+ confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
