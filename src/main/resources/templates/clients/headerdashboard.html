@@ -31,46 +31,46 @@
 					</li>
 					<div class="dropdown">
 						<li>
-							<a href=""  class="texteDropDown"> <!-- th:href="@{/public/registration}" -->
+							<a href="" class="texteDropDown"> <!-- th:href="@{/public/registration}" -->
 								<img th:src="@{/img/DEVIS.jpg}">
-								<p>Devis</p>
+								<span>Devis et factures</span>
 							</a>
 							<div class="dropdown-content">
-	     						<a th:href="@{/clients/estimateRequest}">DEMANDER UN DEVIS</a>
-	      						<a th:href="@{/pro/proDashboard}">MES DEVIS EN COURS</a>
-	    					</div>
-	    				</li>
-	    			</div>
+								<a th:href="@{/clients/estimateRequest}">Réaliser un devis</a>
+								<a th:href="@{/clients/clientDashboard}">Mes devis en cours</a>
+								<a th:href="@{/clients/clientDashboard}">Mes devis validés</a>
+								<a th:href="@{/clients/clientDashboard}">Mes factures</a>
+							</div>
+						</li>
+					</div>
 					<li>
 						<a href="">
-						<img th:src="@{/img/COEUR.jpg}">
-							<p>Mes factures</p>
-						</a>
-					</li>
-
-
-					<li><a th:href="@{/clients/clientEdit/{id}(id=${client.id})}">
-							<img th:src="@{/img/PROFIL.jpg}">
-							<p>Modifier mon profil</p>
+							<img th:src="@{/img/COEUR.jpg}">
+							<span>Mes Pro favoris</span>
 					</a></li>
+					<!-- ----------------MODIFS------------------- -->
+					<div class="dropdown" th:if="${#request.userPrincipal}">
+						<li>
+							<a href="" class="texteDropDown">
+								<img th:src="@{/img/PROFIL.jpg}">
+								<div>
+									<span class="textName" th:text="${client.clientLastname}" />
+									<span class="textName" th:text="${client.clientFirstname}" />
+								</div>
+							</a>
+							<div class="dropdown-content">
+								<a th:href="@{/clients/clientEdit/{id}(id=${client.id})}">
+									Modifier mon profil
+								</a>
+								<form th:action="@{/clients/logout}" method="post">
+									<button class="buttonFauxA" type="submit">Me déconnecter</button>
+								</form>
+							</div>
+						</li>
+					</div>
+					<!-- ----------------FIN MODIFS------------------- -->
 				</ul>
 			</nav>
-			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
-				<div>
-					<b>
-						<span>Bonjour,</span>
-						<br>
-						<span th:text="${client.clientLastname}" />
-						<span th:text="${client.clientFirstname}" />
-					</b>
-				</div>
-				<div>
-					<form th:action="@{/clients/logout}" method="post"
-						class="form-inline my-2 my-lg-0">
-						<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
-					</form>
-				</div>
-			</div>
 		</section>
 
 		<div class="sousMenu"></div>
