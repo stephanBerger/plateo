@@ -41,7 +41,7 @@ public class SecurityConfig {
 			http.antMatcher("/clients/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
 					.anyRequest().hasAuthority("CLIENT").and()
 
-					.formLogin().loginPage("/public/index").permitAll()
+					.formLogin().loginPage("/clients/clientLogin").permitAll()
 					.failureUrl("/clients/clientLogin?error=loginError").defaultSuccessUrl("/")
 					.usernameParameter("email").and()
 
@@ -72,9 +72,9 @@ public class SecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/pro/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.antMatchers("/public/**").permitAll().anyRequest().hasAuthority("PRO").and()
+					.anyRequest().hasAuthority("PRO").and()
 
-					.formLogin().loginPage("/").permitAll().failureUrl("/public/index?error=loginError")
+					.formLogin().loginPage("/pro/proLogin").permitAll().failureUrl("/pro/proLogin?error=loginError")
 					.defaultSuccessUrl("/").usernameParameter("email").and()
 
 					.logout().logoutUrl("/pro/logout").logoutSuccessUrl("/").permitAll();
