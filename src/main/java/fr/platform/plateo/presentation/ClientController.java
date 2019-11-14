@@ -137,8 +137,7 @@ public class ClientController {
 				+ "\n\nVotre incription a bien été prise en compte."
 				+ "\n\nPLATEO vous remercie de votre confiance.";
 
-		// emailService.sendEmail(client.getClientEmailAddress(), "PLATEO -
-		// INSCRIPTION", text);
+		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
 		ClientController.LOGGER.info("Email inscription envoyé");
 		return "/clients/clientValid";
 	}
