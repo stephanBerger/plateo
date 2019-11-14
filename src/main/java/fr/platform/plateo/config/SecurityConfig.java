@@ -41,7 +41,7 @@ public class SecurityConfig {
 			http.antMatcher("/clients/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
 					.anyRequest().hasAuthority("CLIENT").and()
 
-					.formLogin().loginPage("/public/index").permitAll()
+					.formLogin().loginPage("/clients/clientLogin").permitAll()
 					.failureUrl("/clients/clientLogin?error=loginError").defaultSuccessUrl("/")
 					.usernameParameter("email").and()
 
