@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head">
+</head>
+<body>
+	<header th:replace="public/header :: header"></header>
+	<div class="row text-center">
+		<div class="nameAdrCompa offset-4 col-4" style="test-align:center;">
+			<div class="CompanyName blue" th:text="${pro.companyName}">Nom de la société</div>
+			<div th:text="${fullAddress}">Adresse de la société</div>
+		</div>
+		<div class="demDev bgBlue offset-2 col-2 d-flex rounded m-3">Demander un devis</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-4">Images pro
+				<img th:src=*{photo}>
+				<form th:object="${pro}" th:action="@{/public/proAddPhoto/{id}(id=${pro.id})}" method="POST" enctype="multipart/form-data">
+				<label for="proPhotos">Sélectionner le fichier à envoyer</label>
+				<input type="file" id="proPhotos" th:field="*{proPhotos}" accept="image/png, image/jpeg" required>
+				<button>Envoyer</button>
+				<button onClick="this.form.reset()">Reset</button>
+				<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong>Veuillez ajouter une photo</strong>
+				</div>
+				</form>
+			</div>
+			<div class="col-3 offset-3"> 
+				<div class="border border-primary">Infos complémentaires</div> 
+				<div class="border border-info">Notes</div>
+			</div>
+		</div>
+	</div>
+</body>

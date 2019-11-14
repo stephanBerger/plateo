@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -20,7 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class Pro implements UserDetails {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 309196736745054629L;
 
@@ -79,10 +80,22 @@ public class Pro implements UserDetails {
 
 	@Column(name = "staffing")
 	private String staffing;
-	
+
 	@Column(name = "enabled")
 	private boolean enabled;
-	
+
+	@Column(name = "pro_photos")
+	@Lob
+	private byte[] proPhotos;
+
+	public byte[] getProPhotos() {
+		return this.proPhotos;
+	}
+
+	public void setProPhotos(byte[] proPhotos) {
+		this.proPhotos = proPhotos;
+	}
+
 	// role
 	@OneToOne
 	private Role role;
@@ -91,7 +104,7 @@ public class Pro implements UserDetails {
 	 * @return the role
 	 */
 	public Role getRole() {
-		return role;
+		return this.role;
 	}
 
 	/**
@@ -101,6 +114,7 @@ public class Pro implements UserDetails {
 		this.role = role;
 	}
 
+	@Override
 	public Collection<Role> getAuthorities() {
 		return Arrays.asList(this.role);
 	}
@@ -109,7 +123,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getCompanyName() {
-		return companyName;
+		return this.companyName;
 	}
 
 	public void setCompanyName(String companyName) {
@@ -117,7 +131,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getManagerLastname() {
-		return managerLastname;
+		return this.managerLastname;
 	}
 
 	public void setManagerLastname(String managerLastname) {
@@ -125,7 +139,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getManagerFirstname() {
-		return managerFirstname;
+		return this.managerFirstname;
 	}
 
 	public void setManagerFirstname(String managerFirstname) {
@@ -133,7 +147,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProPhoneNumber() {
-		return proPhoneNumber;
+		return this.proPhoneNumber;
 	}
 
 	public void setProPhoneNumber(String proPhoneNumber) {
@@ -141,7 +155,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getSiret() {
-		return siret;
+		return this.siret;
 	}
 
 	public void setSiret(String siret) {
@@ -149,7 +163,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProEmailAddress() {
-		return proEmailAddress;
+		return this.proEmailAddress;
 	}
 
 	public void setProEmailAddress(String proEmailAddress) {
@@ -157,7 +171,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProPassword() {
-		return proPassword;
+		return this.proPassword;
 	}
 
 	public void setProPassword(String proPassword) {
@@ -165,7 +179,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProAddress() {
-		return proAddress;
+		return this.proAddress;
 	}
 
 	public void setProAddress(String proAddress) {
@@ -173,7 +187,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProPostcode() {
-		return proPostcode;
+		return this.proPostcode;
 	}
 
 	public void setProPostcode(String proPostcode) {
@@ -181,7 +195,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getProCity() {
-		return proCity;
+		return this.proCity;
 	}
 
 	public void setProCity(String proCity) {
@@ -189,7 +203,7 @@ public class Pro implements UserDetails {
 	}
 
 	public Blob getKbis() {
-		return kbis;
+		return this.kbis;
 	}
 
 	public void setKbis(Blob kbis) {
@@ -197,7 +211,7 @@ public class Pro implements UserDetails {
 	}
 
 	public Blob getLogo() {
-		return logo;
+		return this.logo;
 	}
 
 	public void setLogo(Blob logo) {
@@ -205,7 +219,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getActivityDescription() {
-		return activityDescription;
+		return this.activityDescription;
 	}
 
 	public void setActivityDescription(String activityDescription) {
@@ -213,7 +227,7 @@ public class Pro implements UserDetails {
 	}
 
 	public Blob getIdentityCard() {
-		return identityCard;
+		return this.identityCard;
 	}
 
 	public void setIdentityCard(Blob identityCard) {
@@ -221,7 +235,7 @@ public class Pro implements UserDetails {
 	}
 
 	public String getStaffing() {
-		return staffing;
+		return this.staffing;
 	}
 
 	public void setStaffing(String staffing) {
@@ -229,7 +243,7 @@ public class Pro implements UserDetails {
 	}
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -271,6 +285,5 @@ public class Pro implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
 
 }

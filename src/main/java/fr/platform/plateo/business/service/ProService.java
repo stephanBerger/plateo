@@ -8,12 +8,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.persistence.ProRepository;
 
 /**
- * 
+ *
  */
 @Service
 public class ProService implements UserDetailsService {
@@ -23,7 +22,7 @@ public class ProService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Pro pro = proRepository.findOneByProEmailAddress(email);
+		Pro pro = this.proRepository.findOneByProEmailAddress(email);
 		return pro;
 	}
 
@@ -42,7 +41,7 @@ public class ProService implements UserDetailsService {
 	public void delete(Integer id) {
 		this.proRepository.deleteById(id);
 	}
-	
+
 	public Pro findEmail(String email) {
 		return this.proRepository.findOneByProEmailAddress(email);
 	}
