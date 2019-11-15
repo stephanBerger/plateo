@@ -8,20 +8,14 @@
 	<header th:replace="public/header :: header"></header>
 	
 	<section class="sectionNouvClient section100pour100 centrer">
-		
 		<div class="centrer carreBlanc">
-			<!--  <div>
-			<h2 class="white titre-formulaires ">Créez un compte</h2>
-		</div>-->
 			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/public/clientForm}" th:object="${client}" method="post">
-				
+					th:action="@{/public/clientForm}" th:object="${client}" method="post">
 				 <div>
 					<h2 class="blue titre-formulaires ">Créez un compte</h2>
 				</div>
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
-
 						<div class="form-group formIdentifier left">
 							<label for="clientLastname" class="col-form-label blue labelForm">Nom</label>
 

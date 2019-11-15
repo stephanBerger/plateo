@@ -18,23 +18,19 @@
 		<div class="divVide"></div>
 	</section>
 
-
-
-	<div class="modal fade" id="loginClientModal" data-keyboard="false"
-		data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content overFlowHidden">
-				<div class="bggreyClair headermodal">
-					<h3 class="white centrer">
-						<strong>PARTICULIER JEM</strong>
-					</h3>
-					<button type="button" class="close btnModal" data-dismiss="modal">
-						<span>&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="identifier-login centrer">
-
+	
+	
+	<div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >
+			<div class="modal-dialog">
+				<div class="modal-content overFlowHidden">
+					<div class="bggreyClair headermodal">
+						<h3 class="white centrer"><strong>PARTICULIER</strong></h3>
+						<button type="button" class="close btnModal" data-dismiss="modal">
+							<span>&times;</span>
+						</button>	
+					</div>
+					<div class="modal-body">
+						<div class="identifier-login centrer">
 						<h2 class="blue">Identifiez-vous</h2>
 
 						<form class="formIdentifier centrer" th:action="@{/clients/login}"
@@ -79,7 +75,7 @@
 			<div class="modal-content overFlowHidden">
 				<div class="bggreyClair headermodal">
 					<h3 class="white centrer">
-						<strong>PROFESSIONNEL JEM</strong>
+						<strong>PROFESSIONNEL</strong>
 					</h3>
 					<button type="button" class="close btnModal" data-dismiss="modal">
 						<span>&times;</span>
@@ -121,8 +117,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
+</div>
 	<footer th:replace="public/footer :: footer"></footer>
 
 
