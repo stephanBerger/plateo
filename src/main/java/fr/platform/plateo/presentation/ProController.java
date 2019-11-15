@@ -24,6 +24,7 @@ import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
+import fr.platform.plateo.business.service.EmailService;
 import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
@@ -39,6 +40,9 @@ public class ProController {
 	@Autowired
 	private ProService proService;
 
+	@Autowired
+	private EmailService emailService;
+
 	@GetMapping("/public/proProfile/{id}")
 	public String proProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
@@ -46,7 +50,8 @@ public class ProController {
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo",
+					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String> encodings = new ArrayList<>();
@@ -187,6 +192,15 @@ public class ProController {
 
 			this.LOGGER.info("Creation utlisateur PRO effectué");
 			this.proService.create(pro);
+
+			// envoi email inscription
+			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+					+ ","
+					+ "\n\nVotre incription a bien été prise en compte."
+					+ "\n\nPLATEO vous remercie de votre confiance.";
+
+			this.emailService.sendEmail(pro.getProEmailAddress(), "PLATEO - INSCRIPTION", text);
+
 			return "pro/proValid";
 
 		}
