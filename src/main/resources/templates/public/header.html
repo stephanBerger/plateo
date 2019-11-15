@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-
 <body>
 	<header th:fragment="header">
 		<div class="divimgHeader">
@@ -36,11 +35,14 @@
 							</span>
 							</a>
 							<div class="dropdown-content">
-								<a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
-								<a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
-						    	</div>
-						</li>
-					</div>
+	     						<a th:href="@{/clients/login}">PARTICULIER</a>
+								<a th:href="@{/pro/login}">PROFESSIONNEL</a>
+	    					</div>
+	    				</li>
+	    			</div>
+					
+						
+					
 				</ul>
 			</nav>
 			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
@@ -53,6 +55,15 @@
 			</div>
 		</section>
 		<div class="sousMenu"></div>
+		<script>
+			$(document).ready(() => {
+				if (document.location.href.indexOf('/clients') >= 0) {
+					$('#loginClientModal').modal({ show: true });
+				} else if (document.location.href.indexOf('/pro') >= 0) {
+					$('#loginProModal').modal({ show: true });
+				}
+			});
+		</script>
 	</header>
 </body>
 </html>

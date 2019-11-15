@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import fr.platform.plateo.business.service.ProService;
-
 /**
  *
  */
@@ -20,9 +18,10 @@ public class IndexController {
 	@Autowired
 	private Logger LOGGER;
 
-	@GetMapping("/")
+	@GetMapping({ "/", "/clients/login", "/pro/login" })
 	public String base() {
-		this.LOGGER.info("Une requête sur '/' est faite, la page 'index' est envoyée");
+		this.LOGGER.info(
+				"Une requête sur '/' est faite, la page 'index' est envoyée");
 		return "public/index";
 	}
 
@@ -39,15 +38,9 @@ public class IndexController {
 		return "public/clientRegistration";
 	}
 
-	
 	@GetMapping("/footer/qui_sommes_nous")
 	public String aboutUs() {
 		return "public/aboutUs";
 	}
-
-	/**
-	 *
-	 */
-	private ProService proServ;
 
 }
