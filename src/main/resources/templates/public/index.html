@@ -20,7 +20,7 @@
 
 	
 	
-	<!--<div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >
+	<div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >
 			<div class="modal-dialog">
 				<div class="modal-content overFlowHidden">
 					<div class="bggreyClair headermodal">
@@ -35,7 +35,7 @@
 							<h2 class="blue">Identifiez-vous</h2>
 
 							<form class="formIdentifier centrer"
-								th:action="@{/clients/clientLogin}" method="post">
+								th:action="@{/clients/login}" method="post">
 
 								<input type="email" name="email" class="champsFormulaire"
 									placeholder="Saisir adresse email" required>
@@ -84,7 +84,7 @@
 						<h2 class="blue">Identifiez-vous</h2>
 
 						<form class="formIdentifier centrer"
-								th:action="@{/pro/proDashboard}" th:object="${pro}" method="post" >
+								th:action="@{/pro/login}" th:object="${pro}" method="post" >
 
 							<input type="email" name="email" class="champsFormulaire"
 								placeholder="Saisir adresse email" required> <input
@@ -114,7 +114,7 @@
 			</div>
 		</div>
 </div>
-	-->
+	
 	<footer th:replace="public/footer :: footer"></footer>
 	
 			
