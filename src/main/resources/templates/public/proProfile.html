@@ -10,7 +10,11 @@
 		</div>
 		<div class="col-4">
 			<div class="blue h3" th:text="${pro.companyName}">Nom de la société</div>
-			<div th:text="${fullAddress}">Adresse de la société</div>
+			<div>
+			<span th:text="${pro.proAddress}">,</span>
+			<span th:text="${pro.proCity}"></span>
+			<span th:text="${pro.proPostcode}"></span>
+			</div>
 		</div>
 			<div class="bgBlue offset-2 col-2 rounded m-3 p-1">Demander un devis</div>
 	</div>
