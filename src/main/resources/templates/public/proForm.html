@@ -94,11 +94,11 @@
 						<div class="form-group formIdentifier left">
 							<label for="listProfession" class="col-form-label blue labelForm">Listes des corps d'états</label>
       							
-      							<select> 
-							       <option th:each="profession : ${listProfessions}" 
-							           th:value="${profession.name}" 
-							           th:text="${profession.name}"/> 
-						      </select>
+      							<div th:each="profession : ${listProfessions}">
+	<input type="checkbox" th:id="${{profession.id}}"
+th:value="${{profession}}" th:field="*{listProProfessions}" />
+	<label th:for="${{profession.id}}" th:text="${profession.name}">Cinema</label>
+</div>
 						</div>
 					</div>
 				</div>
@@ -112,10 +112,9 @@
 				
 				 
 				<div class="" id="passwordStrength"></div>
-				<!--<input type="submit" value="Change Password" class="btn"/>
+				<input type="submit" value="Change Password" class="btn"/>
 				<input type="submit" value="Envoyer"/>
-			 </fieldset>
-			</div>-->
+			
 			</form>
 		</div>
 	</section>
