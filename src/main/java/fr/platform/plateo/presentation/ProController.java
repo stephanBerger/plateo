@@ -24,11 +24,12 @@ import fr.platform.plateo.business.service.ProfessionService;
 @Controller
 public class ProController {
 
-	//private final static Logger LOGGER = LoggerFactory.getLogger(ProController.class);
+	// private final static Logger LOGGER =
+	// LoggerFactory.getLogger(ProController.class);
 
 	@Autowired
 	private Logger LOGGER;
-	
+
 	@Autowired
 	private ProService proService;
 
@@ -37,12 +38,12 @@ public class ProController {
 
 	/*
 	 * // dashboard pro
-	 * 
+	 *
 	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
 	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
 	 * "/pro/proDashboard"; }
 	 */
-	
+
 	// login pro method get
 	@GetMapping("/pro/proLogin")
 	public String pageLoginProGet() {
@@ -59,6 +60,17 @@ public class ProController {
 		return "/pro/proDashboard";
 	}
 	/*-----------FIN MODIF GREG-----------*/
+
+	// list pro method get
+	@GetMapping("/public/proList")
+	public String listPro(Model model) {
+		this.LOGGER.info("La page \"proList\" est demandée");
+		List<Pro> listPro = this.proService.readAll();
+
+		model.addAttribute("listPro", listPro);
+		// model.addAttribute( "listProProfessions", listProfessions );
+		return "public/proList";
+	}
 
 	// nouveau pro method get
 	@GetMapping("/public/proForm")
