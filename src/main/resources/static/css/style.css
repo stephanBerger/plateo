@@ -124,21 +124,36 @@ header{
     display: flex;
     justify-content: flex-end;
     font-size:1.2rem;
-}greyClair ul{
+}
+greyClair ul{
     list-style-type: none;
   }
-.menu li {
+  
+.textName{
+	font-size:1rem !important;
+} 
+  
+  
+.menu li, .menu .dropdown {
     display: flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     margin-right: 50px;
   } 
+  
+  .dropdown li{
+  	margin-right: 0px !important;
+  }
 .menu li a {
     text-decoration: none;
     color :#39424E !important;
     font-weight: 600;
-    text-align:center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .menu li a p {
 	margin-bottom:0;
@@ -154,6 +169,20 @@ header{
    margin:0;
    padding:0;
 }
+
+.buttonFauxA{
+	border: 0;
+    background-color: transparent;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 16px;
+    font-weight: 600;
+    width: 100%;
+}
+
+
+
 /*------------------SOUS MENU-----------------*/
 /* Dropdown container - needed to position the dropdown content */
 .dropdown {
@@ -167,7 +196,7 @@ header{
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+ /* padding: 14px 16px;*/
   background-color: inherit;
   font-family: inherit;
   margin: 0;
@@ -178,7 +207,7 @@ header{
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 200px;
   /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
   top:105px;
   z-index: 1;
@@ -201,7 +230,7 @@ header{
 }
 
 /* Add a grey background to dropdown links on hover */
-.dropdown-content a:hover {
+.dropdown-content a:hover, .buttonFauxA:hover {
   background-color: #ddd;
   color: black;
 }
@@ -314,16 +343,21 @@ header{
  .section100pour100{
  	min-height: calc(100% - 50px - 145px);
  }
+ .sectionNouvClient, .sectionNouvPro{
+	width:100%;
+	background-color:#e6e6e6;
+	background: no-repeat center url("../img/maison-en-travaux.jpg");
+	background-size: cover;
+  	overflow: hidden;
+  	margin: 0;
+  	padding: 0;
+  	position:absolute;
+  	flex-direction:column;
+  	justify-content:space-between;
+}
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
-	/*background-image: url("../img/img-index.jpg");*/
 	width:100%;
-	/*background-position: center;  */
-  /*	background-repeat: no-repeat;
-  	background-size: cover;*/
-  	/*overflow: hidden;*/
-  	overflow-x: hidden;
-  	overflow-y:scroll;
   	margin: 0;
   	padding: 0;
   	position:absolute;

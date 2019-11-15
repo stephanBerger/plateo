@@ -1,5 +1,6 @@
 package fr.platform.plateo.presentation;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,12 +35,23 @@ public class ProController {
         return "/pro/proLogin";
     }
 
-    // dashboard pro
-    @GetMapping( "/pro/proDashboard" )
-    public String proDashboard() {
-        this.LOGGER.info( "La page \"proDashboard\" est demandée" );
-        return "/pro/proDashboard";
-    }
+    /*
+	 * // dashboard pro
+	 * 
+	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
+	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
+	 * "/pro/proDashboard"; }
+	 */
+
+	/*-----------MODIF GREG-----------*/
+	@GetMapping("/pro/proDashboard")
+	public String proDashboard(Model model, Principal principal) {
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+		return "/pro/proDashboard";
+	}
+	/*-----------FIN MODIF GREG-----------*/
 
     // nouveau pro method get
     @GetMapping( "/public/proForm" )
@@ -59,83 +71,75 @@ public class ProController {
         return "public/proList";
     }
 
-    @PostMapping( "/public/proForm" )
-    public String save( @Valid Pro pro, BindingResult result,
-            @RequestParam( value = "confirmProPassword" ) String confirmPasswordInput ) {
-        pro.setSiret( pro.getSiret().replaceAll( "[^0-9]", "" ) );
-        if ( result.hasErrors() ) {
-            this.LOGGER.info(
-                    "Erreur dans le formulaire" + pro.getCompanyName() );
-            System.out.println( result.toString() );
-            return null;
+    @PostMapping("/public/proForm")
+	public String save(@Valid Pro pro, BindingResult result,
+			@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
+		pro.setSiret(pro.getSiret().replaceAll("[^0-9]", ""));
+		if (result.hasErrors()) {
+			this.LOGGER.info("Erreur dans le formulaire" + pro.getCompanyName());
+			System.out.println(result.toString());
+			return null;
 
-        } else if ( this.proService
-                .loadUserByUsername( pro.getProEmailAddress() ) != null ) {
-            this.LOGGER.info( "Utilisateur existe déjà " );
-            result.rejectValue( "proEmailAddress", null,
-                    "Cette adresse email est déjà utilisée." );
-            return null;
+		} else if (this.proService.loadUserByUsername(pro.getProEmailAddress()) != null) {
+			this.LOGGER.info("Utilisateur existe déjà ");
+			result.rejectValue("proEmailAddress", null, "Cette adresse email est déjà utilisée.");
+			return null;
 
-        } else if ( !confirmPasswordInput.equals( pro.getProPassword() ) ) {
-            this.LOGGER.info( "Les 2 passwords ne sont pas identiques "
-                    + confirmPasswordInput.toString() + " "
-                    + pro.getProPassword() );
-            result.rejectValue( "proPassword", null,
-                    "Les passwords ne sont pas identiques" );
-            return null;
-            // Test de la longueur du SIRET et test sur la validité du siren
-        } else if ( pro.getSiret().length() != 14 ) {
-            result.rejectValue( "siret", null,
-                    "Le Siret doit contenir 14 chiffres." );
-            return null;
+		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+					+ pro.getProPassword());
+			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
+			return null;
+			// Test de la longueur du SIRET et test sur la validité du siren
+		} else if (pro.getSiret().length() != 14) {
+			result.rejectValue("siret", null, "Le Siret doit contenir 14 chiffres.");
+			return null;
 
-        } else if ( pro.getSiret() != null ) {
+		} else if (pro.getSiret() != null) {
 
-            String[] siren = pro.getSiret().substring( 0, 9 ).split( "" );
-            int somme = 0;
-            int resultat = 0;
+			String[] siren = pro.getSiret().substring(0, 9).split("");
+			int somme = 0;
+			int resultat = 0;
 
-            for ( int i = 1; i <= siren.length; i++ ) {
-                if ( i % 2 != 0 ) {
-                    somme = Integer.parseInt( siren[i - 1] );
-                } else {
-                    somme = 2 * Integer.parseInt( siren[i - 1] );
-                    if ( somme >= 10 ) {
-                        somme = somme % 10 + somme / 10;
-                    }
-                }
-                resultat += somme;
-            }
+			for (int i = 1; i <= siren.length; i++) {
+				if (i % 2 != 0) {
+					somme = Integer.parseInt(siren[i - 1]);
+				} else {
+					somme = 2 * Integer.parseInt(siren[i - 1]);
+					if (somme >= 10) {
+						somme = somme % 10 + somme / 10;
+					}
+				}
+				resultat += somme;
+			}
 
-            if ( resultat % 10 != 0 ) {
-                this.LOGGER.info( "Le Siret n'est pas valide" );
-                // Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
-                // pas le cas !
-                // result.rejectValue("siret", null, "Le Siret n'est pas
-                // valide.");
-                // return null;
-            }
+			if (resultat % 10 != 0) {
+				this.LOGGER.info("Le Siret n'est pas valide");
+				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
+				// pas le cas !
+				 result.rejectValue("siret", null, "Le Siret n'est pas valide.");
+				 return null;
+			}
 
-            // si ok rajoute le client et redirect sur valid client
-            BCryptPasswordEncoder crypt = new BCryptPasswordEncoder( 4 );
-            String password = crypt.encode( pro.getProPassword() );
-            pro.setProPassword( password );
+			// si ok rajoute le client et redirect sur valid client
+			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+			String password = crypt.encode(pro.getProPassword());
+			pro.setProPassword(password);
 
-            // enabled a true
-            pro.setEnabled( true );
+			// enabled a true
+			pro.setEnabled(true);
 
-            // id du role PRO
-            Role role = new Role();
-            role.setId( 1 );
-            pro.setRole( role );
+			// id du role PRO
+			Role role = new Role();
+			role.setId(1);
+			pro.setRole(role);
 
-            this.LOGGER.info( "Creation utlisateur PRO effectué" );
-            this.proService.create( pro );
-            return "pro/proValid";
+			this.LOGGER.info("Creation utlisateur PRO effectué");
+			this.proService.create(pro);
+			return "pro/proValid";
 
-        }
-        return null;
+		}
+		return null;
 
-    }
-
+	}
 }

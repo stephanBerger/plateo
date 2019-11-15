@@ -1,6 +1,7 @@
 package fr.platform.plateo.presentation;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Client;
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.ProService;
 
 /**
  *
@@ -32,246 +35,228 @@ import fr.platform.plateo.business.service.EmailService;
 @Controller
 public class ClientController {
 
-    private final static Logger LOGGER = LoggerFactory
-            .getLogger( ClientController.class );
+	private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
 
-    @Autowired
-    private ClientService       clientService;
+	@Autowired
+	private ProService    proService;
+	
+	@Autowired
+	private ClientService clientService;
 
-    @Autowired
-    private EmailService        emailService;
+	@Autowired
+	private EmailService emailService;
 
-    // login client method get
-    @GetMapping( "/clients/clientLogin" )
-    public String pageLoginClientGet() {
-        ClientController.LOGGER.info( "La page login client est demandée" );
-        return "/clients/clientLogin";
-    }
+	// login client method get
+	@GetMapping("/clients/clientLogin")
+	public String pageLoginClientGet() {
+		ClientController.LOGGER.info("La page login client est demandée");
+		return "/clients/clientLogin";
+	}
 
-    // changement email client deconnexion obligatoire
-    @RequestMapping( "/exit" )
-    public String exit( HttpServletRequest request,
-            HttpServletResponse response ) {
-        new SecurityContextLogoutHandler().logout( request, null, null );
-        try {
-            // response.sendRedirect(request.getHeader("http://localhost:8080"));
-            return "redirect:/clients/clientDashboard";
-        } catch ( Exception e ) {
+	@GetMapping("/clients/proList")
+	public String listPro(Model model, Principal principal) {
+		ClientController.LOGGER.info("La page \"proList\" est demandée");
+		List<Pro> listPro = this.proService.readAll();
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+		model.addAttribute("listPro", listPro);
+		// model.addAttribute( "listProProfessions", listProfessions );
+		return "clients/proList";
+	}
 
-        }
-        return null;
-    }
+	// changement email client deconnexion obligatoire
+	@RequestMapping("/exit")
+	public String exit(HttpServletRequest request, HttpServletResponse response,
+			final RedirectAttributes redirectAttributes) {
+		new SecurityContextLogoutHandler().logout(request, null, null);
+		try {
+			redirectAttributes.addFlashAttribute("msg", "ok");
+			return "redirect:/clients/clientLogin";
+		} catch (Exception e) {
 
-    // dashboard client
-    @GetMapping( "/clients/clientDashboard" )
-    public String clientDashboard( Model model, Principal principal ) {
-        Client client = this.clientService.findEmail( principal.getName() );
-        model.addAttribute( "client", client );
-        ClientController.LOGGER.info(
-                "Authentification ok - redirect sur clientDashboard" );
-        return "/clients/clientDashboard";
-    }
+		}
+		return null;
+	}
 
-    // nouveau client method get
-    @GetMapping( "/public/clientForm" )
-    public String clientForm( Client client ) {
-        ClientController.LOGGER
-                .info( "La page \"clientForm\" est demandée" );
-        return "/public/clientForm";
-    }
+	// dashboard client
+	@GetMapping("/clients/clientDashboard")
+	public String clientDashboard(Model model, Principal principal) {
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+		ClientController.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+		return "/clients/clientDashboard";
+	}
 
-    // nouveau client method post - bouton valider du formulaire nouveau client
-    @PostMapping( "/public/clientForm" )
-    public String save( @Valid Client client, BindingResult result,
-            Model model, @RequestParam( value = "confirmPasswordInput" ) String confirmPasswordInput ) {
+	// nouveau client method get
+	@GetMapping("/public/clientForm")
+	public String clientForm(Client client) {
+		ClientController.LOGGER.info("La page \"clientForm\" est demandée");
+		return "/public/clientForm";
+	}
 
-        // verifie si l'adresse email est déja dans la BDD
-        Client existing = this.clientService
-                .findEmail( client.getClientEmailAddress() );
-        if ( existing != null ) {
-            result.rejectValue( "clientEmailAddress", null,
-                    "Cette adresse email est déja utilisée." );
-            ClientController.LOGGER.info( "Email existe déjà dans la BDD" );
-            return "/public/clientForm";
-        }
+	// nouveau client method post - bouton valider du formulaire nouveau client
+	@PostMapping("/public/clientForm")
+	public String save(@Valid Client client, BindingResult result, Model model,
+			@RequestParam(value = "confirmPasswordInput") String confirmPasswordInput) {
 
-        // verifie si les 2 mots de passe pareils
-        if ( !client.getClientPassword().equals( confirmPasswordInput ) ) {
-            result.rejectValue( "clientPassword", null,
-                    "Les 2 mots de passes ne correspondent pas" );
-            ClientController.LOGGER
-                    .info( "Les 2 mots de passe sont différents" );
-            return "/public/clientForm";
-        }
+		// verifie si l'adresse email est déja dans la BDD
+		Client existing = this.clientService.findEmail(client.getClientEmailAddress());
+		if (existing != null) {
+			result.rejectValue("clientEmailAddress", null, "Cette adresse email est déja utilisée.");
+			ClientController.LOGGER.info("Email existe déjà dans la BDD");
+			return "/public/clientForm";
+		}
 
-        if ( result.hasErrors() ) {
-            ClientController.LOGGER.info(
-                    "Erreur sur la page new_client" + result.toString() );
-            return "/public/clientForm";
-        }
+		// verifie si les 2 mots de passe pareils
+		if (!client.getClientPassword().equals(confirmPasswordInput)) {
+			result.rejectValue("clientPassword", null, "Les 2 mots de passes ne correspondent pas");
+			ClientController.LOGGER.info("Les 2 mots de passe sont différents");
+			return "/public/clientForm";
+		}
 
-        // si tout est ok on rajoute le client et redirect sur valid client
-        BCryptPasswordEncoder crypt = new BCryptPasswordEncoder( 4 );
-        String password = crypt.encode( client.getClientPassword() );
-        client.setClientPassword( password );
-        ClientController.LOGGER.info( "Cryptage du mot de passe OK" );
+		if (result.hasErrors()) {
+			ClientController.LOGGER.info("Erreur sur la page new_client" + result.toString());
+			return "/public/clientForm";
+		}
 
-        // enabled a true
-        client.setEnabled( true );
+		// si tout est ok on rajoute le client et redirect sur valid client
+		BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+		String password = crypt.encode(client.getClientPassword());
+		client.setClientPassword(password);
+		ClientController.LOGGER.info("Cryptage du mot de passe OK");
 
-        // id du role CLIENT
-        Role role = new Role();
-        role.setId( 2 );
-        client.setRole( role );
+		// enabled a true
+		client.setEnabled(true);
 
-        this.clientService.create( client );
-        ClientController.LOGGER.info( "Le client "
-                + client.getClientFirstname() + " "
-                + client.getClientLastname()
-                + " a été rajouté avec succés - redirect sur la page valid_client" );
+		// id du role CLIENT
+		Role role = new Role();
+		role.setId(2);
+		client.setRole(role);
 
-        // envoi email inscription
-        String text = "Bonjour " + client.getClientFirstname() + " "
-                + client.getClientLastname() + ","
-                + "\n\nVotre incription a bien été prise en compte."
-                + "\n\nPLATEO vous remercie de votre confiance.";
+		this.clientService.create(client);
+		ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+				+ " a été rajouté avec succés - redirect sur la page valid_client");
 
-        emailService.sendEmail( client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text );
-        ClientController.LOGGER.info( "Email inscription envoyé" );
-        return "/clients/clientValid";
-    }
+		// envoi email inscription
+		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
+				+ "\n\nVotre incription a bien été prise en compte." + "\n\nPLATEO vous remercie de votre confiance.";
 
-    @GetMapping( "public/delete/{id}" )
-    public String delete( @PathVariable Integer id ) {
-        this.clientService.delete( id );
-        return "/public/index";
-    }
+		emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
+		ClientController.LOGGER.info("Email inscription envoyé");
+		return "/clients/clientValid";
+	}
 
-    // modifier client
-    @GetMapping( "/clients/clientEdit/{id}" )
-    public String showUpdateClient( @PathVariable( "id" ) Integer id,
-            Model model ) {
-        Client client = this.clientService.findId( id )
-                .orElseThrow( () -> new IllegalArgumentException(
-                        "L' Id du particulier est invalide" ) );
-        model.addAttribute( "client", client );
-        ClientController.LOGGER
-                .info( "Le client " + client.getClientFirstname() + " "
-                        + client.getClientLastname()
-                        + " a demander la modification des ses infos" );
-        return "/clients/clientEdit";
-    }
+	@GetMapping("public/delete/{id}")
+	public String delete(@PathVariable Integer id) {
+		this.clientService.delete(id);
+		return "/public/index";
+	}
 
-    // bouton modifier du formulaire client
-    @PostMapping( "/clients/clientEdit/{id}" )
-    public String updateClient(
-            @RequestParam( value = "OldEmail" ) String OldEmail,
-            @PathVariable( "id" ) Integer id, @Valid Client client,
-            BindingResult result, Model model,
-            final RedirectAttributes redirectAttributes ) {
+	// modifier client
+	@GetMapping("/clients/clientEdit/{id}")
+	public String showUpdateClient(@PathVariable("id") Integer id, Model model) {
+		Client client = this.clientService.findId(id)
+				.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+		model.addAttribute("client", client);
+		ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+				+ " a demander la modification des ses infos");
+		return "/clients/clientEdit";
+	}
 
-        if ( !OldEmail.equals( client.getClientEmailAddress() ) ) {
-            // verifie si l'adresse email est déja dans la BDD
-            Client existing = this.clientService
-                    .findEmail( client.getClientEmailAddress() );
-            if ( existing != null ) {
-                // result.rejectValue("clientEmailAddress", null, "Cette adresse
-                // email est déja
-                // utilisée.");
-                ClientController.LOGGER
-                        .info( "Email existe déjà dans la BDD" );
-                redirectAttributes.addFlashAttribute( "msgfail", "fail" );
-                return "redirect:/clients/clientDashboard";
-            }
+	// bouton modifier du formulaire client
+	@PostMapping("/clients/clientEdit/{id}")
+	public String updateClient(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
+			@Valid Client client, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
-        }
-        if ( result.hasErrors() ) {
-            client.setId( id );
-            return "/clients/clientEdit";
-        }
+		if (!OldEmail.equals(client.getClientEmailAddress())) {
+			// verifie si l'adresse email est déja dans la BDD
+			Client existing = this.clientService.findEmail(client.getClientEmailAddress());
+			if (existing != null) {
+				// result.rejectValue("clientEmailAddress", null, "Cette adresse
+				// email est déja
+				// utilisée.");
+				ClientController.LOGGER.info("Email existe déjà dans la BDD");
+				redirectAttributes.addFlashAttribute("msgfail", "fail");
+				return "redirect:/clients/clientDashboard";
+			}
 
-        if ( client.getId() != null ) {
-            // enabled a true
-            client.setEnabled( true );
+		}
+		if (result.hasErrors()) {
+			client.setId(id);
+			return "/clients/clientEdit";
+		}
 
-            // id du role CLIENT
-            Role role = new Role();
-            role.setId( 2 );
-            client.setRole( role );
+		if (client.getId() != null) {
+			// enabled a true
+			client.setEnabled(true);
 
-            this.clientService.create( client );
-            redirectAttributes.addFlashAttribute( "msgok", "ok" );
-            ClientController.LOGGER
-                    .info( "Le client " + client.getClientFirstname() + " "
-                            + client.getClientLastname()
-                            + " a modifié sa fiche avec succés" );
+			// id du role CLIENT
+			Role role = new Role();
+			role.setId(2);
+			client.setRole(role);
 
-            if ( !OldEmail.equals( client.getClientEmailAddress() ) ) {
-                ClientController.LOGGER.info( "Le client "
-                        + client.getClientFirstname() + " "
-                        + client.getClientLastname()
-                        + " a modifié son email - deconnexion obligatoire" );
-                return "redirect:/exit";
-            }
-        }
-        return "redirect:/clients/clientDashboard";
-    }
+			this.clientService.create(client);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
+			ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+					+ " a modifié sa fiche avec succés");
 
-    // modification du mot de passe client method post
-    @PostMapping( "/clients/clientEditPassword" )
-    public String clientEditPasswordPost( Client client,
-            BindingResult result, Model model,
-            @RequestParam( value = "password" ) String password,
-            @RequestParam( value = "confirmpassword" ) String confirmpassword,
-            final RedirectAttributes redirectAttributes ) {
+			if (!OldEmail.equals(client.getClientEmailAddress())) {
+				ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " "
+						+ client.getClientLastname() + " a modifié son email - deconnexion obligatoire");
 
-        Integer id = client.getId();
+				return "redirect:/exit";
+			}
+		}
+		return "redirect:/clients/clientDashboard";
+	}
 
-        if ( !password.equals( confirmpassword ) ) {
-            // result.rejectValue("password", "Password KO");
-            model.addAttribute( "msg", "fail" );
-            model.addAttribute( "id", id );
-            // result.rejectValue("password", "Password KO");
-            return "/clients/clientEdit";
-        }
+	// modification du mot de passe client method post
+	@PostMapping("/clients/clientEditPassword")
+	public String clientEditPasswordPost(Client client, BindingResult result, Model model,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "confirmpassword") String confirmpassword,
+			final RedirectAttributes redirectAttributes) {
 
-        if ( result.hasErrors() ) {
-            model.addAttribute( "msg", "fail" );
-            model.addAttribute( "id", id );
-            // result.rejectValue("password", "Password KO");
-            return "/clients/clientEdit";
-        }
+		Integer id = client.getId();
 
-        if ( client.getId() != null ) {
-            Client client2 = this.clientService.findId( client.getId() )
-                    .orElseThrow( () -> new IllegalArgumentException(
-                            "L' Id du particulier est invalide" ) );
-            // si tout est ok on modifie le mot de passe
-            BCryptPasswordEncoder crypt = new BCryptPasswordEncoder( 4 );
-            String cryptpassword = crypt.encode( password );
-            client2.setClientPassword( cryptpassword );
-            ClientController.LOGGER.info( "Cryptage du mot de passe OK" );
+		if (!password.equals(confirmpassword)) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/clients/clientEdit";
+		}
 
-            this.clientService.create( client2 );
-            ClientController.LOGGER
-                    .info( "Le client " + client2.getClientFirstname() + " "
-                            + client2.getClientLastname()
-                            + " a modifié son mot de passe avec succés" );
-            model.addAttribute( "client", client );
-            redirectAttributes.addFlashAttribute( "msgok", "ok" );
+		if (result.hasErrors()) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/clients/clientEdit";
+		}
 
-        }
-        return "redirect:/clients/clientEdit/" + id;
+		if (client.getId() != null) {
+			Client client2 = this.clientService.findId(client.getId())
+					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+			// si tout est ok on modifie le mot de passe
+			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+			String cryptpassword = crypt.encode(password);
+			client2.setClientPassword(cryptpassword);
+			ClientController.LOGGER.info("Cryptage du mot de passe OK");
 
-    }
+			this.clientService.create(client2);
+			ClientController.LOGGER.info("Le client " + client2.getClientFirstname() + " " + client2.getClientLastname()
+					+ " a modifié son mot de passe avec succés");
+			model.addAttribute("client", client);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
 
-    /*
-     * // Test d'affichage de la liste des Clients
-     *
-     * @GetMapping("public/test") public String test() { List<Client> list =
-     * this.clientService.listClients(); for(Client client: list)
-     * System.out.println(client.getClientEmailAddress()); return
-     * "public/index"; }
-     */
+		}
+		return "redirect:/clients/clientEdit/" + id;
+
+	}
+
+	/*
+	 * // Test d'affichage de la liste des Clients
+	 *
+	 * @GetMapping("public/test") public String test() { List<Client> list =
+	 * this.clientService.listClients(); for(Client client: list)
+	 * System.out.println(client.getClientEmailAddress()); return "public/index"; }
+	 */
 
 }

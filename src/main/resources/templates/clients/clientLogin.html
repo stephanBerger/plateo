@@ -7,61 +7,70 @@
 <body>
 	<header th:replace="public/header :: header"></header>
 
-	<div th:fragment="clientlogin">
+	<section th:replace="public/index :: sectionIndex"></section>
 
-		<section th:replace="public/index :: sectionIndex"></section>
+	<div id="loginModal" class="modal fade" data-keyboard="false"
+		data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+		<!--  <div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >-->
 		
-		<div id="loginModal" class="modal fade" data-keyboard="false"
-			data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content overFlowHidden">
-					<div class="bggreyTresClair lineHeightLogin">
-						<h3 class="white centrer"><strong>PARTICULIER</strong></h3>
-					</div>
-					<div class="modal-body">
-						<div class="identifier-login centrer">
+		<div class="modal-dialog">
+			<div class="modal-content overFlowHidden">
+				
+				<div class="bggreyClair headermodal">
+					<h3 class="white centrer">
+						<strong>PARTICULIER</strong>
+					</h3>
 
-							<h2 class="blue">Identifiez-vous</h2>
+					<!-- <a th:href="@{/}">&times;</a> -->
+					<button type="button" class="close btnModal" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="identifier-login centrer">
 
-							<form class="formIdentifier centrer"
-								th:action="@{/clients/clientLogin}" method="post">
+						<h2 class="blue">Identifiez-vous</h2>
 
-								<input type="email" name="email" class="champsFormulaire"
-									placeholder="Saisir adresse email" required> <input
-									type="password" name="password" class="champsFormulaire"
-									placeholder="Saisir mot de passe" required>
+						<form class="formIdentifier centrer"
+							th:action="@{/clients/clientLogin}" method="post">
 
-								<button class="btn bgOrange" type="submit">Valider</button>
-								<br>
-								<a th:href="@{/password/clientForgotPassword}">Mot de passe oublié							
-								</a>
-
-								<div th:if="${param.error}" class="alert alert-danger"
-									role="alert">Utilisateur ou mot de passe incorrect</div>
-
-								<div th:if="${param.logout}" class="alert alert-success"
-									role="alert">Vous avez été déconnecté avec succès</div>
-
-
-							</form>
-
-							<h4 class="greyClair">‒ ou ‒</h4>
-
-							<a th:href="@{/public/clientForm}">
-
-								<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
-							</a>
+							<!-- message changement email client-->
+							<div align="center" th:if="${msg eq 'ok'}"
+								class="alert alert-success">
+								<strong>Vous avez modifié votre adresse email !!!</strong><br>
+								<strong>Vous devez vous reconnecter ...</strong><br>
+							</div>
 							
+							<input type="email" name="email" class="champsFormulaire"
+								placeholder="Saisir adresse email" required> <input
+								type="password" name="password" class="champsFormulaire"
+								placeholder="Saisir mot de passe" required>
 
-						</div>
+							<button class="btn bgOrange" type="submit">Valider</button>
+							<br> <a th:href="@{/password/clientForgotPassword}">Mot
+								de passe oublié </a>
+							<div th:if="${param.error}" class="alert alert-danger"
+								role="alert">Utilisateur ou mot de passe incorrect</div>
+
+							<div th:if="${param.logout}" class="alert alert-success"
+								role="alert">Vous avez été déconnecté avec succès</div>
+						</form>
+
+						<h4 class="greyClair">‒ ou ‒</h4>
+
+						<a th:href="@{/public/clientForm}">
+							<button class="btn btnPro btnWidthLong bgBlue">Créez un
+								compte</button>
+						</a>
 
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		$('#loginModal').modal('show');
+		$('#loginModal').modal('show')
 	</script>
 
 </body>
