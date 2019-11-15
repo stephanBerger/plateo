@@ -71,7 +71,7 @@ public class ClientController {
 		new SecurityContextLogoutHandler().logout(request, null, null);
 		try {
 			redirectAttributes.addFlashAttribute("msg", "ok");
-			return "redirect:/clients/clientLogin";
+			return "redirect:/clients/login";
 		} catch (Exception e) {
 
 		}
