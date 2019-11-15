@@ -2,18 +2,9 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	   <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.css"/>-->
+	    <link rel="stylesheet" type="text/css" th:href="@{/ListProDataTables/datatables.min.css}"/>
+		<script type="text/javascript" th:src="@{/ListProDataTables/datatables.min.js}"></script>
 
-        <link rel="stylesheet" type="text/css" th:href="@{/ListProDataTables/datatables.min.css}"/>
-    
-		<!--<script type="text/javascript" src="https://cdn.datatables.net/r/ju-1.11.4/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>-->
-
-        <script type="text/javascript" th:src="@{/ListProDataTables/datatables.min.js}"></script>
-
-        
-
-
-        
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#proList').dataTable();
@@ -23,8 +14,7 @@
 </head>
 
     <body>
-    <header th:replace="public/header :: header">-  
-    </header>
+    <header th:replace="public/header :: header"></header>
 
         <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
            <div class="plusProduits listPro">
