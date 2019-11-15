@@ -47,8 +47,10 @@ public class ProController {
 				pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
 
-		model.addAttribute("logo",
-				"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		if (pro.getLogo() != null) {
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
+
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
 			String encoding = "data:image/png;base64,"
