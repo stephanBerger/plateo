@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -35,13 +34,14 @@ import fr.platform.plateo.business.service.ProService;
 @Controller
 public class ClientController {
 
-	//private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
+	// private final static Logger LOGGER =
+	// LoggerFactory.getLogger(ClientController.class);
 	@Autowired
 	private Logger LOGGER;
-	
+
 	@Autowired
-	private ProService    proService;
-	
+	private ProService proService;
+
 	@Autowired
 	private ClientService clientService;
 
@@ -144,7 +144,7 @@ public class ClientController {
 		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
 				+ "\n\nVotre incription a bien été prise en compte." + "\n\nPLATEO vous remercie de votre confiance.";
 
-		emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
+		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
 		this.LOGGER.info("Email inscription envoyé");
 		return "/clients/clientValid";
 	}
@@ -204,8 +204,8 @@ public class ClientController {
 					+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(client.getClientEmailAddress())) {
-				this.LOGGER.info("Le client " + client.getClientFirstname() + " "
-						+ client.getClientLastname() + " a modifié son email - deconnexion obligatoire");
+				this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+						+ " a modifié son email - deconnexion obligatoire");
 
 				return "redirect:/exit";
 			}

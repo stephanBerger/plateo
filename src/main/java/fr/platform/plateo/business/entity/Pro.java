@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -75,7 +76,8 @@ public class Pro implements UserDetails {
 	private Blob kbis;
 
 	@Column(name = "logo")
-	private Blob logo;
+	@Lob
+	private byte[] logo;
 
 	@Column(name = "activity_description")
 	private String activityDescription;
@@ -225,11 +227,11 @@ public class Pro implements UserDetails {
 		this.kbis = kbis;
 	}
 
-	public Blob getLogo() {
+	public byte[] getLogo() {
 		return this.logo;
 	}
 
-	public void setLogo(Blob logo) {
+	public void setLogo(byte[] logo) {
 		this.logo = logo;
 	}
 

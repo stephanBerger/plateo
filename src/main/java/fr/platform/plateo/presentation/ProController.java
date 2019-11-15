@@ -1,8 +1,8 @@
 package fr.platform.plateo.presentation;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -46,6 +46,7 @@ public class ProController {
 		model.addAttribute("fullAddress", pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
 
+		model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
 			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());

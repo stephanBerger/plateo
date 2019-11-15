@@ -5,7 +5,10 @@
 <body>
 	<header th:replace="public/header :: header"></header>
 	<div class="row text-center border-top border-bottom pt-2 pb-2">
-		<div class="offset-4 col-4">
+		<div class="offset-3 col-1">
+			 <img th:src="${logo}" class="w-100">
+		</div>
+		<div class="col-4">
 			<div class="blue h3" th:text="${pro.companyName}">Nom de la société</div>
 			<div th:text="${fullAddress}">Adresse de la société</div>
 		</div>
