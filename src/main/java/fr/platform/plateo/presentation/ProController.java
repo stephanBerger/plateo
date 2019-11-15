@@ -43,7 +43,6 @@ public class ProController {
 	public String proProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
-		model.addAttribute("fullAddress", pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
