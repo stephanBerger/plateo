@@ -6,10 +6,14 @@
 </head>
 <body>
 
-	<header th:replace="clients/headerdashboard :: headerdashboard">	
-	
-	</header>
-	
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<th:block
+		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+	<!-- message -->
+	<div align="center" th:if="${msgok eq 'ok'}"
+		class="alert alert-success">
+		<strong>Modification du profil réussi avec succés</strong>
+	</div>
 	<h1>Super Dashboard Particulier</h1>
 	<footer th:replace="public/footer :: footer">
 	</footer>

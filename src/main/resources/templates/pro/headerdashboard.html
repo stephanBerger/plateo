@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 
-
 <body>
 	<header th:fragment="headerdashboard">
 		<div class="textedivimgHeader centrer white">PROFESSIONNEL</div>
@@ -16,9 +15,6 @@
 			
 		</div>
 
-
-
-
 		<section class="menu centrer">
 			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo"
 				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
@@ -27,32 +23,41 @@
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li><a href=""> <img th:src="@{/img/LOUPE.jpg}">
-							<p>Rechercher une</p>
-							<p>demande de devis</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
-							<p>Mes devis</p>
-							<p>en cours</p>
-					</a></li>
-					<li><a href=""> <img th:src="@{/img/COEUR.jpg}">
-							<p>Mes factures</p>
-					</a></li>
-
-					<li><a class="textIdentifier" href=""> <img
-							th:src="@{/img/PROFIL.jpg}">
-							<p>Modifier mon profil</p>
-					</a></li>
+					<div class="dropdown">
+						<li>
+							<a href="" class="texteDropDown"> <!-- th:href="@{/public/registration}" -->
+								<img th:src="@{/img/DEVIS.jpg}">
+								<span>Devis et factures</span>
+							</a>
+							<div class="dropdown-content">
+	     						<a th:href="@{/clients/estimateRequest}">Consulter des devis</a>
+	      						<a th:href="@{/clients/clientDashboard}">Mes devis en cours</a>
+	      						<a th:href="@{/clients/clientDashboard}">Mes devis validés</a>
+	      						<a th:href="@{/clients/clientDashboard}">Mes factures</a>
+	    					</div>
+	    				</li>
+	    			</div>
+					<div class="dropdown" th:if="${#request.userPrincipal}">
+						<li>
+							<a href="" class="texteDropDown">
+								<img th:src="@{/img/PROFIL.jpg}">
+								<div>
+									<span class="textName" th:text="${pro.managerLastname}"  />
+									<span class="textName" th:text="${pro.managerFirstname}" />
+								</div>
+							</a>
+							<div class="dropdown-content">
+								<a th:href="@{/pro/proEdit/{id}(id=${pro.id})}">Visualiser ma page</a>
+	     						<a th:href="@{/pro/proEdit/{id}(id=${pro.id})}">Modifier mon profil</a>
+								<form th:action="@{/pro/logout}" method="post">
+									<button class="buttonFauxA" type="submit">Me déconnecter</button>
+								</form>
+							</div>
+						</li>
+					</div>
+	    			<!-- ----------------FIN MODIFS------------------- -->
 				</ul>
 			</nav>
-			<div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
-				<span class="nav-link d-inline-flex align-items-center p-2"
-					th:text="${#request.userPrincipal.principal.username}"></span>
-				<form th:action="@{/pro/logout}" method="post"
-					class="form-inline my-2 my-lg-0">
-					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
-				</form>
-			</div>
 		</section>
 
 		<div class="sousMenu"></div>

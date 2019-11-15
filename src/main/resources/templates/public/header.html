@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-
 <body>
 	<header th:fragment="header">
 		<div class="divimgHeader">
@@ -22,29 +21,22 @@
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li>
-						<a th:href="@{/public/proList}">
-							<img th:src="@{/img/LOUPE.jpg}">
-							<p>Rechercher un Pro</p>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<img th:src="@{/img/DEVIS.jpg}">
-							<p>Demander un devis</p>
-						</a>
-					</li>
+					<li><a th:href="@{/public/proList}"> <img th:src="@{/img/LOUPE.jpg}">
+							<span>Rechercher un Pro</span>
+					</a></li>
+					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
+							<span>Demander un devis</span>
+					</a></li>
 					<div class="dropdown">
-						<li>
-							<a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
-								<img th:src="@{/img/PROFIL.jpg}">
-								<p>
-									S'identifier <br>ou s'inscrire
-								</p>
+						<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
+							<img th:src="@{/img/PROFIL.jpg}">
+							<span>
+								S'identifier <br>ou s'inscrire
+							</span>
 							</a>
 							<div class="dropdown-content">
 	     						<a th:href="@{/clients/clientDashboard}">PARTICULIER</a>
-	      						<a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
+								<a th:href="@{/pro/proDashboard}">PROFESSIONNEL</a>
 	    					</div>
 	    				</li>
 	    			</div>
@@ -62,8 +54,16 @@
 				</form>
 			</div>
 		</section>
-
 		<div class="sousMenu"></div>
+		<script>
+			$(document).ready(() => {
+				if (document.location.href.indexOf('/clients') >= 0) {
+					$('#loginClientModal').modal({ show: true });
+				} else if (document.location.href.indexOf('/pro') >= 0) {
+					$('#loginProModal').modal({ show: true });
+				}
+			});
+		</script>
 	</header>
 </body>
 </html>

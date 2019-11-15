@@ -1,5 +1,6 @@
 package fr.platform.plateo.business.entity;
 
+import fr.platform.plateo.business.entity.Role;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +21,7 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table( name = "pro" )
+@Table(name = "pro")
 public class Pro implements UserDetails {
 
     /**
@@ -89,7 +90,7 @@ public class Pro implements UserDetails {
 
     // role
     @OneToOne
-    private Role              role;
+    private Role role;
 
     /**
     *
@@ -98,155 +99,154 @@ public class Pro implements UserDetails {
     @JoinTable( joinColumns = @JoinColumn( name = "pro_id" ), inverseJoinColumns = @JoinColumn( name = "profession_id" ) )
     private List<Profession>  listProProfessions;
 
-    /**
-     * @return the role
-     */
-    public Role getRole() {
-        return role;
-    }
+	//@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
+	//private List<ProHasProfession> listProfessions;
 
-    /**
-     * @param role
-     *            the role to set
-     */
-    public void setRole( Role role ) {
-        this.role = role;
-    }
+	/**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return this.role;
+	}
 
-    public Collection<Role> getAuthorities() {
-        return Arrays.asList( this.role );
-    }
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
-    public Pro() {
-    }
+	@Override
+	public Collection<Role> getAuthorities() {
+		return Arrays.asList(this.role);
+	}
 
-    public String getCompanyName() {
-        return companyName;
-    }
+	public Pro() {
+	}
 
-    public void setCompanyName( String companyName ) {
-        this.companyName = companyName;
-    }
+	public String getCompanyName() {
+		return this.companyName;
+	}
 
-    public String getManagerLastname() {
-        return managerLastname;
-    }
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 
-    public void setManagerLastname( String managerLastname ) {
-        this.managerLastname = managerLastname;
-    }
+	public String getManagerLastname() {
+		return this.managerLastname;
+	}
 
-    public String getManagerFirstname() {
-        return managerFirstname;
-    }
+	public void setManagerLastname(String managerLastname) {
+		this.managerLastname = managerLastname;
+	}
 
-    public void setManagerFirstname( String managerFirstname ) {
-        this.managerFirstname = managerFirstname;
-    }
+	public String getManagerFirstname() {
+		return this.managerFirstname;
+	}
 
-    public String getProPhoneNumber() {
-        return proPhoneNumber;
-    }
+	public void setManagerFirstname(String managerFirstname) {
+		this.managerFirstname = managerFirstname;
+	}
 
-    public void setProPhoneNumber( String proPhoneNumber ) {
-        this.proPhoneNumber = proPhoneNumber;
-    }
+	public String getProPhoneNumber() {
+		return this.proPhoneNumber;
+	}
 
-    public String getSiret() {
-        return siret;
-    }
+	public void setProPhoneNumber(String proPhoneNumber) {
+		this.proPhoneNumber = proPhoneNumber;
+	}
 
-    public void setSiret( String siret ) {
-        this.siret = siret;
-    }
+	public String getSiret() {
+		return this.siret;
+	}
 
-    public String getProEmailAddress() {
-        return proEmailAddress;
-    }
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
-    public void setProEmailAddress( String proEmailAddress ) {
-        this.proEmailAddress = proEmailAddress.toLowerCase();
-    }
+	public String getProEmailAddress() {
+		return this.proEmailAddress;
+	}
 
-    public String getProPassword() {
-        return proPassword;
-    }
+	public void setProEmailAddress(String proEmailAddress) {
+		this.proEmailAddress = proEmailAddress.toLowerCase();
+	}
 
-    public void setProPassword( String proPassword ) {
-        this.proPassword = proPassword;
-    }
+	public String getProPassword() {
+		return this.proPassword;
+	}
 
-    public String getProAddress() {
-        return proAddress;
-    }
+	public void setProPassword(String proPassword) {
+		this.proPassword = proPassword;
+	}
 
-    public void setProAddress( String proAddress ) {
-        this.proAddress = proAddress;
-    }
+	public String getProAddress() {
+		return this.proAddress;
+	}
 
-    public String getProPostcode() {
-        return proPostcode;
-    }
+	public void setProAddress(String proAddress) {
+		this.proAddress = proAddress;
+	}
 
-    public void setProPostcode( String proPostcode ) {
-        this.proPostcode = proPostcode;
-    }
+	public String getProPostcode() {
+		return this.proPostcode;
+	}
 
-    public String getProCity() {
-        return proCity;
-    }
+	public void setProPostcode(String proPostcode) {
+		this.proPostcode = proPostcode;
+	}
 
-    public void setProCity( String proCity ) {
-        this.proCity = proCity;
-    }
+	public String getProCity() {
+		return this.proCity;
+	}
 
-    public Blob getKbis() {
-        return kbis;
-    }
+	public void setProCity(String proCity) {
+		this.proCity = proCity;
+	}
 
-    public void setKbis( Blob kbis ) {
-        this.kbis = kbis;
-    }
+	public Blob getKbis() {
+		return this.kbis;
+	}
 
-    public Blob getLogo() {
-        return logo;
-    }
+	public void setKbis(Blob kbis) {
+		this.kbis = kbis;
+	}
 
-    public void setLogo( Blob logo ) {
-        this.logo = logo;
-    }
+	public Blob getLogo() {
+		return this.logo;
+	}
 
-    public String getActivityDescription() {
-        return activityDescription;
-    }
+	public void setLogo(Blob logo) {
+		this.logo = logo;
+	}
 
-    public void setActivityDescription( String activityDescription ) {
-        this.activityDescription = activityDescription;
-    }
+	public String getActivityDescription() {
+		return this.activityDescription;
+	}
 
-    public Blob getIdentityCard() {
-        return identityCard;
-    }
+	public void setActivityDescription(String activityDescription) {
+		this.activityDescription = activityDescription;
+	}
 
-    public void setIdentityCard( Blob identityCard ) {
-        this.identityCard = identityCard;
-    }
+	public Blob getIdentityCard() {
+		return this.identityCard;
+	}
 
-    public String getStaffing() {
-        return staffing;
-    }
+	public void setIdentityCard(Blob identityCard) {
+		this.identityCard = identityCard;
+	}
 
-    public void setStaffing( String staffing ) {
-        this.staffing = staffing;
-    }
+	public String getStaffing() {
+		return this.staffing;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setStaffing(String staffing) {
+		this.staffing = staffing;
+	}
 
-    public void setId( Integer id ) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
     public List<Profession> getListProProfessions() {
         return listProProfessions;
@@ -256,44 +256,44 @@ public class Pro implements UserDetails {
         this.listProProfessions = listProProfessions;
     }
 
-    public void setEnabled( boolean enabled ) {
-        this.enabled = enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
-    @Override
-    public String getPassword() {
-        // TODO Auto-generated method stub
-        return this.proPassword;
-    }
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.proPassword;
+	}
 
-    @Override
-    public String getUsername() {
-        // TODO Auto-generated method stub
-        return this.proEmailAddress;
-    }
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.proEmailAddress;
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return true;
-    }
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }
