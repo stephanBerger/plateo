@@ -33,20 +33,30 @@ public class ProController {
 	@Autowired
 	private ProfessionService professionService;
 
-	// login pro method get
-	@GetMapping("/pro/proLogin")
-	public String pageLoginProGet() {
-		this.LOGGER.info("La page \"proLogin\" est demandée");
-		return "/pro/proLogin";
-	}
-
-	/*
+    /*
 	 * // dashboard pro
-	 *
+	 * 
 	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
 	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
 	 * "/pro/proDashboard"; }
 	 */
+
+	/*-----------MODIF GREG-----------*/
+	@GetMapping("/pro/proDashboard")
+	public String proDashboard(Model model, Principal principal) {
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+		return "/pro/proDashboard";
+	}
+	/*-----------FIN MODIF GREG-----------*/
+
+    // nouveau pro method get
+    @GetMapping( "/public/proForm" )
+    public String proForm( Pro pro ) {
+        this.LOGGER.info( "La page \"proForm\" est demandée" );
+        return "/public/proForm";
+    }
 
 	/*-----------MODIF GREG-----------*/
 	@GetMapping("/pro/proDashboard")
@@ -67,18 +77,7 @@ public class ProController {
 		return "/public/proForm";
 	}
 
-	// list pro method get
-	@GetMapping("/public/proList")
-	public String listPro(Model model) {
-		this.LOGGER.info("La page \"proList\" est demandée");
-		List<Pro> listPro = this.proService.readAll();
-
-		model.addAttribute("listPro", listPro);
-		// model.addAttribute( "listProProfessions", listProfessions );
-		return "public/proList";
-	}
-
-	@PostMapping("/public/proForm")
+    @PostMapping("/public/proForm")
 	public String save(@Valid Pro pro, BindingResult result,
 			@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
 		pro.setSiret(pro.getSiret().replaceAll("[^0-9]", ""));
@@ -93,8 +92,7 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
-					+ confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
@@ -125,9 +123,8 @@ public class ProController {
 				this.LOGGER.info("Le Siret n'est pas valide");
 				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
 				// pas le cas !
-				// result.rejectValue("siret", null, "Le Siret n'est pas
-				// valide.");
-				// return null;
+				 result.rejectValue("siret", null, "Le Siret n'est pas valide.");
+				 return null;
 			}
 
 			// si ok rajoute le client et redirect sur valid client
@@ -151,5 +148,4 @@ public class ProController {
 		return null;
 
 	}
-
 }

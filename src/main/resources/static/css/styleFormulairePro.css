@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+.carreBlanc{
+	margin:0;
+	padding:0;
+	background-color: white;
+	box-shadow: 0px 0px 15px 0px #bdbdbd;
+	
+	align-items:flex-start !important;
+	flex-grow: 1;
+}
+.divVide{
+	height:0px;
+}
+ .sectionForm{
+ 	display:flex;
+ 	flex-direction:row;
+ 	justify-content:flex-start;
+ 	align-items:flex-start;
+ }
+ .changePassword{
+ 	line-height:2;
+ 	font-size: 1.2rem;
+    font-weight: 500;
+    /*margin-left :50px;*/
+ }
+ .sectionButton{
+ 	display:flex;
+ 	flex-direction:column;
+ }
+ .formIdentifier label{
+ 	padding-left:10px;
+ }
+ .formIdentifierLeft, .formIdentifierRight{
+ 	padding-left:20px;
+ 	padding-right:20px;
+ }
+ .MarginClient{
+ 	margin-left:40px;
+ 	margin-right:40px;
+ }
+ input, select.champsFormulaire {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:5px !important;
+} 
+ 
+ /*---------------------------------------MEDIA QUERYS-------------------------------*/   
+ 
+  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */ 
+  @media screen and (max-width: 1440px) {
+/*---------------MODIF FORMULAIRES----------------*/ 
+
+	 .sectionFormPro{
+	 	padding-top:20px;
+	 }
+}
+  
+  
+ 
+ 
+ 
+  

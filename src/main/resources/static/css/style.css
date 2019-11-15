@@ -343,6 +343,18 @@ greyClair ul{
  .section100pour100{
  	min-height: calc(100% - 50px - 145px);
  }
+ .sectionNouvClient, .sectionNouvPro{
+	width:100%;
+	background-color:#e6e6e6;
+	background: no-repeat center url("../img/maison-en-travaux.jpg");
+	background-size: cover;
+  	overflow: hidden;
+  	margin: 0;
+  	padding: 0;
+  	position:absolute;
+  	flex-direction:column;
+  	justify-content:space-between;
+}
 /*-----------------------------IDENTIFICATION-----------------------------------------*/  
 .sectionIdentifier{
 	width:100%;

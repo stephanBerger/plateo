@@ -39,6 +39,7 @@ public class ClientController {
 
 	@Autowired
 	private ProService    proService;
+	
 	@Autowired
 	private ClientService clientService;
 
@@ -66,11 +67,12 @@ public class ClientController {
 
 	// changement email client deconnexion obligatoire
 	@RequestMapping("/exit")
-	public String exit(HttpServletRequest request, HttpServletResponse response) {
+	public String exit(HttpServletRequest request, HttpServletResponse response,
+			final RedirectAttributes redirectAttributes) {
 		new SecurityContextLogoutHandler().logout(request, null, null);
 		try {
-			// response.sendRedirect(request.getHeader("http://localhost:8080"));
-			return "redirect:/clients/clientDashboard";
+			redirectAttributes.addFlashAttribute("msg", "ok");
+			return "redirect:/clients/clientLogin";
 		} catch (Exception e) {
 
 		}
@@ -140,8 +142,7 @@ public class ClientController {
 		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
 				+ "\n\nVotre incription a bien été prise en compte." + "\n\nPLATEO vous remercie de votre confiance.";
 
-		// emailService.sendEmail(client.getClientEmailAddress(), "PLATEO -
-		// INSCRIPTION", text);
+		emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
 		ClientController.LOGGER.info("Email inscription envoyé");
 		return "/clients/clientValid";
 	}
@@ -172,7 +173,8 @@ public class ClientController {
 			// verifie si l'adresse email est déja dans la BDD
 			Client existing = this.clientService.findEmail(client.getClientEmailAddress());
 			if (existing != null) {
-				// result.rejectValue("clientEmailAddress", null, "Cette adresse email est déja
+				// result.rejectValue("clientEmailAddress", null, "Cette adresse
+				// email est déja
 				// utilisée.");
 				ClientController.LOGGER.info("Email existe déjà dans la BDD");
 				redirectAttributes.addFlashAttribute("msgfail", "fail");
@@ -202,6 +204,7 @@ public class ClientController {
 			if (!OldEmail.equals(client.getClientEmailAddress())) {
 				ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " "
 						+ client.getClientLastname() + " a modifié son email - deconnexion obligatoire");
+
 				return "redirect:/exit";
 			}
 		}
@@ -218,17 +221,14 @@ public class ClientController {
 		Integer id = client.getId();
 
 		if (!password.equals(confirmpassword)) {
-			// result.rejectValue("password", "Password KO");
 			model.addAttribute("msg", "fail");
 			model.addAttribute("id", id);
-			// result.rejectValue("password", "Password KO");
 			return "/clients/clientEdit";
 		}
 
 		if (result.hasErrors()) {
 			model.addAttribute("msg", "fail");
 			model.addAttribute("id", id);
-			// result.rejectValue("password", "Password KO");
 			return "/clients/clientEdit";
 		}
 

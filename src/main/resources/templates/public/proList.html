@@ -34,7 +34,7 @@
         	      <td scope="row" th:text="${pro.companyName}"><a th:href="@{/}"></a></td>
         	      <td th:text="${pro.proCity}"></td>
         	      <td th:text="${pro.proPostcode}"></td>
-        	      <td th:text="${pro.listProProfessions}">       	      
+        	      <td><span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
         	      </td>
         	      <td th:text="${pro.siret}"></td>
         	    </tr>

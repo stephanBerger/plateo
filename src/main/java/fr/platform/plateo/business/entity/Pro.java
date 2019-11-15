@@ -11,7 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -22,76 +24,80 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "pro")
 public class Pro implements UserDetails {
 
-	private static final long serialVersionUID = 309196736745054629L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 309196736745054629L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private Integer           id;
 
-	@NotBlank(message = "Entrez la raison sociale")
-	@Column(name = "company_name", length = 45, nullable = false)
-	private String companyName;
+    @NotBlank( message = "Entrez la raison sociale" )
+    @Column( name = "company_name", length = 45, nullable = false )
+    private String            companyName;
 
-	@NotBlank(message = "Entrez le nom du gérant")
-	@Column(name = "manager_lastname", length = 45, nullable = false)
-	private String managerLastname;
+    @NotBlank( message = "Entrez le nom du gérant" )
+    @Column( name = "manager_lastname", length = 45, nullable = false )
+    private String            managerLastname;
 
-	@NotBlank(message = "Entrez le prénom du gérant")
-	@Column(name = "manager_firstname", length = 45, nullable = false)
-	private String managerFirstname;
+    @NotBlank( message = "Entrez le prénom du gérant" )
+    @Column( name = "manager_firstname", length = 45, nullable = false )
+    private String            managerFirstname;
 
-	@Column(name = "pro_phone_number", length = 20)
-	private String proPhoneNumber;
+    @Column( name = "pro_phone_number", length = 20 )
+    private String            proPhoneNumber;
 
-	@NotBlank(message = "Entrez le Siret de la société")
-	@Column(name = "siret", length = 14, nullable = false)
-	private String siret;
+    @NotBlank( message = "Entrez le Siret de la société" )
+    @Column( name = "siret", length = 14, nullable = false )
+    private String            siret;
 
-	@NotBlank(message = "Entrez votre email")
-	@Column(name = "pro_email_address", length = 45, nullable = false)
-	private String proEmailAddress;
+    @NotBlank( message = "Entrez votre email" )
+    @Column( name = "pro_email_address", length = 45, nullable = false )
+    private String            proEmailAddress;
 
-	@NotBlank(message = "Entrez votre mot de passe")
-	@Column(name = "pro_password", nullable = false)
-	private String proPassword;
+    @NotBlank( message = "Entrez votre mot de passe" )
+    @Column( name = "pro_password", nullable = false )
+    private String            proPassword;
 
-	@Column(name = "pro_address")
-	private String proAddress;
+    @Column( name = "pro_address" )
+    private String            proAddress;
 
-	@NotBlank(message = "Entrez votre code postal")
-	@Column(name = "pro_postcode", length = 10, nullable = false)
-	private String proPostcode;
+    @NotBlank( message = "Entrez votre code postal" )
+    @Column( name = "pro_postcode", length = 10, nullable = false )
+    private String            proPostcode;
 
-	@Column(name = "pro_city")
-	private String proCity;
+    @Column( name = "pro_city" )
+    private String            proCity;
 
-	@Column(name = "kbis")
-	private Blob kbis;
+    @Column( name = "kbis" )
+    private Blob              kbis;
 
-	@Column(name = "logo")
-	private Blob logo;
+    @Column( name = "logo" )
+    private Blob              logo;
 
-	@Column(name = "activity_description")
-	private String activityDescription;
+    @Column( name = "activity_description" )
+    private String            activityDescription;
 
-	@Column(name = "identity_card")
-	private Blob identityCard;
+    @Column( name = "identity_card" )
+    private Blob              identityCard;
 
-	@Column(name = "staffing")
-	private String staffing;
+    @Column( name = "staffing" )
+    private String            staffing;
 
-	@Column(name = "enabled")
-	private boolean enabled;
+    @Column( name = "enabled" )
+    private boolean           enabled;
 
-	// role
-	@OneToOne
-	private Role role;
+    // role
+    @OneToOne
+    private Role              role;
 
-	/**
-	*
-	*/
-	@OneToMany(mappedBy = "pro")
-	private List<ProHasProfession> listProProfessions;
+    /**
+    *
+    */
+    @ManyToMany
+    @JoinTable( joinColumns = @JoinColumn( name = "pro_id" ), inverseJoinColumns = @JoinColumn( name = "profession_id" ) )
+    private List<Profession>  listProProfessions;
 
 	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
 	private List<ProHasProfession> listProfessions;
@@ -242,13 +248,13 @@ public class Pro implements UserDetails {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public List<Profession> getListProProfessions() {
+        return listProProfessions;
+    }
 
-	public List<ProHasProfession> getListProProfessions() {
-		return this.listProProfessions;
-	}
+    public void setListProProfessions( List<Profession> listProProfessions ) {
+        this.listProProfessions = listProProfessions;
+    }
 
 	public void setListProProfessions(List<ProHasProfession> listProProfessions) {
 		this.listProProfessions = listProProfessions;

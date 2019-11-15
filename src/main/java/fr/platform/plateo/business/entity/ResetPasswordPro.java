@@ -5,12 +5,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-@Table( name = "resetpassword" )
-public class ResetPassword {
+@Table( name = "resetpasswordpro" )
+public class ResetPasswordPro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, unique = true)
     private String token;
@@ -18,18 +18,16 @@ public class ResetPassword {
     @Column(nullable = false)
     private Date expiryDate;
     
-    @OneToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = Pro.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
    
-    private Client client;
-    
     private Pro pro;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,12 +39,12 @@ public class ResetPassword {
         this.token = token;
     }
 
-    public Client getClient() {
-        return client;
+    public Pro getPro() {
+        return pro;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setPro(Pro pro) {
+        this.pro = pro;
     }
 
     public Date getExpiryDate() {
@@ -66,14 +64,5 @@ public class ResetPassword {
     public boolean isExpired() {
         return new Date().after(this.expiryDate);
     }
-
-	public Pro getPro() {
-		return pro;
-	}
-
-	public void setPro(Pro pro) {
-		this.pro = pro;
-	}
-
 
 }
