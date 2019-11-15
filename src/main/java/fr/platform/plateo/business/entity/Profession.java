@@ -42,12 +42,6 @@ public class Profession implements Serializable {
 	@OneToMany(mappedBy = "profession")
 	private List<Service> services;
 
-	/**
-	*
-	*/
-	@OneToMany(mappedBy = "profession")
-	private List<ProHasProfession> listProProfessions;
-
 	public Integer getId() {
 		return this.id;
 	}
@@ -87,13 +81,4 @@ public class Profession implements Serializable {
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
-
-	public List<ProHasProfession> getListProProfessions() {
-		return this.listProProfessions;
-	}
-
-	public void setListProProfessions(List<ProHasProfession> listProProfessions) {
-		this.listProProfessions = listProProfessions;
-	}
-
 }

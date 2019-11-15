@@ -1,11 +1,11 @@
 package fr.platform.plateo.business.entity;
 
+import fr.platform.plateo.business.entity.Role;
 import java.sql.Blob;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,7 +90,7 @@ public class Pro implements UserDetails {
 
     // role
     @OneToOne
-    private Role              role;
+    private Role role;
 
     /**
     *
@@ -99,8 +99,8 @@ public class Pro implements UserDetails {
     @JoinTable( joinColumns = @JoinColumn( name = "pro_id" ), inverseJoinColumns = @JoinColumn( name = "profession_id" ) )
     private List<Profession>  listProProfessions;
 
-	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
-	private List<ProHasProfession> listProfessions;
+	//@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
+	//private List<ProHasProfession> listProfessions;
 
 	/**
 	 * @return the role
@@ -255,10 +255,6 @@ public class Pro implements UserDetails {
     public void setListProProfessions( List<Profession> listProProfessions ) {
         this.listProProfessions = listProProfessions;
     }
-
-	public void setListProProfessions(List<ProHasProfession> listProProfessions) {
-		this.listProProfessions = listProProfessions;
-	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;

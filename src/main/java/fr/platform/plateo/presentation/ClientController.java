@@ -35,8 +35,10 @@ import fr.platform.plateo.business.service.ProService;
 @Controller
 public class ClientController {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
-
+	//private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
+	@Autowired
+	private Logger LOGGER;
+	
 	@Autowired
 	private ProService    proService;
 	
@@ -50,13 +52,13 @@ public class ClientController {
 
 	@GetMapping("/clients/clientLogin")
 	public String pageLoginClientGet() {
-		ClientController.LOGGER.info("La page login client est demandée");
+		this.LOGGER.info("La page login client est demandée");
 		return "/clients/clientLogin";
 	}
 
 	@GetMapping("/clients/proList")
 	public String listPro(Model model, Principal principal) {
-		ClientController.LOGGER.info("La page \"proList\" est demandée");
+		this.LOGGER.info("La page \"proList\" est demandée");
 		List<Pro> listPro = this.proService.readAll();
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
@@ -84,14 +86,14 @@ public class ClientController {
 	public String clientDashboard(Model model, Principal principal) {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		ClientController.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
 		return "/clients/clientDashboard";
 	}
 
 	// nouveau client method get
 	@GetMapping("/public/clientForm")
 	public String clientForm(Client client) {
-		ClientController.LOGGER.info("La page \"clientForm\" est demandée");
+		this.LOGGER.info("La page \"clientForm\" est demandée");
 		return "/public/clientForm";
 	}
 
@@ -104,19 +106,19 @@ public class ClientController {
 		Client existing = this.clientService.findEmail(client.getClientEmailAddress());
 		if (existing != null) {
 			result.rejectValue("clientEmailAddress", null, "Cette adresse email est déja utilisée.");
-			ClientController.LOGGER.info("Email existe déjà dans la BDD");
+			this.LOGGER.info("Email existe déjà dans la BDD");
 			return "/public/clientForm";
 		}
 
 		// verifie si les 2 mots de passe pareils
 		if (!client.getClientPassword().equals(confirmPasswordInput)) {
 			result.rejectValue("clientPassword", null, "Les 2 mots de passes ne correspondent pas");
-			ClientController.LOGGER.info("Les 2 mots de passe sont différents");
+			this.LOGGER.info("Les 2 mots de passe sont différents");
 			return "/public/clientForm";
 		}
 
 		if (result.hasErrors()) {
-			ClientController.LOGGER.info("Erreur sur la page new_client" + result.toString());
+			this.LOGGER.info("Erreur sur la page new_client" + result.toString());
 			return "/public/clientForm";
 		}
 
@@ -124,7 +126,7 @@ public class ClientController {
 		BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 		String password = crypt.encode(client.getClientPassword());
 		client.setClientPassword(password);
-		ClientController.LOGGER.info("Cryptage du mot de passe OK");
+		this.LOGGER.info("Cryptage du mot de passe OK");
 
 		// enabled a true
 		client.setEnabled(true);
@@ -135,7 +137,7 @@ public class ClientController {
 		client.setRole(role);
 
 		this.clientService.create(client);
-		ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+		this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 				+ " a été rajouté avec succés - redirect sur la page valid_client");
 
 		// envoi email inscription
@@ -143,7 +145,7 @@ public class ClientController {
 				+ "\n\nVotre incription a bien été prise en compte." + "\n\nPLATEO vous remercie de votre confiance.";
 
 		emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
-		ClientController.LOGGER.info("Email inscription envoyé");
+		this.LOGGER.info("Email inscription envoyé");
 		return "/clients/clientValid";
 	}
 
@@ -159,7 +161,7 @@ public class ClientController {
 		Client client = this.clientService.findId(id)
 				.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
 		model.addAttribute("client", client);
-		ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+		this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 				+ " a demander la modification des ses infos");
 		return "/clients/clientEdit";
 	}
@@ -176,7 +178,7 @@ public class ClientController {
 				// result.rejectValue("clientEmailAddress", null, "Cette adresse
 				// email est déja
 				// utilisée.");
-				ClientController.LOGGER.info("Email existe déjà dans la BDD");
+				this.LOGGER.info("Email existe déjà dans la BDD");
 				redirectAttributes.addFlashAttribute("msgfail", "fail");
 				return "redirect:/clients/clientDashboard";
 			}
@@ -198,11 +200,11 @@ public class ClientController {
 
 			this.clientService.create(client);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
-			ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+			this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 					+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(client.getClientEmailAddress())) {
-				ClientController.LOGGER.info("Le client " + client.getClientFirstname() + " "
+				this.LOGGER.info("Le client " + client.getClientFirstname() + " "
 						+ client.getClientLastname() + " a modifié son email - deconnexion obligatoire");
 
 				return "redirect:/exit";
@@ -239,10 +241,10 @@ public class ClientController {
 			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 			String cryptpassword = crypt.encode(password);
 			client2.setClientPassword(cryptpassword);
-			ClientController.LOGGER.info("Cryptage du mot de passe OK");
+			this.LOGGER.info("Cryptage du mot de passe OK");
 
 			this.clientService.create(client2);
-			ClientController.LOGGER.info("Le client " + client2.getClientFirstname() + " " + client2.getClientLastname()
+			this.LOGGER.info("Le client " + client2.getClientFirstname() + " " + client2.getClientLastname()
 					+ " a modifié son mot de passe avec succés");
 			model.addAttribute("client", client);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
