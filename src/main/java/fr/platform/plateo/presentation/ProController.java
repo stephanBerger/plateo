@@ -43,13 +43,16 @@ public class ProController {
 	public String proProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
-		model.addAttribute("fullAddress", pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
+		model.addAttribute("fullAddress",
+				pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
 
-		model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		model.addAttribute("logo",
+				"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64,"
+					+ encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
 
@@ -58,7 +61,8 @@ public class ProController {
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
-	public String proAddPhoto(@PathVariable Integer id, @RequestParam("listProPhotos") List<MultipartFile> photos,
+	public String proAddPhoto(@PathVariable Integer id,
+			@RequestParam("listProPhotos") List<MultipartFile> photos,
 			RedirectAttributes redirectAttributes) {
 		if (photos.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
@@ -72,7 +76,6 @@ public class ProController {
 	private ProfessionService professionService;
 
 	/*
-	 * // dashboard pro
 	 *
 	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
 	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
