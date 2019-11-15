@@ -2,19 +2,23 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	<link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
+	<link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet" type="text/css" >
 </head>
 <body>
-	<header th:replace="public/header :: header">	
-	</header>
+	<header th:replace="public/header :: header"></header>
 	
 	<section class="sectionNouvPro section100pour100 centrer">
 		<div class="centrer carreBlanc section100pour100">
-			<form class="centrer sectionFormPro" th:object="${pro}" method="post" th:action="@{/public/proForm}">
+			<form class="centrer sectionFormPro"
+					th:action="@{/public/proForm}" th:object="${pro}" method="post" >
+				<div>
+					<h2 class="blue titre-formulaires ">Créez un compte</h2>
+				</div>
 				<div class="centrer sectionForm">
 					<div class="formIdentifierLeft">
 						<div class="form-group formIdentifier left">
 							<label for="companyName" class="col-form-label blue labelForm">Dénomination sociale </label>
+							
 							<input class="champsFormulaire" id="companyName" th:field="*{companyName}" type="text"
 									placeholder="Champs obligatoire" required tabindex="1"/>
 							<span th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}" class="text-danger">
