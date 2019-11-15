@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-
 <body>
 	<header th:fragment="header">
 		<div class="divimgHeader">
@@ -43,8 +42,8 @@
 								</p>
 							</a>
 							<div class="dropdown-content">
-	     						<a data-toggle="modal" data-target="#loginClientModal">PARTICULIER</a>
-								  <a data-toggle="modal" data-target="#loginProModal">PROFESSIONNEL</a>
+	     						<a th:href="@{/clients/login}">PARTICULIER</a>
+								<a th:href="@{/pro/login}">PROFESSIONNEL</a>
 	    					</div>
 	    				</li>
 	    			</div>
@@ -64,6 +63,15 @@
 		</section>
 
 		<div class="sousMenu"></div>
+		<script>
+			$(document).ready(() => {
+				if (document.location.href.indexOf('/clients') >= 0) {
+					$('#loginClientModal').modal({ show: true });
+				} else if (document.location.href.indexOf('/pro') >= 0) {
+					$('#loginProModal').modal({ show: true });
+				}
+			});
+		</script>
 	</header>
 </body>
 </html>
