@@ -2,6 +2,7 @@ package fr.platform.plateo.presentation;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,15 +22,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
+import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
+import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
 public class ProController {
 
+	//private final static Logger LOGGER = LoggerFactory.getLogger(ProController.class);
+
 	@Autowired
 	private Logger LOGGER;
-
+	
 	@Autowired
 	private ProService proService;
 
@@ -61,6 +66,17 @@ public class ProController {
 		return "redirect:/";
 	}
 
+	@Autowired
+	private ProfessionService professionService;
+
+	/*
+	 * // dashboard pro
+	 * 
+	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
+	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
+	 * "/pro/proDashboard"; }
+	 */
+	
 	// login pro method get
 	@GetMapping("/pro/proLogin")
 	public String pageLoginProGet() {
@@ -68,17 +84,22 @@ public class ProController {
 		return "/pro/proLogin";
 	}
 
-	// dashboard pro
+	/*-----------MODIF GREG-----------*/
 	@GetMapping("/pro/proDashboard")
-	public String proDashboard() {
-		this.LOGGER.info("La page \"proDashboard\" est demandée");
+	public String proDashboard(Model model, Principal principal) {
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
 		return "/pro/proDashboard";
 	}
+	/*-----------FIN MODIF GREG-----------*/
 
 	// nouveau pro method get
 	@GetMapping("/public/proForm")
-	public String proForm(Pro pro) {
+	public String proForm(Pro pro, Model model) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
+		List<Profession> listProfessions = this.professionService.getAll();
+		model.addAttribute("listProfessions", listProfessions);
 		return "/public/proForm";
 	}
 
@@ -126,7 +147,8 @@ public class ProController {
 
 			if (resultat % 10 != 0) {
 				this.LOGGER.info("Le Siret n'est pas valide");
-				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est pas le cas !
+				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
+				// pas le cas !
 				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
 				return null;
 			}
@@ -152,5 +174,4 @@ public class ProController {
 		return null;
 
 	}
-
 }

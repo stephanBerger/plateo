@@ -43,6 +43,10 @@ public class ProService implements UserDetailsService {
 		return this.proRepository.getOne(id);
 	}
 
+	public List<Pro> readAll() {
+		return this.proRepository.findAll();
+	}
+
 	public void idupdate(Pro pro) {
 		this.proRepository.save(pro);
 	}

@@ -1,17 +1,29 @@
 @charset "UTF-8";
 
-.divImgLogo{
-	padding-top:20px;
+.modal-content{
+	border-radius: .5rem;
 }
-.imgLogo{
-	height:120px;
-	width:120px;	
+
+.identifier-login{
+	flex-direction: column;
 }
-.imgLogoText{
-	height:75px;
-	width:200px;	
+.headermodal{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	align-items:stretch;
 }
-.card-header{
-	background-color :white; 
-	padding-top:20px;
+
+.btnModal{
+	width:30px;
+	position:absolute;
+	right:5px;
+	top:8px;
+}
+
+
+h3.white.centrer{
+	margin-bottom: .2rem;
+	margin-top:.2rem;
+	flex-grow: 1;
 }

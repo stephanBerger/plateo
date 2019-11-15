@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -86,6 +89,17 @@ public class Pro implements UserDetails {
 	@Column(name = "enabled")
 	private boolean enabled;
 
+	// role
+	@OneToOne
+	private Role role;
+
+	/**
+	*
+	*/
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "pro_id"), inverseJoinColumns = @JoinColumn(name = "profession_id"))
+	private List<Profession> listProProfessions;
+
 	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
 	private List<ProPhotos> listProPhotos;
 
@@ -100,10 +114,6 @@ public class Pro implements UserDetails {
 	public void addListProPhotos(ProPhotos proPhoto) {
 		this.listProPhotos.add(proPhoto);
 	}
-
-	// role
-	@OneToOne
-	private Role role;
 
 	/**
 	 * @return the role
@@ -249,6 +259,14 @@ public class Pro implements UserDetails {
 
 	public Integer getId() {
 		return this.id;
+	}
+
+	public List<Profession> getListProProfessions() {
+		return this.listProProfessions;
+	}
+
+	public void setListProProfessions(List<Profession> listProProfessions) {
+		this.listProProfessions = listProProfessions;
 	}
 
 	public void setEnabled(boolean enabled) {

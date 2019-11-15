@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,9 +17,10 @@ import javax.persistence.Table;
 @Table(name = "profession")
 public class Profession implements Serializable {
 
-	/**
-	 *
-	 */
+	@JoinColumn(name = "pro_id")
+	@ManyToOne
+	private Pro pro;
+
 	private static final long serialVersionUID = -2301537539869858022L;
 
 	/**
@@ -78,5 +81,4 @@ public class Profession implements Serializable {
 	public void setServices(List<Service> services) {
 		this.services = services;
 	}
-
 }
