@@ -113,6 +113,8 @@ public class ProController {
 		this.LOGGER.info("La page \"proForm\" est demandée");
 		List<Profession> listProfessions = this.professionService.getAll();
 		model.addAttribute("listProfessions", listProfessions);
+		model.addAttribute("listProfessions",
+				this.professionService.getAll());
 		return "/public/proForm";
 	}
 
@@ -131,7 +133,8 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
+					+ confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
