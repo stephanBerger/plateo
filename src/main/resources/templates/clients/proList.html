@@ -2,9 +2,10 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	    <link rel="stylesheet" type="text/css" th:href="@{/ListProDataTables/datatables.min.css}"/>
-		<script type="text/javascript" th:src="@{/ListProDataTables/datatables.min.js}"></script>
 
+        <link rel="stylesheet" type="text/css" th:href="@{/ListProDataTables/datatables.min.css}"/>
+        <script type="text/javascript" th:src="@{/ListProDataTables/datatables.min.js}"></script>
+        
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#proList').dataTable();
@@ -14,7 +15,9 @@
 </head>
 
     <body>
-    <header th:replace="public/header :: header"></header>
+    <header th:replace="clients/headerdashboard :: headerdashboard">	
+	
+	</header>
 
         <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
            <div class="plusProduits listPro">
@@ -36,7 +39,7 @@
         	      <td scope="row" th:text="${pro.companyName}"><a th:href="@{/}"></a></td>
         	      <td th:text="${pro.proCity}"></td>
         	      <td th:text="${pro.proPostcode}"></td>
-        	      <td><span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
+        	      <td th:text="${pro.listProProfessions}">       	      
         	      </td>
         	      <td th:text="${pro.siret}"></td>
         	    </tr>
@@ -45,6 +48,8 @@
 </div>
 <div class="divVide"></div>
 </section>
+
+
         <footer th:replace="public/footer :: footer">
     </footer>
     </body>

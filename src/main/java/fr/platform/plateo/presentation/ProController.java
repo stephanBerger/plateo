@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.platform.plateo.business.entity.Pro;
+import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ProService;
+import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
 public class ProController {
 
+	//private final static Logger LOGGER = LoggerFactory.getLogger(ProController.class);
+
 	@Autowired
 	private Logger LOGGER;
-
+	
 	@Autowired
 	private ProService proService;
 
-	// login pro method get
-	@GetMapping("/pro/proLogin")
-	public String pageLoginProGet() {
-		this.LOGGER.info("La page \"proLogin\" est demandée");
-		return "/pro/proLogin";
-	}
+	@Autowired
+	private ProfessionService professionService;
 
 	/*
 	 * // dashboard pro
@@ -42,6 +42,13 @@ public class ProController {
 	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
 	 * "/pro/proDashboard"; }
 	 */
+	
+	// login pro method get
+	@GetMapping("/pro/proLogin")
+	public String pageLoginProGet() {
+		this.LOGGER.info("La page \"proLogin\" est demandée");
+		return "/pro/proLogin";
+	}
 
 	/*-----------MODIF GREG-----------*/
 	@GetMapping("/pro/proDashboard")
@@ -55,20 +62,11 @@ public class ProController {
 
 	// nouveau pro method get
 	@GetMapping("/public/proForm")
-	public String proForm(Pro pro) {
+	public String proForm(Pro pro, Model model) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
+		List<Profession> listProfessions = this.professionService.getAll();
+		model.addAttribute("listProfessions", listProfessions);
 		return "/public/proForm";
-	}
-
-	// list pro method get
-	@GetMapping("/public/proList")
-	public String listPro(Model model) {
-		this.LOGGER.info("La page \"proList\" est demandée");
-		List<Pro> listPro = this.proService.readAll();
-
-		model.addAttribute("listPro", listPro);
-		// model.addAttribute( "listProProfessions", listProfessions );
-		return "public/proList";
 	}
 
 	@PostMapping("/public/proForm")
@@ -117,9 +115,8 @@ public class ProController {
 				this.LOGGER.info("Le Siret n'est pas valide");
 				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
 				// pas le cas !
-				// result.rejectValue("siret", null, "Le Siret n'est pas
-				// valide.");
-				// return null;
+				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
+				return null;
 			}
 
 			// si ok rajoute le client et redirect sur valid client
@@ -143,5 +140,4 @@ public class ProController {
 		return null;
 
 	}
-
 }

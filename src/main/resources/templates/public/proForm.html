@@ -38,6 +38,13 @@
 							<span th:if="${#fields.hasErrors('proEmailAddress')}" th:errors="*{proEmailAddress}" class="text-danger">
 							</span>
 						</div>
+						<div class="form-group formIdentifier left">
+							<label for="proCity" class="col-form-label blue labelForm">Ville </label>
+							<input class="champsFormulaire" id="proCity" th:field="*{proCity}" type="text"
+									placeholder="Saisir votre ville" required tabindex="9"/>
+							<span th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}" class="text-danger">
+							</span>
+						</div>
 					</div>
 					<div class="formIdentifierRight">	
 						<div class="form-group formIdentifier left">
@@ -80,6 +87,18 @@
 									placeholder="Champs obligatoire" name="confirmProPassword" required tabindex="8"/>
 							<span th:if="${#fields.hasErrors('proPassword')}" th:errors="*{proPassword}" class="text-danger">
 							</span>
+						</div>
+					</div>
+					
+						<div class="formIdentifierRight sectionForm">		
+						<div class="form-group formIdentifier left">
+							<label for="listProfession" class="col-form-label blue labelForm">Listes des corps d'états</label>
+      							
+      							<select> 
+							       <option th:each="profession : ${listProfessions}" 
+							           th:value="${profession.name}" 
+							           th:text="${profession.name}"/> 
+						      </select>
 						</div>
 					</div>
 				</div>
