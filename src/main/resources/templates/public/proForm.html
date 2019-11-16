@@ -96,7 +96,7 @@
       						<div th:each="profession : ${listProfessions}">
 								<input type="checkbox" th:id="${{profession.id}}"
 								th:value="${{profession}}" th:field="*{listProProfessions}" />
-								<label th:for="${{profession.id}}" th:text="${profession.name}">Cinema</label>
+								<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
 							</div>
 						</div>
 					</div>
