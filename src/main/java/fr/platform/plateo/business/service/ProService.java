@@ -74,6 +74,17 @@ public class ProService implements UserDetailsService {
 		this.proRepository.save(pro);
 	}
 
+	public void deletePhoto(Integer idPro, Integer idPhoto) {
+		Pro pro = this.proRepository.getOne(idPro);
+		List<ProPhotos> temp = pro.getListProPhotos();
+		ProService.LOGGER.error("Taille de la liste avant: " + pro.getListProPhotos().size());
+		temp.remove((int) idPhoto);
+		pro.setListProPhotos(temp);
+		ProService.LOGGER.error("Taille de la liste après: " + pro.getListProPhotos().size());
+		ProService.LOGGER.error(idPhoto + "");
+		this.proRepository.save(pro);
+	}
+
 	public Optional<Pro> findId(Integer id) {
 		return this.proRepository.findById(id);
 	}

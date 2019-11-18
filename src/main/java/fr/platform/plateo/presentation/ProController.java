@@ -101,6 +101,7 @@ public class ProController {
 		return "redirect:/pro/proDashboard";
 	}
 
+	// Profil pro vu par le pro
 	@GetMapping("/pro/proProfile/{id}")
 	public String proProfile(@PathVariable Integer id, Model model, Principal user) {
 		Pro pro = this.proService.read(id);
@@ -119,7 +120,34 @@ public class ProController {
 
 		model.addAttribute("photos", encodings);
 		model.addAttribute("username", user.getName());
-		return "/public/proProfile";
+		return "/pro/proProfile";
+	}
+
+	// Profil pro vu par tout le monde
+	@GetMapping("/public/proProfile/{id}")
+	public String publicProProfile(@PathVariable Integer id, Model model) {
+		Pro pro = this.proService.read(id);
+		model.addAttribute("pro", pro);
+		Base64.Encoder encoder = Base64.getEncoder();
+
+		if (pro.getLogo() != null) {
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
+
+		List<String> encodings = new ArrayList<>();
+		for (ProPhotos photo : pro.getListProPhotos()) {
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			encodings.add(encoding);
+		}
+
+		model.addAttribute("photos", encodings);
+		return "/public/publicProProfile";
+	}
+
+	@GetMapping("/pro/proDeletePhotos/{idPro}/{idPhoto}")
+	public String proDeletePhotos(@PathVariable Integer idPro, @PathVariable Integer idPhoto) {
+		this.proService.deletePhoto(idPro, idPhoto);
+		return "redirect:/pro/proDashboard";
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
@@ -130,7 +158,7 @@ public class ProController {
 			return "redirect:/uploadStatus";
 		}
 		this.proService.addPhotos(id, photos);
-		return "redirect:/";
+		return "redirect:/pro/proDashboard";
 	}
 
 	// login pro method get

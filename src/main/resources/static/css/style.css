@@ -11,20 +11,20 @@ body {
 
 a:hover{
 	text-decoration: none;
-	
+
 }
 .titre-formulaires{
 	font-weight: 600;
 	/*margin-top:15px;
 	text-shadow: 0px 0px 10px black;*/
-	
+
 }
 
 
 .texteDropDown{
 	font-size: 1.2rem !important;
 }
-/*-------COLOR----------*/ 
+/*-------COLOR----------*/
 .white{
 	color:White !important;
 }
@@ -53,7 +53,7 @@ a:hover{
 .bggreyTresClair{
 	background-color: #e6e6e6;
 }
-/*----------------------*/ 
+/*----------------------*/
 .centrer{
 	display: flex;
   	justify-content:center;
@@ -128,20 +128,20 @@ header{
 greyClair ul{
     list-style-type: none;
   }
-  
+
 .textName{
 	font-size:1rem !important;
-} 
-  
-  
+}
+
+
 .menu li, .menu .dropdown {
     display: flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     margin-right: 50px;
-  } 
-  
+  }
+
   .dropdown li{
   	margin-right: 0px !important;
   }
@@ -157,7 +157,6 @@ greyClair ul{
 }
 .menu li a p {
 	margin-bottom:0;
-	
 }
 .textIdentifier{
 	line-height: 1.1;
@@ -225,7 +224,7 @@ greyClair ul{
 
 /* Add a dark background on topnav links and the dropdown button on hover */
 .dropdown:hover  {
-  
+
   color: white;
 }
 
@@ -238,7 +237,7 @@ greyClair ul{
 /* Show the dropdown menu when the user moves the mouse over the dropdown button */
 .dropdown:hover .dropdown-content {
   display: block;
-  
+
 }
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
@@ -339,7 +338,7 @@ greyClair ul{
 
 
   /*-----------------------------FIN HEADER-----------------------------------------*/
-  
+
  .section100pour100{
  	min-height: calc(100% - 50px - 145px);
  }
@@ -355,28 +354,19 @@ greyClair ul{
   	flex-direction:column;
   	justify-content:space-between;
 }
-/*-----------------------------IDENTIFICATION-----------------------------------------*/ 
-
-/*-----------------------------PROFIL PRO-----------------------------------------*/  
-.row{
-	margin :0 !important;
-}
-/*-----------------------------FIN PROFIL PRO-----------------------------------------*/  
-
-
- 
+/*-----------------------------IDENTIFICATION-----------------------------------------*/
 .sectionIdentifier{
 	width:100%;
   	margin: 0;
   	padding: 0;
   	position:absolute;
   	align-items:flex-start !important;
-  	
+
   	/*padding-bottom: 50px;*/
 }
 
 .imgindex{
-	
+
 	width:100%;
 }
 .sectionIdentifier h2{
@@ -400,29 +390,29 @@ greyClair ul{
 	width:460px;
 	background-color: white;
 	flex-direction: column;
-	
+
 	box-shadow: 0px 0px 15px 0px black;
 	justify-content:flex-start !important;
-} 
+}
  .formIdentifier{
  	flex-direction: column;
  }
 .formIdentifier input{
 	margin:10px;
 	width:400px;
-} 
+}
 .form-group{
 	margin-bottom: 0.6rem;
-} 
+}
 .form-group-vide{
 	height:86px;
 	margin-bottom: 0.6rem;
-} 
+}
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
   	font-size: 1.6rem;
- } 
+ }
 ::placeholder {
 	font-size:1.3rem;
 	color:#bdbdbd;
@@ -471,7 +461,7 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
 .identifier h4{
  	padding-top:15px;
- } 
+ }
  /*-----------------------------FIN IDENTIFICATION-----------------------------------------*/
  /*-----------------------------PLUS PRODUITS-----------------------------------------*/
  .plusProduits {
@@ -480,13 +470,13 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	width:100%;
 	flex-direction: row;
 	align-items:stretch;*/
-} 
+}
 
  .plusProduitsClient, .plusProduitsPro{
  	/*min-height:600px;
  	opacity:0;*/
  }
- 
+
 .plusProduitsClient{
 	/*width:60%;
 	margin-left:-200px;
@@ -496,46 +486,46 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	/* width:60%;
 	 margin-right:-200px;
 	 transform: skewX(-20deg);*/
- } 
- 
- 
- 
+ }
+
+
+
  .plusProduitsClient:hover, .plusProduitsPro:hover{
  	/*opacity:1;
  	transition: all 0.3s ease-out;*/
  }
- 
- 
+
+
  /*-----------------------------FIN PLUS PRODUITS-----------------------------------------*/
- 
- 
+
+
  .listPro {
 	flex-direction: column;
 	width: 90%;
 	margin-top: 10px;
 	margin-bottom: 70px;
 	padding: 50px;
-	
+
 	//border: solid;
     //border-radius: 10px;
     //background-color: #ff9500;
-} 
+}
 
 .listPro h1 {
 	margin-top: 5px;
 	margin-bottom: 50px;
 }
- 
+
 
 .listPro th {
 	text-decoration: underline;
 	background-color: white;
 }
- 
 
- 
- 
- /*-----------------------------FOOTER-----------------------------------------*/ 
+
+
+
+ /*-----------------------------FOOTER-----------------------------------------*/
 .theFooter{
 	height:50px;
 	min-height:50px;
@@ -549,7 +539,7 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	justify-content: flex-end;
 	list-style-type: none;
 	color :white;
-	
+
 	margin-right:20px;
     padding: 0;
 }
@@ -575,12 +565,12 @@ ul{
     margin-inline-end: 0px;
     padding-inline-start: 0px;
 }
- /*-----------------------------FIN FOOTER-----------------------------------------*/ 
- 
+ /*-----------------------------FIN FOOTER-----------------------------------------*/
+
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1680px   */
 @media screen and (max-width: 1680px) {
-/*---------------MODIF FORMULAIRES----------------*/ 
-	
+/*---------------MODIF FORMULAIRES----------------*/
+
 
 
 }
@@ -611,9 +601,9 @@ ul{
 	   width:45px;
 	   height:45px;
 	}
-	
-	
-	
+
+
+
 	.form-group {
 	    margin-bottom: 0.5rem;
 	}
@@ -621,7 +611,7 @@ ul{
 	 	font-weight: 500;
 	  	line-height: 1;
 	  	font-size: 1.3rem;
-	 } 
+	 }
 	/*.sectionIdentifier h2{
 		padding-top:40px;
 	}
@@ -634,7 +624,7 @@ ul{
 		width:460px;
 		background-color: white;
 		flex-direction: column;
-		
+
 		box-shadow: 0px 0px 15px 0px black;
 		justify-content:flex-start !important;
 	} */
@@ -644,8 +634,8 @@ ul{
 	.formIdentifier input{
 		margin:10px;
 		width:400px;
-	}   
-	
+	}
+
 	::placeholder {
 		font-size:1rem;
 		color:#bdbdbd;
@@ -688,14 +678,14 @@ ul{
 	}
 	.identifier h4{
 	 	padding-top:15px;
-	} 
- 
- 
- 
- 
- 
+	}
+
+
+
+
+
 }
- 
+
  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
 @media screen and (max-width: 1280px) {
 	body{

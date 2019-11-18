@@ -99,9 +99,7 @@ public class Pro implements UserDetails {
 	*
 	*/
 	@ManyToMany
-	@JoinTable(
-			joinColumns = @JoinColumn(name = "pro_id"),
-			inverseJoinColumns = @JoinColumn(name = "profession_id"))
+	@JoinTable(joinColumns = @JoinColumn(name = "pro_id"), inverseJoinColumns = @JoinColumn(name = "profession_id"))
 	private List<Profession> listProProfessions;
 
 	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
