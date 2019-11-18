@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
@@ -261,4 +262,47 @@ public class ProController {
 		return null;
 
 	}
+	
+	
+	// modification du mot de passe professionnel method post
+		@PostMapping("/pro/proEditPassword")
+		public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
+				@RequestParam(value = "password") String password,
+				@RequestParam(value = "confirmpassword") String confirmpassword,
+				final RedirectAttributes redirectAttributes) {
+
+			Integer id = pro.getId();
+
+			if (!password.equals(confirmpassword)) {
+				model.addAttribute("msg", "fail");
+				model.addAttribute("id", id);
+				return "/pro/proEdit";
+			}
+
+			if (result.hasErrors()) {
+				model.addAttribute("msg", "fail");
+				model.addAttribute("id", id);
+				return "/pro/proEdit";
+			}
+
+			if (pro.getId() != null) {
+				Pro pro2 = this.proService.findId(pro.getId())
+						.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+				// si tout est ok on modifie le mot de passe
+				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+				String cryptpassword = crypt.encode(password);
+				pro2.setProPassword(cryptpassword);
+				this.LOGGER.info("Cryptage du mot de passe OK");
+
+				this.proService.create(pro2);
+				this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
+						+ " a modifié son mot de passe avec succés");
+				model.addAttribute("pro", pro);
+				redirectAttributes.addFlashAttribute("msgok", "ok");
+
+			}
+			return "redirect:/pro/proEdit/" + id;
+
+		}
+	
 }
