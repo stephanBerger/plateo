@@ -141,7 +141,7 @@
 							</div>
 			</div>
 			<div align="center">
-				<button type="submit" class="btn btn-primary">Modifier</button>
+				<button type="submit" class="btn btn-primary" data-tippy-content="Tooltip" >Modifier</button>
 			</div>
 			<div><span> </span></div>
 			<div align="center">
@@ -154,11 +154,12 @@
 
 <script>
 $(function () {
-	  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 250, hide: 100} })
+	  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 150, hide: 100} })
 	});
   $(function () {
     $('label').popover()
-  })
+  });
+  
 </script>
 
 	<th:block th:if="${msg}">

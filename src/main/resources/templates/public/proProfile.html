@@ -68,10 +68,12 @@
 				
 			</div>
 			<div class="col-5 offset-1"> 
-				<div class="border border-primary p-1">
-					<div th:text="${pro.proPhoneNumber}">Numéro de téléphone</div>
-					<div th:text="${pro.activityDescription}">Description de l'activité</div>
-					<div th:text="${pro.proEmailAddress}">Adresse email</div>
+				<div class="border border-primary p-1" th:object="${pro}">
+					<div th:text="*{managerLastname}">Description de l'activité</div>
+					<div th:text="*{managerFirstname}">Adresse email</div>
+					<div th:text="*{proEmailAddress}">Adresse email</div>
+					<div th:text="*{proPhoneNumber}">Numéro de téléphone</div>
+					<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data= + ${pro.proEmailAddress};size=100x100}" alt="" title="" />
 				</div> 
 				<!--<div class="border border-info">Notes</div>-->
 			</div>
