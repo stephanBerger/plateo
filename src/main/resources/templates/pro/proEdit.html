@@ -133,8 +133,8 @@
 										<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
 											th:value="${{profession}}" th:field="*{listProProfessions}" />
 										
-										<label  class="custom-control-label" th:for="${{profession.id}}" 
-										th:style="${iStat.count%10==0}? 'font-weight: bold;'" th:text="${profession.name}" th:count></label>
+										<label  class="custom-control-label" th:for="${{profession.id}}" data-toggle="popover" data-placement="right"  
+										th:title="${profession.name}" th:data-content="${profession.description}" th:style="${iStat.count%10==0}? 'font-weight: bold;'" th:text="${profession.name}"></label>
 										</div>
 									</div>
 								</div>
@@ -152,12 +152,21 @@
 </form>
 	</section>
 
-
+<script>
+$(function () {
+	  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 250, hide: 100} })
+	});
+  $(function () {
+    $('label').popover()
+  })
+</script>
 
 	<th:block th:if="${msg}">
 		<script>
 			$('#loginModal').modal('show')
+			
 		</script>
+		
 	</th:block>
 
 </body>

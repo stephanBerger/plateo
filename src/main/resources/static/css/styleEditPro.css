@@ -1,0 +1,18 @@
+.popover {
+	background-color: #ff9500;
+	color: #0073be
+}
+
+.popover-title {
+  background-color: #0073be;
+  color: #FFFFFF;
+  transform:uppercase;
+  text-align:center;
+}
+
+.popover-content {
+	background-color: #ff9500;
+	color:#FFFFFF;
+}
+
+/* Popover Header */
