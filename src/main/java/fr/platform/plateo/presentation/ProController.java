@@ -20,18 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
-import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
+import fr.platform.plateo.business.service.EmailService;
 import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
 public class ProController {
-
-	// private final static Logger LOGGER =
-	// LoggerFactory.getLogger(ProController.class);
 
 	@Autowired
 	private Logger LOGGER;
@@ -39,11 +37,75 @@ public class ProController {
 	@Autowired
 	private ProService proService;
 
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private ProfessionService professionService;
+
+	// Affichage de la modification du professionnel
+	@GetMapping("/pro/proEdit/{id}")
+	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
+		Pro pro = this.proService.findId(id)
+				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
+		model.addAttribute("pro", pro);
+		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+				+ " a demander la modification des ses infos");
+		model.addAttribute("listProfessions", this.professionService.getAll());
+		return "/pro/proEdit";
+	}
+
+	// bouton modifier du formulaire professionnel
+	@PostMapping("/pro/proEdit/{id}")
+	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
+			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+
+		if (!OldEmail.equals(pro.getProEmailAddress())) {
+			// verifie si l'adresse email est déja dans la BDD
+			Pro existing = this.proService.findEmail(pro.getProEmailAddress());
+			if (existing != null) {
+				// result.rejectValue("proEmailAddress", null, "Cette adresse
+				// email est déja
+				// utilisée.");
+				this.LOGGER.info("Email existe déjà dans la BDD");
+				redirectAttributes.addFlashAttribute("msgfail", "fail");
+				return "redirect:/pro/proDashboard";
+			}
+
+		}
+		if (result.hasErrors()) {
+			pro.setId(id);
+			return "/pro/proEdit";
+		}
+
+		if (pro.getId() != null) {
+			// enabled a true
+			pro.setEnabled(true);
+
+			// id du role CLIENT
+			Role role = new Role();
+			role.setId(1);
+			pro.setRole(role);
+
+			this.proService.create(pro);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
+			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+					+ " a modifié sa fiche avec succés");
+
+			if (!OldEmail.equals(pro.getProEmailAddress())) {
+				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+						+ " a modifié son email - deconnexion obligatoire");
+
+				return "redirect:/exit";
+			}
+		}
+		return "redirect:/pro/proDashboard";
+	}
+
 	@GetMapping("/public/proProfile/{id}")
 	public String proProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
-		model.addAttribute("fullAddress", pro.getProAddress() + ", " + pro.getProCity() + " " + pro.getProPostcode());
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
@@ -70,17 +132,6 @@ public class ProController {
 		this.proService.addPhotos(id, photos);
 		return "redirect:/";
 	}
-
-	@Autowired
-	private ProfessionService professionService;
-
-	/*
-	 * // dashboard pro
-	 *
-	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
-	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
-	 * "/pro/proDashboard"; }
-	 */
 
 	// login pro method get
 	@GetMapping("/pro/proLogin")
@@ -114,8 +165,9 @@ public class ProController {
 	@GetMapping("/public/proForm")
 	public String proForm(Pro pro, Model model) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
-		List<Profession> listProfessions = this.professionService.getAll();
-		model.addAttribute("listProfessions", listProfessions);
+//		List<Profession> listProfessions = this.professionService.getAll();
+//		model.addAttribute("listProfessions", listProfessions);
+		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/public/proForm";
 	}
 
@@ -184,10 +236,61 @@ public class ProController {
 
 			this.LOGGER.info("Creation utlisateur PRO effectué");
 			this.proService.create(pro);
+
+			// envoi email inscription
+			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
+					+ "\n\nVotre incription a bien été prise en compte."
+					+ "\n\nPLATEO vous remercie de votre confiance.";
+
+			this.emailService.sendEmail(pro.getProEmailAddress(), "PLATEO - INSCRIPTION", text);
+
 			return "pro/proValid";
 
 		}
 		return null;
 
 	}
+	
+	
+	// modification du mot de passe professionnel method post
+		@PostMapping("/pro/proEditPassword")
+		public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
+				@RequestParam(value = "password") String password,
+				@RequestParam(value = "confirmpassword") String confirmpassword,
+				final RedirectAttributes redirectAttributes) {
+
+			Integer id = pro.getId();
+
+			if (!password.equals(confirmpassword)) {
+				model.addAttribute("msg", "fail");
+				model.addAttribute("id", id);
+				return "/pro/proEdit";
+			}
+
+			if (result.hasErrors()) {
+				model.addAttribute("msg", "fail");
+				model.addAttribute("id", id);
+				return "/pro/proEdit";
+			}
+
+			if (pro.getId() != null) {
+				Pro pro2 = this.proService.findId(pro.getId())
+						.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+				// si tout est ok on modifie le mot de passe
+				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+				String cryptpassword = crypt.encode(password);
+				pro2.setProPassword(cryptpassword);
+				this.LOGGER.info("Cryptage du mot de passe OK");
+
+				this.proService.create(pro2);
+				this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
+						+ " a modifié son mot de passe avec succés");
+				model.addAttribute("pro", pro);
+				redirectAttributes.addFlashAttribute("msgok", "ok");
+
+			}
+			return "redirect:/pro/proEdit/" + id;
+
+		}
+	
 }

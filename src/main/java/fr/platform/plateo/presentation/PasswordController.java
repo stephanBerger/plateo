@@ -83,7 +83,7 @@ public class PasswordController {
 
 		// envoi email réinitialisation du password
 		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
-				+ "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe" + "\n\n"
 				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
 		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
@@ -203,7 +203,7 @@ public class PasswordController {
 
 		// envoi email réinitialisation du password
 		String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
-				+ "\n\nVeuiller cliquez sur le lien ci dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe" + "\n\n"
 				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
 		this.emailService.sendEmail(pro.getProEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
