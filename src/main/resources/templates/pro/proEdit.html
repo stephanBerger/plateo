@@ -4,24 +4,23 @@
 
 <head>
 <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="pro/headerdashboard :: headerdashboard">-
 	</header>
 <body>
 
-	<!-- 	<th:block -->
-	<!-- 		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block> -->
-
+	<div>
+		<h2 class="blue titre-formulaires ">Modifier mon profil</h2>
+	</div>
 	<section class="">
 
 		<div class="">
-			<!--  <div>
-			<h2 class="white titre-formulaires ">Créez un compte</h2>
-		</div>-->
 
 
-			<form class="centrer sectionFormPro" action="#"
+			<form class="" action="#"
 				th:action="@{/pro/proEdit/{id}(id=${pro.id})}" th:object="${pro}"
 				method="post">
 
@@ -31,9 +30,7 @@
 					<strong>Modification du mot de passe réussie avec succès</strong>
 				</div>
 
-				<div>
-					<h2 class="blue titre-formulaires ">Modifier mon profil</h2>
-				</div>
+
 				<div>
 					<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
 							mon mot de passe</button></a>
