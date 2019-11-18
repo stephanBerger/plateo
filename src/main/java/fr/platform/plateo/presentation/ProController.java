@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
-import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.EmailService;
 import fr.platform.plateo.business.service.ProService;
@@ -30,9 +29,6 @@ import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
 public class ProController {
-
-	// private final static Logger LOGGER =
-	// LoggerFactory.getLogger(ProController.class);
 
 	@Autowired
 	private Logger LOGGER;
@@ -42,6 +38,75 @@ public class ProController {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private ProfessionService professionService;
+
+	// Affichage de la modification du professionnel
+	@GetMapping("/pro/proEdit/{id}")
+	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
+		Pro pro = this.proService.findId(id)
+				.orElseThrow(
+						() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
+		model.addAttribute("pro", pro);
+		this.LOGGER.info(
+				"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+						+ " a demander la modification des ses infos");
+		model.addAttribute("listProfessions",
+				this.professionService.getAll());
+		return "/pro/proEdit";
+	}
+
+	// bouton modifier du formulaire professionnel
+	@PostMapping("/pro/proEdit/{id}")
+	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail,
+			@PathVariable("id") Integer id,
+			@Valid Pro pro, BindingResult result, Model model,
+			final RedirectAttributes redirectAttributes) {
+
+		if (!OldEmail.equals(pro.getProEmailAddress())) {
+			// verifie si l'adresse email est déja dans la BDD
+			Pro existing = this.proService.findEmail(pro.getProEmailAddress());
+			if (existing != null) {
+				// result.rejectValue("proEmailAddress", null, "Cette adresse
+				// email est déja
+				// utilisée.");
+				this.LOGGER.info("Email existe déjà dans la BDD");
+				redirectAttributes.addFlashAttribute("msgfail", "fail");
+				return "redirect:/pro/proDashboard";
+			}
+
+		}
+		if (result.hasErrors()) {
+			pro.setId(id);
+			return "/pro/proEdit";
+		}
+
+		if (pro.getId() != null) {
+			// enabled a true
+			pro.setEnabled(true);
+
+			// id du role CLIENT
+			Role role = new Role();
+			role.setId(1);
+			pro.setRole(role);
+
+			this.proService.create(pro);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
+			this.LOGGER.info(
+					"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+							+ " a modifié sa fiche avec succés");
+
+			if (!OldEmail.equals(pro.getProEmailAddress())) {
+				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " "
+						+ pro.getManagerLastname()
+						+ " a modifié son email - deconnexion obligatoire");
+
+				return "redirect:/exit";
+			}
+		}
+		return "redirect:/pro/proDashboard";
+	}
 
 	@GetMapping("/public/proProfile/{id}")
 	public String proProfile(@PathVariable Integer id, Model model) {
@@ -77,16 +142,6 @@ public class ProController {
 		return "redirect:/";
 	}
 
-	@Autowired
-	private ProfessionService professionService;
-
-	/*
-	 *
-	 * @GetMapping( "/pro/proDashboard" ) public String proDashboard() {
-	 * this.LOGGER.info( "La page \"proDashboard\" est demandée" ); return
-	 * "/pro/proDashboard"; }
-	 */
-
 	// login pro method get
 	@GetMapping("/pro/proLogin")
 	public String pageLoginProGet() {
@@ -119,10 +174,9 @@ public class ProController {
 	@GetMapping("/public/proForm")
 	public String proForm(Pro pro, Model model) {
 		this.LOGGER.info("La page \"proForm\" est demandée");
-		List<Profession> listProfessions = this.professionService.getAll();
-		model.addAttribute("listProfessions", listProfessions);
-		model.addAttribute("listProfessions",
-				this.professionService.getAll());
+//		List<Profession> listProfessions = this.professionService.getAll();
+//		model.addAttribute("listProfessions", listProfessions);
+		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/public/proForm";
 	}
 
