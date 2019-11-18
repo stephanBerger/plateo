@@ -355,7 +355,16 @@ greyClair ul{
   	flex-direction:column;
   	justify-content:space-between;
 }
-/*-----------------------------IDENTIFICATION-----------------------------------------*/  
+/*-----------------------------IDENTIFICATION-----------------------------------------*/ 
+
+/*-----------------------------PROFIL PRO-----------------------------------------*/  
+.row{
+	margin :0 !important;
+}
+/*-----------------------------FIN PROFIL PRO-----------------------------------------*/  
+
+
+ 
 .sectionIdentifier{
 	width:100%;
   	margin: 0;

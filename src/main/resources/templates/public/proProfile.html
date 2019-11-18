@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
-<head th:replace="public/head :: head">
+<head th:replace="public/head :: head"></head>
+<head>
+	<!-- <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" > -->
 </head>
 <body class="BgBlue">
 	<header th:replace="pro/headerdashboard :: header"></header>
@@ -16,7 +18,9 @@
 			<span th:text="${pro.proPostcode}"></span>
 			</div>
 		</div>
-			<div class="bgBlue offset-2 col-2 rounded m-3 p-1">Demander un devis</div>
+			<a class="bgBlue offset-2 col-2 rounded m-3 p-1 btn" th:href="@{/clients/estimateRequest?{id}(id=${pro.id})}">
+				Demander un devis
+			</a>
 	</div>
 	<div class="container mt-5">
 		<div class="row">
@@ -24,12 +28,10 @@
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 	  			<!-- Indicators -->
 	  	
-				  	<ol class="carousel-indicators">
-				    	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				    	<li data-target="#myCarousel" data-slide-to="1"></li>
-				    	<li data-target="#myCarousel" data-slide-to="2"></li>
+					<ol class="carousel-indicators" >
+				    	<li data-target="#myCarousel" th:each="photo, iterStat: ${photos}" th:data-slide-to="${iterStat.index}">
 				  	</ol>
-				
+				  	
 				  	<!-- Wrapper for slides -->
 				  	<div class="carousel-inner">
 				  		<div th:each="photo, iterStat: ${photos}" th:class="${iterStat.index}== 0 ? 'carousel-item active':'carousel-item'">
@@ -55,7 +57,7 @@
 						<input type="file" id="listProPhotos" name="listProPhotos" accept="image/png, image/jpeg" multiple required>
 						<div class="mt-1">
 							<button>Envoyer</button>
-							<button onClick="this.form.reset()">Enlever</button>
+							<button onClick="this.form.reset()">Annuler</button>
 						</div>
 						<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -75,6 +77,5 @@
 			</div>
 		</div>
 	</div>
-	<footer th:replace="public/footer :: footer"></footer>
 </body>
 </html>
