@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header th:replace="public/header :: header"></header>
+	
+	<section class="sectionNouvClient section100pour100 centrer">
+		<div class="centrer carreBlanc">
+			<form class="centrer sectionFormClient" action="#"
+					th:action="@{/public/clientForm}" th:object="${client}" method="post">
+				 <div>
+					<h2 class="blue titre-formulaires ">Créez un compte</h2>
+				</div>
+				<div class="centrer sectionForm">
+					<div class="formIdentifierLeft">
+						<div class="form-group formIdentifier left">
+							<label for="clientLastname" class="col-form-label blue labelForm">Nom</label>
+
+							<input type="text" id="clientLastname"
+								th:field="*{clientLastname}" class="champsFormulaire"
+								placeholder="Champs obligatoire" required tabindex="1" /> <span
+								th:if="${#fields.hasErrors('clientLastname')}"
+								th:errors="*{clientLastname}" class="text-danger"> </span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientAddress" class="col-form-label blue labelForm">Adresse</label>
+							<input type="text" id="clientAddress" th:field="*{clientAddress}"
+								class="champsFormulaire" placeholder="Saisir adresse"
+								tabindex="3" /> <span
+								th:if="${#fields.hasErrors('clientAddress')}"
+								th:errors="*{clientAddress}" class="text-danger"> </span>
+
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientPostcode" class="col-form-label blue labelForm">Code
+								Postal</label> <input type="text" id="clientPostcode" pattern="[0-9]{5}"
+								th:field="*{clientPostcode}" class="champsFormulaire"
+								placeholder="Saisir code postal" tabindex="5" /> <span
+								th:if="${#fields.hasErrors('clientPostcode')}"
+								th:errors="*{clientPostcode}" class="text-danger"> </span>
+
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientPhoneNumber"
+								class="col-form-label blue labelForm">Téléphone</label> <input
+								type="text" id="clientPhoneNumber" pattern="[0-9]{10}"
+								th:field="*{clientPhoneNumber}" class="champsFormulaire"
+								placeholder="Saisir numéro de téléphone" tabindex="7" /> <span
+								th:if="${#fields.hasErrors('clientPhoneNumber')}"
+								th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientPassword" class="col-form-label blue labelForm">Mot
+								de passe</label> <input type="password" id="clientPassword"
+								th:field="*{clientPassword}" class="champsFormulaire"
+								placeholder="Champs obligatoire" required tabindex="8" /> <span
+								th:if="${#fields.hasErrors('clientPassword')}"
+								th:errors="*{clientPassword}" class="text-danger"> </span>
+						</div>
+					</div>
+					<div class="formIdentifierRight">
+						<div class="form-group formIdentifier left">
+							<label for="clientFirstname"
+								class="col-form-label blue labelForm">Prénom</label> <input
+								type="text" id="clienFirstname" th:field="*{clientFirstname}"
+								class="champsFormulaire" placeholder="Champs obligatoire"
+								required tabindex="2" /> <span
+								th:if="${#fields.hasErrors('clientFirstname')}"
+								th:errors="*{clientFirstname}" class="text-danger"> </span>
+
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientCity" class="col-form-label blue labelForm">Ville</label>
+							<input type="text" id="clientCity" th:field="*{clientCity}"
+								class="champsFormulaire" placeholder="Saisir ville" tabindex="4" />
+							<span th:if="${#fields.hasErrors('clientCity')}"
+								th:errors="*{clientCity}" class="text-danger"> </span>
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="clientEmailAddress"
+								class="col-form-label blue labelForm">Email</label> <input
+								type="email" id="clientEmailAddress"
+								th:field="*{clientEmailAddress}" class="champsFormulaire"
+								placeholder="Champs obligatoire" required tabindex="6" /> <span
+								th:if="${#fields.hasErrors('clientEmailAddress')}"
+								th:errors="*{clientEmailAddress}" class="text-danger"> </span>
+								
+						</div>
+						<div class="form-group-vide formIdentifier left"></div>
+						<div class="form-group formIdentifier left">
+							<label for="confirmPasswordInput"
+								class="col-form-label blue labelForm">Confirmez votre
+								mot de passe</label> <input class="champsFormulaire" type="password"
+								id="confirmPasswordInput" name="confirmPasswordInput"
+								placeholder="Champs Obligatoire" required tabindex="9" />
+						</div>
+
+					</div>
+				</div>
+				<div class="centrer sectionButton">
+					<button type="submit" class="btn bgOrange MarginClient">Valider</button>
+				</div>
+			</form>
+		</div>
+		<!-- <div class="divVide"></div> -->
+	</section>
+
+
+	<!--  <footer th:replace="/public/footer :: footer"> </footer>-->
+
+</body>
+</html>
