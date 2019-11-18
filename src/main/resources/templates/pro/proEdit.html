@@ -123,14 +123,19 @@
 			</div>
 			<div class="col-xs-6 col-md-4">
 							<div class="formIdentifierRight ">
-								<div class=" ">
+								
 									<label for="listProfession"
 										class="col-form-label blue ">Listes des corps
 										d'états</label>
-									<div th:each="profession : ${listProfessions}">
-										<input type="checkbox" th:id="${{profession.id}}"
+									<div class="custom-control custom-switch" th:each="profession,iStat : ${listProfessions}">
+									<div th:class="${iStat.count%10==0}? 'row':''">
+									<div th:class="${iStat.count%10==0}? 'col-xs-8 col-sm-6':''">
+										<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
 											th:value="${{profession}}" th:field="*{listProProfessions}" />
-										<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
+										
+										<label  class="custom-control-label" th:for="${{profession.id}}" 
+										th:style="${iStat.count%10==0}? 'font-weight: bold;'" th:text="${profession.name}" th:count></label>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -138,6 +143,7 @@
 			<div align="center">
 				<button type="submit" class="btn btn-primary">Modifier</button>
 			</div>
+			<div><span> </span></div>
 			<div align="center">
 				<a href="/pro/proDashboard" class="btn btn-primary">Retour</a>
 			</div>
