@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
@@ -47,23 +46,18 @@ public class ProController {
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
 		Pro pro = this.proService.findId(id)
-				.orElseThrow(
-						() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
+				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
-		this.LOGGER.info(
-				"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-						+ " a demander la modification des ses infos");
-		model.addAttribute("listProfessions",
-				this.professionService.getAll());
+		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+				+ " a demander la modification des ses infos");
+		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/pro/proEdit";
 	}
 
 	// bouton modifier du formulaire professionnel
 	@PostMapping("/pro/proEdit/{id}")
-	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail,
-			@PathVariable("id") Integer id,
-			@Valid Pro pro, BindingResult result, Model model,
-			final RedirectAttributes redirectAttributes) {
+	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
+			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
 		if (!OldEmail.equals(pro.getProEmailAddress())) {
 			// verifie si l'adresse email est déja dans la BDD
@@ -94,13 +88,11 @@ public class ProController {
 
 			this.proService.create(pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
-			this.LOGGER.info(
-					"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-							+ " a modifié sa fiche avec succés");
+			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+					+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(pro.getProEmailAddress())) {
-				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " "
-						+ pro.getManagerLastname()
+				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
 						+ " a modifié son email - deconnexion obligatoire");
 
 				return "redirect:/exit";
@@ -109,31 +101,29 @@ public class ProController {
 		return "redirect:/pro/proDashboard";
 	}
 
-	@GetMapping("/public/proProfile/{id}")
-	public String proProfile(@PathVariable Integer id, Model model) {
+	@GetMapping("/pro/proProfile/{id}")
+	public String proProfile(@PathVariable Integer id, Model model, Principal user) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo",
-					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64,"
-					+ encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
 
 		model.addAttribute("photos", encodings);
+		model.addAttribute("username", user.getName());
 		return "/public/proProfile";
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
-	public String proAddPhoto(@PathVariable Integer id,
-			@RequestParam("listProPhotos") List<MultipartFile> photos,
+	public String proAddPhoto(@PathVariable Integer id, @RequestParam("listProPhotos") List<MultipartFile> photos,
 			RedirectAttributes redirectAttributes) {
 		if (photos.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
@@ -196,8 +186,7 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
-					+ confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
@@ -249,8 +238,7 @@ public class ProController {
 			this.proService.create(pro);
 
 			// envoi email inscription
-			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-					+ ","
+			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
 					+ "\n\nVotre incription a bien été prise en compte."
 					+ "\n\nPLATEO vous remercie de votre confiance.";
 
@@ -262,47 +250,46 @@ public class ProController {
 		return null;
 
 	}
-	
-	
+
 	// modification du mot de passe professionnel method post
-		@PostMapping("/pro/proEditPassword")
-		public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
-				@RequestParam(value = "password") String password,
-				@RequestParam(value = "confirmpassword") String confirmpassword,
-				final RedirectAttributes redirectAttributes) {
+	@PostMapping("/pro/proEditPassword")
+	public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "confirmpassword") String confirmpassword,
+			final RedirectAttributes redirectAttributes) {
 
-			Integer id = pro.getId();
+		Integer id = pro.getId();
 
-			if (!password.equals(confirmpassword)) {
-				model.addAttribute("msg", "fail");
-				model.addAttribute("id", id);
-				return "/pro/proEdit";
-			}
+		if (!password.equals(confirmpassword)) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/pro/proEdit";
+		}
 
-			if (result.hasErrors()) {
-				model.addAttribute("msg", "fail");
-				model.addAttribute("id", id);
-				return "/pro/proEdit";
-			}
+		if (result.hasErrors()) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/pro/proEdit";
+		}
 
-			if (pro.getId() != null) {
-				Pro pro2 = this.proService.findId(pro.getId())
-						.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
-				// si tout est ok on modifie le mot de passe
-				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
-				String cryptpassword = crypt.encode(password);
-				pro2.setProPassword(cryptpassword);
-				this.LOGGER.info("Cryptage du mot de passe OK");
+		if (pro.getId() != null) {
+			Pro pro2 = this.proService.findId(pro.getId())
+					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+			// si tout est ok on modifie le mot de passe
+			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+			String cryptpassword = crypt.encode(password);
+			pro2.setProPassword(cryptpassword);
+			this.LOGGER.info("Cryptage du mot de passe OK");
 
-				this.proService.create(pro2);
-				this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
-						+ " a modifié son mot de passe avec succés");
-				model.addAttribute("pro", pro);
-				redirectAttributes.addFlashAttribute("msgok", "ok");
-
-			}
-			return "redirect:/pro/proEdit/" + id;
+			this.proService.create(pro2);
+			this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
+					+ " a modifié son mot de passe avec succés");
+			model.addAttribute("pro", pro);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
 
 		}
-	
+		return "redirect:/pro/proEdit/" + id;
+
+	}
+
 }

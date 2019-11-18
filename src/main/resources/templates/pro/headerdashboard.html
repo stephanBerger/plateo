@@ -47,7 +47,7 @@
 								</div>
 							</a>
 							<div class="dropdown-content">
-								<a th:href="@{/public/proProfile/{id}(id=${pro.id})}">Visualiser ma page</a>
+								<a th:href="@{/pro/proProfile/{id}(id=${pro.id})}">Visualiser ma page</a>
 	     						<a th:href="@{/pro/proEdit/{id}(id=${pro.id})}">Modifier mon profil</a>
 								<form th:action="@{/pro/logout}" method="post">
 									<button class="buttonFauxA" type="submit">Me déconnecter</button>
