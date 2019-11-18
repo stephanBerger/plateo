@@ -47,23 +47,18 @@ public class ProController {
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
 		Pro pro = this.proService.findId(id)
-				.orElseThrow(
-						() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
+				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
-		this.LOGGER.info(
-				"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-						+ " a demander la modification des ses infos");
-		model.addAttribute("listProfessions",
-				this.professionService.getAll());
+		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+				+ " a demander la modification des ses infos");
+		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/pro/proEdit";
 	}
 
 	// bouton modifier du formulaire professionnel
 	@PostMapping("/pro/proEdit/{id}")
-	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail,
-			@PathVariable("id") Integer id,
-			@Valid Pro pro, BindingResult result, Model model,
-			final RedirectAttributes redirectAttributes) {
+	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
+			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
 		if (!OldEmail.equals(pro.getProEmailAddress())) {
 			// verifie si l'adresse email est déja dans la BDD
@@ -94,13 +89,11 @@ public class ProController {
 
 			this.proService.create(pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
-			this.LOGGER.info(
-					"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-							+ " a modifié sa fiche avec succés");
+			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+					+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(pro.getProEmailAddress())) {
-				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " "
-						+ pro.getManagerLastname()
+				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
 						+ " a modifié son email - deconnexion obligatoire");
 
 				return "redirect:/exit";
@@ -116,14 +109,12 @@ public class ProController {
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo",
-					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64,"
-					+ encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
 
@@ -132,8 +123,7 @@ public class ProController {
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
-	public String proAddPhoto(@PathVariable Integer id,
-			@RequestParam("listProPhotos") List<MultipartFile> photos,
+	public String proAddPhoto(@PathVariable Integer id, @RequestParam("listProPhotos") List<MultipartFile> photos,
 			RedirectAttributes redirectAttributes) {
 		if (photos.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
@@ -196,8 +186,7 @@ public class ProController {
 			return null;
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
-					+ confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
@@ -249,8 +238,7 @@ public class ProController {
 			this.proService.create(pro);
 
 			// envoi email inscription
-			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-					+ ","
+			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
 					+ "\n\nVotre incription a bien été prise en compte."
 					+ "\n\nPLATEO vous remercie de votre confiance.";
 
