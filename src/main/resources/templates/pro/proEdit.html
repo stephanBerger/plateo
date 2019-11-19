@@ -35,20 +35,20 @@
 						<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
 								mon mot de passe</button></a>
 					</div>
-					<div class=" ">
+					<div class="form-group formIdentifier left">
 						<label for="companyName" class="col-form-label blue ">Dénomination
 							sociale </label> <input class="champsFormulaire" id="companyName" th:field="*{companyName}" type="text" placeholder="Champs obligatoire" required tabindex="1" /> <span th:if="${#fields.hasErrors('companyName')}"
 								th:errors="*{companyName}" class="text-danger"> </span>
 						</div>
 
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="siret" class="col-form-label blue ">SIRET</label>
 								<input class="champsFormulaire" id="siret" th:field="*{siret}"
 									type="text" placeholder="numéro de SIRET : 14 chiffres" required
 									tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
 									th:errors="*{siret}" class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="managerLastname"
 									class="col-form-label blue ">Nom du gérant</label> <input
 									type="text" id="managerLastname" th:field="*{managerLastname}"
@@ -57,7 +57,7 @@
 									th:if="${#fields.hasErrors('managerLastname')}"
 									th:errors="*{managerLastname}" class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="managerFirstname"
 									class="col-form-label blue ">Prénom du gérant</label> <input
 									type="text" id="managerFirstname" th:field="*{managerFirstname}"
@@ -66,7 +66,7 @@
 									th:if="${#fields.hasErrors('managerFirstname')}"
 									th:errors="*{managerFirstname}" class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="proEmailAddress"
 									class="col-form-label blue ">Email</label> <input
 									type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
@@ -80,7 +80,7 @@
 			</div>
 
 			<div class="col-xs-6 col-md-4">
-				<div class=" ">
+				<div class="form-group formIdentifier left">
 					<input type="hidden" id="proPassword" th:field="*{proPassword}"
 						class="champsFormulaire" placeholder="Champs obligatoire"
 						required /> <span th:if="${#fields.hasErrors('proPassword')}"
@@ -88,14 +88,14 @@
 				</div>
 
 						<div class="formIdentifierRight">
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="proAddress" class="col-form-label blue ">Adresse</label>
 								<input type="text" id="proAddress" th:field="*{proAddress}"
 									class="champsFormulaire" placeholder="Saisir adresse" /> <span
 									th:if="${#fields.hasErrors('proAddress')}"
 									th:errors="*{proAddress}" class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="proPostcode" class="col-form-label blue ">Code
 									Postal</label> <input type="text" id="proPostcode" pattern="[0-9]{5}"
 									th:field="*{proPostcode}" class="champsFormulaire"
@@ -103,7 +103,7 @@
 									th:if="${#fields.hasErrors('proPostcode')}"
 									th:errors="*{proPostcode}" class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 
 								<label for="proCity" class="col-form-label blue ">Ville</label>
 								<input type="text" id="proCity" th:field="*{proCity}"
@@ -111,7 +111,7 @@
 									th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
 									class="text-danger"> </span>
 							</div>
-							<div class=" ">
+							<div class="form-group formIdentifier left">
 								<label for="proPhoneNumber" class="col-form-label blue ">Téléphone</label>
 								<input type="text" id="proPhoneNumber" pattern="[0-9]{10}"
 									th:field="*{proPhoneNumber}" class="champsFormulaire"
@@ -127,14 +127,11 @@
 									<label for="listProfession"
 										class="col-form-label blue ">Listes des corps
 										d'états</label>
-									<div class="custom-control custom-switch" th:each="profession,iStat : ${listProfessions}">
-									<div th:class="${iStat.count%10==0}? 'row':''">
-									<div th:class="${iStat.count%10==0}? 'col-xs-8 col-sm-6':''">
+									<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
 										<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
 											th:value="${{profession}}" th:field="*{listProProfessions}" />
-										
 										<label  class="custom-control-label" th:for="${{profession.id}}" data-toggle="popover" data-placement="right"  
-										th:title="${profession.name}" th:data-content="${profession.description}" th:style="${iStat.count%10==0}? 'font-weight: bold;'" th:text="${profession.name}"></label>
+										th:title="${profession.name}" th:data-content="${profession.description}" th:text="${profession.name}"></label>
 										</div>
 									</div>
 								</div>

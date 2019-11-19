@@ -5,7 +5,7 @@
 	padding:0;
 	background-color: white;
 	box-shadow: 0px 0px 15px 0px #bdbdbd;
-	
+
 	align-items:flex-start !important;
 	flex-grow: 1;
 }
@@ -21,7 +21,7 @@
  .changePassword{
  	line-height:2;
  	font-size: 1.2rem;
-    font-weight: 500;
+  font-weight: 500;
     /*margin-left :50px;*/
  }
  .sectionButton{
@@ -48,21 +48,15 @@
   border-radius: 0;
   margin:10px;
   margin-top:5px !important;
-} 
- 
- /*---------------------------------------MEDIA QUERYS-------------------------------*/   
- 
-  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */ 
-  @media screen and (max-width: 1440px) {
-/*---------------MODIF FORMULAIRES----------------*/ 
-
-	 .sectionFormPro{
-	 	padding-top:20px;
-	 }
 }
-  
-  
- 
- 
- 
-  
+
+ /*---------------------------------------MEDIA QUERYS-------------------------------*/
+
+  /*--------------VERSION MOBILE si ecran egal ou plus petit que 1440px   */
+  @media screen and (max-width: 1440px) {
+/*---------------MODIF FORMULAIRES----------------*/
+
+	 /* .sectionFormPro{
+	 	padding-top:20px;
+	 } */
+}
