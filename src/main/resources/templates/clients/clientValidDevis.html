@@ -8,28 +8,27 @@
 	<header th:replace="public/header :: header"></header>
 
 	<section th:replace="public/index :: sectionIndex"></section>
-		
+			
 	<div id="loginModal" class="modal fade" data-keyboard="false"
-		data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+	data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content overFlowHidden">
-				<div class="bggreyClair headermodal">
-					<h3 class="white centrer">
-						<strong>PARTICULIER</strong>
-					</h3>
-					<button type="button" class="close btnModal" data-dismiss="modal">
-						<span>&times;</span>
-					</button>	
-				</div>
 				<div class="modal-body">
 					<div class="identifier-login centrer">
-						<h3 class="blue">Votre compte a bien été créé</h3>
-						<a th:href="@{/clients/clientDashboard}">
-							<button class="btn bgBlue">Se connecter</button>
-						</a>
-						<a th:href="@{/}">
-							<button class="btn btnPro bgOrange">Accueil</button>
-						</a>
+						<h3 class="blue">Votre demande de devis</h3>
+						<h3 class="blue">a bien été créé</h3><br>
+						<h4 class="blue">Voulez vous rajoutez</h4>
+						<h4 class="blue">une nouvelle prestation ???</h4>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div align="center">
+							<a class="btn btn-primary" th:href="@{/clients/estimateRequestNext/} + ${estimateid}">Oui</a>
+							<a class="btn btn-primary" th:href="@{/clients/clientDashboard}">Dashboard</a>
+						</div><br>
+						<div align="center"></div><br>
+
 					</div>
 				</div>
 			</div>

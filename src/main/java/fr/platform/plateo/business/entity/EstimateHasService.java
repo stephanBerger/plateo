@@ -34,6 +34,11 @@ public class EstimateHasService implements Serializable {
 	 *
 	 */
 	private Blob data;
+	
+	/**
+	 *
+	 */
+	private Integer processid;
 
 	/**
 	 *
@@ -45,14 +50,14 @@ public class EstimateHasService implements Serializable {
 	/**
 	 *
 	 */
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "service_id")
-	private Service service;
+	private Service service;*/
 
 	public Integer getId() {
 		return this.id;
 	}
-
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -73,12 +78,23 @@ public class EstimateHasService implements Serializable {
 		this.estimate = estimate;
 	}
 
-	public Service getService() {
+	public Integer getProcessid() {
+		return processid;
+	}
+
+	public void setProcessid(Integer processid) {
+		this.processid = processid;
+	}
+
+	
+
+	
+/*	public Service getService() {
 		return this.service;
 	}
 
 	public void setService(Service service) {
 		this.service = service;
-	}
+	}*/
 
 }

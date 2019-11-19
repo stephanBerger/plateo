@@ -254,12 +254,4 @@ public class ClientController {
 
 	}
 
-	/*
-	 * // Test d'affichage de la liste des Clients
-	 *
-	 * @GetMapping("public/test") public String test() { List<Client> list =
-	 * this.clientService.listClients(); for(Client client: list)
-	 * System.out.println(client.getClientEmailAddress()); return "public/index"; }
-	 */
-
 }

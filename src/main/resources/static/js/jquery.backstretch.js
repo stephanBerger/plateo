@@ -82,7 +82,7 @@
   var styles = {
       wrap: {
           left: 0
-        , top: 140px
+        , top: 0
         , overflow: 'hidden'
         , margin: 0
         , padding: 0
