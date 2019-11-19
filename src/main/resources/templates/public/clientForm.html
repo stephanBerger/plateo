@@ -2,8 +2,7 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/asupp.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="public/header :: header"></header>
@@ -12,7 +11,7 @@
             <div class="inner-bg">
                 <div class="container">
                     <div class="row centrer">
-                        <div class="col-sm-8 col-sm-offset-2 text">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
                             <h1>Créez un compte <strong>Particulier</strong></h1>
                         </div>
                     </div>
@@ -67,8 +66,6 @@
 					                    	</div>
 					                    	
 					                    	<div class="middle-border"></div>
-                        					<!--  <div class="col-sm-1"></div>-->
-					                    	
 					                    	
 					                    	<div class="sousColumnFormulaire">
 						                    	<div class="form-group">
@@ -119,9 +116,7 @@
             
         </div>
 		<div class="backstretch">
-			<!--  --><img src="/img/1.jpg">
-			<!--<img src="/img/maison-en-travaux.jpg">
-			  <img src="/img/IMG-FOND1.jpg">-->
+			<img src="/img/1.jpg">
 		</div>
         <!-- Footer -->
         <footer th:fragment="footer" class="">

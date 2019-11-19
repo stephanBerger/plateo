@@ -15,15 +15,9 @@
 	<section class="sectionNouvClient section100pour100 centrer">
 
 		<div class="centrer carreBlanc">
-			<!--  <div>
-			<h2 class="white titre-formulaires ">Créez un compte</h2>
-		</div>-->
-
-
 			<form class="centrer sectionFormClient" action="#"
 				th:action="@{/clients/clientEdit/{id}(id=${client.id})}"
 				th:object="${client}" method="post">
-
 				<!-- message -->
 				<div align="center" th:if="${msgok eq 'ok'}"
 					class="alert alert-success">

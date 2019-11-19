@@ -359,8 +359,154 @@ greyClair ul{
   	position:absolute;
   	flex-direction:column;
   	justify-content:space-between;
-  	margin-top: 140px;
 }
+.sectionNouvClient, .sectionNouvPro, .sectionIdentifier, .top-content{
+	margin-top: 140px !important;
+}
+
+/*-------------------------DECO FORMULAIRE----------------------------*/
+.inner-bg {
+    padding: 30px 0 80px 0;
+}
+.top-content .text h1 {
+	color: #fff;
+}
+h1, h2 {
+	margin-top: 10px;
+	font-size: 38px;
+    font-weight: 100;
+    color: #555;
+    line-height: 50px;
+}
+
+h3 {
+	font-size: 22px;
+    font-weight: 300;
+    color: #555;
+    line-height: 30px;
+}
+strong {
+	font-weight: 600;
+}
+.form-box {
+	margin-top: 30px;
+}
+.form-bottom {
+	padding: 25px 25px 30px 25px;
+	background: #444;
+	background: rgba(0, 0, 0, 0.3);
+	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+	text-align: left;
+}
+.rowFormulaire{
+	display:flex;
+	flex-direction: row;
+	justify-content:center;
+	align-items:flex-start;
+}
+.sousColumnFormulaire{
+	min-width:380px;
+}
+input[type="text"], 
+input[type="password"], 
+input[type="email"],
+textarea, 
+textarea.form-control {
+	height: 50px;
+    margin: 0;
+    padding: 0 20px;
+    vertical-align: middle;
+    background: #fff;
+    border: 3px solid #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 50px;
+    color: #888;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+textarea:focus, 
+textarea.form-control:focus {
+	outline: 0;
+	background: #fff;
+    border: 3px solid #fff;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+
+input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder, 
+textarea:-moz-placeholder, textarea.form-control:-moz-placeholder { color: #888; }
+
+input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, 
+textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { color: #888; }
+
+input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, 
+textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
+
+.middle-border {
+	min-height: 290px;
+	margin: 0 30px;
+	border-right: 1px solid #fff;
+	border-right: 1px solid rgba(255, 255, 255, 0.6);
+}
+button.btn {
+	height: 50px;
+    /*margin: 0;*/
+    padding: 0 20px;
+    margin-top:20px;
+    vertical-align: middle;
+    background: #19b9e7;
+    border: 0;
+    font-family: 'Roboto', sans-serif;
+    /*font-size: 16px;*/
+    font-weight: 300;
+    line-height: 50px;
+    color: #fff;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+button.btn:hover { opacity: 0.6; color: #fff; }
+
+button.btn:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+button.btn:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+.form-bottom form button.btn {
+	width: 100%;	
+}
+.backstretch{
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+	z-index: -999999;
+	position: fixed;
+}
+.backstretch img {
+	/*position: absolute;*/
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	/*width: 1524px;*/
+	/*height: 1016px;*/
+	max-height: none;
+	max-width: none;
+	z-index: -999999;
+	left: 0px;
+	top: 145px;
+}
+
 /*-----------------------------IDENTIFICATION-----------------------------------------*/
 .sectionIdentifier{
 	width:100%;
@@ -418,7 +564,8 @@ greyClair ul{
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
-  	font-size: 1.6rem;
+  	opacity:0.8;
+	font-size: 1.4rem !important;
  }
 ::placeholder {
 	font-size:1.3rem;
@@ -533,13 +680,14 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
 
  /*-----------------------------FOOTER-----------------------------------------*/
-/*.theFooter{
-	height:50px;
-	min-height:50px;
-	position: fixed;
-   	bottom: 0;
-	width:100%;
-}*/
+footer {
+	margin-top: 85px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.3);
+}
+footer a:hover, footer a:focus {
+	color: #fff;
+}
 .ulFooter{
 	display:flex;
 	flex-direction: row;
