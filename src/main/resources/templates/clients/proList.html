@@ -5,8 +5,8 @@
 
         
         <link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
-        <link rel="stylesheet" type="text/css" th:href="@{/ListProDataTables/datatables.min.css}"/>
-        <script type="text/javascript" th:src="@{/ListProDataTables/datatables.min.js}"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
+        <script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
         
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
@@ -22,7 +22,7 @@
 	</header>
 
         <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
-           <div class="plusProduits listPro">
+           <div class="plusProduits list">
 
 	       <h1 class="centrer" >Annuaire des professionnels</h1>
 		
@@ -37,7 +37,7 @@
             	    </tr>
 	          </thead>
         	  <tbody>
-        	    <tr th:each="pro : ${listPro}">
+        	    <tr th:each="pro : ${proList}">
         	      <td th:text="${pro.companyName}"></td>
         	      <td th:text="${pro.proCity}"></td>
         	      <td th:text="${pro.proPostcode}"></td>
