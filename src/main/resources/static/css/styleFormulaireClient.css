@@ -38,7 +38,7 @@
  }
  
 input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
-  margin-top:5px;
+  /*margin-top:5px;*/
 }
  /*--------------------FIN FORMULAIRE INSCRIPTION CLIENT-------------------------------*/ 
-  
+   
