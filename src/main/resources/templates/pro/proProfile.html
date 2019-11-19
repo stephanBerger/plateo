@@ -31,8 +31,8 @@
 				  	
 				  	<!-- Wrapper for slides -->
 				  	<div class="carousel-inner">
-				  		<div th:each="photo, iterStat: ${photos}" th:class="${iterStat.index}== 0 ? 'carousel-item active':'carousel-item'">
-				  			<img th:src="${photo}" class="d-block w-100">
+				  		<div th:each="photo, iterStat:${photos}" th:class="${iterStat.index}== 0 ? 'carousel-item active':'carousel-item'">
+				  			<img th:src="${photo[0]}" class="d-block w-100">
 						</div>
 					</div>
 				
@@ -88,9 +88,9 @@
         			</button>
       			</div>
       			<div class="modal-body">
-	        		<div th:each="photo, iterStat : ${photos}" class="border-bottom">
-				  		<img th:src="${photo}" class="d-block w-25 mb-1 mt-1">
-				  		<a th:href="@{/pro/proDeletePhotos/}+ ${pro.id}+ @{/} + ${iterStat.index}">Supprimer</a>
+	        		<div th:each="photo : ${photos}" class="border-bottom">
+				  		<img th:src="${photo[0]}" class="d-block w-25 mb-1 mt-1">
+				  		<a th:href="@{/pro/proDeletePhotos/}+ ${photo[1]}">Supprimer</a>
 					</div>
 	      		</div>
     		</div>

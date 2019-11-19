@@ -112,10 +112,10 @@ public class ProController {
 			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
-		List<String> encodings = new ArrayList<>();
+		List<String[]> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
 			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
-			encodings.add(encoding);
+			encodings.add(new String[] { encoding, photo.getId() + "" });
 		}
 
 		model.addAttribute("photos", encodings);
@@ -144,9 +144,9 @@ public class ProController {
 		return "/public/publicProProfile";
 	}
 
-	@GetMapping("/pro/proDeletePhotos/{idPro}/{idPhoto}")
-	public String proDeletePhotos(@PathVariable Integer idPro, @PathVariable Integer idPhoto) {
-		this.proService.deletePhoto(idPro, idPhoto);
+	@GetMapping("/pro/proDeletePhotos/{idPhoto}")
+	public String proDeletePhotos(@PathVariable Integer idPhoto) {
+		this.proService.deletePhoto(idPhoto);
 		return "redirect:/pro/proDashboard";
 	}
 

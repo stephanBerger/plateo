@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
+import fr.platform.plateo.persistence.ProPhotosRepository;
 import fr.platform.plateo.persistence.ProRepository;
 import fr.platform.plateo.presentation.ClientController;
 
@@ -26,6 +27,9 @@ public class ProService implements UserDetailsService {
 
 	@Autowired
 	private ProRepository proRepository;
+
+	@Autowired
+	private ProPhotosRepository proPhotosRepository;
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(ClientController.class);
 
@@ -74,15 +78,8 @@ public class ProService implements UserDetailsService {
 		this.proRepository.save(pro);
 	}
 
-	public void deletePhoto(Integer idPro, Integer idPhoto) {
-		Pro pro = this.proRepository.getOne(idPro);
-		List<ProPhotos> temp = pro.getListProPhotos();
-		ProService.LOGGER.error("Taille de la liste avant: " + pro.getListProPhotos().size());
-		temp.remove((int) idPhoto);
-		pro.setListProPhotos(temp);
-		ProService.LOGGER.error("Taille de la liste après: " + pro.getListProPhotos().size());
-		ProService.LOGGER.error(idPhoto + "");
-		this.proRepository.save(pro);
+	public void deletePhoto(Integer idPhoto) {
+		this.proPhotosRepository.deleteById(idPhoto);
 	}
 
 	public Optional<Pro> findId(Integer id) {
