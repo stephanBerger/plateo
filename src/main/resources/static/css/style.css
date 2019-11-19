@@ -4,7 +4,7 @@ html {
   height: 100%;
 }
 body {
-  min-height: 100vh;
+ /* min-height: 100vh;*/
   margin: 0;
   padding: 0;
 }
@@ -72,7 +72,13 @@ a:hover{
 
 /*-----------------------------HEADER-----------------------------------------*/
 header{
-	/*box-shadow: 0px -4px 10px 0px black;*/
+	background-color: white;
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    
 }
 .textedivimgHeader{
 	position:absolute;
@@ -353,6 +359,7 @@ greyClair ul{
   	position:absolute;
   	flex-direction:column;
   	justify-content:space-between;
+  	margin-top: 140px;
 }
 /*-----------------------------IDENTIFICATION-----------------------------------------*/
 .sectionIdentifier{
@@ -418,7 +425,7 @@ greyClair ul{
 	color:#bdbdbd;
 	font-style: italic;
 }
-input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -526,13 +533,13 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
 
  /*-----------------------------FOOTER-----------------------------------------*/
-.theFooter{
+/*.theFooter{
 	height:50px;
 	min-height:50px;
 	position: fixed;
    	bottom: 0;
 	width:100%;
-}
+}*/
 .ulFooter{
 	display:flex;
 	flex-direction: row;

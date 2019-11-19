@@ -94,7 +94,7 @@ public class ClientController {
 	@GetMapping("/public/clientForm")
 	public String clientForm(Client client) {
 		this.LOGGER.info("La page \"clientForm\" est demandée");
-		return "/public/clientForm2";
+		return "/public/clientForm";
 	}
 
 	// nouveau client method post - bouton valider du formulaire nouveau client
