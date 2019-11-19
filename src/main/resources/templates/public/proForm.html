@@ -90,16 +90,31 @@
 						</div>
 					</div>
 					
-						<div class="formIdentifierRight sectionForm">		
-						<div class="form-group formIdentifier left">
-							<label for="listProfession" class="col-form-label blue labelForm">Listes des corps d'états</label>
-      						<div th:each="profession : ${listProfessions}">
-								<input type="checkbox" th:id="${{profession.id}}"
-								th:value="${{profession}}" th:field="*{listProProfessions}" />
-								<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
-							</div>
-						</div>
-					</div>
+<!-- 						<div class="formIdentifierRight sectionForm">		 -->
+<!-- 						<div class="form-group formIdentifier left"> -->
+<!-- 							<label for="listProfession" class="col-form-label blue labelForm">Listes des corps d'états</label> -->
+<!--       						<div th:each="profession : ${listProfessions}"> -->
+<!-- 								<input type="checkbox" th:id="${{profession.id}}" -->
+<!-- 								th:value="${{profession}}" th:field="*{listProProfessions}" /> -->
+<!-- 								<label th:for="${{profession.id}}" th:text="${profession.name}"></label> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+									<div class="form-group row mb-2">
+							
+
+									<label for="listProfession"
+										class="col-form-label blue">Listes des corps
+										d'états</label>
+									<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
+										<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
+											th:value="${{profession}}" th:field="*{listProProfessions}" />
+										<label  class="custom-control-label" th:for="${{profession.id}}" data-toggle="popover" data-placement="right"  
+										th:title="${profession.name}" th:data-content="${profession.description}" th:text="${profession.name}"></label>
+										</div>
+
+							
+			</div>
 				</div>
 				<div class="centrer sectionButton">
 					
@@ -119,6 +134,15 @@
 	</section>
 	<footer th:replace="public/footer :: footer">
 	</footer>
+	<script>
+$(function () {
+	  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 150, hide: 100} })
+	});
+  $(function () {
+    $('label').popover()
+  });
+
+</script>
 </body>
 
 </html>
