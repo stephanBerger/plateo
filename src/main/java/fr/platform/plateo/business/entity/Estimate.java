@@ -3,12 +3,17 @@ package fr.platform.plateo.business.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -31,12 +36,15 @@ public class Estimate implements Serializable {
 	/**
 	 *
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate request_date;
 
 	/**
 	 *
 	 */
-	private Integer estimate_status;
+	@Enumerated (EnumType.STRING)
+	@Column(name="estimate_status")
+	private EstimateStatus estimatestatus;
 
 	/**
 	 *
@@ -71,7 +79,8 @@ public class Estimate implements Serializable {
 	/**
 	 *
 	 */
-	private String work_deadline;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate work_deadline;
 
 	/**
 	 *
@@ -108,12 +117,12 @@ public class Estimate implements Serializable {
 		this.request_date = request_date;
 	}
 
-	public Integer getEstimate_status() {
-		return this.estimate_status;
+	public EstimateStatus getEstimatestatus() {
+		return estimatestatus;
 	}
 
-	public void setEstimate_status(Integer estimate_status) {
-		this.estimate_status = estimate_status;
+	public void setEstimatestatus(EstimateStatus estimatestatus) {
+		this.estimatestatus = estimatestatus;
 	}
 
 	public String getWork_address() {
@@ -164,11 +173,11 @@ public class Estimate implements Serializable {
 		this.work_comment = work_comment;
 	}
 
-	public String getWork_deadline() {
-		return this.work_deadline;
+	public LocalDate getWork_deadline() {
+		return work_deadline;
 	}
 
-	public void setWork_deadline(String work_deadline) {
+	public void setWork_deadline(LocalDate work_deadline) {
 		this.work_deadline = work_deadline;
 	}
 

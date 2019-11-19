@@ -17,10 +17,6 @@ import javax.persistence.Table;
 @Table(name = "profession")
 public class Profession implements Serializable {
 
-	@JoinColumn(name = "pro_id")
-	@ManyToOne
-	private Pro pro;
-
 	private static final long serialVersionUID = -2301537539869858022L;
 
 	/**
