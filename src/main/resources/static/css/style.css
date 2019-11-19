@@ -415,6 +415,18 @@ greyClair ul{
 	height:86px;
 	margin-bottom: 0.6rem;
 }
+
+input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:20px;
+}
+
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
