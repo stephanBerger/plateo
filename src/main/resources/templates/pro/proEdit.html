@@ -1,159 +1,153 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
+
 <head th:replace="public/head :: head"></head>
 
 <head>
 <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet" type="text/css">
+   <link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 	<header th:replace="pro/headerdashboard :: headerdashboard">-
 	</header>
-<body>
 
 	<th:block th:include="/pro/proEditPassword.html :: proeditpassword"></th:block>
 
-	<section class="">
+	<div>
+		<h2 class="blue titre-formulaires centrer">Modifier mon profil</h2>
+	</div>
 
-		<div class="">
-			<!--  <div>
-			<h2 class="white titre-formulaires ">Créez un compte</h2>
-		</div>-->
+	<section class="container">
+		<form class="" action="#" th:action="@{/pro/proEdit/{id}(id=${pro.id})}" th:object="${pro}" method="post">
+		<div class="row">
 
 
-			<form class="centrer sectionFormPro" action="#"
-				th:action="@{/pro/proEdit/{id}(id=${pro.id})}" th:object="${pro}"
-				method="post">
+				<div class="col-xs-6 col-md-4">
 
-				<!-- message -->
-				<div align="center" th:if="${msgok eq 'ok'}"
-					class="alert alert-success">
-					<strong>Modification du mot de passe réussie avec succès</strong>
-				</div>
 
-				<div>
-					<h2 class="blue titre-formulaires ">Modifier mon profil</h2>
-				</div>
-				<div>
-					<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
-							mon mot de passe</button></a>
-				</div>
-				<div class="centrer sectionForm">
-					<div class="form-group formIdentifier left">
-						<label for="companyName" class="col-form-label blue labelForm">Dénomination
-							sociale </label> <input class="champsFormulaire" id="companyName"
-							th:field="*{companyName}" type="text"
-							placeholder="Champs obligatoire" required tabindex="1" /> <span
-							th:if="${#fields.hasErrors('companyName')}"
-							th:errors="*{companyName}" class="text-danger"> </span>
+					<!-- message -->
+					<div align="center" th:if="${msgok eq 'ok'}" class="alert alert-success">
+						<strong>Modification du mot de passe réussie avec succès</strong>
 					</div>
-					<div class="formIdentifierLeft">
-						<div class="form-group formIdentifier left">
-							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
-							<input class="champsFormulaire" id="siret" th:field="*{siret}"
-								type="text" placeholder="numéro de SIRET : 14 chiffres" required
-								tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
-								th:errors="*{siret}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-
-							<label for="managerLastname"
-								class="col-form-label blue labelForm">Nom du gérant</label> <input
-								type="text" id="managerLastname" th:field="*{managerLastname}"
-								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span
-								th:if="${#fields.hasErrors('managerLastname')}"
-								th:errors="*{managerLastname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="managerFirstname"
-								class="col-form-label blue labelForm">Prénom du gérant</label> <input
-								type="text" id="managerFirstname" th:field="*{managerFirstname}"
-								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span
-								th:if="${#fields.hasErrors('managerFirstname')}"
-								th:errors="*{managerFirstname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proEmailAddress"
-								class="col-form-label blue labelForm">Email</label> <input
-								type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
-								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span
-								th:if="${#fields.hasErrors('proEmailAddress')}"
-								th:errors="*{proEmailAddress}" class="text-danger"> </span> <input
-								type="hidden" id="OldEmail" name="OldEmail"
-								th:value="*{proEmailAddress}" />
-
-						</div>
-						<div class="form-group formIdentifier left">
-							<input type="hidden" id="proPassword" th:field="*{proPassword}"
-								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span th:if="${#fields.hasErrors('proPassword')}"
-								th:errors="*{proPassword}" class="text-danger"> </span>
-						</div>
-						<div class="form-group-vide formIdentifier left"></div>
-						<div align="center">
-							<a href="/pro/proDashboard" class="btn btn-primary">Retour</a>
-						</div>
+					<div>
+						<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
+								mon mot de passe</button></a>
 					</div>
-
-					<div class="formIdentifierRight">
-						<div class="form-group formIdentifier left">
-
-							<label for="proAddress" class="col-form-label blue labelForm">Adresse</label>
-							<input type="text" id="proAddress" th:field="*{proAddress}"
-								class="champsFormulaire" placeholder="Saisir adresse" /> <span
-								th:if="${#fields.hasErrors('proAddress')}"
-								th:errors="*{proAddress}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proPostcode" class="col-form-label blue labelForm">Code
-								Postal</label> <input type="text" id="proPostcode" pattern="[0-9]{5}"
-								th:field="*{proPostcode}" class="champsFormulaire"
-								placeholder="Saisir code postal" /> <span
-								th:if="${#fields.hasErrors('proPostcode')}"
-								th:errors="*{proPostcode}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-
-							<label for="proCity" class="col-form-label blue labelForm">Ville</label>
-							<input type="text" id="proCity" th:field="*{proCity}"
-								class="champsFormulaire" placeholder="Saisir ville" /> <span
-								th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
-								class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proPhoneNumber" class="col-form-label blue labelForm">Téléphone</label>
-							<input type="text" id="proPhoneNumber" pattern="[0-9]{10}"
-								th:field="*{proPhoneNumber}" class="champsFormulaire"
-								placeholder="Saisir numéro de téléphone" /> <span
-								th:if="${#fields.hasErrors('proPhoneNumber')}"
-								th:errors="*{proPhoneNumber}" class="text-danger"> </span>
+					<div class=" ">
+						<label for="companyName" class="col-form-label blue ">Dénomination
+							sociale </label> <input class="champsFormulaire" id="companyName" th:field="*{companyName}" type="text" placeholder="Champs obligatoire" required tabindex="1" /> <span th:if="${#fields.hasErrors('companyName')}"
+								th:errors="*{companyName}" class="text-danger"> </span>
 						</div>
 
-						<div class="formIdentifierRight sectionForm">
-							<div class="form-group formIdentifier left">
-								<label for="listProfession"
-									class="col-form-label blue labelForm">Listes des corps
-									d'états</label>
-								<div th:each="profession : ${listProfessions}">
-									<input type="checkbox" th:id="${{profession.id}}"
-										th:value="${{profession}}" th:field="*{listProProfessions}" />
-									<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
-								</div>
+							<div class=" ">
+								<label for="siret" class="col-form-label blue ">SIRET</label>
+								<input class="champsFormulaire" id="siret" th:field="*{siret}"
+									type="text" placeholder="numéro de SIRET : 14 chiffres" required
+									tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
+									th:errors="*{siret}" class="text-danger"> </span>
+							</div>
+							<div class=" ">
+								<label for="managerLastname"
+									class="col-form-label blue ">Nom du gérant</label> <input
+									type="text" id="managerLastname" th:field="*{managerLastname}"
+									class="champsFormulaire" placeholder="Champs obligatoire"
+									required /> <span
+									th:if="${#fields.hasErrors('managerLastname')}"
+									th:errors="*{managerLastname}" class="text-danger"> </span>
+							</div>
+							<div class=" ">
+								<label for="managerFirstname"
+									class="col-form-label blue ">Prénom du gérant</label> <input
+									type="text" id="managerFirstname" th:field="*{managerFirstname}"
+									class="champsFormulaire" placeholder="Champs obligatoire"
+									required /> <span
+									th:if="${#fields.hasErrors('managerFirstname')}"
+									th:errors="*{managerFirstname}" class="text-danger"> </span>
+							</div>
+							<div class=" ">
+								<label for="proEmailAddress"
+									class="col-form-label blue ">Email</label> <input
+									type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
+									class="champsFormulaire" placeholder="Champs obligatoire"
+									required /> <span
+									th:if="${#fields.hasErrors('proEmailAddress')}"
+									th:errors="*{proEmailAddress}" class="text-danger"> </span> <input
+									type="hidden" id="OldEmail" name="OldEmail"
+									th:value="*{proEmailAddress}" />
+							</div>
+			</div>
+
+			<div class="col-xs-6 col-md-4">
+				<div class=" ">
+					<input type="hidden" id="proPassword" th:field="*{proPassword}"
+						class="champsFormulaire" placeholder="Champs obligatoire"
+						required /> <span th:if="${#fields.hasErrors('proPassword')}"
+						th:errors="*{proPassword}" class="text-danger"> </span>
+				</div>
+
+						<div class="formIdentifierRight">
+							<div class=" ">
+								<label for="proAddress" class="col-form-label blue ">Adresse</label>
+								<input type="text" id="proAddress" th:field="*{proAddress}"
+									class="champsFormulaire" placeholder="Saisir adresse" /> <span
+									th:if="${#fields.hasErrors('proAddress')}"
+									th:errors="*{proAddress}" class="text-danger"> </span>
+							</div>
+							<div class=" ">
+								<label for="proPostcode" class="col-form-label blue ">Code
+									Postal</label> <input type="text" id="proPostcode" pattern="[0-9]{5}"
+									th:field="*{proPostcode}" class="champsFormulaire"
+									placeholder="Saisir code postal" /> <span
+									th:if="${#fields.hasErrors('proPostcode')}"
+									th:errors="*{proPostcode}" class="text-danger"> </span>
+							</div>
+							<div class=" ">
+
+								<label for="proCity" class="col-form-label blue ">Ville</label>
+								<input type="text" id="proCity" th:field="*{proCity}"
+									class="champsFormulaire" placeholder="Saisir ville" /> <span
+									th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
+									class="text-danger"> </span>
+							</div>
+							<div class=" ">
+								<label for="proPhoneNumber" class="col-form-label blue ">Téléphone</label>
+								<input type="text" id="proPhoneNumber" pattern="[0-9]{10}"
+									th:field="*{proPhoneNumber}" class="champsFormulaire"
+									placeholder="Saisir numéro de téléphone" /> <span
+									th:if="${#fields.hasErrors('proPhoneNumber')}"
+									th:errors="*{proPhoneNumber}" class="text-danger"> </span>
 							</div>
 						</div>
-						<div align="center">
-							<button type="submit" class="btn btn-primary">Modifier</button>
-						</div>
+			</div>
+			<div class="col-xs-6 col-md-4">
+							<div class="formIdentifierRight ">
+								<div class=" ">
+									<label for="listProfession"
+										class="col-form-label blue ">Listes des corps
+										d'états</label>
+									<div th:each="profession : ${listProfessions}">
+										<input type="checkbox" th:id="${{profession.id}}"
+											th:value="${{profession}}" th:field="*{listProProfessions}" />
+										<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
+									</div>
+								</div>
+							</div>
+			</div>
+			<div align="center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+			<div align="center">
+				<a href="/pro/proDashboard" class="btn btn-primary">Retour</a>
+			</div>
 
-					</div>
-				</div>
-
-
-			</form>
 		</div>
+</form>
 	</section>
+
+
+
 	<th:block th:if="${msg}">
 		<script>
 			$('#loginModal').modal('show')

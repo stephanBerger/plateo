@@ -10,23 +10,26 @@
 	<section th:replace="public/index :: sectionIndex"></section>
 		
 	<div id="loginModal" class="modal fade" data-keyboard="false"
-	data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+		data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content overFlowHidden">
+				<div class="bggreyClair headermodal">
+					<h3 class="white centrer">
+						<strong>PARTICULIER</strong>
+					</h3>
+					<button type="button" class="close btnModal" data-dismiss="modal">
+						<span>&times;</span>
+					</button>	
+				</div>
 				<div class="modal-body">
 					<div class="identifier-login centrer">
-						<h3 class="blue">Votre compte</h3>
-						<h3 class="blue">a bien été créé</h3>
-					</div>
-				</div>
-				<div>
-					<div>
-						<div align="center">
-							<a class="btn btn-primary" th:href="@{/clients/clientDashboard}">Se connecter</a>
-							<a class="btn btn-primary" th:href="@{/}">Accueil</a>
-						</div><br>
-						<div align="center"></div><br>
-
+						<h3 class="blue">Votre compte a bien été créé</h3>
+						<a th:href="@{/clients/clientDashboard}">
+							<button class="btn bgBlue">Se connecter</button>
+						</a>
+						<a th:href="@{/}">
+							<button class="btn btnPro bgOrange">Accueil</button>
+						</a>
 					</div>
 				</div>
 			</div>

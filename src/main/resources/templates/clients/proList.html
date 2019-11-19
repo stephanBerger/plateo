@@ -33,17 +33,17 @@
             	      <th scope="col">Ville</th>
             	      <th scope="col">Code postal</th>
             	      <th scope="col">Corps état</th>
-            	      <th scope="col">siret</th>
+            	      <th scope="col">Visualisation</th>
             	    </tr>
 	          </thead>
         	  <tbody>
         	    <tr th:each="pro : ${listPro}">
-        	      <td scope="row" th:text="${pro.companyName}"><a th:href="@{/}"></a></td>
+        	      <td th:text="${pro.companyName}"></td>
         	      <td th:text="${pro.proCity}"></td>
         	      <td th:text="${pro.proPostcode}"></td>
         	      <td><span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
         	      </td>
-        	      <td th:text="${pro.siret}"></td>
+        	      <td><a th:href="@{/public/proProfile/{id}(id=${pro.id})}">Détails</a></td>
         	    </tr>
 	           </tbody>
 	       </table>	
