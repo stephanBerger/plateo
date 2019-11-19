@@ -73,7 +73,7 @@
 					<div th:text="*{managerFirstname}">Adresse email</div>
 					<div th:text="*{proEmailAddress}">Adresse email</div>
 					<div th:text="*{proPhoneNumber}">Numéro de téléphone</div>
-					<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data= + ${pro.proEmailAddress};size=100x100}" alt="" title="" />
+					<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data={email}(email=*{proEmailAddress});size=100x100}" alt="" title="" />
 				</div> 
 				<!--<div class="border border-info">Notes</div>-->
 			</div>
