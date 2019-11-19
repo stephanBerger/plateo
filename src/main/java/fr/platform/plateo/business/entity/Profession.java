@@ -12,69 +12,82 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "profession" )
+@Table(name = "profession")
 public class Profession implements Serializable {
 
 
     private static final long serialVersionUID = -2301537539869858022L;
 
-    /**
-     *
-     */
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Integer           id;
+
+	/**
+	 *
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 
-    @Column( name = "profession_name" )
-    private String            name;
+	@Column(name = "profession_name")
+	private String name;
 
-    @Column( name = "profession_code", length = 3, unique = true )
-    private String            code;
 
-    @Column( name = "profession_enabled" )
-    private Boolean           enabled;
+	@Column(name = "profession_code", length = 3, unique = true)
+	private String code;
 
-    @OneToMany( mappedBy = "profession" )
-    private List<Service>     services;
+	@Column(name = "description")
+	private String description;
 
-    public Integer getId() {
-        return this.id;
-    }
+	@Column(name = "profession_enabled")
+	private Boolean enabled;
 
-    public void setId( Integer id ) {
-        this.id = id;
-    }
+	@OneToMany(mappedBy = "profession")
+	private List<Service> services;
 
-    public String getName() {
-        return this.name;
-    }
+	public String getDescription() {
+		return this.description;
+	}
 
-    public void setName( String name ) {
-        this.name = name;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public String getCode() {
-        return this.code;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    public void setCode( String code ) {
-        this.code = code;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Boolean getEnabled() {
-        return this.enabled;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public void setEnabled( Boolean enabled ) {
-        this.enabled = enabled;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public List<Service> getServices() {
-        return this.services;
-    }
+	public String getCode() {
+		return this.code;
+	}
 
-    public void setServices( List<Service> services ) {
-        this.services = services;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public Boolean getEnabled() {
+		return this.enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Service> getServices() {
+		return this.services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
 }
