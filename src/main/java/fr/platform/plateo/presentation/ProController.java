@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;

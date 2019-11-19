@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header th:replace="public/header :: header"></header>
+
+	<section th:replace="public/index :: sectionIndex"></section>
+			
+	<div id="loginModal" class="modal fade" data-keyboard="false"
+	data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content overFlowHidden">
+				<div class="modal-body">
+					<div class="identifier-login centrer">
+						<h3 class="blue">Votre demande de devis</h3>
+						<h3 class="blue">a bien été créé</h3><br>
+						<h4 class="blue">Voulez vous rajoutez</h4>
+						<h4 class="blue">une nouvelle prestation ???</h4>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div align="center">
+							<a class="btn btn-primary" th:href="@{/clients/estimateRequestNext/} + ${estimateid}">Oui</a>
+							<a class="btn btn-primary" th:href="@{/clients/clientDashboard}">Dashboard</a>
+						</div><br>
+						<div align="center"></div><br>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$('#loginModal').modal('show');
+	</script>
+</body>
+</html>
