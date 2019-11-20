@@ -533,10 +533,6 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	margin-top: 10px;
 	margin-bottom: 70px;
 	padding: 50px;
-
-	border: solid;
-    border-radius: 10px;
-    background-color: #ff9500;
 }
 
 .list h1 {

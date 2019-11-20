@@ -7,6 +7,7 @@
 <body>
 
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<section class="top-content"></section>
 	<div class="container">
 		<h1 class="text-center" th:text="${task.name}"></h1>
 
@@ -37,6 +38,6 @@
 			<button class="btn btn-primary">Valider</button>
 		</form>
 	</div>
-	<!--<footer th:replace="public/footer :: footer"></footer>-->
+	<footer th:replace="public/footer :: footer"></footer>
 </body>
 </html>
