@@ -109,6 +109,7 @@
 										<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
 											<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
 													th:value="${{profession}}" th:field="*{listProProfessions}" />
+											<!-- petite fenêtre blanche -->
 											<label  class="custom-control-label white" th:for="${{profession.id}}"
 													data-toggle="popover" data-placement="top" th:title="${profession.name}"
 													th:data-content="${profession.description}" th:text="${profession.name}">
