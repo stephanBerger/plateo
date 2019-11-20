@@ -15,45 +15,54 @@
 			<form class="centrer sectionFormClient" action="#"
 				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid}"
 				th:object="${estimate}" method="post">
+
+				<!-- message error date-->
+				<div align="center" th:if="${msg eq 'datesup'}"
+					class="alert alert-danger alert-dismissable">
+					<strong>La date de début chantier est supérieur à la date
+						de fin chantier</strong>
+				</div>
+
 				<div>
 					<h2 class="blue titre-formulaires ">Validation du devis</h2>
 				</div>
 
-				Id du process : <label th:text="${processInstanceId}"></label> Id
-				client : <label th:text="${client.id}"></label> Id devis : <label
-					th:text="${estimateid}"></label>
-				<div class="centrer sectionForm" th:if="${estimateid}==0">
+				<div class="centrer sectionForm">
 
 					<div class="formIdentifierLeft">
 
 						<div class="form-group formIdentifier left">
 							<label for="workAddress" class="col-form-label blue labelForm">Adresse
 								du chantier</label> <input type="text" id="workAddress"
-								name="workAddress" th:value="${client.clientAddress}"
+								name="workAddress" th:field="*{workAddress}"
 								class="champsFormulaire" required />
 						</div>
 
 						<div class="form-group formIdentifier left">
 							<label for="workPostcode" class="col-form-label blue labelForm">Code
 								postal</label> <input type="text" pattern="[0-9]{5}" id="workPostcode"
-								name="workPostcode" th:value="${client.clientPostcode}"
+								name="workPostcode" th:field="*{workPostcode}"
 								placeholder="Saisir code postal" class="champsFormulaire"
 								required />
 						</div>
 
 						<div class="form-group formIdentifier left">
 							<label for="workCity" class="col-form-label blue labelForm">Ville</label>
-							<input type="text" id="workCity" th:value="${client.clientCity}"
+							<input type="text" id="workCity" th:field="*{workCity}"
 								name="workCity" class="champsFormulaire"
 								placeholder="Saisir ville" required />
 						</div>
+
 						<div class="form-group formIdentifier left">
 							<label for="workComment" class="col-form-label blue labelForm">Commentaires</label>
 							<textarea rows="5" cols="50" maxlength="255" id="workComment"
 								th:field="*{workComment}" class="champsFormulaire"
 								placeholder="Commentaires"></textarea>
 						</div>
-
+						<div align="center">
+							<button type="submit" name="prestation" value="otherprestation"
+								class="btn btn-primary">Rajouter une prestation</button>
+						</div>
 					</div>
 
 					<div class="formIdentifierRight">
@@ -63,6 +72,12 @@
 								th:field="*{requestDate}" class="champsFormulaire"
 								placeholder="Saisir date début chantier" required />
 
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="workDeadline" class="col-form-label blue labelForm">Date
+								fin chantier prévu</label> <input type="date" id="workDeadline"
+								th:field="*{workDeadline}" class="champsFormulaire"
+								placeholder="Saisir date fin chantier prévu" required />
 						</div>
 						<div class="form-group formIdentifier left">
 							<label for="accessDescription"
@@ -79,33 +94,27 @@
 								id="usableParkingSpace" class="champsFormulaire"
 								placeholder="Parking" />
 						</div>
+
 						<div class="form-group formIdentifier left">
-							<label for="workDeadline" class="col-form-label blue labelForm">Work
-								deadline</label>
-							<textarea rows="5" cols="50" maxlength="255" id="workDeadline"
-								th:field="*{workDeadline}" class="champsFormulaire"
-								placeholder="Work deadline"></textarea>
+							<input type="hidden" th:field="*{id}" id="id"
+								class="champsFormulaire" />
+						</div>
+						<div class="form-group formIdentifier left">
+							<input type="hidden" th:field="*{client.id}" id="clientid"
+								class="champsFormulaire" />
+						</div>
+						<div align="center">
+							<button type="submit" name="prestation" value="endprestation"
+								class="btn btn-primary">Terminer le devis</button>
 						</div>
 					</div>
-					<div align="center">
-						<button type="submit" class="btn btn-primary">Valider</button>
-					</div>
+
 				</div>
 
 			</form>
 
-			<div class="centrer sectionForm" th:if="${estimateid}!=0">
-				<form class="centrer sectionFormClient" action="#"
-					th:action="@{/clients/valideEstimate2/} + ${processInstanceId} + '/' + ${estimateid}"
-					th:object="${estimate}" method="post">
-					<div align="center">
-						<button type="submit" class="btn btn-primary">Valider2</button>
-					</div>
-				</form>
-			</div>
-
-
 		</div>
 	</section>
+
 </body>
 </html>

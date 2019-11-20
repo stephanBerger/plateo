@@ -17,14 +17,13 @@
 					<div class="identifier-login centrer">
 						<h3 class="blue">Votre demande de devis</h3>
 						<h3 class="blue">a bien été créé</h3><br>
-						<h4 class="blue">Voulez vous rajoutez</h4>
-						<h4 class="blue">une nouvelle prestation ???</h4>
+						<h4 class="blue">sous le numéro</h4>
+						<h4 class="blue"><label th:text="${estimateid}"/></h4>
 					</div>
 				</div>
 				<div>
 					<div>
 						<div align="center">
-							<a class="btn btn-primary" th:href="@{/clients/estimateRequestNext/} + ${estimateid}">Oui</a>
 							<a class="btn btn-primary" th:href="@{/clients/clientDashboard}">Dashboard</a>
 						</div><br>
 						<div align="center"></div><br>

@@ -88,7 +88,7 @@ public class Estimate implements Serializable {
      */
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
     @Column( name = "work_deadline" )
-    private String            workDeadline;
+    private LocalDate            workDeadline;
 
     /**
      *
@@ -182,15 +182,17 @@ public class Estimate implements Serializable {
         this.workComment = workComment;
     }
 
-    public String getWorkDeadline() {
-        return workDeadline;
-    }
+   
 
-    public void setWorkDeadline( String workDeadline ) {
-        this.workDeadline = workDeadline;
-    }
+    public LocalDate getWorkDeadline() {
+		return workDeadline;
+	}
 
-    public Double getAdvancePayment() {
+	public void setWorkDeadline(LocalDate workDeadline) {
+		this.workDeadline = workDeadline;
+	}
+
+	public Double getAdvancePayment() {
         return advancePayment;
     }
 
