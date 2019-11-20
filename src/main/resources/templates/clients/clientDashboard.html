@@ -7,16 +7,21 @@
 <body>
 
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	<th:block
-		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+	<th:block th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
 	<!-- message -->
 	<div align="center" th:if="${msgok eq 'ok'}"
 		class="alert alert-success">
 		<strong>Modification du profil réussie</strong>
 	</div>
-	<h1>Super Dashboard Particulier</h1>
+
+	<section class="section100pour100">
+		<h1>Super Dashboard Particulier</h1>
+	</section>
+	
+	
 	<footer th:replace="public/footer :: footer">
 	</footer>
+
 			
 </body>
 </html>

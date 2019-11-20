@@ -2,142 +2,126 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/asupp.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="public/header :: header"></header>
 	
-	<!-- Top content -->
         <div class="top-content">
-        	
             <div class="inner-bg">
-                <div class="container">
-                	
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>Bootstrap</strong> Login &amp; Register Forms</h1>
-                            <div class="description">
-                            	<p>
-	                            	This is a free responsive <strong>"login and register forms"</strong> template made with Bootstrap. 
-	                            	Download it on <a href="http://azmind.com" target="_blank"><strong>AZMIND</strong></a>, 
-	                            	customize and use it as you like!
-                            	</p>
-                            </div>
+                <div class="container containerMaxWidth">
+                    <div class="row centrer">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
+                            <h1>Créez un compte <strong>Particulier</strong></h1>
                         </div>
                     </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-5">
-                        	
-                        	<div class="form-box">
-	                        	<div class="form-top">
-	                        		<div class="form-top-left">
-	                        			<h3>Login to our site</h3>
-	                            		<p>Enter username and password to log on:</p>
-	                        		</div>
-	                        		<div class="form-top-right">
-	                        			<i class="fa fa-lock"></i>
-	                        		</div>
-	                            </div>
-	                            <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="login-form">
-				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
-				                        </div>
-				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
-				                        </div>
-				                        <button type="submit" class="btn">Sign in!</button>
-				                    </form>
-			                    </div>
+                    <div class="row centrer">
+                       	<div class="form-box">
+                            <div class="form-bottom">
+			                    <form role="form" action="#" th:action="@{/public/clientForm}"
+			                    		th:object="${client}" method="post" class="registration-form">
+			                    	<div>
+				                    	<div class="rowFormulaire">
+					                    	<div class="sousColumnFormulaire">
+					                    		<div class="form-group">
+					                    			<label for="clientLastname" class="white labelForm">Nom</label>
+						                        	<input type="text" id="clientLastname" th:field="*{clientLastname}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="1"/>
+						                       		<span th:if="${#fields.hasErrors('clientLastname')}"
+						                       				th:errors="*{clientLastname}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                    		<label for="clientFirstname" class="white labelForm">Prénom</label>
+						                        	<input type="text" id="clienFirstname" th:field="*{clientFirstname}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="2"/>
+						                        	<span th:if="${#fields.hasErrors('clientFirstname')}"
+															th:errors="*{clientFirstname}" class="text-danger"> </span>
+						                        </div>
+						                    	<div class="form-group">
+						                    		<label for="clientAddress" class="white labelForm">Adresse</label>
+						                        	<input type="text" id="clientAddress" th:field="*{clientAddress}"
+						                        			placeholder="" class="form-first-name form-control"
+						                        			tabindex="3"/>
+						                        	<span th:if="${#fields.hasErrors('clientAddress')}"
+															th:errors="*{clientAddress}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="clientCity" class="white labelForm">Ville</label>
+						                        	<input type="text" id="clientCity" th:field="*{clientCity}"
+						                        			placeholder="" class="form-last-name form-control"
+						                        			tabindex="4"/>
+						                        	<span th:if="${#fields.hasErrors('clientCity')}"
+															th:errors="*{clientCity}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="clientPostcode" class="white labelForm">Code postal</label>
+						                        	<input type="text" id="clientPostcode" pattern="[0-9]{5}" th:field="*{clientPostcode}"
+						                        			placeholder="" class="form-email form-control"
+						                        			tabindex="5"/>
+						                        	<span th:if="${#fields.hasErrors('clientPostcode')}"
+															th:errors="*{clientPostcode}" class="text-danger"> </span>
+						                        </div>
+					                    	</div>
+					                    	
+					                    	<div class="middle-border-vertical"></div>
+					                    	
+					                    	<div class="sousColumnFormulaire">
+						                    	<div class="form-group">
+						                        	<label for="clientEmailAddress" class="white labelForm">Email</label>
+						                        	<input type="email" id="clientEmailAddress" th:field="*{clientEmailAddress}"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+						                        			required tabindex="6" />
+						                        	<span th:if="${#fields.hasErrors('clientEmailAddress')}"
+															th:errors="*{clientEmailAddress}" class="text-danger"> </span>
+						                        </div> 
+						                        <div class="form-group">
+						                        	<label for="clientPhoneNumber" class="white labelForm">Téléphone</label>
+						                        	<input type="text" id="clientPhoneNumber" pattern="[0-9]{10}" th:field="*{clientPhoneNumber}"
+						                        			placeholder="" class="form-email form-control"
+						                        			tabindex="7" />
+						                        	<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
+															th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="clientPassword" class="white labelForm">Mot de passe</label>
+						                        	<input type="password" id="clientPassword" th:field="*{clientPassword}"
+															placeholder="Champs Obligatoire" class="form-email form-control"
+															required tabindex="8" />
+													<span th:if="${#fields.hasErrors('clientPassword')}"
+															th:errors="*{clientPassword}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="confirmPasswordInput" class="white labelForm">Confirmer votre mot de passe</label>
+						                        	<input type="password" id="confirmPasswordInput" name="confirmPasswordInput"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+															required tabindex="9" />
+						                        </div>
+					                    	</div>
+					                    </div>
+			                    	</div> 
+			                    	<div>
+			                    		<button type="submit" class="btn">Validez</button>
+			                        </div> 
+			                        
+			                       
+			                    </form>
 		                    </div>
-		                
-		                	<div class="social-login">
-	                        	<h3>...or login with:</h3>
-	                        	<div class="social-login-buttons">
-		                        	<a class="btn btn-link-2" href="#">
-		                        		<i class="fa fa-facebook"></i> Facebook
-		                        	</a>
-		                        	<a class="btn btn-link-2" href="#">
-		                        		<i class="fa fa-twitter"></i> Twitter
-		                        	</a>
-		                        	<a class="btn btn-link-2" href="#">
-		                        		<i class="fa fa-google-plus"></i> Google Plus
-		                        	</a>
-	                        	</div>
-	                        </div>
-	                        
-                        </div>
-                        
-                        <div class="col-sm-1 middle-border"></div>
-                        <div class="col-sm-1"></div>
-                        	
-                        <div class="col-sm-5">
-                        	
-                        	<div class="form-box">
-                        		<div class="form-top">
-	                        		<div class="form-top-left">
-	                        			<h3>Sign up now</h3>
-	                            		<p>Fill in the form below to get instant access:</p>
-	                        		</div>
-	                        		<div class="form-top-right">
-	                        			<i class="fa fa-pencil"></i>
-	                        		</div>
-	                            </div>
-	                            <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="registration-form">
-				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-first-name">First name</label>
-				                        	<input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
-				                        </div>
-				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-last-name">Last name</label>
-				                        	<input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
-				                        </div>
-				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-email">Email</label>
-				                        	<input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-				                        </div>
-				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-about-yourself">About yourself</label>
-				                        	<textarea name="form-about-yourself" placeholder="About yourself..." 
-				                        				class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-				                        </div>
-				                        <button type="submit" class="btn">Sign me up!</button>
-				                    </form>
-			                    </div>
-                        	</div>
-                        	
-                        </div>
+                       	</div>
                     </div>
                     
                 </div>
             </div>
             
         </div>
-
+		<div class="backstretch">
+			<img src="/img/1.jpg">
+		</div>
         <!-- Footer -->
-        <footer>
-        	<div class="container">
-        		<div class="row">
-        			
-        			<div class="col-sm-8 col-sm-offset-2">
-        				<div class="footer-border"></div>
-        				<p>Made by Anli Zaimi at <a href="http://azmind.com" target="_blank"><strong>AZMIND</strong></a> 
-        					having a lot of fun. <i class="fa fa-smile-o"></i></p>
-        			</div>
-        			
-        		</div>
-        	</div>
-        </footer>
-	<!-- Javascript -->
-       <!-- <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>-->
-        <script th:src="@{/js/jquery.backstretch.js}"></script>
-        <script th:src="@{/js/jquery.backstretch.min.js}"></script>
+        <footer th:replace="public/footer :: footer"></footer>
+        
         <script th:src="@{/js/scripts.js}"></script>
         
         <!--[if lt IE 10]>

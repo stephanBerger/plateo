@@ -4,9 +4,13 @@ html {
   height: 100%;
 }
 body {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
 a:hover{
@@ -72,7 +76,13 @@ a:hover{
 
 /*-----------------------------HEADER-----------------------------------------*/
 header{
-	/*box-shadow: 0px -4px 10px 0px black;*/
+	background-color: white;
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    
 }
 .textedivimgHeader{
 	position:absolute;
@@ -354,6 +364,12 @@ greyClair ul{
   	flex-direction:column;
   	justify-content:space-between;
 }
+.sectionNouvClient, .sectionNouvPro, .sectionIdentifier, .top-content{
+	margin-top: 140px !important;
+}
+
+
+
 /*-----------------------------IDENTIFICATION-----------------------------------------*/
 .sectionIdentifier{
 	width:100%;
@@ -408,17 +424,30 @@ greyClair ul{
 	height:86px;
 	margin-bottom: 0.6rem;
 }
+
+input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #7d7d7d;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin:10px;
+  margin-top:20px;
+}
+
 .labelForm{
  	font-weight: 500;
   	line-height: 1.2;
-  	font-size: 1.6rem;
+  	opacity:0.8;
+	font-size: 1.4rem !important;
  }
 ::placeholder {
 	font-size:1.3rem;
 	color:#bdbdbd;
 	font-style: italic;
 }
-input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
+select.champsFormulaire {
   background: transparent;
   border: none;
   border-bottom: 1px solid #7d7d7d;
@@ -498,26 +527,21 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
  /*-----------------------------FIN PLUS PRODUITS-----------------------------------------*/
 
-
- .listPro {
+.list {
 	flex-direction: column;
 	width: 90%;
 	margin-top: 10px;
 	margin-bottom: 70px;
 	padding: 50px;
-
-	//border: solid;
-    //border-radius: 10px;
-    //background-color: #ff9500;
 }
 
-.listPro h1 {
+.list h1 {
 	margin-top: 5px;
 	margin-bottom: 50px;
 }
 
 
-.listPro th {
+.list th {
 	text-decoration: underline;
 	background-color: white;
 }
@@ -526,12 +550,13 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
 
  /*-----------------------------FOOTER-----------------------------------------*/
-.theFooter{
-	height:50px;
-	min-height:50px;
-	position: fixed;
-   	bottom: 0;
-	width:100%;
+footer {
+	margin-top: 85px;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.3);
+}
+footer a:hover, footer a:focus {
+	color: #fff;
 }
 .ulFooter{
 	display:flex;

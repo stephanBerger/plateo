@@ -2,136 +2,151 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet"
-	type="text/css">
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="public/header :: header"></header>
-
-	<section class="sectionNouvPro section100pour100 centrer">
-		<div class="centrer carreBlanc section100pour100">
-			<form class="centrer sectionFormPro" th:action="@{/public/proForm}"
-				th:object="${pro}" method="post">
-				<div>
-					<h2 class="blue titre-formulaires ">Créez un compte</h2>
-				</div>
-				<div class="centrer sectionForm">
-					<div class="formIdentifierLeft">
-						<div class="form-group formIdentifier left">
-							<label for="companyName" class="col-form-label blue labelForm">Dénomination
-								sociale </label> <input class="champsFormulaire" id="companyName"
-								th:field="*{companyName}" type="text"
-								placeholder="Champs obligatoire" required tabindex="1" /> <span
-								th:if="${#fields.hasErrors('companyName')}"
-								th:errors="*{companyName}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="managerLastname"
-								class="col-form-label blue labelForm">Nom du gérant </label> <input
-								class="champsFormulaire" id="managerLastname"
-								th:field="*{managerLastname}" type="text"
-								placeholder="Champs obligatoire" required tabindex="3" /> <span
-								th:if="${#fields.hasErrors('managerLastname')}"
-								th:errors="*{managerLastname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proEmailAddress"
-								class="col-form-label blue labelForm">Email</label> <input
-								class="champsFormulaire" id="proEmailAddress"
-								th:field="*{proEmailAddress}" type="email"
-								placeholder="Champs obligatoire" required tabindex="5" /> <span
-								th:if="${#fields.hasErrors('proEmailAddress')}"
-								th:errors="*{proEmailAddress}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proCity" class="col-form-label blue labelForm">Ville
-							</label> <input class="champsFormulaire" id="proCity"
-								th:field="*{proCity}" type="text"
-								placeholder="Saisir votre ville" required tabindex="9" /> <span
-								th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
-								class="text-danger"> </span>
-						</div>
-					</div>
-					<div class="formIdentifierRight">
-						<div class="form-group formIdentifier left">
-							<label for="siret" class="col-form-label blue labelForm">SIRET</label>
-							<input class="champsFormulaire" id="siret" th:field="*{siret}"
-								type="text" placeholder="numéro de SIRET : 14 chiffres" required
-								tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
-								th:errors="*{siret}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="managerFirstname"
-								class="col-form-label blue labelForm">Prénom du gérant </label>
-							<input class="champsFormulaire" id="managerFirstname"
-								th:field="*{managerFirstname}" type="text"
-								placeholder="Champs obligatoire" required tabindex="4" /> <span
-								th:if="${#fields.hasErrors('managerFirstname')}"
-								th:errors="*{managerFirstname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="proPostcode" class="col-form-label blue labelForm">Code
-								Postal </label> <input class="champsFormulaire" id="proPostcode"
-								th:field="*{proPostcode}" type="text"
-								placeholder="Saisir son code postal à 5 chiffres"
-								pattern="[0-9]{5}" required tabindex="6" /> <span
-								th:if="${#fields.hasErrors('proPostcode')}"
-								th:errors="*{proPostcode}" class="text-danger"> </span>
-						</div>
-					</div>
-				</div>
-				<div class="sectionForm ">
-					<div class="formIdentifierRight sectionForm">
-						<div class="form-group formIdentifier left">
-							<label for="proPassword" class="col-form-label blue labelForm">Mot
-								de passe :</label> <input class="champsFormulaire" type="password"
-								id="passwordInput" placeholder="Champs obligatoire"
-								th:field="*{proPassword}" required tabindex="7" /> <span
-								th:if="${#fields.hasErrors('proPassword')}"
-								th:errors="*{proPassword}" class="text-danger"> </span>
-						</div>
-					</div>
-					<div class="formIdentifierRight sectionForm">
-						<div class="form-group formIdentifier left">
-							<label for="confirmproPassword"
-								class="col-form-label blue labelForm">Confirmer votre
-								mot de passe :</label> <input class="champsFormulaire" type="password"
-								id="confirmPasswordInput" placeholder="Champs obligatoire"
-								name="confirmProPassword" required tabindex="8" /> <span
-								th:if="${#fields.hasErrors('proPassword')}"
-								th:errors="*{proPassword}" class="text-danger"> </span>
-						</div>
-					</div>
-
-					<div class="formIdentifierRight sectionForm">
-						<div class="form-group formIdentifier left">
-							<label for="listProfession" class="col-form-label blue labelForm">Listes
-								des corps d'états</label>
-							<div th:each="profession : ${listProfessions}">
-								<input type="checkbox" th:id="${{profession.id}}"
-									th:value="${{profession}}" th:field="*{listProProfessions}" />
-								<label th:for="${{profession.id}}" th:text="${profession.name}"></label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="centrer sectionButton">
-
-					<a>
-						<button type="submit" class="btn bgOrange MarginClient">Envoyer</button>
-					</a>
-
-				</div>
-
-
-				<div class="" id="passwordStrength"></div>
-				<input type="submit" value="Change Password" class="btn" /> <input
-					type="submit" value="Envoyer" />
-
-			</form>
+	
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container containerMaxWidth">
+                    <div class="row centrer">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
+                            <h1>Créez un compte <strong>Professionnel</strong></h1>
+                        </div>
+                    </div>
+                    <div class="row centrer">
+                       	<div class="form-box">
+                            <div class="form-bottom">
+			                    <form role="form" action="#" th:action="@{/public/proForm}"
+										th:object="${pro}" method="post" class="registration-form">
+			                    	<div>
+				                    	<div class="rowFormulaire">
+					                    	<div class="sousColumnFormulaire">
+					                    		<div class="form-group">
+					                    			<label for="companyName" class="white labelForm">Dénomination sociale</label>
+						                        	<input type="text" id="companyName" th:field="*{companyName}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="1"/>
+						                       		<span th:if="${#fields.hasErrors('companyName')}"
+															th:errors="*{companyName}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                    		<label for="managerLastname" class="white labelForm">Nom du gérant</label>
+						                        	<input type="text" id="managerLastname" th:field="*{managerLastname}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="3"/>
+						                        	<span th:if="${#fields.hasErrors('managerLastname')}"
+															th:errors="*{managerLastname}" class="text-danger"> </span>
+						                        </div>
+						                    	<div class="form-group">
+						                    		<label for="proEmailAddress" class="white labelForm">Email</label>
+						                        	<input type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
+						                        			placeholder="Champs obligatoire" class="form-first-name form-control"
+						                        			required tabindex="5" />
+						                        	<span th:if="${#fields.hasErrors('proEmailAddress')}"
+															th:errors="*{proEmailAddress}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proCity" class="white labelForm">Ville</label>
+						                        	<input type="text" id="proCity" th:field="*{proCity}"
+						                        			placeholder="Champs obligatoire" class="form-last-name form-control"
+						                        			required tabindex="9"/>
+						                        	<span th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
+															class="text-danger"> </span>
+						                        </div>
+					                    	</div>
+					                    	
+					                    	<div class="middle-border-vertical"></div>
+					                    	
+					                    	<div class="sousColumnFormulaire">
+						                    	<div class="form-group">
+						                        	<label for="siret" class="white labelForm">SIRET</label>
+						                        	<input type="text" id="siret" th:field="*{siret}"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+						                        			required tabindex="2" />
+						                        	<span th:if="${#fields.hasErrors('siret')}"
+															th:errors="*{siret}" class="text-danger"> </span>
+						                        </div> 
+						                        <div class="form-group">
+						                        	<label for="managerFirstname" class="white labelForm">Prénom du gérant</label>
+						                        	<input type="text" id="managerFirstname" th:field="*{managerFirstname}"
+						                        			placeholder="Champs obligatoire" class="form-email form-control"
+						                        			required tabindex="4" />
+						                        	<span th:if="${#fields.hasErrors('managerFirstname')}"
+															th:errors="*{managerFirstname}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proPostcode" class="white labelForm">Code Postal</label>
+						                        	<input type="text" id="proPostcode" th:field="*{proPostcode}"
+															placeholder="Champs Obligatoire" class="form-email form-control"
+															pattern="[0-9]{5}" required tabindex="6" />
+													<span th:if="${#fields.hasErrors('proPostcode')}"
+															th:errors="*{proPostcode}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proPassword" class="white labelForm">Mot de passe</label>
+						                        	<input type="password" id="passwordInput"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+															th:field="*{proPassword}" required tabindex="7" />
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="confirmproPassword" class="white labelForm">Confirmer votre mot de passe</label>
+						                        	<input type="password" id="confirmPasswordInput"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+															name="confirmProPassword" required tabindex="8" />
+													<span th:if="${#fields.hasErrors('proPassword')}"
+															th:errors="*{proPassword}" class="text-danger"> </span>
+						                        </div>
+					                    	</div>
+					                    </div>
+			                    	</div> 
+			                    	
+			                    	<div class="middle-border-horizontal"></div>
+			                    	<label for="listProfession" class="white labelForm">Listes des corps d'états</label>
+			                    	<div class="PopoverColumn">
+										<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
+											<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
+													th:value="${{profession}}" th:field="*{listProProfessions}" />
+											<label  class="custom-control-label white" th:for="${{profession.id}}"
+													data-toggle="popover" data-placement="top" th:title="${profession.name}"
+													th:data-content="${profession.description}" th:text="${profession.name}">
+											</label>
+										</div>
+									</div>	
+			                    	<div>
+			                    		<button type="submit" class="btn">Validez</button>
+			                        </div> 
+			                        
+			                    </form>
+		                    </div>
+                       	</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
 		</div>
-	</section>
-	<footer th:replace="public/footer :: footer"> </footer>
-</body>
+        <!-- Footer -->
+        <footer th:replace="public/footer :: footer"></footer>
+        
+        <script th:src="@{/js/scripts.js}"></script>
+        <script>
+			$(function () {
+				  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 150, hide: 100} })
+				});
+			  $(function () {
+			    $('label').popover()
+			  });
+			
+		</script>
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
+</body>
 </html>
