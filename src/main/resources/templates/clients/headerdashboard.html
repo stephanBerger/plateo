@@ -31,10 +31,12 @@
 								<span>Devis et factures</span>
 							</a>
 							<div class="dropdown-content">
-								<a th:href="@{/clients/estimateRequest}">Réaliser un devis</a>
-								<a th:href="@{/}">Mes devis en cours</a>
-								<a th:href="@{/}">Mes devis validés</a>
-								<a th:href="@{/}">Mes factures</a>
+								<a th:href="@{/clients/estimateRequest}">Demander un devis</a>
+
+								<a th:href="@{/clients/estimatesRequestList}">Mes demandes de devis</a>
+								<a th:href="@{/clients/estimatesAcceptedList}">Mes validations de devis</a>
+								<a th:href="@{/clients/estimatesConvertedList}">Mes factures</a>
+
 							</div>
 						</li>
 					</div>

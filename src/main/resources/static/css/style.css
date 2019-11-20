@@ -581,26 +581,21 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 
  /*-----------------------------FIN PLUS PRODUITS-----------------------------------------*/
 
-
- .listPro {
+.list {
 	flex-direction: column;
 	width: 90%;
 	margin-top: 10px;
 	margin-bottom: 70px;
 	padding: 50px;
-
-	border: solid;
-    border-radius: 10px;
-    background-color: #ff9500;
 }
 
-.listPro h1 {
+.list h1 {
 	margin-top: 5px;
 	margin-bottom: 50px;
 }
 
 
-.listPro th {
+.list th {
 	text-decoration: underline;
 	background-color: white;
 }

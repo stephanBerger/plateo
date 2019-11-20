@@ -101,8 +101,31 @@ public class ProController {
 		return "redirect:/pro/proDashboard";
 	}
 
+	// Profil pro vu par le pro
+	@GetMapping("/pro/proProfile/{id}")
+	public String proProfile(@PathVariable Integer id, Model model, Principal user) {
+		Pro pro = this.proService.read(id);
+		model.addAttribute("pro", pro);
+		Base64.Encoder encoder = Base64.getEncoder();
+
+		if (pro.getLogo() != null) {
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
+
+		List<String[]> encodings = new ArrayList<>();
+		for (ProPhotos photo : pro.getListProPhotos()) {
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			encodings.add(new String[] { encoding, photo.getId() + "" });
+		}
+
+		model.addAttribute("photos", encodings);
+		model.addAttribute("username", user.getName());
+		return "/pro/proProfile";
+	}
+
+	// Profil pro vu par tout le monde
 	@GetMapping("/public/proProfile/{id}")
-	public String proProfile(@PathVariable Integer id, Model model) {
+	public String publicProProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -118,7 +141,13 @@ public class ProController {
 		}
 
 		model.addAttribute("photos", encodings);
-		return "/public/proProfile";
+		return "/public/publicProProfile";
+	}
+
+	@GetMapping("/pro/proDeletePhotos/{idPhoto}")
+	public String proDeletePhotos(@PathVariable Integer idPhoto) {
+		this.proService.deletePhoto(idPhoto);
+		return "redirect:/pro/proDashboard";
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
@@ -129,7 +158,7 @@ public class ProController {
 			return "redirect:/uploadStatus";
 		}
 		this.proService.addPhotos(id, photos);
-		return "redirect:/";
+		return "redirect:/pro/proDashboard";
 	}
 
 	// login pro method get
@@ -153,10 +182,9 @@ public class ProController {
 	@GetMapping("/public/proList")
 	public String listPro(Model model) {
 		this.LOGGER.info("La page \"proList\" est demandée");
-		List<Pro> listPro = this.proService.readAll();
+		List<Pro> proList = this.proService.readAll();
 
-		model.addAttribute("listPro", listPro);
-		// model.addAttribute( "listProProfessions", listProfessions );
+		model.addAttribute("proList", proList);
 		return "public/proList";
 	}
 
@@ -249,47 +277,46 @@ public class ProController {
 		return null;
 
 	}
-	
-	
+
 	// modification du mot de passe professionnel method post
-		@PostMapping("/pro/proEditPassword")
-		public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
-				@RequestParam(value = "password") String password,
-				@RequestParam(value = "confirmpassword") String confirmpassword,
-				final RedirectAttributes redirectAttributes) {
+	@PostMapping("/pro/proEditPassword")
+	public String proEditPasswordPost(Pro pro, BindingResult result, Model model,
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "confirmpassword") String confirmpassword,
+			final RedirectAttributes redirectAttributes) {
 
-			Integer id = pro.getId();
+		Integer id = pro.getId();
 
-			if (!password.equals(confirmpassword)) {
-				model.addAttribute("msg", "fail");
-				model.addAttribute("id", id);
-				return "/pro/proEdit";
-			}
+		if (!password.equals(confirmpassword)) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/pro/proEdit";
+		}
 
-			if (result.hasErrors()) {
-				model.addAttribute("msg", "fail");
-				model.addAttribute("id", id);
-				return "/pro/proEdit";
-			}
+		if (result.hasErrors()) {
+			model.addAttribute("msg", "fail");
+			model.addAttribute("id", id);
+			return "/pro/proEdit";
+		}
 
-			if (pro.getId() != null) {
-				Pro pro2 = this.proService.findId(pro.getId())
-						.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
-				// si tout est ok on modifie le mot de passe
-				BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
-				String cryptpassword = crypt.encode(password);
-				pro2.setProPassword(cryptpassword);
-				this.LOGGER.info("Cryptage du mot de passe OK");
+		if (pro.getId() != null) {
+			Pro pro2 = this.proService.findId(pro.getId())
+					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+			// si tout est ok on modifie le mot de passe
+			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
+			String cryptpassword = crypt.encode(password);
+			pro2.setProPassword(cryptpassword);
+			this.LOGGER.info("Cryptage du mot de passe OK");
 
-				this.proService.create(pro2);
-				this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
-						+ " a modifié son mot de passe avec succés");
-				model.addAttribute("pro", pro);
-				redirectAttributes.addFlashAttribute("msgok", "ok");
-
-			}
-			return "redirect:/pro/proEdit/" + id;
+			this.proService.create(pro2);
+			this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
+					+ " a modifié son mot de passe avec succés");
+			model.addAttribute("pro", pro);
+			redirectAttributes.addFlashAttribute("msgok", "ok");
 
 		}
-	
+		return "redirect:/pro/proEdit/" + id;
+
+	}
+
 }

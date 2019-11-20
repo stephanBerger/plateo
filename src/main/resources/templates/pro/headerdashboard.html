@@ -25,10 +25,10 @@
 								<span>Devis et factures</span>
 							</a>
 							<div class="dropdown-content">
-	     						<a th:href="@{/clients/estimateRequest}">Consulter des devis</a>
-	      						<a th:href="@{/clients/clientDashboard}">Mes devis en cours</a>
-	      						<a th:href="@{/clients/clientDashboard}">Mes devis validés</a>
-	      						<a th:href="@{/clients/clientDashboard}">Mes factures</a>
+	     						<a th:href="@{/pro/estimatesAllList}">Liste totale des devis</a>
+	      						<a th:href="@{/pro/estimatesRequestList}">Demande de devis en cours</a>
+	      						<a th:href="@{/pro/estimatesAcceptedList}">Mes devis validés</a>
+	      						<a th:href="@{/pro/estimatesConvertedList}">Mes factures</a>
 	    					</div>
 	    				</li>
 	    			</div>
@@ -42,7 +42,7 @@
 								</div>
 							</a>
 							<div class="dropdown-content">
-								<a th:href="@{/public/proProfile/{id}(id=${pro.id})}">Visualiser ma page</a>
+								<a th:href="@{/pro/proProfile/{id}(id=${pro.id})}">Visualiser ma page</a>
 	     						<a th:href="@{/pro/proEdit/{id}(id=${pro.id})}">Modifier mon profil</a>
 								<form th:action="@{/pro/logout}" method="post">
 									<button class="buttonFauxA" type="submit">Me déconnecter</button>
