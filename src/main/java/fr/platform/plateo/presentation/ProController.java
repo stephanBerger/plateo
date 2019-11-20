@@ -182,10 +182,9 @@ public class ProController {
 	@GetMapping("/public/proList")
 	public String listPro(Model model) {
 		this.LOGGER.info("La page \"proList\" est demandée");
-		List<Pro> listPro = this.proService.readAll();
+		List<Pro> proList = this.proService.readAll();
 
-		model.addAttribute("listPro", listPro);
-		// model.addAttribute( "listProProfessions", listProfessions );
+		model.addAttribute("proList", proList);
 		return "public/proList";
 	}
 

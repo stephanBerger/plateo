@@ -21,188 +21,197 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Estimate implements Serializable {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -2301537539869858022L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2301537539869858022L;
 
-	/**
-	 *
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    /**
+     *
+     */
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY )
+    private Integer           id;
 
-	/**
-	 *
-	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate request_date;
+    /**
+     *
+     */
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    @Column( name = "request_date" )
+    private LocalDate         requestDate;
 
-	/**
-	 *
-	 */
-	@Enumerated (EnumType.STRING)
-	@Column(name="estimate_status")
-	private EstimateStatus estimatestatus;
+    /**
+     *
+     */
+    @Enumerated( EnumType.STRING )
+    @Column( name = "estimate_status" )
+    private EstimateStatus    estimateStatus;
 
-	/**
-	 *
-	 */
-	private String work_address;
+    /**
+     *
+     */
+    @Column( name = "work_address" )
+    private String            workAddress;
 
-	/**
-	 *
-	 */
-	private String work_postcode;
+    /**
+     *
+     */
+    @Column( name = "work_postcode" )
+    private String            workPostcode;
 
-	/**
-	 *
-	 */
-	private String work_city;
+    /**
+     *
+     */
+    @Column( name = "work_city" )
+    private String            workCity;
 
-	/**
-	 *
-	 */
-	private String access_description;
+    /**
+     *
+     */
+    @Column( name = "access_description" )
+    private String            accessDescription;
 
-	/**
-	 *
-	 */
-	private String usable_parking_space;
+    /**
+     *
+     */
+    @Column( name = "usable_parking_space" )
+    private String            usableParkingSpace;
 
-	/**
-	 *
-	 */
-	private String work_comment;
+    /**
+     *
+     */
+    @Column( name = "work_comment" )
+    private String            workComment;
 
-	/**
-	 *
-	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate work_deadline;
+    /**
+     *
+     */
+    @DateTimeFormat( pattern = "yyyy-MM-dd" )
+    @Column( name = "work_deadline" )
+    private String            workDeadline;
 
-	/**
-	 *
-	 */
-	private Double advance_payment;
+    /**
+     *
+     */
+    @Column( name = "advance_payment" )
+    private Double            advancePayment;
 
-	/**
-	 *
-	 */
-	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
+    /**
+     *
+     */
+    @ManyToOne
+    @JoinColumn( name = "client_id" )
+    private Client            client;
 
-	/**
-	 *
-	 */
-	@ManyToOne
-	@JoinColumn(name = "pro_id")
-	private Pro pro;
+    /**
+     *
+     */
+    @ManyToOne
+    @JoinColumn( name = "pro_id" )
+    private Pro               pro;
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId( Integer id ) {
+        this.id = id;
+    }
 
-	public LocalDate getRequest_date() {
-		return this.request_date;
-	}
+    public LocalDate getRequestDate() {
+        return requestDate;
+    }
 
-	public void setRequest_date(LocalDate request_date) {
-		this.request_date = request_date;
-	}
+    public void setRequestDate( LocalDate requestDate ) {
+        this.requestDate = requestDate;
+    }
 
-	public EstimateStatus getEstimatestatus() {
-		return estimatestatus;
-	}
+    public EstimateStatus getEstimateStatus() {
+        return estimateStatus;
+    }
 
-	public void setEstimatestatus(EstimateStatus estimatestatus) {
-		this.estimatestatus = estimatestatus;
-	}
+    public void setEstimateStatus( EstimateStatus estimateStatus ) {
+        this.estimateStatus = estimateStatus;
+    }
 
-	public String getWork_address() {
-		return this.work_address;
-	}
+    public String getWorkAddress() {
+        return workAddress;
+    }
 
-	public void setWork_address(String work_address) {
-		this.work_address = work_address;
-	}
+    public void setWorkAddress( String workAddress ) {
+        this.workAddress = workAddress;
+    }
 
-	public String getWork_postcode() {
-		return this.work_postcode;
-	}
+    public String getWorkPostcode() {
+        return workPostcode;
+    }
 
-	public void setWork_postcode(String work_postcode) {
-		this.work_postcode = work_postcode;
-	}
+    public void setWorkPostcode( String workPostcode ) {
+        this.workPostcode = workPostcode;
+    }
 
-	public String getWork_city() {
-		return this.work_city;
-	}
+    public String getWorkCity() {
+        return workCity;
+    }
 
-	public void setWork_city(String work_city) {
-		this.work_city = work_city;
-	}
+    public void setWorkCity( String workCity ) {
+        this.workCity = workCity;
+    }
 
-	public String getAccess_description() {
-		return this.access_description;
-	}
+    public String getAccessDescription() {
+        return accessDescription;
+    }
 
-	public void setAccess_description(String access_description) {
-		this.access_description = access_description;
-	}
+    public void setAccessDescription( String accessDescription ) {
+        this.accessDescription = accessDescription;
+    }
 
-	public String getUsable_parking_space() {
-		return this.usable_parking_space;
-	}
+    public String getUsableParkingSpace() {
+        return usableParkingSpace;
+    }
 
-	public void setUsable_parking_space(String usable_parking_space) {
-		this.usable_parking_space = usable_parking_space;
-	}
+    public void setUsableParkingSpace( String usableParkingSpace ) {
+        this.usableParkingSpace = usableParkingSpace;
+    }
 
-	public String getWork_comment() {
-		return this.work_comment;
-	}
+    public String getWorkComment() {
+        return workComment;
+    }
 
-	public void setWork_comment(String work_comment) {
-		this.work_comment = work_comment;
-	}
+    public void setWorkComment( String workComment ) {
+        this.workComment = workComment;
+    }
 
-	public LocalDate getWork_deadline() {
-		return work_deadline;
-	}
+    public String getWorkDeadline() {
+        return workDeadline;
+    }
 
-	public void setWork_deadline(LocalDate work_deadline) {
-		this.work_deadline = work_deadline;
-	}
+    public void setWorkDeadline( String workDeadline ) {
+        this.workDeadline = workDeadline;
+    }
 
-	public Double getAdvance_payment() {
-		return this.advance_payment;
-	}
+    public Double getAdvancePayment() {
+        return advancePayment;
+    }
 
-	public void setAdvance_payment(Double advance_payment) {
-		this.advance_payment = advance_payment;
-	}
+    public void setAdvancePayment( Double advancePayment ) {
+        this.advancePayment = advancePayment;
+    }
 
-	public Client getClient() {
-		return this.client;
-	}
+    public Client getClient() {
+        return this.client;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public void setClient( Client client ) {
+        this.client = client;
+    }
 
-	public Pro getPro() {
-		return this.pro;
-	}
+    public Pro getPro() {
+        return this.pro;
+    }
 
-	public void setPro(Pro pro) {
-		this.pro = pro;
-	}
+    public void setPro( Pro pro ) {
+        this.pro = pro;
+    }
 
 }

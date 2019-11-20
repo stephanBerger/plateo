@@ -105,6 +105,9 @@ public class Pro implements UserDetails {
 	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
 	private List<ProPhotos> listProPhotos;
 
+	@OneToMany(mappedBy = "pro", cascade = CascadeType.MERGE)
+	private List<Estimate> listEstimates;
+
 	public List<ProPhotos> getListProPhotos() {
 		return this.listProPhotos;
 	}

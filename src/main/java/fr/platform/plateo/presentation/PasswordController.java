@@ -150,7 +150,7 @@ public class PasswordController {
 		String cryptPassword = this.passwordEncoder.encode(clientPassword);
 		client2.setClientPassword(cryptPassword);
 		this.clientService.create(client2);
-		PasswordController.LOGGER.info("Le mot de passe à bien été modifié");
+		PasswordController.LOGGER.info("Le mot de passe a bien été modifié");
 		model.addAttribute("msg", "ok");
 		return "/password/clientResetPassword";
 	}
