@@ -24,6 +24,7 @@ strong {
 }
 .form-box {
 	margin-top: 30px;
+	width: 100%;
 }
 .form-bottom {
 	padding: 25px 25px 30px 25px;
@@ -80,12 +81,20 @@ textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder { co
 input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, 
 textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder { color: #888; }
 
-.middle-border {
+.middle-border-vertical {
 	min-height: 290px;
 	margin: 0 30px;
 	border-right: 1px solid #fff;
 	border-right: 1px solid rgba(255, 255, 255, 0.6);
 	align-self: center;
+	
+}
+.middle-border-horizontal {
+	margin: 30px 0px;
+	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+	align-self: center;
+	
 }
 button.btn {
 	height: 50px;
@@ -141,3 +150,30 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 	left: 0px;
 	top: 145px;
 }
+
+.PopoverColumn{
+	display:flex;
+	flex-direction: column;
+	flex-wrap:wrap;
+	max-height:150px;
+	
+}
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    border-color: #ff9500;
+    background-color: #ff9500;
+}
+.custom-control{
+	padding-right:15px;
+}
+
+
+@media (min-width: 1200px){
+	.containerMaxWidth {
+	    max-width: 1000px !important; 
+	}
+}
+
+
+
+
