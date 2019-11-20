@@ -6,6 +6,7 @@
 </head>
 <body>
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<section class="top-content">	
 	<h1 class="text-center" th:text="${profession.name}"></h1>
 	<div class="list-group container">
 		<a th:each="service,stat : ${services}"
@@ -13,6 +14,7 @@
 			th:classappend="${(service.enabled? '' : 'disabled')}"
 			class="list-group-item list-group-item-action list-group-item-primary"></a>
 	</div>
-	<footer th:replace="public/footer :: footer"></footer>
+	</section>
+	<!--<footer th:replace="public/footer :: footer"></footer>-->
 </body>
 </html>

@@ -165,9 +165,9 @@ public class RequestController {
     @PostMapping( "/valideEstimate/{processInstanceId}/{estimateid}" )
     public String postEstimateSave( @PathVariable Integer processInstanceId, @PathVariable Integer estimateid,
             @ModelAttribute( "assigneeId" ) Integer assigneeId, Model model, Principal principal, Estimate estimate,
-            @RequestParam( value = "work_address" ) String work_address,
-            @RequestParam( value = "work_postcode" ) String work_postcode,
-            @RequestParam( value = "work_city" ) String work_city ) {
+            @RequestParam( value = "workAddress" ) String workAddress,
+            @RequestParam( value = "workPostcode" ) String workPostcode,
+            @RequestParam( value = "workCity" ) String workCity ) {
 
         // recherche si process existe pour le terminer
         /*
@@ -183,10 +183,10 @@ public class RequestController {
             Client client = new Client();
             client.setId( assigneeId );
             estimate.setClient( client );
-            estimate.setWork_address( work_address );
-            estimate.setWork_postcode( work_postcode );
-            estimate.setWork_city( work_city );
-            estimate.setEstimatestatus( EstimateStatus.REQUEST_CLIENT );
+            estimate.setWorkAddress( workAddress );
+            estimate.setWorkPostcode( workPostcode );
+            estimate.setWorkCity( workCity );
+            estimate.setEstimateStatus( EstimateStatus.REQUEST_CLIENT );
             this.estimateService.create( estimate );
 
             EstimateHasService estimatehs = new EstimateHasService();
