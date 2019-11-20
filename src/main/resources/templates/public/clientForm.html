@@ -10,7 +10,7 @@
 	
         <div class="top-content">
             <div class="inner-bg">
-                <div class="container">
+                <div class="container containerMaxWidth">
                     <div class="row centrer">
                         <div class="col-sm-8 col-sm-offset-2 text centrer">
                             <h1>Créez un compte <strong>Particulier</strong></h1>
@@ -66,7 +66,7 @@
 						                        </div>
 					                    	</div>
 					                    	
-					                    	<div class="middle-border"></div>
+					                    	<div class="middle-border-vertical"></div>
 					                    	
 					                    	<div class="sousColumnFormulaire">
 						                    	<div class="form-group">
@@ -120,30 +120,8 @@
 			<img src="/img/1.jpg">
 		</div>
         <!-- Footer -->
-        <footer th:fragment="footer" class="">
-			<nav>
-				<ul class="ulFooter">
-					<li>
-						<a href="/footer/qui_sommes_nous" >
-							QUI SOMMES NOUS ?
-						</a>
-					</li>
-					<li>
-						<a href="/footer/mentions_legales" >
-							MENTIONS LEGALES
-						</a>
-					</li>
-					<li>
-						<a href="/footer/faq" >
-							FAQ
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</footer>
-	<!-- Javascript -->
-       <!-- <script th:src="@{/js/jquery.backstretch.js}"></script>
-        <script th:src="@{/js/jquery.backstretch.min.js}"></script>-->
+        <footer th:replace="public/footer :: footer"></footer>
+        
         <script th:src="@{/js/scripts.js}"></script>
         
         <!--[if lt IE 10]>
