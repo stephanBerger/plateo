@@ -75,6 +75,87 @@ a:hover{
 
 
 /*-----------------------------HEADER-----------------------------------------*/
+
+/*----------ANIM JS HEADER-------------------*/
+
+/* QUAND ON DESCEND */
+.nav-is-stuck .main-header {
+	position: fixed;
+	/*top: 0; left: 0; right: 0;*/
+}
+.nav-is-stuck .menu {
+	top: -50px;
+	animation: stickAnim 1s;
+}
+@keyframes stickAnim {
+	0% {transform: translateY(50px);}
+	100% {transform: translateY(0);}
+}
+.nav-is-stuck .imgO {
+	opacity: 0;
+	animation: stickAnim2 0.5s;
+}
+@keyframes stickAnim2 {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+.nav-is-stuck .sousMenu {
+	top: -50px;
+	animation: stickAnim3 1s;
+}
+@keyframes stickAnim3 {
+	0% {transform: translateY(50px);}
+	100% {transform: translateY(0);}
+}
+.nav-is-stuck header {
+	height:95px;
+	animation: stickAnim4 1s;
+}
+@keyframes stickAnim4 {
+	0% {height:145px;}
+	100% {height:95px;}
+}
+
+
+/* QUAND ON REMONTE */
+
+.nav-is-remonte .menu {
+	top: 0px;
+	animation: stickAnim11 1s;
+}
+@keyframes stickAnim11 {
+	0% {transform: translateY(-50px);}
+	100% {transform: translateY(0);}
+}
+.nav-is-remonte .imgO {
+	opacity: 1;
+	animation: stickAnim21 1s;
+}
+@keyframes stickAnim21 {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+.nav-is-remonte .sousMenu {
+	top: 0px;
+	animation: stickAnim31 1s;
+}
+@keyframes stickAnim31 {
+	0% {transform: translateY(-50px);}
+	100% {transform: translateY(0);}
+}
+.nav-is-remonte header {
+	height:145px;
+	animation: stickAnim41 1s;
+}
+@keyframes stickAnim41 {
+	0% {height:95px;}
+	100% {height:145px;}
+}
+/*-------------------------*/
+
+
+/*---------FIN ANIM JS HEADER----------*/
+
 header{
 	background-color: white;
 	position: fixed;
@@ -82,7 +163,7 @@ header{
     left: 0;
     right: 0;
     z-index: 1;
-    
+    height:145px;
 }
 .textedivimgHeader{
 	position:absolute;
@@ -96,6 +177,10 @@ header{
 /*-------IMG Header----------*/
 .menu{
 	justify-content: space-between;
+    top: 0;
+    /*overflow: hidden;*/
+    position: relative;
+    z-index: -1;
 }
 .imgLogo{
 	margin-left:70px;
@@ -193,36 +278,26 @@ greyClair ul{
 
 
 /*------------------SOUS MENU-----------------*/
-/* Dropdown container - needed to position the dropdown content */
 .dropdown {
   float: left;
-  /*overflow: hidden;*/
 }
-
-/* Style the dropdown button to fit inside the topnav */
 .dropdown {
   font-size: 1rem;
   border: none;
   outline: none;
   color: white;
- /* padding: 14px 16px;*/
   background-color: inherit;
   font-family: inherit;
   margin: 0;
 }
-
-/* Style the dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 200px;
-  /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
   top:105px;
   z-index: 1;
 }
-
-/* Style the links inside the dropdown */
 .dropdown-content a {
   float: none;
   color: black;
@@ -231,26 +306,16 @@ greyClair ul{
   display: block;
   text-align: left;
 }
-
-/* Add a dark background on topnav links and the dropdown button on hover */
 .dropdown:hover  {
-
   color: white;
 }
-
-/* Add a grey background to dropdown links on hover */
 .dropdown-content a:hover, .buttonFauxA:hover {
   background-color: #ddd;
   color: black;
 }
-
-/* Show the dropdown menu when the user moves the mouse over the dropdown button */
 .dropdown:hover .dropdown-content {
   display: block;
-
 }
-
-/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child), .dropdown .dropbtn {
     display: none;
@@ -261,13 +326,11 @@ greyClair ul{
   }
 }
 
-
-
 .sousMenu{
-	/*height:40px;*//*taille normale pour le sous menu*/
 	height:10px;
 	background-color: #0073be;
-	z-index: 1;
+	position:relative;
+	z-index: -2;
 	padding-right:45px;
 }
 .activeSubnavContent{
@@ -295,15 +358,6 @@ greyClair ul{
 .subnav {
 	overflow: hidden;
 }
-/*.overFlowHidden{
-	width: 100%;
-	height:0px;
-	position: absolute;
-	top:135px;
-	right: 0;
-	z-index: 1;
-	overflow: hidden;
-}*/
 .overFlowHidden{
 	overflow: hidden;
 }

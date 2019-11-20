@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
+<html xmlns:th="www.thymeleaf.org"  lang="en" class=" js ">
 <body>
-	<header th:fragment="header">
+	<header th:fragment="header" id="header" role="banner" class="main-header">
 		<div class="divimgHeader">
 			<div class="imgHeaderLeft"></div>
-
 			<div class="imgHeader">
 				<img th:src="@{/img/IMG_HEADER.jpg}">
 			</div>
-
 			<div class="imgHeaderRight"></div>
-
 		</div>
-
 		<section class="menu centrer">
-			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo"
+			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo imgO"
 				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
-				class="imgLogoText" alt="logo textuel Plateo"
+				class="imgLogoText imgO" alt="logo textuel Plateo"
 				th:src="@{/img/logo-texte-BD.png}">
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li><a th:href="@{/public/proList}"> <img th:src="@{/img/LOUPE.jpg}">
+					<li><a th:href="@{/public/proList}"> <img class="imgO" th:src="@{/img/LOUPE.jpg}">
 							<span>Rechercher un Pro</span>
 					</a></li>
-					<li><a href=""> <img th:src="@{/img/DEVIS.jpg}">
+					<li><a href=""> <img class="imgO" th:src="@{/img/DEVIS.jpg}">
 							<span>Demander un devis</span>
 					</a></li>
 					<div class="dropdown">
 						<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
-							<img th:src="@{/img/PROFIL.jpg}">
+							<img class="imgO" th:src="@{/img/PROFIL.jpg}">
 							<span>
 								S'identifier <br>ou s'inscrire
 							</span>
@@ -40,19 +36,8 @@
 	    					</div>
 	    				</li>
 	    			</div>
-					
-						
-					
 				</ul>
 			</nav>
-			<!--  <div class="navbar-nav flex-row" th:if="${#request.userPrincipal}">
-				<span class="nav-link d-inline-flex align-items-center p-2"
-					th:text="${#request.userPrincipal.principal.username}"></span>
-				<form th:action="@{/logout}" method="post"
-					class="form-inline my-2 my-lg-0">
-					<button class="btn bgOrange my-2 my-sm-0" type="submit">Déconnexion</button>
-				</form>
-			</div>-->
 		</section>
 		<div class="sousMenu"></div>
 		<script>
@@ -63,8 +48,9 @@
 					$('#loginProModal').modal({ show: true });
 				}
 			});
-				 
 		</script>
+		<script type="text/javascript" th:src="@{/js/asupp.js}"></script>
+		
 	</header>
 </body>
 </html>
