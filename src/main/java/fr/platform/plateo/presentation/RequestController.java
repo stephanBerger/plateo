@@ -36,233 +36,235 @@ import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
-@RequestMapping("/clients")
-@Scope("session")
-@SessionAttributes({ "assigneeId" })
+@RequestMapping( "/clients" )
+@Scope( "session" )
+@SessionAttributes( { "assigneeId" } )
 public class RequestController {
 
-	@Autowired
-	private Logger LOGGER;
+    @Autowired
+    private Logger                      LOGGER;
 
-	@Autowired
-	private ProfessionService professionService;
+    @Autowired
+    private ProfessionService           professionService;
 
-	@Autowired
-	private ClientService clientService;
+    @Autowired
+    private ClientService               clientService;
 
-	@Autowired
-	private BusinessProcessModelService bpmService;
+    @Autowired
+    private BusinessProcessModelService bpmService;
 
-	@Autowired
-	private EstimateService estimateService;
+    @Autowired
+    private EstimateService             estimateService;
 
-	@Autowired
-	private EstimateHasServService estimateHasServService;
+    @Autowired
+    private EstimateHasServService      estimateHasServService;
 
-	@ModelAttribute("assigneeId")
-	public Integer assigneeId() {
-		return null;
-	}
+    @ModelAttribute( "assigneeId" )
+    public Integer assigneeId() {
+        return null;
+    }
 
-	// client a validé un devis avec 1 prestation, il continue en rajotant une
-	// 2eme
-	// prestation
-	@GetMapping("/estimateRequestNext/{estimateid}")
-	public String estimateRequestNext(@PathVariable Integer estimateid, Model model, HttpServletRequest req,
-			@ModelAttribute("assigneeId") Integer assigneeId, Principal principal) {
-		this.LOGGER.info("Le client continue avec une autre prestation avec Estimate ID : " + estimateid);
-		Client client = this.clientService.loadUserByUsername(req.getUserPrincipal().getName());
-		model.addAttribute("client", client);
-		if (assigneeId == null) {
-			model.addAttribute("assigneeId", client.getId());
-		}
-		if (estimateid == null) {
-			model.addAttribute("estimateid", estimateid);
-		}
-		model.addAttribute("professions", this.professionService.getAll());
-		return "clients/estimateRequest";
-	}
+    // client a validé un devis avec 1 prestation, il continue en rajotant une
+    // 2eme
+    // prestation
+    @GetMapping( "/estimateRequestNext/{estimateid}" )
+    public String estimateRequestNext( @PathVariable Integer estimateid, Model model, HttpServletRequest req,
+            @ModelAttribute( "assigneeId" ) Integer assigneeId, Principal principal ) {
+        this.LOGGER.info( "Le client continue avec une autre prestation avec Estimate ID : " + estimateid );
+        Client client = this.clientService.loadUserByUsername( req.getUserPrincipal().getName() );
+        model.addAttribute( "client", client );
+        if ( assigneeId == null ) {
+            model.addAttribute( "assigneeId", client.getId() );
+        }
+        if ( estimateid == null ) {
+            model.addAttribute( "estimateid", estimateid );
+        }
+        model.addAttribute( "professions", this.professionService.getAll() );
+        return "clients/estimateRequest";
+    }
 
-	@GetMapping("/estimateRequest")
-	public String estimateRequest(Model model, HttpServletRequest req, @ModelAttribute("assigneeId") Integer assigneeId,
-			Principal principal) {
-		Client client = this.clientService.loadUserByUsername(req.getUserPrincipal().getName());
-		model.addAttribute("client", client);
-		if (assigneeId == null) {
-			model.addAttribute("assigneeId", client.getId());
-		}
-		model.addAttribute("estimateid", 0);
-		model.addAttribute("professions", this.professionService.getAll());
-		return "clients/estimateRequest";
-	}
+    @GetMapping( "/estimateRequest" )
+    public String estimateRequest( Model model, HttpServletRequest req,
+            @ModelAttribute( "assigneeId" ) Integer assigneeId,
+            Principal principal ) {
+        Client client = this.clientService.loadUserByUsername( req.getUserPrincipal().getName() );
+        model.addAttribute( "client", client );
+        if ( assigneeId == null ) {
+            model.addAttribute( "assigneeId", client.getId() );
+        }
+        model.addAttribute( "estimateid", 0 );
+        model.addAttribute( "professions", this.professionService.getAll() );
+        return "clients/estimateRequest";
+    }
 
-	@GetMapping("/professionRequest/{id}/{estimateid}")
-	public String professionRequest(@PathVariable Integer id, @PathVariable Integer estimateid, Model model,
-			Principal principal) {
-		Profession profession = this.professionService.read(id);
-		Client client = this.clientService.loadUserByUsername(principal.getName());
-		model.addAttribute("estimateid", estimateid);
-		model.addAttribute("client", client);
-		model.addAttribute("profession", profession);
-		model.addAttribute("services", profession.getServices());
-		return "clients/professionRequest";
-	}
+    @GetMapping( "/professionRequest/{id}/{estimateid}" )
+    public String professionRequest( @PathVariable Integer id, @PathVariable Integer estimateid, Model model,
+            Principal principal ) {
+        Profession profession = this.professionService.read( id );
+        Client client = this.clientService.loadUserByUsername( principal.getName() );
+        model.addAttribute( "estimateid", estimateid );
+        model.addAttribute( "client", client );
+        model.addAttribute( "profession", profession );
+        model.addAttribute( "services", profession.getServices() );
+        return "clients/professionRequest";
+    }
 
-	@GetMapping("/serviceRequest/{professionId}/{serviceId}/{estimateid}")
-	public String serviceRequest(@PathVariable Integer professionId, @PathVariable Integer serviceId,
-			@PathVariable Integer estimateid, Model model, @ModelAttribute("assigneeId") Integer assigneeId,
-			Principal principal) {
-		Task task = this.bpmService.startProcess(assigneeId, professionId, serviceId);
-		Client client = this.clientService.loadUserByUsername(principal.getName());
-		model.addAttribute("estimateid", estimateid);
-		model.addAttribute("client", client);
-		model.addAttribute("task", task);
-		model.addAttribute("properties", this.bpmService.getFormData(task.getId()));
-		return "clients/serviceRequest";
-	}
+    @GetMapping( "/serviceRequest/{professionId}/{serviceId}/{estimateid}" )
+    public String serviceRequest( @PathVariable Integer professionId, @PathVariable Integer serviceId,
+            @PathVariable Integer estimateid, Model model, @ModelAttribute( "assigneeId" ) Integer assigneeId,
+            Principal principal ) {
+        Task task = this.bpmService.startProcess( assigneeId, professionId, serviceId );
+        Client client = this.clientService.loadUserByUsername( principal.getName() );
+        /* lllllllllllllllllllll */
+        model.addAttribute( "estimateid", estimateid );
+        model.addAttribute( "client", client );
+        model.addAttribute( "task", task );
+        model.addAttribute( "properties", this.bpmService.getFormData( task.getId() ) );
+        return "clients/serviceRequest";
+    }
 
-	@PostMapping("/serviceProcess/{processInstanceId}/{taskId}/{estimateid}")
-	public String serviceProcess(Model model, @PathVariable String processInstanceId, @PathVariable String taskId,
-			@PathVariable Integer estimateid, @RequestParam Map<String, Object> params) {
-		for (FormProperty prop : this.bpmService.getFormData(taskId)) {
-			if (prop.getType() instanceof BooleanFormType) {
-				if (params.containsKey(prop.getId())) {
-					params.put(prop.getId(), true);
-				} else {
-					params.put(prop.getId(), false);
-				}
-			}
-		}
-		model.addAttribute("estimateid", estimateid);
-		this.bpmService.save(taskId, params);
-		return "redirect:/clients/serviceTask/" + processInstanceId + "/" + estimateid;
-	}
+    @PostMapping( "/serviceProcess/{processInstanceId}/{taskId}/{estimateid}" )
+    public String serviceProcess( Model model, @PathVariable String processInstanceId, @PathVariable String taskId,
+            @PathVariable Integer estimateid, @RequestParam Map<String, Object> params ) {
+        for ( FormProperty prop : this.bpmService.getFormData( taskId ) ) {
+            if ( prop.getType() instanceof BooleanFormType ) {
+                if ( params.containsKey( prop.getId() ) ) {
+                    params.put( prop.getId(), true );
+                } else {
+                    params.put( prop.getId(), false );
+                }
+            }
+        }
+        model.addAttribute( "estimateid", estimateid );
+        this.bpmService.save( taskId, params );
+        return "redirect:/clients/serviceTask/" + processInstanceId + "/" + estimateid;
+    }
 
-	@GetMapping("/serviceTask/{processInstanceId}/{estimateid}")
-	public String serviceTask(@PathVariable String processInstanceId, @PathVariable Integer estimateid,
-			@ModelAttribute("assigneeId") Integer assigneeId, Model model, Principal principal, Estimate estimate) {
-		Task task = this.bpmService.getTaskByProcessInstanceIdAndAssigneeId(assigneeId, processInstanceId);
-		if (task != null) {
-			Client client = this.clientService.loadUserByUsername(principal.getName());
-			model.addAttribute("client", client);
-			model.addAttribute("task", task);
-			model.addAttribute("properties", this.bpmService.getFormData(task.getId()));
-			return "clients/serviceRequest";
+    @GetMapping( "/serviceTask/{processInstanceId}/{estimateid}" )
+    public String serviceTask( @PathVariable String processInstanceId, @PathVariable Integer estimateid,
+            @ModelAttribute( "assigneeId" ) Integer assigneeId, Model model, Principal principal, Estimate estimate ) {
+        Task task = this.bpmService.getTaskByProcessInstanceIdAndAssigneeId( assigneeId, processInstanceId );
+        if ( task != null ) {
+            Client client = this.clientService.loadUserByUsername( principal.getName() );
+            model.addAttribute( "client", client );
+            model.addAttribute( "task", task );
+            model.addAttribute( "properties", this.bpmService.getFormData( task.getId() ) );
+            return "clients/serviceRequest";
 
-		} else {
+        } else {
 
-			if (estimateid == 0) {
-				Client client = this.clientService.findId(assigneeId)
-						.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
-				
-				Estimate estimate2 = new Estimate();
-				estimate2.setWorkAddress(client.getClientAddress());
-				estimate2.setWorkPostcode(client.getClientPostcode());
-				estimate2.setWorkCity(client.getClientCity());
+            if ( estimateid == 0 ) {
+                Client client = this.clientService.findId( assigneeId )
+                        .orElseThrow( () -> new IllegalArgumentException( "L' Id est invalide" ) );
 
-				model.addAttribute("estimateid", estimateid);
-				model.addAttribute("estimate", estimate2);
-				model.addAttribute("client", client);
-				model.addAttribute("processInstanceId", processInstanceId);
+                Estimate estimate2 = new Estimate();
+                estimate2.setWorkAddress( client.getClientAddress() );
+                estimate2.setWorkPostcode( client.getClientPostcode() );
+                estimate2.setWorkCity( client.getClientCity() );
 
-			} else if (estimateid != 0) {
+                model.addAttribute( "estimateid", estimateid );
+                model.addAttribute( "estimate", estimate2 );
+                model.addAttribute( "client", client );
+                model.addAttribute( "processInstanceId", processInstanceId );
 
-				Client client = this.clientService.findId(assigneeId)
-						.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
-				Estimate estimate2 = this.estimateService.readOne(estimateid);
-				estimate2.setWorkAddress(client.getClientAddress());
-				
-				model.addAttribute("estimateid", estimateid);
-				model.addAttribute("estimate", estimate2);
-				model.addAttribute("client", client);
-				model.addAttribute("processInstanceId", processInstanceId);
+            } else if ( estimateid != 0 ) {
 
-			}
+                Client client = this.clientService.findId( assigneeId )
+                        .orElseThrow( () -> new IllegalArgumentException( "L' Id est invalide" ) );
+                Estimate estimate2 = this.estimateService.readOne( estimateid );
+                estimate2.setWorkAddress( client.getClientAddress() );
 
-		}
-		return "clients/estimate";
+                model.addAttribute( "estimateid", estimateid );
+                model.addAttribute( "estimate", estimate2 );
+                model.addAttribute( "client", client );
+                model.addAttribute( "processInstanceId", processInstanceId );
 
-	}
+            }
 
-	// validation post du devis client
-	@PostMapping("/valideEstimate/{processInstanceId}/{estimateid}")
-	public String postEstimateSave(@Valid Estimate estimate, BindingResult result, Model model, Client client,
-			@PathVariable Integer processInstanceId, @PathVariable Integer estimateid,
-			@ModelAttribute("assigneeId") Integer assigneeId, Principal principal,
-			@RequestParam(value = "prestation") String prestation, final RedirectAttributes redirectAttributes) {
+        }
+        return "clients/estimate";
 
-		if (estimate.getRequestDate().compareTo(estimate.getWorkDeadline()) > 0) {
-			model.addAttribute("msg", "datesup");
-			model.addAttribute("estimateid", estimateid);
-			model.addAttribute("estimate", estimate);
-			model.addAttribute("client", client);
-			model.addAttribute("processInstanceId", processInstanceId);
-			return "clients/estimate";
-		}
+    }
 
-		if (estimateid == 0) {
-			Client client2 = new Client();
-			client2.setId(assigneeId);
-			estimate.setClient(client2);
+    // validation post du devis client
+    @PostMapping( "/valideEstimate/{processInstanceId}/{estimateid}" )
+    public String postEstimateSave( @Valid Estimate estimate, BindingResult result, Model model, Client client,
+            @PathVariable Integer processInstanceId, @PathVariable Integer estimateid,
+            @ModelAttribute( "assigneeId" ) Integer assigneeId, Principal principal,
+            @RequestParam( value = "prestation" ) String prestation, final RedirectAttributes redirectAttributes ) {
 
-			if (prestation.contentEquals("otherprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.DRAFT_REQUEST_CLIENT);
-			} else if (prestation.contentEquals("endprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.REQUEST_CLIENT);
-			}
-			this.LOGGER.info("" + estimate.getRequestDate());
-			this.estimateService.create(estimate);
+        if ( estimate.getRequestDate().compareTo( estimate.getWorkDeadline() ) > 0 ) {
+            model.addAttribute( "msg", "datesup" );
+            model.addAttribute( "estimateid", estimateid );
+            model.addAttribute( "estimate", estimate );
+            model.addAttribute( "client", client );
+            model.addAttribute( "processInstanceId", processInstanceId );
+            return "clients/estimate";
+        }
 
-			EstimateHasService estimatehs = new EstimateHasService();
-			estimatehs.setProcessid(processInstanceId);
-			estimatehs.setEstimate(estimate);
-			this.estimateHasServService.create(estimatehs);
+        if ( estimateid == 0 ) {
+            Client client2 = new Client();
+            client2.setId( assigneeId );
+            estimate.setClient( client2 );
 
-			model.addAttribute("estimateid", estimate.getId());
-			model.addAttribute("estimate", estimate);
-			model.addAttribute("client", client);
-			model.addAttribute("processInstanceId", processInstanceId);
+            if ( prestation.contentEquals( "otherprestation" ) ) {
+                estimate.setEstimateStatus( EstimateStatus.DRAFT_REQUEST_CLIENT );
+            } else if ( prestation.contentEquals( "endprestation" ) ) {
+                estimate.setEstimateStatus( EstimateStatus.REQUEST_CLIENT );
+            }
+            this.LOGGER.info( "" + estimate.getRequestDate() );
+            this.estimateService.create( estimate );
 
-			if (prestation.contentEquals("otherprestation")) {
-				return "redirect:/clients/estimateRequestNext/" + estimate.getId();
-			} else if (prestation.contentEquals("endprestation")) {
-				return "/clients/clientValidDevis";
-			}
+            EstimateHasService estimatehs = new EstimateHasService();
+            estimatehs.setProcessid( processInstanceId );
+            estimatehs.setEstimate( estimate );
+            this.estimateHasServService.create( estimatehs );
 
-		} else if (estimateid != 0) {
-			// estimate.setId(estimateid);
+            model.addAttribute( "estimateid", estimate.getId() );
+            model.addAttribute( "estimate", estimate );
+            model.addAttribute( "client", client );
+            model.addAttribute( "processInstanceId", processInstanceId );
 
-			// Client client2 = new Client();
-			// client2.setId(assigneeId);
-			// estimate.setClient(client2);
-			if (prestation.contentEquals("otherprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.DRAFT_REQUEST_CLIENT);
-			} else if (prestation.contentEquals("endprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.REQUEST_CLIENT);
-			}
+            if ( prestation.contentEquals( "otherprestation" ) ) {
+                return "redirect:/clients/estimateRequestNext/" + estimate.getId();
+            } else if ( prestation.contentEquals( "endprestation" ) ) {
+                return "/clients/clientValidDevis";
+            }
 
-			this.estimateService.create(estimate);
+        } else if ( estimateid != 0 ) {
+            // estimate.setId(estimateid);
 
-			EstimateHasService estimatehs = new EstimateHasService();
-			estimatehs.setProcessid(processInstanceId);
-			Estimate estimate2 = new Estimate();
-			estimate2.setId(estimateid);
-			estimatehs.setEstimate(estimate2);
-			this.estimateHasServService.create(estimatehs);
+            // Client client2 = new Client();
+            // client2.setId(assigneeId);
+            // estimate.setClient(client2);
+            if ( prestation.contentEquals( "otherprestation" ) ) {
+                estimate.setEstimateStatus( EstimateStatus.DRAFT_REQUEST_CLIENT );
+            } else if ( prestation.contentEquals( "endprestation" ) ) {
+                estimate.setEstimateStatus( EstimateStatus.REQUEST_CLIENT );
+            }
 
-			model.addAttribute("estimateid", estimateid);
-			model.addAttribute("estimate", estimate);
-			model.addAttribute("client", client);
-			model.addAttribute("processInstanceId", processInstanceId);
+            this.estimateService.create( estimate );
 
-			if (prestation.contentEquals("otherprestation")) {
-				return "redirect:/clients/estimateRequestNext/" + estimateid;
-			} else if (prestation.contentEquals("endprestation")) {
-				return "/clients/clientValidDevis";
-			}
-		}
-		return null;
+            EstimateHasService estimatehs = new EstimateHasService();
+            estimatehs.setProcessid( processInstanceId );
+            Estimate estimate2 = new Estimate();
+            estimate2.setId( estimateid );
+            estimatehs.setEstimate( estimate2 );
+            this.estimateHasServService.create( estimatehs );
 
-	}
+            model.addAttribute( "estimateid", estimateid );
+            model.addAttribute( "estimate", estimate );
+            model.addAttribute( "client", client );
+            model.addAttribute( "processInstanceId", processInstanceId );
+
+            if ( prestation.contentEquals( "otherprestation" ) ) {
+                return "redirect:/clients/estimateRequestNext/" + estimateid;
+            } else if ( prestation.contentEquals( "endprestation" ) ) {
+                return "/clients/clientValidDevis";
+            }
+        }
+        return null;
+
+    }
 
 }

@@ -25,7 +25,8 @@
            <div class="plusProduits list">
 
 	       <h1 class="centrer" th:if="${mode eq 'all'}">Liste totale des devis</h1>
-	       <h1 class="centrer" th:if="${mode eq 'request'}">Liste des demandes de devis</h1>
+	       <!--<h1 class="centrer" th:if="${mode eq 'profession'}">Liste de Demandes de devis sur mes corps d'état</h1>-->
+	       <h1 class="centrer" th:if="${mode eq 'request'}">Liste totale des demandes de devis</h1>
 	       <h1 class="centrer" th:if="${mode eq 'awaiting'}">Liste des devis en attente validation client</h1>
 	       <h1 class="centrer" th:if="${mode eq 'accepted'}">Liste des devis acceptés</h1>
 	       <h1 class="centrer" th:if="${mode eq 'converted'}">Liste de mes factures</h1>
@@ -37,6 +38,7 @@
             	      <th scope="col">Ville</th>
             	      <th scope="col">Code postal</th>
             	      <th scope="col">Statut</th>
+            	      <th scope="col">numéro Client</th>
             	      <th scope="col">Edition</th>
             	      <th scope="col">Action</th>
             	      
@@ -47,7 +49,8 @@
         	      <td th:text="${estimate.id}"></td>
         	      <td th:text="${estimate.workCity}"></td>
         	      <td th:text="${estimate.workPostcode}"></td>
-        	      <td th:text="${estimate.estimateStatus}"></td> 
+        	      <td th:text="${estimate.estimateStatus}"></td>
+        	      <td th:text="${estimate.client}"></td> 
         	      <!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
         	      <td><a href="#">Edit</a></td>
           		  <td><a th:href="@{/pro/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
