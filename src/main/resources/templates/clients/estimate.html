@@ -13,7 +13,7 @@
 		<div class="centrer carreBlanc">
 
 			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid}"
+				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${serviceId}"
 				th:object="${estimate}" method="post">
 
 				<!-- message error date-->

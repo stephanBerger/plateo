@@ -115,15 +115,17 @@ public class RequestController {
 		Task task = this.bpmService.startProcess(assigneeId, professionId, serviceId);
 		Client client = this.clientService.loadUserByUsername(principal.getName());
 		model.addAttribute("estimateid", estimateid);
+		model.addAttribute("serviceId", serviceId);
 		model.addAttribute("client", client);
 		model.addAttribute("task", task);
 		model.addAttribute("properties", this.bpmService.getFormData(task.getId()));
 		return "clients/serviceRequest";
 	}
 
-	@PostMapping("/serviceProcess/{processInstanceId}/{taskId}/{estimateid}")
+	@PostMapping("/serviceProcess/{processInstanceId}/{taskId}/{estimateid}/{serviceId}")
 	public String serviceProcess(Model model, @PathVariable String processInstanceId, @PathVariable String taskId,
-			@PathVariable Integer estimateid, @RequestParam Map<String, Object> params) {
+			@PathVariable Integer estimateid, @PathVariable Integer serviceId,
+			@RequestParam Map<String, Object> params) {
 		for (FormProperty prop : this.bpmService.getFormData(taskId)) {
 			if (prop.getType() instanceof BooleanFormType) {
 				if (params.containsKey(prop.getId())) {
@@ -135,16 +137,18 @@ public class RequestController {
 		}
 		model.addAttribute("estimateid", estimateid);
 		this.bpmService.save(taskId, params);
-		return "redirect:/clients/serviceTask/" + processInstanceId + "/" + estimateid;
+		return "redirect:/clients/serviceTask/" + processInstanceId + "/" + estimateid + "/" + serviceId;
 	}
 
-	@GetMapping("/serviceTask/{processInstanceId}/{estimateid}")
+	@GetMapping("/serviceTask/{processInstanceId}/{estimateid}/{serviceId}")
 	public String serviceTask(@PathVariable String processInstanceId, @PathVariable Integer estimateid,
-			@ModelAttribute("assigneeId") Integer assigneeId, Model model, Principal principal, Estimate estimate) {
+			@PathVariable Integer serviceId, @ModelAttribute("assigneeId") Integer assigneeId, Model model,
+			Principal principal, Estimate estimate) {
 		Task task = this.bpmService.getTaskByProcessInstanceIdAndAssigneeId(assigneeId, processInstanceId);
 		if (task != null) {
 			Client client = this.clientService.loadUserByUsername(principal.getName());
 			model.addAttribute("client", client);
+			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("task", task);
 			model.addAttribute("properties", this.bpmService.getFormData(task.getId()));
 			return "clients/serviceRequest";
@@ -154,13 +158,14 @@ public class RequestController {
 			if (estimateid == 0) {
 				Client client = this.clientService.findId(assigneeId)
 						.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
-				
+
 				Estimate estimate2 = new Estimate();
 				estimate2.setWorkAddress(client.getClientAddress());
 				estimate2.setWorkPostcode(client.getClientPostcode());
 				estimate2.setWorkCity(client.getClientCity());
 
 				model.addAttribute("estimateid", estimateid);
+				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("estimate", estimate2);
 				model.addAttribute("client", client);
 				model.addAttribute("processInstanceId", processInstanceId);
@@ -171,8 +176,9 @@ public class RequestController {
 						.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
 				Estimate estimate2 = this.estimateService.readOne(estimateid);
 				estimate2.setWorkAddress(client.getClientAddress());
-				
+
 				model.addAttribute("estimateid", estimateid);
+				model.addAttribute("serviceId", serviceId);
 				model.addAttribute("estimate", estimate2);
 				model.addAttribute("client", client);
 				model.addAttribute("processInstanceId", processInstanceId);
@@ -185,15 +191,16 @@ public class RequestController {
 	}
 
 	// validation post du devis client
-	@PostMapping("/valideEstimate/{processInstanceId}/{estimateid}")
+	@PostMapping("/valideEstimate/{processInstanceId}/{estimateid}/{serviceId}")
 	public String postEstimateSave(@Valid Estimate estimate, BindingResult result, Model model, Client client,
-			@PathVariable Integer processInstanceId, @PathVariable Integer estimateid,
+			@PathVariable Integer processInstanceId, @PathVariable Integer estimateid, @PathVariable Integer serviceId,
 			@ModelAttribute("assigneeId") Integer assigneeId, Principal principal,
 			@RequestParam(value = "prestation") String prestation, final RedirectAttributes redirectAttributes) {
 
 		if (estimate.getRequestDate().compareTo(estimate.getWorkDeadline()) > 0) {
 			model.addAttribute("msg", "datesup");
 			model.addAttribute("estimateid", estimateid);
+			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("estimate", estimate);
 			model.addAttribute("client", client);
 			model.addAttribute("processInstanceId", processInstanceId);
@@ -216,6 +223,7 @@ public class RequestController {
 			EstimateHasService estimatehs = new EstimateHasService();
 			estimatehs.setProcessid(processInstanceId);
 			estimatehs.setEstimate(estimate);
+			estimatehs.setService(this.estimateService.readService(serviceId));
 			this.estimateHasServService.create(estimatehs);
 
 			model.addAttribute("estimateid", estimate.getId());

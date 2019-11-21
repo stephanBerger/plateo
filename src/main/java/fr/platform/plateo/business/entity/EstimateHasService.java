@@ -1,7 +1,6 @@
 package fr.platform.plateo.business.entity;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,11 +32,6 @@ public class EstimateHasService implements Serializable {
 	/**
 	 *
 	 */
-	private Blob data;
-	
-	/**
-	 *
-	 */
 	private Integer processid;
 
 	/**
@@ -50,24 +44,16 @@ public class EstimateHasService implements Serializable {
 	/**
 	 *
 	 */
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "service_id")
-	private Service service;*/
+	private Service service;
 
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Blob getData() {
-		return this.data;
-	}
-
-	public void setData(Blob data) {
-		this.data = data;
 	}
 
 	public Estimate getEstimate() {
@@ -79,22 +65,19 @@ public class EstimateHasService implements Serializable {
 	}
 
 	public Integer getProcessid() {
-		return processid;
+		return this.processid;
 	}
 
 	public void setProcessid(Integer processid) {
 		this.processid = processid;
 	}
 
-	
-
-	
-/*	public Service getService() {
+	public Service getService() {
 		return this.service;
 	}
 
 	public void setService(Service service) {
 		this.service = service;
-	}*/
+	}
 
 }
