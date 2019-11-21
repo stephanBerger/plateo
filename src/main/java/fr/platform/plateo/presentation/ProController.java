@@ -124,7 +124,7 @@ public class ProController {
 	}
 
 	// Profil pro vu par tout le monde
-	@GetMapping("/public/proProfile/{id}")
+	@GetMapping("/public/publicProProfile/{id}")
 	public String publicProProfile(@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);

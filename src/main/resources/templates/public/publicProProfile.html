@@ -6,6 +6,7 @@
 </head>
 <body class="BgBlue">
 	<header th:replace="public/header :: header"></header>
+<div th:fragment="proProfile">
 	<div class="row text-center border-top border-bottom pt-2 pb-2">
 		<div class="offset-3 col-1">
 			 <img th:src="${logo}" class="w-100">
@@ -62,5 +63,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
