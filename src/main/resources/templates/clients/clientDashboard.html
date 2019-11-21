@@ -2,12 +2,13 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
+<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	<th:block th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+	<th:block
+		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
 	<!-- message -->
 	<div align="center" th:if="${msgok eq 'ok'}"
 		class="alert alert-success">
@@ -17,11 +18,8 @@
 	<section class="section100pour100">
 		<h1>Super Dashboard Particulier</h1>
 	</section>
-	
-	
-	<footer th:replace="public/footer :: footer">
-	</footer>
+	<footer th:replace="public/footer :: footer"> </footer>
 
-			
+
 </body>
 </html>

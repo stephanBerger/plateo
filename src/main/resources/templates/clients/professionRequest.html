@@ -10,7 +10,7 @@
 	<h1 class="text-center" th:text="${profession.name}"></h1>
 	<div class="list-group container">
 		<a th:each="service,stat : ${services}"
-			th:href="@{/clients/serviceRequest/} + ${profession.id} + '/' + ${service.id} + '/' + ${estimateid}" th:text="${service.name}"
+			th:href="@{/clients/serviceRequest/} + ${profession.id} + '/' + ${service.id} + '/' + ${estimateid} + '/' + ${proid}" th:text="${service.name}"
 			th:classappend="${(service.enabled? '' : 'disabled')}"
 			class="list-group-item list-group-item-action list-group-item-primary"></a>
 	</div>

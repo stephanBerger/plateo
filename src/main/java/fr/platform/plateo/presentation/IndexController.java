@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -25,17 +26,9 @@ public class IndexController {
 		return "public/index";
 	}
 
-	/*
-	 * @GetMapping( "/public/registration" ) public String registration() {
-	 * LOGGER.info(
-	 * "Une requête sur '/public/registration' est faite, la page 'registration' est envoyée"
-	 * ); return "public/registration"; }
-	 */
-	@GetMapping("/public/clientRegistration")
-	public String clientRegistration() {
-		this.LOGGER.info(
-				"Une requête sur '/public/clientRegistration' est faite, la page 'clientRegistration' est envoyée");
-		return "public/clientRegistration";
+	@RequestMapping("/403")
+	public String accessDenied() {
+	    return "/errors/403";
 	}
 
 	@GetMapping("/footer/qui_sommes_nous")

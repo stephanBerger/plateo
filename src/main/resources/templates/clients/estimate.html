@@ -13,7 +13,7 @@
 		<div class="centrer carreBlanc">
 
 			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid}"
+				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${proid}"
 				th:object="${estimate}" method="post">
 
 				<!-- message error date-->
@@ -95,12 +95,18 @@
 								placeholder="Parking" />
 						</div>
 
+
 						<div class="form-group formIdentifier left">
 							<input type="hidden" th:field="*{id}" id="id"
 								class="champsFormulaire" />
 						</div>
 						<div class="form-group formIdentifier left">
 							<input type="hidden" th:field="*{client.id}" id="clientid"
+								class="champsFormulaire" />
+						</div>
+						
+						<div th:if="${proid}!=0" class="form-group formIdentifier left">
+							<input type="hidden" th:field="*{pro.id}" id="proid"
 								class="champsFormulaire" />
 						</div>
 						<div align="center">
