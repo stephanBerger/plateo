@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="www.thymeleaf.org">
-
+<html xmlns:th="www.thymeleaf.org"  lang="en" class=" js ">
 <body>
-	<header th:fragment="headerdashboard">
+	<header th:fragment="headerdashboard" id="header" role="banner" class="main-header">
 		<div class="textedivimgHeader centrer white">PROFESSIONNEL</div>
 		<div class="divimgHeader">
 			<div class="imgHeaderLeft"></div>
-
 			<div class="imgHeader">
 				<img th:src="@{/img/IMG_HEADER.jpg}">
 			</div>
-
 			<div class="imgHeaderRight"></div>
-			
 		</div>
-
 		<section class="menu centrer">
 			<a th:href="@{/pro/proDashboard}" class="imgLogo"> <img class="imgLogoPlateo"
 				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
@@ -59,8 +54,8 @@
 				</ul>
 			</nav>
 		</section>
-
 		<div class="sousMenu"></div>
+		<script type="text/javascript" th:src="@{/js/asupp.js}"></script>
 	</header>
 </body>
 </html>
