@@ -19,10 +19,10 @@ public class EstimateService {
 	private EstimateRepository estimateRepo;
 
 	@Autowired
-	private EstimateHasServiceRepository estimateHSRepo;
+	private ServiceRepository serviceRepo;
 
 	@Autowired
-	private ServiceRepository serviceRepo;
+	private EstimateHasServiceRepository estimateHSRepo;
 
 	public void create(Estimate estimate) {
 		this.estimateRepo.save(estimate);

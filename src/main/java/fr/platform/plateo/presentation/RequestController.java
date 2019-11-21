@@ -193,7 +193,7 @@ public class RequestController {
 	// validation post du devis client
 	@PostMapping("/valideEstimate/{processInstanceId}/{estimateid}/{serviceId}")
 	public String postEstimateSave(@Valid Estimate estimate, BindingResult result, Model model, Client client,
-			@PathVariable Integer processInstanceId, @PathVariable Integer estimateid, @PathVariable Integer serviceId,
+			@PathVariable String processInstanceId, @PathVariable Integer estimateid, @PathVariable Integer serviceId,
 			@ModelAttribute("assigneeId") Integer assigneeId, Principal principal,
 			@RequestParam(value = "prestation") String prestation, final RedirectAttributes redirectAttributes) {
 

@@ -32,7 +32,7 @@ public class EstimateHasService implements Serializable {
 	/**
 	 *
 	 */
-	private Integer processid;
+	private String processid;
 
 	/**
 	 *
@@ -64,11 +64,11 @@ public class EstimateHasService implements Serializable {
 		this.estimate = estimate;
 	}
 
-	public Integer getProcessid() {
+	public String getProcessid() {
 		return this.processid;
 	}
 
-	public void setProcessid(Integer processid) {
+	public void setProcessid(String processid) {
 		this.processid = processid;
 	}
 
