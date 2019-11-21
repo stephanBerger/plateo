@@ -25,8 +25,10 @@
 								<span>Devis et factures</span>
 							</a>
 							<div class="dropdown-content">
-	     						<a th:href="@{/pro/estimatesAllList}">Liste totale des devis</a>
-	      						<a th:href="@{/pro/estimatesRequestList}">Demande de devis en cours</a>
+	     						<!--<a th:href="@{/pro/estimatesProfessionList}">Demandes de devis sur mes corps d'état</a>-->
+	      						<a th:href="@{/pro/estimatesRequestList}">Liste totale des demandes de devis</a>
+	      						<a th:href="@{/pro/estimatesAwaitingList}">Devis en attente de validation client</a>
+	      						<a th:href="@{/pro/estimatesDirectList}">Mes demandes de devis direct</a>
 	      						<a th:href="@{/pro/estimatesAcceptedList}">Mes devis validés</a>
 	      						<a th:href="@{/pro/estimatesConvertedList}">Mes factures</a>
 	    					</div>
