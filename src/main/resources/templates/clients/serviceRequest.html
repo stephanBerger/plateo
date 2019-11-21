@@ -11,8 +11,8 @@
 	<div class="container">
 		<h1 class="text-center" th:text="${task.name}"></h1>
 
-		<form
-			th:action="@{/clients/serviceProcess/} + ${task.processInstanceId} + '/' + ${task.id} + '/' + ${estimateid} + '/' + ${proid}"
+		<form th:action="@{/clients/serviceProcess/} + ${task.processInstanceId} + '/' + ${task.id} + '/' + ${estimateid} + '/' + ${serviceId}"
+
 			method="post">
 			<th:block th:each="property : ${properties}">
 				<div class="form-check" th:if="${property.type.name == 'boolean'}">

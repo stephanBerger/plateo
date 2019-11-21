@@ -16,6 +16,7 @@ import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Profession;
+import fr.platform.plateo.business.service.BusinessProcessModelService;
 import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 
@@ -23,13 +24,16 @@ import fr.platform.plateo.business.service.ProService;
 public class ProEstimateController {
 
     @Autowired
-    private Logger          LOGGER;
+    private Logger                      LOGGER;
 
     @Autowired
-    private ProService      proService;
+    private ProService                  proService;
 
     @Autowired
-    private EstimateService estimateService;
+    private EstimateService             estimateService;
+
+    @Autowired
+    private BusinessProcessModelService bpmService;
 
     // all estimates list
     @GetMapping( "/pro/estimatesAllList" )
@@ -166,6 +170,14 @@ public class ProEstimateController {
         model.addAttribute( "estimatesStatusList", estimatesStatusList );
 
         return "pro/proEstimatesList";
+    }
+
+    @GetMapping( "/pro/EstimateDetails/{estimateId}" )
+    public String estimateDetails( @PathVariable Integer estimateId, Model model, Principal principal ) {
+        Pro pro = this.proService.findEmail( principal.getName() );
+        model.addAttribute( "pro", pro );
+        model.addAttribute( "services", this.bpmService.getDataForAssigneeAndProcess( pro.getId(), estimateId ) );
+        return "pro/proEstimateDetails";
     }
 
 }
