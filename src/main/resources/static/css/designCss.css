@@ -33,15 +33,16 @@ strong {
 	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
 	text-align: left;
 }
-.rowFormulaire{
-	display:flex;
-	flex-direction: row;
-	justify-content:center;
-	align-items:flex-start;
-}
 .sousColumnFormulaire{
 	min-width:380px;
+	
+	max-height: 500px;
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:center;
 }
+
 input[type="text"], 
 input[type="password"], 
 input[type="email"],
@@ -123,8 +124,9 @@ button.btn:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
 
 button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
 
-.form-bottom form button.btn {
-	width: 100%;	
+.width-form-box {
+	width: calc(100% - 40px);
+	margin-left: 20px;	
 }
 .backstretch{
 	left: 0px;
@@ -138,12 +140,9 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 	position: fixed;
 }
 .backstretch img {
-	/*position: absolute;*/
 	margin: 0px;
 	padding: 0px;
 	border: none;
-	/*width: 1524px;*/
-	/*height: 1016px;*/
 	max-height: none;
 	max-width: none;
 	z-index: -999999;
@@ -155,8 +154,7 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 	display:flex;
 	flex-direction: column;
 	flex-wrap:wrap;
-	max-height:150px;
-	
+	max-height:220px;
 }
 .custom-control-input:checked~.custom-control-label::before {
     color: #fff;
@@ -166,14 +164,6 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 .custom-control{
 	padding-right:15px;
 }
-
-
-@media (min-width: 1200px){
-	.containerMaxWidth {
-	    max-width: 1000px !important; 
-	}
-}
-
 /*------------------DECO PROLIST-----------------------*/
 .table-bordered, .table-bordered td, .table-bordered th, .table td, .table th, .table thead th  {
 	border: 5px solid #bdbdbd;
@@ -189,9 +179,6 @@ table.table-bordered.dataTable thead tr, table.table-bordered.dataTable thead th
 .table-bordered{
 	border-radius: 10px;
 }
-/*.col-sm-12{
-	margin-bottom:20px;
-}*/
 .table thead th {
     vertical-align: bottom;
 }
@@ -221,3 +208,25 @@ table.dataTable{
 td a{
 	opacity: 0.6;
 }
+
+/*--------------VERSION MOBILE si ecran egal ou plus grand que 1200px   */
+@media screen and (min-width: 1200px){
+	.containerMaxWidth {
+	    max-width: 1000px !important; 
+	}
+}
+
+/*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
+
+@media screen and (max-width: 1000px) {
+	.sousColumnFormulaire{
+	    max-height: fit-content;
+	}
+	.PopoverColumn{
+		max-height: 400px;
+	}
+	
+}
+
+
+

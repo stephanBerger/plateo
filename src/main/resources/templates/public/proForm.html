@@ -19,9 +19,8 @@
                     <div class="row centrer">
                        	<div class="form-box">
                             <div class="form-bottom">
-			                    <form role="form" action="#" th:action="@{/public/proForm}"
-										th:object="${pro}" method="post" class="registration-form">
-			                    	<div>
+			                    <form class="registration-form" role="form" action="#" th:action="@{/public/proForm}"
+										th:object="${pro}" method="post" >
 				                    	<div class="rowFormulaire">
 					                    	<div class="sousColumnFormulaire">
 					                    		<div class="form-group">
@@ -56,11 +55,6 @@
 						                        	<span th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
 															class="text-danger"> </span>
 						                        </div>
-					                    	</div>
-					                    	
-					                    	<div class="middle-border-vertical"></div>
-					                    	
-					                    	<div class="sousColumnFormulaire">
 						                    	<div class="form-group">
 						                        	<label for="siret" class="white labelForm">SIRET</label>
 						                        	<input type="text" id="siret" th:field="*{siret}"
@@ -101,11 +95,9 @@
 						                        </div>
 					                    	</div>
 					                    </div>
-			                    	</div> 
-			                    	
-			                    	<div class="middle-border-horizontal"></div>
-			                    	<label for="listProfession" class="white labelForm">Listes des corps d'états</label>
-			                    	<div class="PopoverColumn">
+			                    	<div class="middle-border-horizontal width-form-box"></div>
+			                    	<label for="listProfession" class="white labelForm width-form-box">Listes des corps d'états</label>
+			                    	<div class="PopoverColumn width-form-box">
 										<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
 											<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
 													th:value="${{profession}}" th:field="*{listProProfessions}" />
@@ -117,7 +109,7 @@
 										</div>
 									</div>	
 			                    	<div>
-			                    		<button type="submit" class="btn">Validez</button>
+			                    		<button type="submit" class="btn width-form-box">Validez</button>
 			                        </div> 
 			                        
 			                    </form>
