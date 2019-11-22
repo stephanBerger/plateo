@@ -10,19 +10,25 @@
 			<div class="imgHeaderRight"></div>
 		</div>
 		<section class="menu centrer">
-			<a th:href="@{/}" class="imgLogo"> <img class="imgLogoPlateo imgO"
-				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
-				class="imgLogoText imgO" alt="logo textuel Plateo"
-				th:src="@{/img/logo-texte-BD.png}">
+			<a th:href="@{/}" class="imgLogo">
+				<img class="imgLogoPlateo imgO" alt="logo Plateo" th:src="@{/img/LOGO-BD.png}">
+				<img class="imgLogoText imgO" alt="logo textuel Plateo"
+						th:src="@{/img/logo-texte-BD.png}">
 			</a>
 			<nav>
 				<ul class="menuUl">
-					<li><a th:href="@{/public/proList}"> <img class="imgO" th:src="@{/img/LOUPE.jpg}">
+					<li>
+						<a th:href="@{/public/proList}">
+							<img class="imgO" th:src="@{/img/LOUPE.jpg}">
 							<span>Rechercher un Pro</span>
-					</a></li>
-					<li><a href=""> <img class="imgO" th:src="@{/img/DEVIS.jpg}">
+						</a>
+					</li>
+					<li>
+						<a th:href="@{/clients/estimateRequest/0/0}">
+							<img class="imgO" th:src="@{/img/DEVIS.jpg}">
 							<span>Demander un devis</span>
-					</a></li>
+						</a>
+					</li>
 					<div class="dropdown">
 						<li><a class="textIdentifier"> <!-- th:href="@{/public/registration}" -->
 							<img class="imgO" th:src="@{/img/PROFIL.jpg}">

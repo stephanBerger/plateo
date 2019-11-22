@@ -174,6 +174,50 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 	}
 }
 
+/*------------------DECO PROLIST-----------------------*/
+.table-bordered, .table-bordered td, .table-bordered th, .table td, .table th, .table thead th  {
+	border: 5px solid #bdbdbd;
+	/*opacity:0.5;*/
+}
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    border-bottom-width: 0;
+    border-top-width: 0;  
+}
+table.table-bordered.dataTable thead tr, table.table-bordered.dataTable thead th  {
+    border-top-width: 0;
+}
+.table-bordered{
+	border-radius: 10px;
+}
+/*.col-sm-12{
+	margin-bottom:20px;
+}*/
+.table thead th {
+    vertical-align: bottom;
+}
+.texteTable, .table, td a{
+	font-size:1.2rem;
+	font-weight: 600;
+}
+.texteTable{
+	color: white !important;
+}
 
-
-
+.texteTable th, .texteTable td{
+	color: #585757 !important;
+}
+thead th{
+	opacity: 0.8;
+	font-size:1.3rem;
+    font-weight: 500;
+}
+tbody td{
+	opacity: 1;
+    font-weight: 500;
+}
+table.dataTable{
+	background-color: #ECF6FC ;
+}
+td a{
+	opacity: 0.6;
+}

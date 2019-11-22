@@ -50,6 +50,8 @@ public class SecurityConfig {
 					.failureUrl("/clients/login?error=loginError")
 					.defaultSuccessUrl("/clients/clientDashboard")
 					.usernameParameter("email").and()
+					.exceptionHandling().accessDeniedPage("/403")
+					.and()
 
 					.logout().logoutUrl("/clients/logout")
 					.logoutSuccessUrl("/").permitAll();
@@ -89,6 +91,8 @@ public class SecurityConfig {
 					.failureUrl("/pro/login?error=loginError")
 					.defaultSuccessUrl("/pro/proDashboard")
 					.usernameParameter("email").and()
+					.exceptionHandling().accessDeniedPage("/403")
+					.and()
 
 					.logout().logoutUrl("/pro/logout")
 					.logoutSuccessUrl("/").permitAll();

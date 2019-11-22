@@ -2,50 +2,65 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	    <link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
-		<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
-
-		<script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#proList').dataTable();
-			} );
-		</script>
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
+	<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$('#proList').dataTable();
+		} );
+	</script>
 </head>
-    <body>
+<body>
     <header th:replace="public/header :: header"></header>
-
-        <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
-           <div class="plusProduits list">
-
-	       <h1 class="centrer" >Annuaire des professionnels</h1>
-		
-	       <table id="proList" class="table table-striped table-bordered">
-	           <thead>
-            	    <tr>
-            	    
-            	      <th scope="col">Société</th>
-            	      <th scope="col">Ville</th>
-            	      <th scope="col">Code postal</th>
-            	      <th scope="col">Corps état</th>
-            	      <th scope="col">Visualisation</th>
-            	    </tr>
-	          </thead>
-        	  <tbody>
-        	    <tr th:each="pro : ${proList}">
-        	      <td th:text="${pro.companyName}"></td>
-        	      <td th:text="${pro.proCity}"></td>
-        	      <td th:text="${pro.proPostcode}"></td>
-        	      <td><span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
-        	      </td>
-        	      
-        	      <td><a th:href="@{/public/publicProProfile/{id}(id=${pro.id})}">Détails</a></td>
-        	    </tr>
-	           </tbody>
-	       </table>	
-</div>
-<div class="divVide"></div>
-</section>
+	
+	<div class="top-content">
+		<div class="inner-bg">
+	        <div class="container containerMaxWidth">
+	            <div class="row centrer">
+	                <div class="col-sm-8 col-sm-offset-2 text centrer">
+	                    <h1>Annuaire des <strong>Professionnels</strong></h1>
+	                </div>
+	            </div>
+	            <div class="row centrer">
+	            	<div class="form-box">
+	            		<div class="form-bottom texteTable">
+	            			<table id="proList" class="table table-striped table-bordered">
+					           <thead>
+				            	    <tr>
+				            	      <th scope="col">Société</th>
+				            	      <th scope="col">Ville</th>
+				            	      <th scope="col">Code postal</th>
+				            	      <th scope="col">Corps état</th>
+				            	      <th scope="col">Visualisation</th>
+				            	    </tr>
+					          </thead>
+				        	  <tbody>
+				        	    <tr th:each="pro : ${proList}">
+				        	      <td th:text="${pro.companyName}"></td>
+				        	      <td th:text="${pro.proCity}"></td>
+				        	      <td th:text="${pro.proPostcode}"></td>
+				        	      <td>
+				        	      	<span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
+				        	      </td>
+				        	      <td>
+				        	      	<a th:href="@{/public/publicProProfile/{id}(id=${pro.id})}">Détails</a>
+				        	      </td>
+				        	    </tr>
+					           </tbody>
+					       </table>	
+	            		</div>
+	            	</div>
+	            </div>
+			</div>
+		</div>
+	</div>
+	<div class="backstretch">
+		<img src="/img/1.jpg">
+	</div>
         <footer th:replace="public/footer :: footer">
+        <script th:src="@{/js/scripts.js}"></script>
     </footer>
     </body>
 </html>
