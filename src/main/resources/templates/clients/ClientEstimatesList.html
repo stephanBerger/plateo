@@ -2,64 +2,73 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-        <link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
-        <link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
-        <script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
-        <script type="text/javascript" charset="utf-8">
-			$(document).ready(function() {
-				$('#estimatesList').dataTable();
-			} );
-		</script>
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/ListDataTables/datatables.min.css}" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$('#estimatesList').dataTable();
+		} );
+	</script>
 </head>
 <body>
-    <div>
-    <header th:replace="clients/headerdashboard :: headerdashboard"></header>
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
 
-        <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
-           <div class="plusProduits list">
-
-	       <h1 class="centrer" th:if="${mode eq 'all'}">Liste totale des devis</h1>
-	       <h1 class="centrer" th:if="${mode eq 'request'}">Liste de mes demandes de devis</h1>
-	       <h1 class="centrer" th:if="${mode eq 'awaiting'}">Liste des devis à traiter</h1>
-	       <h1 class="centrer" th:if="${mode eq 'accepted'}">Liste de mes acceptations de devis</h1>
-	       <h1 class="centrer" th:if="${mode eq 'converted'}">Liste de mes factures</h1>
-		
-	       <table th:fragment="devis" id="estimatesList" class="table table-striped table-bordered">
-	           <thead>
-            	    <tr>
-            	      <th scope="col">numéro Devis</th>
-            	      <th scope="col">Ville</th>
-            	      <th scope="col">Code postal</th>
-            	      <th scope="col">Statut</th>
-            	      <th scope="col">Edition</th>
-            	      <th scope="col">Action</th>
-            	      
-            	    </tr>
-	          </thead>
-        	  <tbody>
-        	    <tr th:each="estimate : ${estimatesStatusList}">
-        	      <td th:text="${estimate.id}"></td>
-        	      <td th:text="${estimate.workCity}"></td>
-        	      <td th:text="${estimate.workPostcode}"></td>
-        	      <td th:text="${estimate.estimateStatus}"></td> 
-        	      <!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
-        	      <td>  <a href="#">Edit</a></td>
-          		  <td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
-        	      
-        	    </tr>
-	           </tbody>
-	       </table>	
+	<section>
+		<div class="top-content">
+		<div class="inner-bg">
+	        <div class="container containerMaxWidth">
+	            <div th:fragment="divRowProlist" class="row centrer">
+	                <div class="col-sm-8 col-sm-offset-2 text centrer">
+						<h1 th:if="${mode eq 'all'}">Mes devis</h1>
+						<h1 th:if="${mode eq 'request'}">Mes demandes de devis</h1>
+						<!--  <h1 th:if="${mode eq 'awaiting'}">Mes demandes de devis</h1>-->
+						<h1 th:if="${mode eq 'accepted'}">Mes devis validés</h1>
+						<h1 th:if="${mode eq 'converted'}">Mes factures</h1>
+					</div>
+	            </div>
+	            <div class="row centrer">
+	            	<div class="form-box">
+	            		<div class="form-bottom texteTable">
+							<table th:fragment="devis" id="estimatesList" class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">numéro Devis</th>
+										<th scope="col">Ville</th>
+										<th scope="col">Code postal</th>
+										<th scope="col">Statut</th>
+										<th scope="col">Edition</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="estimate : ${estimatesStatusList}">
+										<td th:text="${estimate.id}"></td>
+										<td th:text="${estimate.workCity}"></td>
+										<td th:text="${estimate.workPostcode}"></td>
+										<td th:text="${estimate.estimateStatus}"></td> 
+										<!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
+										<td>  <a href="#">Edit</a></td>
+										<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
+									</tr>
+								</tbody>
+							</table>	
+						</div>
+	            	</div>
+	            </div>
+			</div>
+		</div>
 	</div>
-
-<div class="divVide"></div>
-</section>
-</div>
-<!--FIN DU FRAGMENT-->
-        <footer th:replace="public/footer :: footer">
-    </footer>
-    </body>
+	<div class="backstretch">
+		<img src="/img/1.jpg">
+	</div>
+	</section>
+    <footer th:replace="public/footer :: footer"></footer>
+    <script th:src="@{/js/scripts.js}"></script>
+</body>
 </html>
-
 
 
 
