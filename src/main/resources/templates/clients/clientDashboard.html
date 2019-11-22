@@ -22,33 +22,39 @@
 		class="alert alert-success">
 		<strong>Modification du profil réussie</strong>
 	</div>
-
+	<h1>Annuaire des <strong>Professionnels</strong></h1>
 	
-	<div class="top-content">
-		<div class="inner-bg">
-	        <div class="container containerMaxWidth">
-	            <div class="row centrer">
-	                <div class="col-sm-8 col-sm-offset-2 text centrer">
-	                    <h1>Annuaire des <strong>Professionnels</strong></h1>
-	                </div>
-	            </div>
-					<div class="row centrer">
-	            		<div class="form-box">
-	            			<div class="form-bottom texteTable">
-					<div th:replace="clients/ClientEstimatesList.html :: devis"></div>
-							</div>
-						</div>
-					</div>
-					<div class="row centrer">
-	            		<div class="form-box">
-	            			<div class="form-bottom texteTable">
-					<div th:replace="public/proList :: tablePro"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                      <div th:replace="clients/ClientEstimatesList.html :: devis"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <div th:replace="public/proList :: tablePro"></div>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                    
+ <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="120330/"></script>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+    
+	
+					
+					
+					
+					
+					
+					
+					
+					
 		
 		
 	
