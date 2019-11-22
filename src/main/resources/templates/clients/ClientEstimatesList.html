@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
-
 <head>
-
         <link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
         <link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
         <script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
-
-</head>
-
-    <body>
-    
-    <div >
-    
-    
-    <script type="text/javascript" charset="utf-8">
+        <script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				$('#estimatesList').dataTable();
 			} );
 		</script>
-		
-    <header th:replace="clients/headerdashboard :: headerdashboard">	
-    	
-	</header>
+</head>
+<body>
+    <div>
+    <header th:replace="clients/headerdashboard :: headerdashboard"></header>
 
         <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
            <div class="plusProduits list">

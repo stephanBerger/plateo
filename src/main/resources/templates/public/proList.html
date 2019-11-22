@@ -14,11 +14,11 @@
 </head>
 <body>
     <header th:replace="public/header :: header"></header>
-	
+	<section th:fragment="sectionProlist">
 	<div class="top-content">
 		<div class="inner-bg">
 	        <div class="container containerMaxWidth">
-	            <div class="row centrer">
+	            <div th:fragment="divRowProlist" class="row centrer">
 	                <div class="col-sm-8 col-sm-offset-2 text centrer">
 	                    <h1>Annuaire des <strong>Professionnels</strong></h1>
 	                </div>
@@ -60,7 +60,8 @@
 	<div class="backstretch">
 		<img src="/img/1.jpg">
 	</div>
-        <footer th:replace="public/footer :: footer"></footer>
-        <script th:src="@{/js/scripts.js}"></script>
-    </body>
+	</section>
+    <footer th:replace="public/footer :: footer"></footer>
+    <script th:src="@{/js/scripts.js}"></script>
+</body>
 </html>
