@@ -2,9 +2,11 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
-<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
 			$('#proList').dataTable();
@@ -12,17 +14,14 @@
 	</script>
 </head>
 <body>
-
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	
-	<th:block
-		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
-	<!-- message -->
+	<!-- -----------------MODIFIER LE PASSWORD------------------- -->
+	<th:block th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+	<!-- ------------MODIFICATION DU PASSWORD REUSSIE------------- -->
 	<div align="center" th:if="${msgok eq 'ok'}"
 		class="alert alert-success">
 		<strong>Modification du profil réussie</strong>
 	</div>
-	<h1>Annuaire des <strong>Professionnels</strong></h1>
 	
 	<div class="container">
             <div class="row">
