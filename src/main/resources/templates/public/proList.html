@@ -46,7 +46,7 @@
 				        	      	<span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
 				        	      </td>
 				        	      <td>
-				        	      	<a th:href="@{/public/proProfile/{id}(id=${pro.id})}">Détails</a>
+				        	      	<a th:href="@{/public/publicProProfile/{id}(id=${pro.id})}">Détails</a>
 				        	      </td>
 				        	    </tr>
 					           </tbody>
@@ -64,10 +64,3 @@
         <script th:src="@{/js/scripts.js}"></script>
     </body>
 </html>
-
-
-
-
-
-
-

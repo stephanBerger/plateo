@@ -33,7 +33,7 @@
         	      <td th:text="${pro.proPostcode}"></td>
         	      <td><span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
         	      </td>
-        	      <td><a th:href="@{/public/proProfile/{id}(id=${pro.id})}">Détails</a></td>
+        	      <td><a th:href="@{/clients/clientProProfile/{id}(id=${pro.id})}">Détails</a></td>
         	    </tr>
 	           </tbody>
 	       </table>	
