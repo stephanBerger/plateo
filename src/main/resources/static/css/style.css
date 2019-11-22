@@ -767,7 +767,7 @@ ul{
 
 }
 
- /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1280px   */
 @media screen and (max-width: 1280px) {
 	body{
 		max-width:1280px;
@@ -794,4 +794,11 @@ ul{
 	   width:45px;
 	   height:45px;
 	}
+}
+/*--------------VERSION MOBILE si ecran egal ou plus petit que 900px   */
+@media screen and (max-width: 900px) {
+	.imgLogoText{
+		display:none;
+	}
+	
 }

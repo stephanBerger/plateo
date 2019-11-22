@@ -11,23 +11,22 @@
 			<div class="imgHeaderRight"></div>
 		</div>
 		<section class="menu centrer">
-			<a th:href="@{/clients/clientDashboard}" class="imgLogo"> <img class="imgLogoPlateo"
-				alt="logo Plateo" th:src="@{/img/LOGO-BD.png}"> <img
-				class="imgLogoText" alt="logo textuel Plateo"
-				th:src="@{/img/logo-texte-BD.png}">
+			<a th:href="@{/clients/clientDashboard}" class="imgLogo">
+				<img class="imgLogoPlateo imgO" alt="logo Plateo" th:src="@{/img/LOGO-BD.png}">
+				<img class="imgLogoText imgO" alt="logo textuel Plateo" th:src="@{/img/logo-texte-BD.png}">
 			</a>
 			<nav>
 				<ul class="menuUl">
 					<li>
 						<a th:href="@{/clients/proList}">
-							<img th:src="@{/img/LOUPE.jpg}">
+							<img class="imgO" th:src="@{/img/LOUPE.jpg}">
 							<span>Rechercher un Pro</span>
 						</a>
 					</li>
 					<div class="dropdown">
 						<li>
 							<a href="" class="texteDropDown"> <!-- th:href="@{/public/registration}" -->
-								<img th:src="@{/img/DEVIS.jpg}">
+								<img class="imgO" th:src="@{/img/DEVIS.jpg}">
 								<span>Devis et factures</span>
 							</a>
 							<div class="dropdown-content">
@@ -42,14 +41,14 @@
 					</div>
 					<li>
 						<a href="">
-							<img th:src="@{/img/COEUR.jpg}">
+							<img class="imgO" th:src="@{/img/COEUR.jpg}">
 							<span>Mes Pro favoris</span>
 					</a></li>
 					<!-- ----------------MODIFS------------------- -->
 					<div class="dropdown" th:if="${#request.userPrincipal}">
 						<li>
 							<a href="" class="texteDropDown">
-								<img th:src="@{/img/PROFIL.jpg}">
+								<img class="imgO" th:src="@{/img/PROFIL.jpg}">
 								<div>
 									<span class="textName" th:text="${client.clientLastname}" />
 									<span class="textName" th:text="${client.clientFirstname}" />
