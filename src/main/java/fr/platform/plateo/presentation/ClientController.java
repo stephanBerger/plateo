@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Client;
+import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 
 /**
@@ -50,6 +52,9 @@ public class ClientController {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private EstimateService estimateService;
 
 	// login client method get
 
@@ -90,6 +95,16 @@ public class ClientController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+
+		// AJOUT POUR LISTER LES DEMANDES DE DEVIS EN COURS
+		model.addAttribute("client", client);
+		List<Estimate> estimatesStatusList = this.estimateService.readAll();
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+		model.addAttribute("mode", "all");
+		// AJOUT POUR PROLIST
+		List<Pro> proList = this.proService.readAll();
+		model.addAttribute("proList", proList);
+
 		return "/clients/clientDashboard";
 	}
 
