@@ -3,9 +3,10 @@
 <head th:replace="public/head :: head"></head>
 <head>
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
-	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 	
+	<link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
 	<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
