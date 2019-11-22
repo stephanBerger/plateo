@@ -472,7 +472,9 @@ greyClair ul{
 	width:400px;
 }
 .form-group{
-	margin-bottom: 0.6rem;
+	/*margin-bottom: 0.6rem;*/
+	margin:0 20px 0.6rem 20px;
+	min-width:380px;
 }
 .form-group-vide{
 	height:86px;
