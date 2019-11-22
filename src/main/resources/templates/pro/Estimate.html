@@ -48,7 +48,8 @@
         	      <td th:text="${estimate.workCity}"></td>
         	      <td th:text="${estimate.workPostcode}"></td>
         	      <td th:text="${estimate.estimateStatus}"></td> 
-        	      <td><a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>
+        	      <!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
+        	      <td><a href="#">Edit</a></td>
           		  <td><a th:href="@{/pro/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
         	      
         	    </tr>
