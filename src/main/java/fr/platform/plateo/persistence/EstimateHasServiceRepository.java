@@ -8,5 +8,7 @@ import fr.platform.plateo.business.entity.EstimateHasService;
 
 public interface EstimateHasServiceRepository extends JpaRepository<EstimateHasService, Integer> {
 
-	List<EstimateHasService> findAllByEstimateId(Integer id);
+    List<EstimateHasService> findAllByEstimateId( Integer id );
+
+    List<EstimateHasService> findByEstimateIdAndServiceId( Integer estimateId, Integer serviceId );
 }

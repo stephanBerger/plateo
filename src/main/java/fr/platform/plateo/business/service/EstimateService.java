@@ -42,8 +42,8 @@ public class EstimateService {
         return this.estimateRepo.findAll();
     }
 
-    public Estimate update( Integer id ) {
-        return this.estimateRepo.getOne( id );
+    public Estimate update( Estimate estimate ) {
+        return this.estimateRepo.save( estimate );
     }
 
     public void delete( Integer id ) {
