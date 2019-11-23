@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+</head>
+<body class="BgBlue">
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+<div th:replace="public/publicProProfile :: proProfile"></div>
+</body>
+</html>

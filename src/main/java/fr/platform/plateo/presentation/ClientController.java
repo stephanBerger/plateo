@@ -1,6 +1,8 @@
 package fr.platform.plateo.presentation;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,10 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Client;
+import fr.platform.plateo.business.entity.Estimate;
+import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
+import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 
 /**
@@ -45,6 +51,9 @@ public class ClientController {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private EstimateService estimateService;
 
 	// login client method get
 
@@ -85,6 +94,20 @@ public class ClientController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+
+		// AJOUT POUR LISTER LES DEMANDES DE DEVIS EN COURS
+		model.addAttribute("client", client);
+		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
+		model.addAttribute("mode", "request");
+		// AJOUT DES DEVIS ACCEPTEES
+		List<Estimate> estimatesStatusList3 = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+		model.addAttribute("MesDevisAcceptes", estimatesStatusList3);
+		model.addAttribute("mode", "accepted");
+		// AJOUT POUR PROLIST
+		List<Pro> proList = this.proService.readAll();
+		model.addAttribute("proList", proList);
+
 		return "/clients/clientDashboard";
 	}
 
@@ -250,6 +273,31 @@ public class ClientController {
 		}
 		return "redirect:/clients/clientEdit/" + id;
 
+	}
+
+	// Profil pro vu par tout le monde
+	@GetMapping("/clients/clientProProfile/{id}")
+	public String publicProProfile(@PathVariable Integer id, Model model, Principal principal) {
+		if (principal != null) {
+			Client client = this.clientService.findEmail(principal.getName());
+			model.addAttribute("client", client);
+		}
+		Pro pro = this.proService.read(id);
+		model.addAttribute("pro", pro);
+		Base64.Encoder encoder = Base64.getEncoder();
+
+		if (pro.getLogo() != null) {
+			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
+
+		List<String> encodings = new ArrayList<>();
+		for (ProPhotos photo : pro.getListProPhotos()) {
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			encodings.add(encoding);
+		}
+
+		model.addAttribute("photos", encodings);
+		return "/clients/clientProProfile";
 	}
 
 }

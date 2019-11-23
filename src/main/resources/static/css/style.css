@@ -76,7 +76,7 @@ a:hover{
 
 /*-----------------------------HEADER-----------------------------------------*/
 
-/*----------ANIM JS HEADER-------------------*/
+/*----------ANIMATIONS JS HEADER-------------------*/
 
 /* QUAND ON DESCEND */
 .nav-is-stuck .main-header {
@@ -85,7 +85,7 @@ a:hover{
 }
 .nav-is-stuck .menu {
 	top: -50px;
-	animation: stickAnim 1s;
+	animation: stickAnim 0.5s;
 }
 @keyframes stickAnim {
 	0% {transform: translateY(50px);}
@@ -101,7 +101,7 @@ a:hover{
 }
 .nav-is-stuck .sousMenu {
 	top: -50px;
-	animation: stickAnim3 1s;
+	animation: stickAnim3 0.5s;
 }
 @keyframes stickAnim3 {
 	0% {transform: translateY(50px);}
@@ -109,7 +109,7 @@ a:hover{
 }
 .nav-is-stuck header {
 	height:95px;
-	animation: stickAnim4 1s;
+	animation: stickAnim4 0.5s;
 }
 @keyframes stickAnim4 {
 	0% {height:145px;}
@@ -121,7 +121,7 @@ a:hover{
 
 .nav-is-remonte .menu {
 	top: 0px;
-	animation: stickAnim11 1s;
+	animation: stickAnim11 0.5s;
 }
 @keyframes stickAnim11 {
 	0% {transform: translateY(-50px);}
@@ -129,7 +129,7 @@ a:hover{
 }
 .nav-is-remonte .imgO {
 	opacity: 1;
-	animation: stickAnim21 1s;
+	animation: stickAnim21 0.5s;
 }
 @keyframes stickAnim21 {
 	0% {opacity: 0;}
@@ -137,7 +137,7 @@ a:hover{
 }
 .nav-is-remonte .sousMenu {
 	top: 0px;
-	animation: stickAnim31 1s;
+	animation: stickAnim31 0.5s;
 }
 @keyframes stickAnim31 {
 	0% {transform: translateY(-50px);}
@@ -145,7 +145,7 @@ a:hover{
 }
 .nav-is-remonte header {
 	height:145px;
-	animation: stickAnim41 1s;
+	animation: stickAnim41 0.5s;
 }
 @keyframes stickAnim41 {
 	0% {height:95px;}
@@ -472,7 +472,9 @@ greyClair ul{
 	width:400px;
 }
 .form-group{
-	margin-bottom: 0.6rem;
+	/*margin-bottom: 0.6rem;*/
+	margin:0 20px 0.6rem 20px;
+	min-width:380px;
 }
 .form-group-vide{
 	height:86px;
@@ -765,7 +767,7 @@ ul{
 
 }
 
- /*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
+ /*--------------VERSION MOBILE si ecran egal ou plus petit que 1280px   */
 @media screen and (max-width: 1280px) {
 	body{
 		max-width:1280px;
@@ -792,4 +794,11 @@ ul{
 	   width:45px;
 	   height:45px;
 	}
+}
+/*--------------VERSION MOBILE si ecran egal ou plus petit que 900px   */
+@media screen and (max-width: 900px) {
+	.imgLogoText{
+		display:none;
+	}
+	
 }
