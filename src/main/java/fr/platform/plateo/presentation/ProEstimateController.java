@@ -160,6 +160,9 @@ public class ProEstimateController {
 		} else if (url.contains("Awaiting")) {
 			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.AWAITING_APPROVAL_CLIENT, pro);
 			model.addAttribute("mode", "awaiting");
+		} else if (url.contains("Direct")) {
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.REQUEST_CLIENT, pro);
+			model.addAttribute("mode", "direct");
 		} else if (url.contains("Accepted")) {
 			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTED, pro);
 			model.addAttribute("mode", "accepted");
@@ -190,12 +193,7 @@ public class ProEstimateController {
 
 	@PostMapping("/pro/EstimateDetails/{estimateId}")
 	public String estimateCreation(@PathVariable Integer estimateId, Model model, Principal principal) {
-		Pro pro = this.proService.findEmail(principal.getName());
-		Estimate estimate = this.estimateService.readOne(estimateId);
-		model.addAttribute("estimate", estimate);
-		model.addAttribute("estimateId", estimate.getId());
-		model.addAttribute("pro", pro);
-		model.addAttribute("services", this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
+
 		return "/pro/proEstimateDetails";
 	}
 

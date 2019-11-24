@@ -2,6 +2,7 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet"
 	type="text/css">
@@ -13,7 +14,7 @@
 	
 	<section class="sectionNouvClient section100pour100 centrer">
 
-				<div style="background-color: orange; margin-top: 40px; margin-bottom: 40px">
+				<div style="background-color: #ff9500; margin-top: 40px; margin-bottom: 40px">
 					<h1 class="blue titre-formulaires ">Demande de travaux</h1>
 				</div>
 
@@ -57,19 +58,20 @@
 						<div th:each="service: ${services}">
 							<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
 							<div th:each="prop: ${service.value}" style="margin-top: 15px;">
-								<label for="unitePrice" th:if="${prop.value}"   th:text="${prop.key} + ' :'"
+								<label for="${prop.key}" th:if="${prop.value}"   th:text="${prop.key} + ' :'"
 								 class="col-form-label blue labelForm"></label>
-								<input th:if="${prop.value}" type="text" id="unitePrice" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)" required/>
+								<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
+								placeholder="Prix Unitaire(HT)" name="${prop.key}" required/>
+								<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
+								<input type="text" id="workforce" name="workforce" class="champsFormulaire"
+								placeholder="Prix Unitaire(HT)"><br>					
+								<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
+								<input type="text" id="travelCharge" name="travelCharge" class="champsFormulaire"
+								placeholder="Prix Unitaire(HT)"><br>
 							</div>
 						</div>
 							
-							<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
-							<input type="text" id="workforce" name="workforce" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)"><br>					
-							<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
-							<input type="text" id="travelCharge" name="travelCharge" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)"><br>							
+														
 							<label for="totalHT" class="col-form-label blue labelForm">Total HT : </label>
 							<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
 								placeholder="totalHT"><br>
@@ -86,7 +88,7 @@
 				
 				
 				<div style="margin-top: 60px; margin-bottom: 30px">
-					<h2 class="blue titre-formulaires ">Informations complémentaires</span></h2>
+					<h2 class="blue titre-formulaires ">Informations complémentaires</h2>
 				</div>
 
 				<div class="centrer sectionForm">
@@ -169,8 +171,8 @@
 				
 				
 				<div align="center">
-							<button type="submit" name="prestation" value="endprestation"
-								class="btn btn-primary">Création du devis</button>
+							<button type="submit" name="estimate" value="creatEstimate"
+								class="btn btn-primary" style="margin-bottom: 50px;">Création du devis</button>
 				</div>
 					
 			</form>
