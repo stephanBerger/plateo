@@ -31,49 +31,58 @@
 						<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
 								mon mot de passe</button></a>
 					</div>
+					
 					<div class="form-group formIdentifier left">
 						<label for="companyName" class="col-form-label blue ">Dénomination
 							sociale </label> <input class="form-control" id="companyName" th:field="*{companyName}" type="text" placeholder="Champs obligatoire" required tabindex="1" /> <span th:if="${#fields.hasErrors('companyName')}"
 								th:errors="*{companyName}" class="text-danger"> </span>
-						</div>
+					</div>
+					
+					<div class="form-group formIdentifier left">
+						<label for="proStatutCompany" class="col-form-label blue ">Forme Juridique</label>
+						<input class="form-control" id="proStatutCompany" 
+						th:field="*{proStatutCompany}" type="text" placeholder=""/>
+						<span th:if="${#fields.hasErrors('siret')}"
+							th:errors="*{siret}" class="text-danger"> 
+						</span>
+					</div>
 
-							<div class="form-group formIdentifier left">
-								<label for="siret" class="col-form-label blue ">SIRET</label>
-								<input class="form-control" id="siret" th:field="*{siret}"
-									type="text" placeholder="numéro de SIRET : 14 chiffres" required
-									tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
-									th:errors="*{siret}" class="text-danger"> </span>
-							</div>
-							<div class="form-group formIdentifier left">
-								<label for="managerLastname"
-									class="col-form-label blue">Nom du gérant</label> <input
-									type="text" id="managerLastname" th:field="*{managerLastname}"
-									class="form-control" placeholder="Champs obligatoire"
-									required /> <span
-									th:if="${#fields.hasErrors('managerLastname')}"
-									th:errors="*{managerLastname}" class="text-danger"> </span>
-							</div>
-							<div class="form-group formIdentifier left">
-								<label for="managerFirstname"
-									class="col-form-label blue">Prénom du gérant</label> <input
-									type="text" id="managerFirstname" th:field="*{managerFirstname}"
-									class="form-control" placeholder="Champs obligatoire"
-									required /> <span
-									th:if="${#fields.hasErrors('managerFirstname')}"
-									th:errors="*{managerFirstname}" class="text-danger"> </span>
-							</div>
-							<div class="form-group formIdentifier left">
-								<label for="proEmailAddress"
-									class="col-form-label blue">Email</label> <input
-									type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
-									class="form-control" placeholder="Champs obligatoire"
-									required /> <span
-									th:if="${#fields.hasErrors('proEmailAddress')}"
-									th:errors="*{proEmailAddress}" class="text-danger"> </span> <input
-									type="hidden" id="OldEmail" name="OldEmail"
-									th:value="*{proEmailAddress}" />
-							
-			</div>
+					<div class="form-group formIdentifier left">
+						<label for="siret" class="col-form-label blue ">SIRET</label>
+						<input class="form-control" id="siret" th:field="*{siret}"
+							type="text" placeholder="numéro de SIRET : 14 chiffres" required
+							tabindex="2" /> <span th:if="${#fields.hasErrors('siret')}"
+							th:errors="*{siret}" class="text-danger"> </span>
+					</div>
+					<div class="form-group formIdentifier left">
+						<label for="managerLastname"
+							class="col-form-label blue">Nom du gérant</label> <input
+							type="text" id="managerLastname" th:field="*{managerLastname}"
+							class="form-control" placeholder="Champs obligatoire"
+							required /> <span
+							th:if="${#fields.hasErrors('managerLastname')}"
+							th:errors="*{managerLastname}" class="text-danger"> </span>
+					</div>
+					<div class="form-group formIdentifier left">
+						<label for="managerFirstname"
+							class="col-form-label blue">Prénom du gérant</label> <input
+							type="text" id="managerFirstname" th:field="*{managerFirstname}"
+							class="form-control" placeholder="Champs obligatoire"
+							required /> <span
+							th:if="${#fields.hasErrors('managerFirstname')}"
+							th:errors="*{managerFirstname}" class="text-danger"> </span>
+					</div>
+					<div class="form-group formIdentifier left">
+						<label for="proEmailAddress"
+							class="col-form-label blue">Email</label> <input
+							type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
+							class="form-control" placeholder="Champs obligatoire"
+							required /> <span
+							th:if="${#fields.hasErrors('proEmailAddress')}"
+							th:errors="*{proEmailAddress}" class="text-danger"> </span> <input
+							type="hidden" id="OldEmail" name="OldEmail"
+							th:value="*{proEmailAddress}" />							
+					</div>
 
 			<div class="col-xs-6 col-md-4">
 				<div class="form-group formIdentifier left">

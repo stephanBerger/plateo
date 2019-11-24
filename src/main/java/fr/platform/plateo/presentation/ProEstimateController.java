@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.EstimateStatus;
@@ -177,9 +178,25 @@ public class ProEstimateController {
 	@GetMapping("/pro/EstimateDetails/{estimateId}")
 	public String estimateDetails(@PathVariable Integer estimateId, Model model, Principal principal) {
 		Pro pro = this.proService.findEmail(principal.getName());
+		Estimate estimate = this.estimateService.readOne(estimateId);
+
+		model.addAttribute("client", estimate.getClient());
+		model.addAttribute("estimate", estimate);
+		model.addAttribute("estimateId", estimate.getId());
 		model.addAttribute("pro", pro);
 		model.addAttribute("services", this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
 		return "pro/proEstimateDetails";
+	}
+
+	@PostMapping("/pro/EstimateDetails/{estimateId}")
+	public String estimateCreation(@PathVariable Integer estimateId, Model model, Principal principal) {
+		Pro pro = this.proService.findEmail(principal.getName());
+		Estimate estimate = this.estimateService.readOne(estimateId);
+		model.addAttribute("estimate", estimate);
+		model.addAttribute("estimateId", estimate.getId());
+		model.addAttribute("pro", pro);
+		model.addAttribute("services", this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
+		return "/pro/proEstimateDetails";
 	}
 
 }

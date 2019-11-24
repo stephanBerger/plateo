@@ -42,11 +42,32 @@ public class Estimate implements Serializable {
 	private LocalDateTime requestDate;
 
 	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "estimate_date")
+	private LocalDate estimateDate;
+
+	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "validity_date")
+	private LocalDate validityDate;
+
+	/**
 	*
 	*/
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "begin_date")
 	private LocalDate beginDate;
+
+	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "work_deadline")
+	private LocalDate workDeadline;
 
 	/**
 	 *
@@ -90,13 +111,6 @@ public class Estimate implements Serializable {
 	 */
 	@Column(name = "work_comment")
 	private String workComment;
-
-	/**
-	 *
-	 */
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "work_deadline")
-	private LocalDate workDeadline;
 
 	/**
 	 *
@@ -228,6 +242,22 @@ public class Estimate implements Serializable {
 
 	public void setPro(Pro pro) {
 		this.pro = pro;
+	}
+
+	public LocalDate getEstimateDate() {
+		return this.estimateDate;
+	}
+
+	public void setEstimateDate(LocalDate estimateDate) {
+		this.estimateDate = estimateDate;
+	}
+
+	public LocalDate getValidityDate() {
+		return this.validityDate;
+	}
+
+	public void setValidityDate(LocalDate validityDate) {
+		this.validityDate = validityDate;
 	}
 
 }

@@ -168,7 +168,6 @@ public class ProController {
 		return "/pro/proLogin";
 	}
 
-	/*-----------MODIF GREG-----------*/
 	@GetMapping("/pro/proDashboard")
 	public String proDashboard(Model model, Principal principal) {
 		Pro pro = this.proService.findEmail(principal.getName());
@@ -176,7 +175,6 @@ public class ProController {
 		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
 		return "/pro/proDashboard";
 	}
-	/*-----------FIN MODIF GREG-----------*/
 
 	// list pro method get
 	@GetMapping("/public/proList")
