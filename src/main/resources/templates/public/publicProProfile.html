@@ -2,7 +2,8 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-	<!-- <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" > -->
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body class="BgBlue">
 	<header th:replace="public/header :: header"></header>
@@ -26,7 +27,7 @@
 	<div class="mt-4">
 		<div class="row">
 			<div class="col-7 offset-1">
-				<div th:if="${photos != null}">
+				<div th:if="${not #lists.isEmpty(photos)}">
 					<div>
 						<span th:each="photo, iterStat: ${photos}">
 		   	    			<img th:src="${photo}" th:id="@{'img-wrapper'}+${iterStat.index}" style="width:200px;" class="b-1">
