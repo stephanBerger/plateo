@@ -40,12 +40,18 @@
 								placeholder="Saisir adresse email" required>
 								<input type="password" name="password" class="champsFormulaire"
 								placeholder="Saisir mot de passe" required>
-
-								<button class="btn bgOrange" type="submit">Valider</button>
-								<br>
-								<a th:href="@{/password/clientForgotPassword}">Mot
-								de passe oublié
+								
+								<a class="mdpOublie" th:href="@{/password/clientForgotPassword}">
+									Mot de passe oublié ?
 								</a>
+								
+								<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
+								<button class="btn bgBlue btnWidthLong btnFB" type="submit">
+									<img class="logoFB" alt="Logo Facebook"
+										th:src="@{/img/logo-facebook.svg}">
+									<p class="textFB">Connexion Via Facebook</p>
+								</button>
+								
 								<div th:if="${param.error}" class="alert alert-danger"
 								role="alert">
 									Utilisateur ou mot de passe incorrect
@@ -91,20 +97,26 @@
 							th:object="${pro}" method="post">
 
 							<input type="email" name="email" class="champsFormulaire"
-								placeholder="Saisir adresse email" required> <input
-								type="password" name="password" class="champsFormulaire"
+								placeholder="Saisir adresse email" required>
+							<input type="password" name="password" class="champsFormulaire"
 								placeholder="Saisir mot de passe" required>
-
-							<button class="btn bgOrange" type="submit">Valider</button>
-							<br> <a th:href="@{/password/proForgotPassword}">Mot de
-								passe oublié </a>
+							
+							<a class="mdpOublie" th:href="@{/password/proForgotPassword}">
+									Mot de passe oublié ?
+							</a>
+							
+							<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
+							<button class="btn bgBlue btnWidthLong btnFB" type="submit">
+								<img class="logoFB" alt="Logo Facebook"
+									th:src="@{/img/logo-facebook.svg}">
+								<p class="textFB">Connexion Via Facebook</p>
+							</button>
+							
 							<div th:if="${param.error}" class="alert alert-danger"
 								role="alert">Utilisateur ou mot de passe incorrect</div>
 
 							<div th:if="${param.logout}" class="alert alert-success"
 								role="alert">Vous avez été déconnecté avec succès</div>
-
-
 						</form>
 
 						<h4 class="greyClair">‒ ou ‒</h4>
