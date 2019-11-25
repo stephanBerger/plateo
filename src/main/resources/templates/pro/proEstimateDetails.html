@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
-
 <head>
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css">
 <link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet"
 	type="text/css">
 </head>
-
 <body>
 	<header th:replace="pro/headerdashboard :: headerdashboard"></header>
 	
@@ -29,45 +27,6 @@
 				<div style="margin-bottom: 40px;">
 					<h2 th:text=" 'Devis numéro: '  + ${estimateId}" class="blue titre-formulaires "></h2>
 				</div>				  
-					
-				
-				<div>
-					<h2 class="blue titre-formulaires ">Informations client</h2>
-				</div>
-				
-				<div class="sectionForm" style="margin-left: 40px; border: 2px solid black">
-
-					<div class="formIdentifierRight">
-				
-								
-						<div class="formIdentifier left">
-								<span class="col-form-label labelForm" th:text="'numéro client : ' + ${client.id}"></span>
-								<span class="col-form-label labelForm" th:text="${client.clientLastname} 
-								+ ' ' + ${client.clientFirstname}"></span>  						 
-								<span class="col-form-label labelForm" th:text="${client.clientAddress}
-								 + ' ' + ${client.clientPostcode} + ' ' + ${client.clientCity}"></span>
-						</div>
-					</div>
-				</div>
-				
-					<div>
-						<h2 class="blue titre-formulaires " style="margin-top: 100px;">Prestations demandées et prix unitaires</h2>
-					</div>
-					  							
-					<div class="container">
-
-
-		<div class="centrer carreBlanc">
-				
-					
-			<form class="centrer sectionFormClient" th:action="@{/pro/EstimateDetails/} + ${estimateId}"
-				th:object="${estimate}" method="post">
-				
-				<div style="margin-bottom: 40px;">
-					<h2 th:text=" 'Devis numéro: '  + ${estimateId}" class="blue titre-formulaires "></h2>
-				</div>
-				
-				  
 					
 				
 				<div>
@@ -132,7 +91,6 @@
 					<h2 class="blue titre-formulaires ">Informations complémentaires</h2>
 				</div>
 
-
 				<div class="centrer sectionForm">
 
 					<div class="formIdentifierLeft">
@@ -158,7 +116,6 @@
 								name="workCity" class="champsFormulaire"
 								placeholder="Saisir ville" disabled />
 						</div>
-
 
 						<div class="form-group formIdentifier left">
 							<label for="workComment" class="col-form-label blue labelForm">Commentaires</label>
