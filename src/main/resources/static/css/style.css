@@ -464,6 +464,28 @@ greyClair ul{
 	box-shadow: 0px 0px 15px 0px black;
 	justify-content:flex-start !important;
 }
+.btnFB{
+	display:flex;
+	flex-direction: row;
+	margin-top:10px !important;
+}
+.logoFB{
+	height:40px;
+	margin-bottom:-10px;
+}
+.textFB{
+	margin-left:10px;
+	margin-bottom:0 !important;
+}
+.btnConnexion{
+	width:200px !important;
+}
+.mdpOublie{
+	align-self: flex-end;
+	margin-right:10px;
+	/*margin-top:10px;
+	margin-bottom:10px;*/
+}
  .formIdentifier{
  	flex-direction: column;
  }
@@ -526,7 +548,7 @@ input[type="email"]:focus,input[type="text"]:focus,input[type="password"]:focus,
 	font-size:1.3rem;
 }
 .btnWidthLong{
-	width:300px;
+	width:340px;
 }
 .btn.bgOrange:hover{
 	background-color:#e68200;
