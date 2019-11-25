@@ -54,6 +54,7 @@ public class EstimateHasServService {
 		List<Estimate> estimatesRequestList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 
 		for (Estimate estimate : estimatesRequestList) {
+
 			professionsEstimate = new ArrayList<>();
 			estimateHasServList = this.readByEstimateId(estimate.getId());
 
