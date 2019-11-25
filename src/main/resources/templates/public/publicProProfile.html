@@ -26,13 +26,15 @@
 	<div class="mt-4">
 		<div class="row">
 			<div class="col-7 offset-1">
+				<div th:if="${photos != null}">
 					<div>
 						<span th:each="photo, iterStat: ${photos}">
 		   	    			<img th:src="${photo}" th:id="@{'img-wrapper'}+${iterStat.index}" style="width:200px;" class="b-1">
 						</span>
 					</div>
-				<div>
-					<input id="mySlider" type="range" min="0" max="5" value="0" step="1" onchange="resizeImage();" style="width:500px;">
+					<div>
+						<input id="mySlider" type="range" min="0" max="5" value="0" step="1" onchange="resizeImage();" style="width:500px;">
+					</div>
 				</div>
 			</div>
 			<div class="col-3"> 

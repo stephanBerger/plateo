@@ -13,24 +13,26 @@
 		<div class="col-4">
 			<div class="blue h3" th:text="${pro.companyName}">Nom de la société</div>
 			<div>
-			<span th:text="${pro.proAddress}">,</span>
-			<span th:text="${pro.proCity}"></span>
-			<span th:text="${pro.proPostcode}"></span>
+				<span th:text="${pro.proAddress}">,</span>
+				<span th:text="${pro.proCity}"></span>
+				<span th:text="${pro.proPostcode}"></span>
 			</div>
 		</div>
 	</div>
 	<div class="mt-5">
 		<div class="row">
 			<div class="col-7 offset-1">
-				<div>
-					<span th:each="photo, iterStat: ${photos}">
-	   	    			<img th:src="${photo[0]}" th:id="@{'img-wrapper'}+${iterStat.index}" style="width:200px;" class="b-1">
-					</span>
+				<div th:if="${photos != null}">
+					<div>
+						<span th:each="photo, iterStat: ${photos}">
+	   	    				<img th:src="${photo[0]}" th:id="@{'img-wrapper'}+${iterStat.index}" style="width:200px;" class="b-1">
+						</span>
+					</div>
+					<div>
+						<input id="mySlider" type="range" min="0" max="5" value="0" step="1" onchange="resizeImage();" style="width:500px;">
+					</div>
 				</div>
-			<div>
-			<input id="mySlider" type="range" min="0" max="5" value="0" step="1" onchange="resizeImage();" style="width:500px;">
-		</div>
-		  		<div class="mt-3" th:if="${pro.proEmailAddress == username}">
+			  	<div class="mt-3" th:if="${pro.proEmailAddress == username}">
 					<form th:object="${pro}" th:action="@{/public/proAddPhoto/{id}(id=${pro.id})}" method="POST" enctype="multipart/form-data">
 						<div>
 							<label for="proPhotos">Sélectionner le fichier à envoyer</label>
@@ -49,17 +51,16 @@
 						</div>
 					</form>
 				</div>
-				
 			</div>
-			<div class="col-3"> 
-				<div class="border border-primary p-1" th:object="${pro}">
-					<div th:text="*{managerLastname}">Description de l'activité</div>
-					<div th:text="*{managerFirstname}">Adresse email</div>
-					<div th:text="*{proEmailAddress}">Adresse email</div>
-					<div th:text="*{proPhoneNumber}">Numéro de téléphone</div>
-					<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data={email}(email=*{proEmailAddress});size=100x100}" alt="" title="" />
-				</div> 
-				<!--<div class="border border-info">Notes</div>-->
+		<div class="col-3"> 
+			<div class="border border-primary p-1" th:object="${pro}">
+				<div th:text="*{managerLastname}">Description de l'activité</div>
+				<div th:text="*{managerFirstname}">Adresse email</div>
+				<div th:text="*{proEmailAddress}">Adresse email</div>
+				<div th:text="*{proPhoneNumber}">Numéro de téléphone</div>
+				<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data={email}(email=*{proEmailAddress});size=100x100}" alt="" title="" />
+			</div> 
+			<!--<div class="border border-info">Notes</div>-->
 			</div>
 		</div>
 	</div>
