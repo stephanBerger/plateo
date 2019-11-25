@@ -144,7 +144,7 @@ public class Client implements UserDetails {
 	 */
 	@Override
 	public String toString() {
-		return this.clientFirstname + " " + this.clientLastname;
+		return String.valueOf(this.getId());
 	}
 
 	public Role getRole() {
