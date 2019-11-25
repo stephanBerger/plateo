@@ -18,92 +18,62 @@ import fr.platform.plateo.persistence.EstimateHasServiceRepository;
 @Service
 public class EstimateHasServService {
 
-    @Autowired
-    private EstimateHasServiceRepository estimateHasServiceRepo;
+	@Autowired
+	private EstimateHasServiceRepository estimateHasServiceRepo;
 
-    @Autowired
-    private EstimateService              estimateService;
+	@Autowired
+	private EstimateService estimateService;
 
-    public Optional<EstimateHasService> findServiceId( Integer id ) {
-        return this.estimateHasServiceRepo.findById( id );
-    }
+	public Optional<EstimateHasService> findServiceId(Integer id) {
+		return this.estimateHasServiceRepo.findById(id);
+	}
 
-    public void create( EstimateHasService estimatehs ) {
-        this.estimateHasServiceRepo.save( estimatehs );
-    }
+	public void create(EstimateHasService estimatehs) {
+		this.estimateHasServiceRepo.save(estimatehs);
+	}
 
-    public List<EstimateHasService> readAll() {
-        return this.estimateHasServiceRepo.findAll();
-    }
+	public List<EstimateHasService> readAll() {
+		return this.estimateHasServiceRepo.findAll();
+	}
 
-    public List<EstimateHasService> readByEstimateId( Integer estimateId ) {
-        return this.estimateHasServiceRepo.findAllByEstimateId( estimateId );
-    }
+	public List<EstimateHasService> readByEstimateId(Integer estimateId) {
+		return this.estimateHasServiceRepo.findAllByEstimateId(estimateId);
+	}
 
-    public List<EstimateHasService> readByEstimateIdServiceId( Integer estimateId, Integer serviceId ) {
-        return this.estimateHasServiceRepo.findByEstimateIdAndServiceId( estimateId, serviceId );
-    }
+	public List<EstimateHasService> readByEstimateIdServiceId(Integer estimateId, Integer serviceId) {
+		return this.estimateHasServiceRepo.findByEstimateIdAndServiceId(estimateId, serviceId);
+	}
 
-    public HashSet<Estimate> readAllEstimatesReqProProfessions( Pro pro ) {
+	public HashSet<Estimate> readAllEstimatesReqProProfessions(Pro pro) {
 
-        HashSet<Estimate> estimatesMatchesProProfList = new HashSet<>();
-        List<EstimateHasService> estimateHasServList = new ArrayList<EstimateHasService>();
-        Profession professionHasServ = null;
-        List<Profession> professionsEstimate = new ArrayList<Profession>();
+		HashSet<Estimate> estimatesMatchesProProfList = new HashSet<>();
+		List<EstimateHasService> estimateHasServList = new ArrayList<>();
+		Profession professionHasServ = null;
+		List<Profession> professionsEstimate = new ArrayList<>();
 
-        List<Estimate> estimatesRequestList = this.estimateService.readByStatus( EstimateStatus.REQUEST_CLIENT );
+		List<Estimate> estimatesRequestList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
 
-        for ( Estimate est : estimatesRequestList ) {
-            System.out.println( "liste des devis : " + est.getEstimateStatus() );
-        }
+		for (Estimate estimate : estimatesRequestList) {
 
-        for ( Estimate estimate : estimatesRequestList ) {
+			estimateHasServList = this.readByEstimateId(estimate.getId());
 
-            estimateHasServList = this.readByEstimateId( estimate.getId() );
-            System.out.println( "liste des services par id devis : " + estimate.getId() );
+			for (EstimateHasService estimateHasServ : estimateHasServList) {
+				professionHasServ = estimateHasServ.getService().getProfession();
+				professionsEstimate.add(professionHasServ);
+			}
 
-            for ( EstimateHasService ehs : estimateHasServList ) {
-                System.out.println( ehs.getService().getName() );
-            }
+			List<Profession> proProfessionsList = pro.getListProProfessions();
 
-            for ( EstimateHasService estimateHasServ : estimateHasServList ) {
-                professionHasServ = estimateHasServ.getService().getProfession();
-                System.out.println( "le corp état est : " + professionHasServ.getName() );
-                professionsEstimate.add( professionHasServ );
-                System.out.println( "la liste de corps d'état pour cet id " + estimate.getId()
-                        + " est : " );
-                for ( Profession prof : professionsEstimate ) {
-                    System.out.println( prof.getName() );
-                }
-            }
+			for (Profession professionPro : proProfessionsList) {
+				for (Profession professionEstimate : professionsEstimate) {
+					if (professionPro.equals(professionEstimate)) {
+						estimatesMatchesProProfList.add(estimate);
+					}
+				}
+			}
+		}
+		return estimatesMatchesProProfList;
 
-            List<Profession> proProfessionsList = pro.getListProProfessions();
-
-            System.out.println( "list de corps état du pro : " + pro.getId() + " " + pro.getManagerLastname() );
-
-            for ( Profession p : proProfessionsList ) {
-                System.out.println( p.getName() );
-            }
-
-            System.out.println( "rappel: la liste des profession de l'id : " + estimate.getId() );
-
-            for ( Profession pr : professionsEstimate ) {
-                System.out.println( pr.getName() );
-            }
-
-            for ( Profession professionPro : proProfessionsList ) {
-                for ( Profession professionEstimate : professionsEstimate ) {
-                    if ( professionPro.equals( professionEstimate ) ) {
-                        System.out.println( estimate.getEstimateStatus() + " " + estimate.getId() );
-                        estimatesMatchesProProfList.add( estimate );
-
-                        System.out.println( "si correspond avec professions pro: " + estimatesMatchesProProfList );
-                    }
-                }
-            }
-        }
-        return estimatesMatchesProProfList;
-
-    }
+	}
 
 }

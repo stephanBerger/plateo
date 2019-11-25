@@ -2,21 +2,60 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 
+<head>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleFormulairePro.css}" rel="stylesheet"
+	type="text/css">
+</head>
 
 <body>
-	<header th:replace="pro/headerdashboard :: headerdashboard"> </header>
-	<div class="container" style="margin-top: 160px;">
-		<div th:each="service: ${services}">
-			<h2 th:text="${service.key.name}"></h2>
-			<div th:each="prop: ${service.value}">
-				<span th:text="${prop.key}"></span> :
-				<span th:text="${prop.value}"></span>
-			</div>
-		</div>
-	</div>
-	<footer th:replace="public/footer :: footer"> </footer>
-</body>
-</html>
+	<header th:replace="pro/headerdashboard :: headerdashboard"></header>
+	
+	
+	
+	<section class="sectionNouvClient section100pour100 centrer">
+
+				<div style="background-color: #ff9500; margin-top: 40px; margin-bottom: 40px">
+					<h1 class="blue titre-formulaires ">Demande de travaux</h1>
+				</div>
+
+		<div class="centrer carreBlanc">
+				
+					
+			<form class="centrer sectionFormClient" th:action="@{/pro/EstimateDetails/} + ${estimateId}"
+				th:object="${estimate}" method="post">
+				
+				<div style="margin-bottom: 40px;">
+					<h2 th:text=" 'Devis numéro: '  + ${estimateId}" class="blue titre-formulaires "></h2>
+				</div>				  
+					
+				
+				<div>
+					<h2 class="blue titre-formulaires ">Informations client</h2>
+				</div>
+				
+				<div class="sectionForm" style="margin-left: 40px; border: 2px solid black">
+
+					<div class="formIdentifierRight">
+				
+								
+						<div class="formIdentifier left">
+								<span class="col-form-label labelForm" th:text="'numéro client : ' + ${client.id}"></span>
+								<span class="col-form-label labelForm" th:text="${client.clientLastname} 
+								+ ' ' + ${client.clientFirstname}"></span>  						 
+								<span class="col-form-label labelForm" th:text="${client.clientAddress}
+								 + ' ' + ${client.clientPostcode} + ' ' + ${client.clientCity}"></span>
+						</div>
+					</div>
+				</div>
+				
+					<div>
+						<h2 class="blue titre-formulaires " style="margin-top: 100px;">Prestations demandées et prix unitaires</h2>
+					</div>
+					  							
+					<div class="container">
+
 
 		<div class="centrer carreBlanc">
 				
@@ -55,25 +94,25 @@
 					</div>
 					  							
 					<div class="container">
-						<div th:each="service: ${services}">
-							<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
-							<div th:each="prop: ${service.value}" style="margin-top: 15px;">
-								<fieldset th:if="${prop.value}">
-									<label for="${prop.key}"   th:text="${prop.key} + ' :'"
-									 class="col-form-label blue labelForm"></label>
-									<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
-									placeholder="Prix Unitaire(HT)" name="${prop.key}" /><br>
-									<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
-									<input type="text" id="workforce" name="workforce" class="champsFormulaire"
-									placeholder="Prix Unitaire(HT)"><br>					
-									<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
-									<input type="text" id="travelCharge" name="travelCharge" class="champsFormulaire"
-									placeholder="Prix Unitaire(HT)"><br>
-								</fieldset>
-							</div>
-						</div>
-							
-														
+
+						<div th:each="service: ${services}">							
+								<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
+								<div th:each="prop: ${service.value}" style="margin-top: 15px;">
+									<fieldset>
+										<label for="${prop.key}" th:text="${prop.key} + ' :'"
+										 class="col-form-label blue labelForm"></label> <span th:text="${prop.value}"></span>
+										<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)" name="${prop.key}"/><br>
+										<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
+										<input type="text" id="workforce" name="${prop.key} + 'workforce'" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)"><br>					
+										<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
+										<input type="text" id="travelCharge" name="${prop.key} + 'travelCharge'" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)"><br>
+									</fieldset>
+								</div>	
+						</div>						
+
 							<label for="totalHT" class="col-form-label blue labelForm">Total HT : </label>
 							<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
 								placeholder="totalHT"><br>
@@ -92,6 +131,45 @@
 				<div style="margin-top: 60px; margin-bottom: 30px">
 					<h2 class="blue titre-formulaires ">Informations complémentaires</h2>
 				</div>
+
+
+				<div class="centrer sectionForm">
+
+					<div class="formIdentifierLeft">
+						
+						<div class="form-group formIdentifier left">
+							<label for="workAddress" class="col-form-label blue labelForm">Adresse
+								du chantier</label> <input type="text" id="workAddress"
+								name="workAddress" th:field="*{workAddress}"
+								class="champsFormulaire" disabled />
+						</div>
+
+						<div class="form-group formIdentifier left">
+							<label for="workPostcode" class="col-form-label blue labelForm">Code
+								postal</label> <input type="text" pattern="[0-9]{5}" id="workPostcode"
+								name="workPostcode" th:field="*{workPostcode}"
+								placeholder="Saisir code postal" class="champsFormulaire"
+								disabled />
+						</div>
+
+						<div class="form-group formIdentifier left">
+							<label for="workCity" class="col-form-label blue labelForm">Ville</label>
+							<input type="text" id="workCity" th:field="*{workCity}"
+								name="workCity" class="champsFormulaire"
+								placeholder="Saisir ville" disabled />
+						</div>
+
+
+						<div class="form-group formIdentifier left">
+							<label for="workComment" class="col-form-label blue labelForm">Commentaires</label>
+							<textarea rows="5" cols="50" maxlength="255" id="workComment"
+								th:field="*{workComment}" class="champsFormulaire"
+								placeholder="Commentaires" disabled></textarea>
+						</div>
+						
+					</div>
+					
+					
 
 					<div class="formIdentifierRight">
 						<div class="form-group formIdentifier left">
@@ -136,9 +214,9 @@
 				
 				
 				<div align="center">
-							<button type="submit" 
-							class="btn btn-primary" style="margin-bottom: 50px;">
-							Création du devis</button>
+
+							<button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">Création du devis</button>
+
 				</div>
 					
 			</form>
@@ -147,4 +225,3 @@
 
 </body>
 </html>
-
