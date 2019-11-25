@@ -97,11 +97,11 @@ public class ClientController {
 
 		// AJOUT POUR LISTER LES DEMANDES DE DEVIS EN COURS
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
 		model.addAttribute("mode", "request");
 		// AJOUT DES DEVIS ACCEPTEES
-		List<Estimate> estimatesStatusList3 = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+		List<Estimate> estimatesStatusList3 = this.estimateService.readByStatus(EstimateStatus.ACCEPTE);
 		model.addAttribute("MesDevisAcceptes", estimatesStatusList3);
 		model.addAttribute("mode", "accepted");
 		// AJOUT POUR PROLIST

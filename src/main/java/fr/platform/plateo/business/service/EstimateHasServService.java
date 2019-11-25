@@ -49,12 +49,12 @@ public class EstimateHasServService {
 		HashSet<Estimate> estimatesMatchesProProfList = new HashSet<>();
 		List<EstimateHasService> estimateHasServList = new ArrayList<>();
 		Profession professionHasServ = null;
-		List<Profession> professionsEstimate = new ArrayList<>();
+		List<Profession> professionsEstimate;
 
-		List<Estimate> estimatesRequestList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+		List<Estimate> estimatesRequestList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 
 		for (Estimate estimate : estimatesRequestList) {
-
+			professionsEstimate = new ArrayList<>();
 			estimateHasServList = this.readByEstimateId(estimate.getId());
 
 			for (EstimateHasService estimateHasServ : estimateHasServList) {
@@ -75,5 +75,4 @@ public class EstimateHasServService {
 		return estimatesMatchesProProfList;
 
 	}
-
 }
