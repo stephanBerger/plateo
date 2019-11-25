@@ -98,6 +98,7 @@ public class RequestController {
 		if (req.getHeader("referer") != null && req.getHeader("referer").contains("proProfile")) {
 			String[] elementsUrl = req.getHeader("referer").split("/");
 			proId = Integer.valueOf(elementsUrl[elementsUrl.length - 1]);
+			 
 			if (proId != null) {
 				Pro pro = new Pro();
 				pro.setId(proId);
