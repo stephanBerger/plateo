@@ -12,19 +12,18 @@
 
 		<div class="centrer carreBlanc">
 
-			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${proid}"
+			<form class="centrer sectionFormClient" th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${serviceId}"
 				th:object="${estimate}" method="post">
 
 				<!-- message error date-->
 				<div align="center" th:if="${msg eq 'datesup'}"
 					class="alert alert-danger alert-dismissable">
-					<strong>La date de début chantier est supérieur à la date
+					<strong>La date de début de chantier est supérieure à la date
 						de fin chantier</strong>
 				</div>
 
 				<div>
-					<h2 class="blue titre-formulaires ">Validation du devis</h2>
+					<h2 class="blue titre-formulaires ">Création de la demande de devis</h2>
 				</div>
 
 				<div class="centrer sectionForm">
@@ -67,9 +66,9 @@
 
 					<div class="formIdentifierRight">
 						<div class="form-group formIdentifier left">
-							<label for="requestDate" class="col-form-label blue labelForm">Date
-								début chantier</label> <input type="date" id="requestDate"
-								th:field="*{requestDate}" class="champsFormulaire"
+							<label for="beginDate" class="col-form-label blue labelForm">Date
+								début chantier</label> <input type="date" id="beginDate"
+								th:field="*{beginDate}" class="champsFormulaire"
 								placeholder="Saisir date début chantier" required />
 
 						</div>
@@ -105,13 +104,9 @@
 								class="champsFormulaire" />
 						</div>
 						
-						<div th:if="${proid}!=0" class="form-group formIdentifier left">
-							<input type="hidden" th:field="*{pro.id}" id="proid"
-								class="champsFormulaire" />
-						</div>
 						<div align="center">
 							<button type="submit" name="prestation" value="endprestation"
-								class="btn btn-primary">Terminer le devis</button>
+								class="btn btn-primary">Terminer la demande</button>
 						</div>
 					</div>
 

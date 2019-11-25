@@ -1,7 +1,9 @@
 package fr.platform.plateo.presentation;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,11 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.service.BusinessProcessModelService;
+import fr.platform.plateo.business.service.EstimateHasServService;
 import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 
@@ -30,6 +35,9 @@ public class ProEstimateController {
 
 	@Autowired
 	private EstimateService estimateService;
+
+	@Autowired
+	private EstimateHasServService estimateHasService;
 
 	@Autowired
 	private BusinessProcessModelService bpmService;
@@ -48,14 +56,44 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
+	// professions estimates list
+	@GetMapping("/pro/estimatesProfessionList")
+	public String EstimatesProfessionListPro(Model model, Principal principal) {
+
+		this.LOGGER.info("La page \"estimatesProfessionList\" pour Pro est demandée");
+
+		Pro pro = this.proService.findEmail(principal.getName());
+
+		HashSet<Estimate> estimatesStatusList = this.estimateHasService.readAllEstimatesReqProProfessions(pro);
+		model.addAttribute("pro", pro);
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+		model.addAttribute("mode", "profession");
+
+		return "pro/proEstimatesList";
+	}
+
 	// request estimates list
+	@GetMapping("/pro/estimatesDirectList")
+	public String EstimatesDirectListPro(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesDirectList\" pour Pro est demandée");
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.REQUEST_CLIENT, pro);
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+
+		model.addAttribute("mode", "direct");
+
+		return "pro/proEstimatesList";
+	}
+
+	// direct request estimates list
 	@GetMapping("/pro/estimatesRequestList")
 	public String EstimatesRequestListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesRequestList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.REQUEST_CLIENT);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "request");
@@ -70,7 +108,7 @@ public class ProEstimateController {
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
 		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.AWAITING_APPROVAL_CLIENT);
+				.readByStatusPro(EstimateStatus.AWAITING_APPROVAL_CLIENT, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "awaiting");
@@ -84,8 +122,7 @@ public class ProEstimateController {
 		this.LOGGER.info("La page \"estimatesAcceptedList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.ACCEPTED);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTED, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "accepted");
@@ -99,8 +136,7 @@ public class ProEstimateController {
 		this.LOGGER.info("La page \"estimatesConvertedList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.CONVERTED);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.CONVERTED, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "converted");
@@ -116,6 +152,7 @@ public class ProEstimateController {
 		this.estimateService.delete(id);
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
+		// List<Profession> professionsList = pro.getListProProfessions();
 		String url = req.getHeader("referer");
 		List<Estimate> estimatesStatusList;
 
@@ -123,18 +160,17 @@ public class ProEstimateController {
 			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
 			model.addAttribute("mode", "request");
 		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService
-					.readByStatus(EstimateStatus.AWAITING_APPROVAL_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.AWAITING_APPROVAL_CLIENT, pro);
 			model.addAttribute("mode", "awaiting");
 		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTED, pro);
 			model.addAttribute("mode", "accepted");
 		} else if (url.contains("Converted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.CONVERTED);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.CONVERTED, pro);
 			model.addAttribute("mode", "converted");
 		} else {
-			estimatesStatusList = this.estimateService.readAll();
-			model.addAttribute("mode", "all");
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+			model.addAttribute("mode", "request");
 		}
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
@@ -142,13 +178,31 @@ public class ProEstimateController {
 	}
 
 	@GetMapping("/pro/EstimateDetails/{estimateId}")
-	public String estimateDetails(@PathVariable Integer estimateId, Model model,
-			Principal principal) {
+	public String estimateDetails(@PathVariable Integer estimateId, Model model, Principal principal) {
 		Pro pro = this.proService.findEmail(principal.getName());
+		Estimate estimate = this.estimateService.readOne(estimateId);
+
 		model.addAttribute("pro", pro);
-		model.addAttribute("services",
-				this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
+		model.addAttribute("estimate", estimate);
+		model.addAttribute("client", estimate.getClient());
+		model.addAttribute("services", this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
 		return "pro/proEstimateDetails";
+	}
+
+	@PostMapping("/pro/EstimateDetails/{estimateId}")
+	public String estimateCreate(@PathVariable Integer estimateId, Model model, Principal principal,
+			@RequestParam Map<String, String> params) {
+		Pro pro = this.proService.findEmail(principal.getName());
+		Estimate estimate = this.estimateService.readOne(estimateId);
+		model.addAttribute("estimate", estimate);
+		model.addAttribute("pro", pro);
+		model.addAttribute("services", this.bpmService.getDataForAssigneeAndProcess(pro.getId(), estimateId));
+
+		for (Map.Entry<String, String> param : params.entrySet()) {
+			System.out.println("clé: " + param.getKey() + "," + " valeur: " + param.getValue());
+		}
+
+		return "pro/proDashboard";
 	}
 
 }

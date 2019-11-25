@@ -75,6 +75,9 @@ public class Pro implements UserDetails {
 	@Column(name = "kbis")
 	private Blob kbis;
 
+	@Column(name = "pro_statut_company")
+	private String proStatutCompany;
+
 	@Column(name = "logo")
 	@Lob
 	private byte[] logo;
@@ -280,6 +283,22 @@ public class Pro implements UserDetails {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getProStatutCompany() {
+		return this.proStatutCompany;
+	}
+
+	public void setProStatutCompany(String proStatutCompany) {
+		this.proStatutCompany = proStatutCompany;
+	}
+
+	public List<Estimate> getListEstimates() {
+		return this.listEstimates;
+	}
+
+	public void setListEstimates(List<Estimate> listEstimates) {
+		this.listEstimates = listEstimates;
 	}
 
 	@Override
