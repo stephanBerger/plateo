@@ -30,12 +30,9 @@
 										class="alert alert-success">
 										<strong>Modification du mot de passe réussie</strong>
 									</div>
-									<div>
-										<a href="#loginModal" role="button" data-toggle="modal">
-											<button>Modifier mon mot de passe</button></a>
-									</div>
+									
 				                    <div class="rowFormulaire">
-				                    	<div class="sousColumnFormulaire">
+				                    	<div class="sousColumnFormulaire columnClientEdit">
 				                    		<div class="form-group">
 				                    			<label for="clientLastname" class="white labelForm">Nom</label>
 					                        	<input type="text" id="clientLastname" th:field="*{clientLastname}"
@@ -96,12 +93,18 @@
 					                        	<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
 														th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
 					                        </div>
-					                        
 				                    	</div>
 			                    	</div>
 			                    	<div class="zoneBoutonsEdit">
-			                    		<button type="submit" class="btn">Modifier</button>
 			                    		<a href="/clients/clientDashboard" class="btn btnRetour bggreyClair">Retour</a>
+			                    		<button type="submit" class="btn">Sauvegarder les Modifications</button>
+			                        </div>
+			                        <div class="middle-border-horizontal width-form-box"></div>
+			                        <div class="form-group">
+										<a class="btn btnMDP " href="#loginModal"
+												data-toggle="modal">
+											Modifier mon mot de passe
+										</a>
 			                        </div>
 			                    </form>
 		                    </div>
