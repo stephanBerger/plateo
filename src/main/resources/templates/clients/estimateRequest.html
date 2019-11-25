@@ -12,7 +12,7 @@
 	</h4>
 	<div class="list-group container">
 		<a th:each="prof,stat : ${professions}"
-			th:href="@{/clients/professionRequest/} + ${prof.id} + '/' + ${estimateid} + '/' + ${proid}" th:text="${prof.name}"
+			th:href="@{/clients/professionRequest/} + ${prof.id} + '/' + ${estimateid}" th:text="${prof.name}"
 			th:classappend="${(prof.enabled? '' : 'disabled')}"
 			class="list-group-item list-group-item-action list-group-item-primary"></a>
 	</div>

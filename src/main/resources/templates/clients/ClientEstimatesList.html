@@ -23,9 +23,8 @@
 	            <div th:fragment="estimateRowList">
 		            <div class="row centrer">
 		                <div class="col-sm-8 col-sm-offset-2 text centrer">
-							<h1 th:if="${mode eq 'all'}">Mes devis</h1>
+							<h1 th:if="${mode eq 'awaiting'}">Mes devis</h1>
 							<h1 th:if="${mode eq 'request'}">Mes demandes de devis</h1>
-							<!--  <h1 th:if="${mode eq 'awaiting'}">Mes demandes de devis</h1>-->
 							<h1 th:if="${mode eq 'accepted'}">Mes devis validés</h1>
 							<h1 th:if="${mode eq 'converted'}">Mes factures</h1>
 						</div>

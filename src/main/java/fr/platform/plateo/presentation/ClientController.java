@@ -40,8 +40,6 @@ import fr.platform.plateo.business.service.ProService;
 @Controller
 public class ClientController {
 
-	// private final static Logger LOGGER =
-	// LoggerFactory.getLogger(ClientController.class);
 	@Autowired
 	private Logger LOGGER;
 
