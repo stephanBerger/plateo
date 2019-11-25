@@ -80,10 +80,6 @@ public class ProEstimateController {
 		model.addAttribute("pro", pro);
 		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.DEMANDE, pro);
 
-		for (Estimate estimate : estimatesStatusList) {
-			System.out.println("la liste sur pro direct : " + estimate);
-		}
-
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "direct");
