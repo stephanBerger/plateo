@@ -21,7 +21,7 @@
 		<div class="centrer carreBlanc">
 				
 					
-			<form class="centrer sectionFormClient" th:action="@{/pro/proEstimateDetails/} + ${estimateId}"
+			<form class="centrer sectionFormClient" th:action="@{/pro/EstimateDetails/} + ${estimateId}"
 				th:object="${estimate}" method="post">
 				
 				<div style="margin-bottom: 40px;">
@@ -51,8 +51,9 @@
 					<div>
 						<h2 class="blue titre-formulaires " style="margin-top: 100px;">Prestations demandées et prix unitaires</h2>
 					</div>
-												
+					  							
 					<div class="container">
+
 						<div th:each="service: ${services}">							
 								<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
 								<div th:each="prop: ${service.value}" style="margin-top: 15px;">
@@ -70,6 +71,7 @@
 									</fieldset>
 								</div>	
 						</div>						
+
 							<label for="totalHT" class="col-form-label blue labelForm">Total HT : </label>
 							<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
 								placeholder="totalHT"><br>
@@ -82,7 +84,7 @@
 							<label for="validityDate" class="col-form-label blue labelForm">Date de validité :</label>
 							<input type="date" id="validityDate" name="validityDate" class="champsFormulaire"><br>
 					</div>
-				
+									
 				
 				
 				<div style="margin-top: 60px; margin-bottom: 30px">
@@ -169,7 +171,9 @@
 				
 				
 				<div align="center">
+
 							<button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">Création du devis</button>
+
 				</div>
 					
 			</form>
