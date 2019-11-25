@@ -2,6 +2,7 @@ package fr.platform.plateo.business.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,171 +22,190 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Estimate implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -2301537539869858022L;
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2301537539869858022L;
 
-    /**
-     *
-     */
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Integer           id;
+	/**
+	 *
+	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    /**
-     *
-     */
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    @Column( name = "request_date" )
-    private LocalDate         requestDate;
+	/**
+	 *
+	 */
+	@DateTimeFormat
+	@Column(name = "request_date")
+	private LocalDateTime requestDate;
 
-    /**
-     *
-     */
-    @Enumerated( EnumType.STRING )
-    @Column( name = "estimate_status" )
-    private EstimateStatus    estimateStatus;
+	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "estimate_date")
+	private LocalDate estimateDate;
 
-    /**
-     *
-     */
-    @Column( name = "work_address" )
-    private String            workAddress;
+	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "validity_date")
+	private LocalDate validityDate;
 
-    /**
-     *
-     */
-    @Column( name = "work_postcode" )
-    private String            workPostcode;
+	/**
+	*
+	*/
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "begin_date")
+	private LocalDate beginDate;
 
-    /**
-     *
-     */
-    @Column( name = "work_city" )
-    private String            workCity;
+	/**
+	 *
+	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "work_deadline")
+	private LocalDate workDeadline;
 
-    /**
-     *
-     */
-    @Column( name = "access_description" )
-    private String            accessDescription;
+	/**
+	 *
+	 */
+	@Enumerated(EnumType.STRING)
+	@Column(name = "estimate_status")
+	private EstimateStatus estimateStatus;
 
-    /**
-     *
-     */
-    @Column( name = "usable_parking_space" )
-    private String            usableParkingSpace;
+	/**
+	 *
+	 */
+	@Column(name = "work_address")
+	private String workAddress;
 
-    /**
-     *
-     */
-    @Column( name = "work_comment" )
-    private String            workComment;
+	/**
+	 *
+	 */
+	@Column(name = "work_postcode")
+	private String workPostcode;
 
-    /**
-     *
-     */
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    @Column( name = "work_deadline" )
-    private LocalDate            workDeadline;
+	/**
+	 *
+	 */
+	@Column(name = "work_city")
+	private String workCity;
 
-    /**
-     *
-     */
-    @Column( name = "advance_payment" )
-    private Double            advancePayment;
+	/**
+	 *
+	 */
+	@Column(name = "access_description")
+	private String accessDescription;
 
-    /**
-     *
-     */
-    @ManyToOne
-    @JoinColumn( name = "client_id" )
-    private Client            client;
+	/**
+	 *
+	 */
+	@Column(name = "usable_parking_space")
+	private String usableParkingSpace;
 
-    /**
-     *
-     */
-    @ManyToOne
-    @JoinColumn( name = "pro_id" )
-    private Pro               pro;
+	/**
+	 *
+	 */
+	@Column(name = "work_comment")
+	private String workComment;
 
-    public Integer getId() {
-        return this.id;
-    }
+	/**
+	 *
+	 */
+	@Column(name = "advance_payment")
+	private Double advancePayment;
 
-    public void setId( Integer id ) {
-        this.id = id;
-    }
+	/**
+	 *
+	 */
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
 
-    public LocalDate getRequestDate() {
-        return requestDate;
-    }
+	/**
+	 *
+	 */
+	@ManyToOne
+	@JoinColumn(name = "pro_id")
+	private Pro pro;
 
-    public void setRequestDate( LocalDate requestDate ) {
-        this.requestDate = requestDate;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    public EstimateStatus getEstimateStatus() {
-        return estimateStatus;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setEstimateStatus( EstimateStatus estimateStatus ) {
-        this.estimateStatus = estimateStatus;
-    }
+	public LocalDateTime getRequestDate() {
+		return this.requestDate;
+	}
 
-    public String getWorkAddress() {
-        return workAddress;
-    }
+	public void setRequestDate(LocalDateTime requestDate) {
+		this.requestDate = requestDate;
+	}
 
-    public void setWorkAddress( String workAddress ) {
-        this.workAddress = workAddress;
-    }
+	public EstimateStatus getEstimateStatus() {
+		return this.estimateStatus;
+	}
 
-    public String getWorkPostcode() {
-        return workPostcode;
-    }
+	public void setEstimateStatus(EstimateStatus estimateStatus) {
+		this.estimateStatus = estimateStatus;
+	}
 
-    public void setWorkPostcode( String workPostcode ) {
-        this.workPostcode = workPostcode;
-    }
+	public String getWorkAddress() {
+		return this.workAddress;
+	}
 
-    public String getWorkCity() {
-        return workCity;
-    }
+	public void setWorkAddress(String workAddress) {
+		this.workAddress = workAddress;
+	}
 
-    public void setWorkCity( String workCity ) {
-        this.workCity = workCity;
-    }
+	public String getWorkPostcode() {
+		return this.workPostcode;
+	}
 
-    public String getAccessDescription() {
-        return accessDescription;
-    }
+	public void setWorkPostcode(String workPostcode) {
+		this.workPostcode = workPostcode;
+	}
 
-    public void setAccessDescription( String accessDescription ) {
-        this.accessDescription = accessDescription;
-    }
+	public String getWorkCity() {
+		return this.workCity;
+	}
 
-    public String getUsableParkingSpace() {
-        return usableParkingSpace;
-    }
+	public void setWorkCity(String workCity) {
+		this.workCity = workCity;
+	}
 
-    public void setUsableParkingSpace( String usableParkingSpace ) {
-        this.usableParkingSpace = usableParkingSpace;
-    }
+	public String getAccessDescription() {
+		return this.accessDescription;
+	}
 
-    public String getWorkComment() {
-        return workComment;
-    }
+	public void setAccessDescription(String accessDescription) {
+		this.accessDescription = accessDescription;
+	}
 
-    public void setWorkComment( String workComment ) {
-        this.workComment = workComment;
-    }
+	public String getUsableParkingSpace() {
+		return this.usableParkingSpace;
+	}
 
-   
+	public void setUsableParkingSpace(String usableParkingSpace) {
+		this.usableParkingSpace = usableParkingSpace;
+	}
 
-    public LocalDate getWorkDeadline() {
-		return workDeadline;
+	public String getWorkComment() {
+		return this.workComment;
+	}
+
+	public void setWorkComment(String workComment) {
+		this.workComment = workComment;
+	}
+
+	public LocalDate getWorkDeadline() {
+		return this.workDeadline;
 	}
 
 	public void setWorkDeadline(LocalDate workDeadline) {
@@ -193,27 +213,51 @@ public class Estimate implements Serializable {
 	}
 
 	public Double getAdvancePayment() {
-        return advancePayment;
-    }
+		return this.advancePayment;
+	}
 
-    public void setAdvancePayment( Double advancePayment ) {
-        this.advancePayment = advancePayment;
-    }
+	public void setAdvancePayment(Double advancePayment) {
+		this.advancePayment = advancePayment;
+	}
 
-    public Client getClient() {
-        return this.client;
-    }
+	public LocalDate getBeginDate() {
+		return this.beginDate;
+	}
 
-    public void setClient( Client client ) {
-        this.client = client;
-    }
+	public void setBeginDate(LocalDate beginDate) {
+		this.beginDate = beginDate;
+	}
 
-    public Pro getPro() {
-        return this.pro;
-    }
+	public Client getClient() {
+		return this.client;
+	}
 
-    public void setPro( Pro pro ) {
-        this.pro = pro;
-    }
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Pro getPro() {
+		return this.pro;
+	}
+
+	public void setPro(Pro pro) {
+		this.pro = pro;
+	}
+
+	public LocalDate getEstimateDate() {
+		return this.estimateDate;
+	}
+
+	public void setEstimateDate(LocalDate estimateDate) {
+		this.estimateDate = estimateDate;
+	}
+
+	public LocalDate getValidityDate() {
+		return this.validityDate;
+	}
+
+	public void setValidityDate(LocalDate validityDate) {
+		this.validityDate = validityDate;
+	}
 
 }

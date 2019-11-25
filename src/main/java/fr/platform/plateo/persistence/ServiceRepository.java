@@ -7,6 +7,6 @@ import fr.platform.plateo.business.entity.Service;
 
 @Repository
 public interface ServiceRepository
-		extends JpaRepository<Service, Integer> {
+        extends JpaRepository<Service, Integer> {
 
 }
