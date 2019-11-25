@@ -5,129 +5,140 @@
 	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
 
-	<th:block
-		th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
+	<th:block th:include="/clients/clientEditPassword.html :: clienteditpassword"></th:block>
 
-	<section class="sectionNouvClient section100pour100 centrer">
-
-		<div class="centrer carreBlanc">
-			<form class="centrer sectionFormClient" action="#"
-				th:action="@{/clients/clientEdit/{id}(id=${client.id})}"
-				th:object="${client}" method="post">
-				<!-- message -->
-				<div align="center" th:if="${msgok eq 'ok'}"
-					class="alert alert-success">
-					<strong>Modification du mot de passe réussie</strong>
-				</div>
-
-				<div>
-					<h2 class="blue titre-formulaires">Modifier mon profil</h2>
-				</div>
-				<div>
-					<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
-							mon mot de passe</button></a>
-				</div>
-				<div class="centrer sectionForm">
-					<div class="formIdentifierLeft">
-
-						<div class="form-group formIdentifier left">
-
-							<label for="clientLastname" class="col-form-label blue labelForm">Nom</label>
-							<input type="text" id="clientLastname"
-								th:field="*{clientLastname}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required /> <span
-								th:if="${#fields.hasErrors('clientLastname')}"
-								th:errors="*{clientLastname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="clientFirstname"
-								class="col-form-label blue labelForm">Prénom</label> <input
-								type="text" id="clienFirstname" th:field="*{clientFirstname}"
-								class="champsFormulaire" placeholder="Champs obligatoire"
-								required /> <span
-								th:if="${#fields.hasErrors('clientFirstname')}"
-								th:errors="*{clientFirstname}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="clientEmailAddress"
-								class="col-form-label blue labelForm">Email</label> <input
-								type="email" id="clientEmailAddress"
-								th:field="*{clientEmailAddress}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required /> <span
-								th:if="${#fields.hasErrors('clientEmailAddress')}"
-								th:errors="*{clientEmailAddress}" class="text-danger"> </span> <input
-								type="hidden" id="OldEmail" name="OldEmail"
-								th:value="*{clientEmailAddress}" />
-
-						</div>
-						<div class="form-group formIdentifier left">
-							<input type="hidden" id="clientPassword"
-								th:field="*{clientPassword}" class="champsFormulaire"
-								placeholder="Champs obligatoire" required /> <span
-								th:if="${#fields.hasErrors('clientPassword')}"
-								th:errors="*{clientPassword}" class="text-danger"> </span>
-						</div>
-						<div class="form-group-vide formIdentifier left"></div>
-						<div align="center">
-							<a href="/clients/clientDashboard" class="btn btn-primary">Retour</a>
-						</div>
-					</div>
-
-					<div class="formIdentifierRight">
-						<div class="form-group formIdentifier left">
-
-							<label for="clientAddress" class="col-form-label blue labelForm">Adresse</label>
-							<input type="text" id="clientAddress" th:field="*{clientAddress}"
-								class="champsFormulaire" placeholder="Saisir adresse" /> <span
-								th:if="${#fields.hasErrors('clientAddress')}"
-								th:errors="*{clientAddress}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="clientPostcode" class="col-form-label blue labelForm">Code
-								Postal</label> <input type="text" id="clientPostcode" pattern="[0-9]{5}"
-								th:field="*{clientPostcode}" class="champsFormulaire"
-								placeholder="Saisir code postal" /> <span
-								th:if="${#fields.hasErrors('clientPostcode')}"
-								th:errors="*{clientPostcode}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-
-							<label for="clientCity" class="col-form-label blue labelForm">Ville</label>
-							<input type="text" id="clientCity" th:field="*{clientCity}"
-								class="champsFormulaire" placeholder="Saisir ville" /> <span
-								th:if="${#fields.hasErrors('clientCity')}"
-								th:errors="*{clientCity}" class="text-danger"> </span>
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="clientPhoneNumber"
-								class="col-form-label blue labelForm">Téléphone</label> <input
-								type="text" id="clientPhoneNumber" pattern="[0-9]{10}"
-								th:field="*{clientPhoneNumber}" class="champsFormulaire"
-								placeholder="Saisir numéro de téléphone" /> <span
-								th:if="${#fields.hasErrors('clientPhoneNumber')}"
-								th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
-						</div>
-
-						<div align="center">
-							<button type="submit" class="btn btn-primary">Modifier</button>
-						</div>
-
-					</div>
-				</div>
-
-
-			</form>
+	<div class="top-content">
+            <div class="inner-bg">
+                <div class="container containerMaxWidth">
+                    <div class="row centrer">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
+                            <h1>Modifier mon <strong>profil</strong></h1>
+                        </div>
+                    </div>
+                    <div class="row centrer">
+                       	<div class="form-box">
+                            <div class="form-bottom">
+			                    <form class="registration-form" action="#"
+										th:action="@{/clients/clientEdit/{id}(id=${client.id})}"
+										th:object="${client}" method="post">
+				                    <!-- message -->
+									<div align="center" th:if="${msgok eq 'ok'}"
+										class="alert alert-success">
+										<strong>Modification du mot de passe réussie</strong>
+									</div>
+									
+				                    <div class="rowFormulaire">
+				                    	<div class="sousColumnFormulaire columnClientEdit">
+				                    		<div class="form-group">
+				                    			<label for="clientLastname" class="white labelForm">Nom</label>
+					                        	<input type="text" id="clientLastname" th:field="*{clientLastname}"
+					                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+					                        			required tabindex="1"/>
+					                       		<span th:if="${#fields.hasErrors('clientLastname')}"
+														th:errors="*{clientLastname}" class="text-danger"> </span>
+					                        </div>
+					                        <div class="form-group">
+					                    		<label for="clientFirstname" class="white labelForm">Prénom</label>
+					                        	<input type="text" id="clienFirstname" th:field="*{clientFirstname}"
+					                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+					                        			required tabindex="2"/>
+					                        	<span th:if="${#fields.hasErrors('clientFirstname')}"
+														th:errors="*{clientFirstname}" class="text-danger"> </span>
+					                        </div>
+					                    	<div class="form-group">
+					                    		
+					                    		<label for="clientAddress" class="white labelForm">Adresse</label>
+					                        	<input type="text" id="clientAddress" th:field="*{clientAddress}"
+					                        			placeholder="" class="form-first-name form-control"
+					                        			tabindex="3"/>
+					                        	<span th:if="${#fields.hasErrors('clientAddress')}"
+														th:errors="*{clientAddress}" class="text-danger"> </span>
+					                        </div>
+					                        <div class="form-group">
+					                        	<label for="clientCity" class="white labelForm">Ville</label>
+					                        	<input type="text" id="clientCity" th:field="*{clientCity}"
+					                        			placeholder="" class="form-last-name form-control"
+					                        			tabindex="4"/>
+					                        	<span th:if="${#fields.hasErrors('clientCity')}"
+														th:errors="*{clientCity}" class="text-danger"> </span>
+					                        </div>
+					                        <div class="form-group">
+					                        	
+					                        	<label for="clientPostcode" class="white labelForm">Code postal</label>
+					                        	<input type="text" id="clientPostcode" pattern="[0-9]{5}" th:field="*{clientPostcode}"
+					                        			placeholder="" class="form-email form-control"
+					                        			tabindex="5"/>
+					                        	<span th:if="${#fields.hasErrors('clientPostcode')}"
+														th:errors="*{clientPostcode}" class="text-danger"> </span>
+					                        </div>
+					                    	<div class="form-group">
+					                        	<label for="clientEmailAddress" class="white labelForm">Email</label>
+					                        	<input type="email" id="clientEmailAddress" th:field="*{clientEmailAddress}"
+					                        			placeholder="Champs Obligatoire" class="form-email form-control"
+					                        			required tabindex="6" />
+					                        	<span th:if="${#fields.hasErrors('clientEmailAddress')}"
+														th:errors="*{clientEmailAddress}" class="text-danger"> </span>
+					                        	<input type="hidden" id="OldEmail" name="OldEmail"
+														th:value="*{clientEmailAddress}" />
+					                        </div> 
+					                        <div class="form-group">
+					                        	<label for="clientPhoneNumber" class="white labelForm">Téléphone</label>
+					                        	<input type="text" id="clientPhoneNumber" pattern="[0-9]{10}" th:field="*{clientPhoneNumber}"
+					                        			placeholder="" class="form-email form-control"
+					                        			tabindex="7" />
+					                        	<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
+														th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
+					                        </div>
+					                        <div class="form-group">
+												<input type="hidden" id="clientPassword"
+													th:field="*{clientPassword}" class="champsFormulaire"
+													placeholder="Champs obligatoire" required /> <span
+													th:if="${#fields.hasErrors('clientPassword')}"
+													th:errors="*{clientPassword}" class="text-danger"> </span>
+											</div>
+				                    	</div>
+			                    	</div>
+			                    	<!--  --> <div class="zoneBoutonsEdit">
+			                    		<a href="/clients/clientDashboard" class="btn btnRetour bggreyClair">Retour</a>
+			                    		<button type="submit" class="btn">Sauvegarder les Modifications</button>
+			                        </div>
+			                        <div class="middle-border-horizontal width-form-box"></div>
+			                        <div class="form-group">
+										<a class="btn btnMDP " href="#loginModal"
+												data-toggle="modal">
+											Modifier mon mot de passe
+										</a>
+			                        </div>
+			                        <!--  <button type="submit" class="btn">Sauvegarder les Modifications</button>-->
+			                    </form>
+		                    </div>
+                       	</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
 		</div>
-	</section>
-	<th:block th:if="${msg}">
-		<script>
-			$('#loginModal').modal('show')
-		</script>
-	</th:block>
-
+        <!-- Footer -->
+        <footer th:replace="public/footer :: footer"></footer>
+        
+        <script th:src="@{/js/scripts.js}"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+        
+		<th:block th:if="${msg}">
+			<script>
+				$('#loginModal').modal('show')
+			</script>
+		</th:block>
 </body>
 </html>

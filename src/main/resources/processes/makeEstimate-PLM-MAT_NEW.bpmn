@@ -39,7 +39,51 @@
     <sequenceFlow id="flow9" sourceRef="exclusivegateway1" targetRef="usertask2"></sequenceFlow>
     <sequenceFlow id="flow10" sourceRef="usertask1" targetRef="usertask2"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
-    <sequenceFlow id="flow11" sourceRef="usertask2" targetRef="endevent1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow13" sourceRef="usertask2" targetRef="exclusivegateway2"></sequenceFlow>
+    <userTask id="usertask4" name="Douche">
+      <extensionElements>
+        <activiti:formProperty id="typedouche" name="Type de douche" type="enum">
+          <activiti:value id="doucheitalienne" name="Douche à l'italienne"></activiti:value>
+          <activiti:value id="doucheclassique" name="Douche classique"></activiti:value>
+          <activiti:value id="baignoireendouche" name="Transformer une baignoire en douche"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="typereceveur" name="Type de receveur" type="enum">
+          <activiti:value id="carreler" name="À carreler"></activiti:value>
+          <activiti:value id="gres" name="Grès"></activiti:value>
+          <activiti:value id="résine" name="Résine"></activiti:value>
+          <activiti:value id="acrylique" name="Acrylique"></activiti:value>
+          <activiti:value id="pierre" name="Pierre"></activiti:value>
+          <activiti:value id="pasdereceveur" name="Pas de receveur à prévoir"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="dimensionsreceveur" name="Dimensions du receveur" type="enum">
+          <activiti:value id="70" name="70 x 70 cm"></activiti:value>
+          <activiti:value id="80" name="80 x 80 cm"></activiti:value>
+          <activiti:value id="90" name="90 x 90 cm"></activiti:value>
+          <activiti:value id="100" name="100 x 100 cm"></activiti:value>
+          <activiti:value id="70x90" name="70 x 90 cm"></activiti:value>
+          <activiti:value id="80x120" name="80 x 120 cm"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="typedistribution" name="Type de distribution" type="enum">
+          <activiti:value id="barredouche" name="Barre de douche"></activiti:value>
+          <activiti:value id="colonnedouche" name="Colonne de douche"></activiti:value>
+          <activiti:value id="colonnedouchehydro" name="Colonne de douche hydromassante"></activiti:value>
+          <activiti:value id="pasdedistribution" name="Pas de système de distribution à prévoir"></activiti:value>
+        </activiti:formProperty>
+        <activiti:formProperty id="typeparoi" name="Type de paroi" type="enum">
+          <activiti:value id="fixe" name="Fixe"></activiti:value>
+          <activiti:value id="coulissante" name="Coulissante"></activiti:value>
+          <activiti:value id="pivotante" name="Pivotante"></activiti:value>
+          <activiti:value id="pasdeparoi" name="Pas de paroi de douche à prévoir"></activiti:value>
+        </activiti:formProperty>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow14" name="Choix matériel douche" sourceRef="exclusivegateway2" targetRef="usertask4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${choixMateriel == "douche"}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow15" sourceRef="usertask4" targetRef="endevent2"></sequenceFlow>
+    <sequenceFlow id="flow16" sourceRef="exclusivegateway2" targetRef="endevent2"></sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_makeEstimate-PLM-MAT_NEW">
     <bpmndi:BPMNPlane bpmnElement="makeEstimate-PLM-MAT_NEW" id="BPMNPlane_makeEstimate-PLM-MAT_NEW">
@@ -59,7 +103,16 @@
         <omgdc:Bounds height="62.0" width="110.0" x="620.0" y="177.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
-        <omgdc:Bounds height="35.0" width="35.0" x="775.0" y="191.0"></omgdc:Bounds>
+        <omgdc:Bounds height="35.0" width="35.0" x="880.0" y="191.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="775.0" y="189.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask4" id="BPMNShape_usertask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="860.0" y="182.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="1010.0" y="192.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
         <omgdi:waypoint x="75.0" y="207.0"></omgdi:waypoint>
@@ -86,9 +139,26 @@
         <omgdi:waypoint x="674.0" y="91.0"></omgdi:waypoint>
         <omgdi:waypoint x="675.0" y="177.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
         <omgdi:waypoint x="730.0" y="208.0"></omgdi:waypoint>
-        <omgdi:waypoint x="775.0" y="208.0"></omgdi:waypoint>
+        <omgdi:waypoint x="775.0" y="209.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="815.0" y="209.0"></omgdi:waypoint>
+        <omgdi:waypoint x="860.0" y="209.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="39.0" width="100.0" x="780.0" y="236.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="965.0" y="209.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1010.0" y="209.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="795.0" y="189.0"></omgdi:waypoint>
+        <omgdi:waypoint x="791.0" y="99.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1027.0" y="99.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1027.0" y="192.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -52,7 +52,7 @@ a:hover{
 	background-color: #808080;
 }
 .bggreyClair{
-	background-color: #bdbdbd;
+	background-color: #bdbdbd !important;
 }
 .bggreyTresClair{
 	background-color: #e6e6e6;
@@ -770,7 +770,7 @@ ul{
 		font-size:1.3rem;
 	}
 	.btnWidthLong{
-		width:300px;
+		width:340px;
 	}
 	.btn:hover{
 		background-color:#e68200;
@@ -820,6 +820,7 @@ ul{
 	   height:45px;
 	}
 }
+
 /*--------------VERSION MOBILE si ecran egal ou plus petit que 900px   */
 @media screen and (max-width: 900px) {
 	.imgLogoText{
