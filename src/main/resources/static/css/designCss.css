@@ -1,3 +1,26 @@
+
+/*--------------VERSION MOBILE si ecran egal ou plus grand que 1200px   */
+@media screen and (min-width: 1200px){
+	/*.containerMaxWidth {
+	    max-width: 1000px !important; 
+	}*/
+	.containerDevisMaxWidth, .container {
+	    /*max-width: 1400px !important; */
+	}
+}
+
+/*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
+
+@media screen and (max-width: 1000px) {
+	.sousColumnFormulaire{
+	    max-height: fit-content;
+	}
+	.PopoverColumn{
+		max-height: 400px;
+	}
+	
+}
+
 /*-------------------------DECO FORMULAIRE----------------------------*/
 .inner-bg {
     padding: 30px 0 80px 0;
@@ -164,6 +187,40 @@ button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; bac
 .custom-control{
 	padding-right:15px;
 }
+
+.row2Devis .form-box{
+	margin-top: 15px !important;
+}
+.row2Devis .row{
+	margin:0 20px 0 20px !important;
+}
+/*
+.row2Devis{
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.row2Devis thead th, .row2Devis tbody td{
+	padding:5px;
+}*/
+
+/*.col-md-6{
+	flex-basis: 30% !important;
+}*/
+
+
+
+
+/*table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting:before{
+	right:0.7em !important;
+	bottom: 0.3em !important;
+}
+table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting:after{
+	right:0.2em !important;
+	bottom: 0.3em !important;
+}*/
 /*------------------DECO PROLIST-----------------------*/
 .table-bordered, .table-bordered td, .table-bordered th, .table td, .table th, .table thead th  {
 	border: 5px solid #bdbdbd;
@@ -209,24 +266,11 @@ td a{
 	opacity: 0.6;
 }
 
-/*--------------VERSION MOBILE si ecran egal ou plus grand que 1200px   */
-@media screen and (min-width: 1200px){
-	.containerMaxWidth {
-	    max-width: 1000px !important; 
-	}
+/*.row2Devis thead th, .row2Devis tbody td{
+	font-size:1rem;
 }
 
-/*--------------VERSION MOBILE si ecran egal ou plus petit que 1080px   */
-
-@media screen and (max-width: 1000px) {
-	.sousColumnFormulaire{
-	    max-height: fit-content;
-	}
-	.PopoverColumn{
-		max-height: 400px;
-	}
-	
-}
-
-
+.row2Devis div.dataTables_wrapper div.dataTables_filter input {
+    width: 150px !important;
+*/
 

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Estimate;
+import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
@@ -98,9 +99,13 @@ public class ClientController {
 
 		// AJOUT POUR LISTER LES DEMANDES DE DEVIS EN COURS
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService.readAll();
-		model.addAttribute("estimatesStatusList", estimatesStatusList);
-		model.addAttribute("mode", "all");
+		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
+		model.addAttribute("mode", "request");
+		// AJOUT DES DEVIS ACCEPTEES
+		List<Estimate> estimatesStatusList3 = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+		model.addAttribute("MesDevisAcceptes", estimatesStatusList3);
+		model.addAttribute("mode", "accepted");
 		// AJOUT POUR PROLIST
 		List<Pro> proList = this.proService.readAll();
 		model.addAttribute("proList", proList);

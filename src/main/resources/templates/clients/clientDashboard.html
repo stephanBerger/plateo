@@ -2,16 +2,18 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
-	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/ListDataTables/datatables.min.css}"/>
 	<script type="text/javascript" th:src="@{/ListDataTables/datatables.min.js}"></script>
 	<script type="text/javascript" charset="utf-8">
-		$(document).ready(function() {
-			$('#proList').dataTable();
-		} );
+	$(document).ready(function() {
+		$('#MesDemandesDevis').dataTable();
+		$('#MesDevisAcceptes').dataTable();
+		$('#proList').dataTable();
+	} );
 	</script>
 </head>
 <body>
@@ -24,45 +26,88 @@
 		<strong>Modification du profil réussie</strong>
 	</div>
 	
-	<div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="table-responsive">
-                      <div th:replace="clients/ClientEstimatesList.html :: devis"></div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="table-responsive">
-                        <div th:replace="public/proList :: tablePro"></div>
-                    </div>
-                </div>
-                <div class="row">
-                <div class="col-md-12">
-                    
- <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" data-fw-param="120330/"></script>
-                            
-                        </div>
-                    </div>
-                </div>
-                </div>
-    
-	
-					
-					
-					
-					
-					
-					
-					
-					
-		
-		
-	
-		<div class="backstretch">
-			<img src="/img/1.jpg">
-		</div>
-        <footer th:replace="public/footer :: footer"></footer>
-        <script th:src="@{/js/scripts.js}"></script>
-    
+	<div class="top-content">
+		<div class="inner-bg">
+	        <div class="container containerDevisMaxWidth">
+		        <div class="row2Devis">
+		       		<!-- ---------------PREMIERE ROW DEMANDE DEVIS--------------------- -->
+		        	<div class="rowMesDemandesDevis">
+		        		<div class="row centrer">
+			                <div class=" text centrer">
+			                    <h1>Mes demandes de <strong>devis</strong></h1>
+			                </div>
+			            </div>
+			            <div class="row centrer">
+			            	<div class="form-box">
+			            		<div class="form-bottom texteTable">
+									<table th:fragment="devis" id="MesDemandesDevis" class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">numéro Devis</th>
+												<th scope="col">Ville</th>
+												<th scope="col">Code postal</th>
+												<th scope="col">Edition</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="estimate : ${MesDemandesDevis}">
+												<td th:text="${estimate.id}"></td>
+												<td th:text="${estimate.workCity}"></td>
+												<td th:text="${estimate.workPostcode}"></td>
+												<td>  <a href="#">Edit</a></td>
+												<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
+											</tr>
+										</tbody>
+									</table>	
+								</div>
+			            	</div>
+			            </div>
+			         </div>
+		        	<!-- ---------------DEUXIEME ROW DEVIS ACCEPTES--------------------- -->
+		        	<div class="rowMesDevisAcceptes">
+		        		<div class="row centrer">
+			                <div class="col-sm-8 col-sm-offset-2 text centrer">
+			                    <h1>Mes <strong>devis</strong> acceptés</h1>
+			                </div>
+			            </div>
+			            <div class="row centrer">
+			            	<div class="form-box">
+			            		<div class="form-bottom texteTable">
+									<table th:fragment="devis" id="MesDevisAcceptes" class="table table-striped table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">numéro Devis</th>
+												<th scope="col">Ville</th>
+												<th scope="col">Code postal</th>
+												<th scope="col">Edition</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="estimate : ${MesDevisAcceptes}">
+												<td th:text="${estimate.id}"></td>
+												<td th:text="${estimate.workCity}"></td>
+												<td th:text="${estimate.workPostcode}"></td>
+												<!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
+												<td>  <a href="#">Edit</a></td>
+												<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
+											</tr>
+										</tbody>
+									</table>	
+								</div>
+			            	</div>
+			            </div>
+			         </div>
+			      </div>
+		       <div th:replace="clients/proList :: divRowProlist"></div>
+	        </div>
+	    </div>
+	</div>
+	<div class="backstretch">
+		<img src="/img/1.jpg">
+	</div>
+    <footer th:replace="public/footer :: footer"></footer>
+    <script th:src="@{/js/scripts.js}"></script>
 </body>
 </html>

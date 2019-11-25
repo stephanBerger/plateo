@@ -14,53 +14,51 @@
 </head>
 <body>
     <header th:replace="public/header :: header"></header>
-	<section th:fragment="sectionProlist">
-	<div class="top-content">
-		<div class="inner-bg">
-	        <div class="container containerMaxWidth">
-	            <div th:fragment="divRowProlist" class="row centrer">
-	                <div class="col-sm-8 col-sm-offset-2 text centrer">
-	                    <h1>Annuaire des <strong>Professionnels</strong></h1>
-	                </div>
-	            </div>
-	            <div class="row centrer">
-	            	<div class="form-box">
-	            		<div class="form-bottom texteTable">
-	            			
-	            			<table th:fragment="tablePro" id="proList" class="table table-striped table-bordered">
-					           <thead>
-				            	    <tr>
-				            	      <th scope="col">Société</th>
-				            	      <th scope="col">Ville</th>
-				            	      <th scope="col">Code postal</th>
-				            	      <th scope="col">Corps état</th>
-				            	      <th scope="col">Visualisation</th>
-				            	    </tr>
-					          </thead>
-				        	  <tbody>
-				        	    <tr th:each="pro : ${proList}">
-				        	      <td th:text="${pro.companyName}"></td>
-				        	      <td th:text="${pro.proCity}"></td>
-				        	      <td th:text="${pro.proPostcode}"></td>
-				        	      <td>
-				        	      	<span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
-				        	      </td>
-				        	      <td>
-				        	      	<a th:href="@{/public/publicProProfile/{id}(id=${pro.id})}">Détails</a>
-				        	      </td>
-				        	    </tr>
-					           </tbody>
-					       </table>	
-	            		</div>
-	            	</div>
-	            </div>
+		<div class="top-content">
+			<div class="inner-bg">
+		        <div class="container containerMaxWidth">
+		            <div th:fragment="divRowProlist" class="row centrer">
+		                <div class="col-sm-8 col-sm-offset-2 text centrer">
+		                    <h1>Annuaire des <strong>Professionnels</strong></h1>
+		                </div>
+		            </div>
+		            <div class="row centrer">
+		            	<div class="form-box">
+		            		<div class="form-bottom texteTable">
+		            			
+		            			<table th:fragment="tablePro" id="proList" class="table table-striped table-bordered">
+						           <thead>
+					            	    <tr>
+					            	      <th scope="col">Société</th>
+					            	      <th scope="col">Ville</th>
+					            	      <th scope="col">Code postal</th>
+					            	      <th scope="col">Corps état</th>
+					            	      <th scope="col">Visualisation</th>
+					            	    </tr>
+						          </thead>
+					        	  <tbody>
+					        	    <tr th:each="pro : ${proList}">
+					        	      <td th:text="${pro.companyName}"></td>
+					        	      <td th:text="${pro.proCity}"></td>
+					        	      <td th:text="${pro.proPostcode}"></td>
+					        	      <td>
+					        	      	<span th:each="profession : ${pro.listProProfessions}" th:text="${profession.name} + ' ' "></span>       	      
+					        	      </td>
+					        	      <td>
+					        	      	<a th:href="@{/public/publicProProfile/{id}(id=${pro.id})}">Détails</a>
+					        	      </td>
+					        	    </tr>
+						           </tbody>
+						       </table>	
+		            		</div>
+		            	</div>
+		            </div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="backstretch">
-		<img src="/img/1.jpg">
-	</div>
-	</section>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
+		</div>
     <footer th:replace="public/footer :: footer"></footer>
     <script th:src="@{/js/scripts.js}"></script>
 </body>
