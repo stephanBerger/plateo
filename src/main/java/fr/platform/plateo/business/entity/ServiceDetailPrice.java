@@ -37,6 +37,12 @@ public class ServiceDetailPrice implements Serializable {
 	/**
 	 *
 	 */
+	@Column(name = "name_detail_service")
+	private Double nameDetailService;
+
+	/**
+	 *
+	 */
 	@Column(name = "datail_price")
 	private Double detailPrice;
 

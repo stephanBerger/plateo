@@ -26,9 +26,7 @@
 				
 				<div style="margin-bottom: 40px;">
 					<h2 th:text=" 'Devis numéro: '  + ${estimateId}" class="blue titre-formulaires "></h2>
-				</div>
-				
-				  
+				</div>				  
 					
 				
 				<div>
@@ -55,23 +53,23 @@
 					</div>
 												
 					<div class="container">
-						<div th:each="service: ${services}">
-							<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
-							<div th:each="prop: ${service.value}" style="margin-top: 15px;">
-								<label for="${prop.key}" th:if="${prop.value}"   th:text="${prop.key} + ' :'"
-								 class="col-form-label blue labelForm"></label>
-								<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)" name="${prop.key}" required/>
-								<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
-								<input type="text" id="workforce" name="workforce" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)"><br>					
-								<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
-								<input type="text" id="travelCharge" name="travelCharge" class="champsFormulaire"
-								placeholder="Prix Unitaire(HT)"><br>
-							</div>
-						</div>
-							
-														
+						<div th:each="service: ${services}">							
+								<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
+								<div th:each="prop: ${service.value}" style="margin-top: 15px;">
+									<fieldset>
+										<label for="${prop.key}" th:text="${prop.key} + ' :'"
+										 class="col-form-label blue labelForm"></label> <span th:text="${prop.value}"></span>
+										<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)" name="${prop.key}"/><br>
+										<label for="workforce" class="col-form-label blue labelForm">Frais de main-d'oeuvre :</label>
+										<input type="text" id="workforce" name="${prop.key} + 'workforce'" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)"><br>					
+										<label for="travelCharge" class="col-form-label blue labelForm">Frais de déplacement :</label>
+										<input type="text" id="travelCharge" name="${prop.key} + 'travelCharge'" class="champsFormulaire"
+										placeholder="Prix Unitaire(HT)"><br>
+									</fieldset>
+								</div>	
+						</div>						
 							<label for="totalHT" class="col-form-label blue labelForm">Total HT : </label>
 							<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
 								placeholder="totalHT"><br>
@@ -171,8 +169,7 @@
 				
 				
 				<div align="center">
-							<button type="submit" name="estimate" value="creatEstimate"
-								class="btn btn-primary" style="margin-bottom: 50px;">Création du devis</button>
+							<button type="submit" class="btn btn-primary" style="margin-bottom: 50px;">Création du devis</button>
 				</div>
 					
 			</form>
