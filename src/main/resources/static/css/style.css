@@ -483,8 +483,6 @@ greyClair ul{
 .mdpOublie{
 	align-self: flex-end;
 	margin-right:10px;
-	/*margin-top:10px;
-	margin-bottom:10px;*/
 }
  .formIdentifier{
  	flex-direction: column;
@@ -493,8 +491,11 @@ greyClair ul{
 	margin:10px;
 	width:400px;
 }
+.ouPro{
+	margin-top:15px;
+	margin-bottom:0 !important;
+}
 .form-group{
-	/*margin-bottom: 0.6rem;*/
 	margin:0 20px 0.6rem 20px;
 	min-width:380px;
 }
@@ -502,6 +503,8 @@ greyClair ul{
 	height:86px;
 	margin-bottom: 0.6rem;
 }
+
+
 
 input[type="email"],input[type="text"],input[type="password"], select.champsFormulaire {
   background: transparent;
