@@ -30,6 +30,7 @@ import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.EstimateHasService;
 import fr.platform.plateo.business.entity.EstimateStatus;
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.Profession;
 import fr.platform.plateo.business.service.BusinessProcessModelService;
 import fr.platform.plateo.business.service.ClientService;
@@ -97,6 +98,7 @@ public class RequestController {
 		if (req.getHeader("referer") != null && req.getHeader("referer").contains("proProfile")) {
 			String[] elementsUrl = req.getHeader("referer").split("/");
 			proId = Integer.valueOf(elementsUrl[elementsUrl.length - 1]);
+			 
 			if (proId != null) {
 				Pro pro = new Pro();
 				pro.setId(proId);
@@ -239,37 +241,6 @@ public class RequestController {
 			}
 
 			this.estimateService.update(estimate);
-
-			EstimateHasService estimatehs = new EstimateHasService();
-			estimatehs.setProcessid(processInstanceId);
-			estimatehs.setEstimate(estimate);
-			estimatehs.setService(this.estimateService.readService(serviceId));
-			this.estimateHasServService.create(estimatehs);
-
-			model.addAttribute("estimateid", estimate.getId());
-			model.addAttribute("estimate", estimate);
-			model.addAttribute("client", client);
-			model.addAttribute("processInstanceId", processInstanceId);
-
-			if (prestation.contentEquals("otherprestation")) {
-				return "redirect:/clients/estimateRequestNext/" + estimate.getId();
-			} else if (prestation.contentEquals("endprestation")) {
-				return "/clients/clientValidDevis";
-			}
-
-		} else if (estimateid != 0) {
-			// estimate.setId(estimateid);
-
-			// Client client2 = new Client();
-			// client2.setId(assigneeId);
-			// estimate.setClient(client2);
-			if (prestation.contentEquals("otherprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.DRAFT_REQUEST_CLIENT);
-			} else if (prestation.contentEquals("endprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.REQUEST_CLIENT);
-			}
-
-			this.estimateService.create(estimate);
 
 			EstimateHasService estimatehs = new EstimateHasService();
 			estimatehs.setProcessid(processInstanceId);

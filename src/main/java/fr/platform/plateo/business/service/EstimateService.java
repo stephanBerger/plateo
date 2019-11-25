@@ -17,50 +17,51 @@ import fr.platform.plateo.persistence.ServiceRepository;
 @org.springframework.stereotype.Service
 public class EstimateService {
 
-    @Autowired
-    private EstimateRepository           estimateRepo;
+	@Autowired
+	private EstimateRepository estimateRepo;
 
-    @Autowired
-    private ServiceRepository            serviceRepo;
-
-    @Autowired
-    private EstimateHasServiceRepository estimateHSRepo;
-
-    public void create( Estimate estimate ) {
-        this.estimateRepo.save( estimate );
-    }
+	@Autowired
+	private ServiceRepository serviceRepo;
 
 	@Autowired
 	private EstimateHasServiceRepository estimateHSRepo;
 
-    public Service readService( Integer id ) {
-        return this.serviceRepo.getOne( id );
-    }
+	public void create(Estimate estimate) {
+		this.estimateRepo.save(estimate);
+	}
 
-    public List<Estimate> readAll() {
-        return this.estimateRepo.findAll();
-    }
+	public Estimate readOne(Integer id) {
+		return this.estimateRepo.getOne(id);
+	}
 
-    public Estimate update( Estimate estimate ) {
-        return this.estimateRepo.save( estimate );
-    }
-
-    public void delete( Integer id ) {
-        List<EstimateHasService> ehsList = this.estimateHSRepo.findAllByEstimateId( id );
-        this.estimateHSRepo.deleteAll( ehsList );
-        this.estimateRepo.deleteById( id );
-    }
+	public Service readService(Integer id) {
+		return this.serviceRepo.getOne(id);
+	}
 
 	public List<Estimate> readAll() {
 		return this.estimateRepo.findAll();
 	}
 
-    public List<Estimate> readByStatusClient( EstimateStatus estimateStatus, Client client ) {
-        return this.estimateRepo.findByEstimateStatusAndClient( estimateStatus, client );
-    }
+	public Estimate update(Estimate estimate) {
+		return this.estimateRepo.save(estimate);
+	}
 
-    public List<Estimate> readByStatusPro( EstimateStatus estimateStatus, Pro pro ) {
-        return this.estimateRepo.findByEstimateStatusAndPro( estimateStatus, pro );
-    }
+	public List<Estimate> readByStatus(EstimateStatus estimateStatus) {
+		return this.estimateRepo.findByEstimateStatus(estimateStatus);
+	}
+
+	public void delete(Integer id) {
+		List<EstimateHasService> ehsList = this.estimateHSRepo.findAllByEstimateId(id);
+		this.estimateHSRepo.deleteAll(ehsList);
+		this.estimateRepo.deleteById(id);
+	}
+
+	public List<Estimate> readByStatusClient(EstimateStatus estimateStatus, Client client) {
+		return this.estimateRepo.findByEstimateStatusAndClient(estimateStatus, client);
+	}
+
+	public List<Estimate> readByStatusPro(EstimateStatus estimateStatus, Pro pro) {
+		return this.estimateRepo.findByEstimateStatusAndPro(estimateStatus, pro);
+	}
 
 }

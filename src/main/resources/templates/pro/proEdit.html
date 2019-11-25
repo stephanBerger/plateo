@@ -42,7 +42,7 @@
 						<label for="proStatutCompany" class="col-form-label blue ">Forme Juridique</label>
 						<input class="form-control" id="proStatutCompany" 
 						th:field="*{proStatutCompany}" type="text" placeholder=""/>
-						<span th:if="${#fields.hasErrors('siret')}"
+						<span th:if="${#fields.hasErrors('proStatutCompany')}"
 							th:errors="*{siret}" class="text-danger"> 
 						</span>
 					</div>
