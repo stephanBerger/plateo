@@ -128,7 +128,8 @@ public class ClientController {
 		// verifie si l'adresse email est déja dans la BDD
 		Client existing = this.clientService.findEmail(client.getClientEmailAddress());
 		if (existing != null) {
-			result.rejectValue("clientEmailAddress", null, "Cette adresse email est déja utilisée.");
+			result.rejectValue("clientEmailAddress", null,
+					"Cette adresse email est déja utilisée.");
 			this.LOGGER.info("Email existe déjà dans la BDD");
 			return "/public/clientForm";
 		}
@@ -160,12 +161,15 @@ public class ClientController {
 		client.setRole(role);
 
 		this.clientService.create(client);
-		this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
-				+ " a été rajouté avec succés - redirect sur la page valid_client");
+		this.LOGGER
+				.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+						+ " a été rajouté avec succés - redirect sur la page valid_client");
 
 		// envoi email inscription
-		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
-				+ "\n\nVotre incription a bien été prise en compte." + "\n\nPLATEO vous remercie de votre confiance.";
+		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname()
+				+ ","
+				+ "\n\nVotre incription a bien été prise en compte."
+				+ "\n\nPLATEO vous remercie de votre confiance.";
 
 		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - INSCRIPTION", text);
 		this.LOGGER.info("Email inscription envoyé");
@@ -182,17 +186,21 @@ public class ClientController {
 	@GetMapping("/clients/clientEdit/{id}")
 	public String showUpdateClient(@PathVariable("id") Integer id, Model model) {
 		Client client = this.clientService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+				.orElseThrow(
+						() -> new IllegalArgumentException("L' Id du particulier est invalide"));
 		model.addAttribute("client", client);
-		this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
-				+ " a demander la modification des ses infos");
+		this.LOGGER
+				.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+						+ " a demander la modification des ses infos");
 		return "/clients/clientEdit";
 	}
 
 	// bouton modifier du formulaire client
 	@PostMapping("/clients/clientEdit/{id}")
-	public String updateClient(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
-			@Valid Client client, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+	public String updateClient(@RequestParam(value = "OldEmail") String OldEmail,
+			@PathVariable("id") Integer id,
+			@Valid Client client, BindingResult result, Model model,
+			final RedirectAttributes redirectAttributes) {
 
 		if (!OldEmail.equals(client.getClientEmailAddress())) {
 			// verifie si l'adresse email est déja dans la BDD
@@ -223,11 +231,13 @@ public class ClientController {
 
 			this.clientService.create(client);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
-			this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
-					+ " a modifié sa fiche avec succés");
+			this.LOGGER.info(
+					"Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+							+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(client.getClientEmailAddress())) {
-				this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
+				this.LOGGER.info("Le client " + client.getClientFirstname() + " "
+						+ client.getClientLastname()
 						+ " a modifié son email - deconnexion obligatoire");
 
 				return "redirect:/exit";
@@ -259,7 +269,8 @@ public class ClientController {
 
 		if (client.getId() != null) {
 			Client client2 = this.clientService.findId(client.getId())
-					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+					.orElseThrow(() -> new IllegalArgumentException(
+							"L' Id du particulier est invalide"));
 			// si tout est ok on modifie le mot de passe
 			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 			String cryptpassword = crypt.encode(password);
@@ -267,8 +278,9 @@ public class ClientController {
 			this.LOGGER.info("Cryptage du mot de passe OK");
 
 			this.clientService.create(client2);
-			this.LOGGER.info("Le client " + client2.getClientFirstname() + " " + client2.getClientLastname()
-					+ " a modifié son mot de passe avec succés");
+			this.LOGGER.info(
+					"Le client " + client2.getClientFirstname() + " " + client2.getClientLastname()
+							+ " a modifié son mot de passe avec succés");
 			model.addAttribute("client", client);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
 
@@ -289,12 +301,14 @@ public class ClientController {
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo",
+					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64,"
+					+ encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
 

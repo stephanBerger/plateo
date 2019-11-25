@@ -55,33 +55,37 @@ public class BusinessProcessModelService {
 	public Task startProcess(Integer assigneeId, Integer professionId, Integer serviceId) {
 		String professionCode = this.professionRepo.getOne(professionId).getCode();
 		String serviceCode = this.serviceRepo.getOne(serviceId).getCode();
-		BusinessProcessModelService.LOGGER.info("STARTING PROCESS {} {} {} !", assigneeId, professionCode, serviceCode);
+		BusinessProcessModelService.LOGGER.info("STARTING PROCESS {} {} {} !", assigneeId,
+				professionCode, serviceCode);
 		Map<String, Object> vars = new HashMap<>();
 		vars.put("account", this.clientService.findId(assigneeId).get());
 		ProcessInstance pi = this.runtimeService.startProcessInstanceByKey(
-				BusinessProcessModelService.PROCESS_NAME_PREFIX + professionCode + "-" + serviceCode, vars);
-		Task task = this.getTaskByProcessInstanceIdAndAssigneeId(assigneeId, pi.getProcessInstanceId());
+				BusinessProcessModelService.PROCESS_NAME_PREFIX + professionCode + "-"
+						+ serviceCode,
+				vars);
+		Task task = this.getTaskByProcessInstanceIdAndAssigneeId(assigneeId,
+				pi.getProcessInstanceId());
 		return task;
 	}
 
-	public Map<Service, Map<String, Object>> getDataForAssigneeAndProcess(Integer assigneeId, Integer estimateId) {
+	public Map<Service, Map<String, Object>> getDataForAssigneeAndProcess(Integer assigneeId,
+			Integer estimateId) {
 		Map<Service, Map<String, Object>> services = new HashMap<>();
 		List<EstimateHasService> ehsList = this.estimateHSService.readByEstimateId(estimateId);
 		for (EstimateHasService ehs : ehsList) {
 			HistoricProcessInstance pi = this.historyService.createHistoricProcessInstanceQuery()
 					.includeProcessVariables().processInstanceId(ehs.getProcessid()).singleResult();
 			Map<String, Object> props = pi.getProcessVariables();
-			
 			// Retirer les variables qui ne concernent pas la prestation du devis.
 			props.remove("_csrf");
 			props.remove("account");
 			services.put(ehs.getService(), props);
 		}
-		
 		return services;
 	}
 
-	public Task getTaskByProcessInstanceIdAndAssigneeId(Integer assigneeId, String processInstanceId) {
+	public Task getTaskByProcessInstanceIdAndAssigneeId(Integer assigneeId,
+			String processInstanceId) {
 		return this.taskService.createTaskQuery().processInstanceId(processInstanceId)
 				.taskAssignee(assigneeId.toString()).singleResult();
 	}
