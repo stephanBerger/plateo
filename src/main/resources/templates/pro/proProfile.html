@@ -29,7 +29,7 @@
 						</span>
 					</div>
 					<div>
-						<input id="mySlider" type="range" min="0" max="5" value="0" step="1" onchange="resizeImage();" style="width:500px;">
+						<input id="mySlider" type="range" min="0" max="5" value="0" step="any" oninput="resizeImage();" style="width:500px;">
 					</div>
 				</div>
 			  	<div class="mt-3" th:if="${pro.proEmailAddress == username}">
