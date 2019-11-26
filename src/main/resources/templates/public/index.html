@@ -53,11 +53,12 @@
 								</a>
 								
 								<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
-								<button class="btn bgBlue btnWidthLong btnFB" type="submit">
+								<a
+								href="https://www.facebook.com/dialog/oauth?client_id=536071257190563&redirect_uri=http://localhost:8080/login-facebook" class="btn bgBlue btnWidthLong btnFB" type="submit">
 									<img class="logoFB" alt="Logo Facebook"
 										th:src="@{/img/logo-facebook.svg}">
 									<p class="textFB">Connexion Via Facebook</p>
-								</button>
+								</a>
 								
 								<div th:if="${param.error}" class="alert alert-danger"
 								role="alert">
