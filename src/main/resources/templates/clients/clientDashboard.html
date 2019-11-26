@@ -44,6 +44,7 @@
 										<thead>
 											<tr>
 												<th scope="col">numéro Devis</th>
+												<th scope="col">Date</th>
 												<th scope="col">Ville</th>
 												<th scope="col">Code postal</th>
 												<th scope="col">Edition</th>
@@ -53,6 +54,7 @@
 										<tbody>
 											<tr th:each="estimate : ${MesDemandesDevis}">
 												<td th:text="${estimate.id}"></td>
+												<td th:text="${#temporals.format(estimate.requestDate, 'dd-MM-yyyy HH:mm')}"></td>
 												<td th:text="${estimate.workCity}"></td>
 												<td th:text="${estimate.workPostcode}"></td>
 												<td><a th:href="@{/clients/clientDashboard/{id}(id=${estimate.id})}">Edit</a></td>
