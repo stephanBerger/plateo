@@ -1,5 +1,6 @@
 package fr.platform.plateo.presentation;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -9,14 +10,17 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,6 +32,8 @@ import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
+@Scope("session")
+@SessionAttributes({ "proId" })
 public class ProController {
 
 	@Autowired
@@ -42,14 +48,24 @@ public class ProController {
 	@Autowired
 	private ProfessionService professionService;
 
+	@ModelAttribute("proId")
+	public Integer proId() {
+		return null;
+	}
+	
 	// Affichage de la modification du professionnel
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
 		Pro pro = this.proService.findId(id)
 				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
+
+		if (pro.getLogo() != null) {
+			Base64.Encoder encoder = Base64.getEncoder();
+			model.addAttribute("afficheLogo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
 		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-				+ " a demander la modification des ses infos");
+				+ " a demandé la modification de ses infos");
 		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/pro/proEdit";
 	}
@@ -57,7 +73,8 @@ public class ProController {
 	// bouton modifier du formulaire professionnel
 	@PostMapping("/pro/proEdit/{id}")
 	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
-			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes,
+			@RequestParam("getLogo") MultipartFile logo) {
 
 		if (!OldEmail.equals(pro.getProEmailAddress())) {
 			// verifie si l'adresse email est déja dans la BDD
@@ -86,14 +103,20 @@ public class ProController {
 			role.setId(1);
 			pro.setRole(role);
 
+			try {
+				pro.setLogo(logo.getBytes());
+			} catch (IOException e) {
+				this.LOGGER.error("Can't turn logo into bytes.");
+			}
+
 			this.proService.create(pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
 			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-					+ " a modifié sa fiche avec succés");
+					+ " a modifié sa fiche avec succès");
 
 			if (!OldEmail.equals(pro.getProEmailAddress())) {
 				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-						+ " a modifié son email - deconnexion obligatoire");
+						+ " a modifié son email - déconnexion obligatoire");
 
 				return "redirect:/exit";
 			}
@@ -125,7 +148,7 @@ public class ProController {
 
 	// Profil pro vu par tout le monde
 	@GetMapping("/public/publicProProfile/{id}")
-	public String publicProProfile(@PathVariable Integer id, Model model) {
+	public String publicProProfile(@ModelAttribute("proId") Integer proId,@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -139,7 +162,9 @@ public class ProController {
 			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
-
+		proId = pro.getId();
+		System.out.println(proId);
+		model.addAttribute("proId", proId);
 		model.addAttribute("photos", encodings);
 		return "/public/publicProProfile";
 	}

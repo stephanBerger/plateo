@@ -12,6 +12,7 @@
 		</div>
 		<section class="menu centrer">
 			<a th:href="@{/clients/clientDashboard}" class="imgLogo">
+				<!-- -------------ON NE TOUCHE PAS A LA CLASS imgO-------------------->
 				<img class="imgLogoPlateo imgO" alt="logo Plateo" th:src="@{/img/LOGO-BD.png}">
 				<img class="imgLogoText imgO" alt="logo textuel Plateo" th:src="@{/img/logo-texte-BD.png}">
 			</a>
@@ -32,7 +33,7 @@
 							<div class="dropdown-content">
 
 								<a th:href="@{/clients/estimateRequest}">Demander un devis</a>
-								<a th:href="@{/clients/estimatesAllRequestList}">Mes demandes de devis</a>
+								<a th:href="@{/clients/estimatesRequestList}">Mes demandes de devis</a>
 								<a th:href="@{/clients/estimatesAwaitingAcceptedList}">Mes devis</a>
 								<a th:href="@{/clients/estimatesConvertedList}">Mes factures</a>
 

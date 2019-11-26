@@ -76,6 +76,7 @@ public class RequestController {
 	public String estimateRequest(Model model, HttpServletRequest req, @ModelAttribute("assigneeId") Integer assigneeId,
 			Principal principal, @ModelAttribute("proId") Integer proId, HttpSession session) {
 
+		System.out.println(proId);
 		Client client = this.clientService.loadUserByUsername(req.getUserPrincipal().getName());
 		model.addAttribute("client", client);
 

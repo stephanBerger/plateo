@@ -43,8 +43,8 @@ public class SecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.antMatcher("/clients/**").authorizeRequests()
-					.antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.anyRequest().hasAuthority("CLIENT").and()
+			.antMatchers("/clients/**").hasRole("CLIENT")
+			.antMatchers("/pro/**").hasRole("PRO").anyRequest().authenticated().and()
 
 					.formLogin().loginPage("/clients/login").permitAll()
 					.failureUrl("/clients/login?error=loginError")
@@ -83,9 +83,7 @@ public class SecurityConfig {
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.antMatcher("/pro/**").authorizeRequests()
-					.antMatchers(SecurityConfig.RESOURCES).permitAll()
-					.anyRequest().hasAuthority("PRO").and()
+			http.authorizeRequests().antMatchers("/pro/**").hasRole("PRO").and()
 
 					.formLogin().loginPage("/pro/login").permitAll()
 					.failureUrl("/pro/login?error=loginError")
