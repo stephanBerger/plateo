@@ -9,14 +9,17 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,6 +31,8 @@ import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
 @Controller
+@Scope("session")
+@SessionAttributes({ "proId" })
 public class ProController {
 
 	@Autowired
@@ -42,6 +47,11 @@ public class ProController {
 	@Autowired
 	private ProfessionService professionService;
 
+	@ModelAttribute("proId")
+	public Integer proId() {
+		return null;
+	}
+	
 	// Affichage de la modification du professionnel
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
@@ -125,7 +135,7 @@ public class ProController {
 
 	// Profil pro vu par tout le monde
 	@GetMapping("/public/publicProProfile/{id}")
-	public String publicProProfile(@PathVariable Integer id, Model model) {
+	public String publicProProfile(@ModelAttribute("proId") Integer proId,@PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -139,7 +149,9 @@ public class ProController {
 			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
-
+		proId = pro.getId();
+		System.out.println(proId);
+		model.addAttribute("proId", proId);
 		model.addAttribute("photos", encodings);
 		return "/public/publicProProfile";
 	}
