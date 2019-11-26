@@ -1,6 +1,7 @@
 package fr.platform.plateo.presentation;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +37,8 @@ public class ClientEstimateController {
 		this.LOGGER.info("La page \"estimatesDraftList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
-				client);
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "draft");
@@ -51,7 +52,8 @@ public class ClientEstimateController {
 		this.LOGGER.info("La page \"estimatesAllList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService.readAll();
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readAll();
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "all");
@@ -66,8 +68,11 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		List<Estimate> estimatesStatusDraftList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+		estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusList.addAll(estimatesStatusDraftList);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "request");
@@ -81,14 +86,17 @@ public class ClientEstimateController {
 	public String EstimatesAllRequestListClient(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesRequestList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
+		System.out.println(client.getId());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
-				client);
 
-		System.out.println(estimatesStatusList1.addAll(estimatesStatusList2));
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		List<Estimate> estimatesStatusDraftList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+		estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
 
-		model.addAttribute("estimatesStatusList", estimatesStatusList1);
+		estimatesStatusList.addAll(estimatesStatusDraftList);
+
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "allRequest");
 
@@ -102,11 +110,13 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatusClient(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, client);
-		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		List<Estimate> estimatesStatusAcceptedList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT,
+				client);
+		estimatesStatusAcceptedList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
 
-		estimatesStatusList.addAll(estimatesStatusList2);
+		estimatesStatusList.addAll(estimatesStatusAcceptedList);
 
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
@@ -122,7 +132,8 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
 
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
@@ -138,7 +149,8 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.FACTURE, client);
+		List<Estimate> estimatesStatusList = new ArrayList<>();
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.FACTURE, client);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "converted");
@@ -155,7 +167,7 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 		String url = req.getHeader("referer");
-		List<Estimate> estimatesStatusList;
+		List<Estimate> estimatesStatusList = new ArrayList<>();
 
 		if (url.contains("Request")) {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
@@ -191,7 +203,7 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 		String url = req.getHeader("referer");
-		List<Estimate> estimatesStatusList;
+		List<Estimate> estimatesStatusList = new ArrayList<>();
 
 		if (url.contains("Request")) {
 			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
