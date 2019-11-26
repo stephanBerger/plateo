@@ -72,7 +72,7 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
-	// request estimates list
+	// direct estimates list
 	@GetMapping("/pro/estimatesDirectList")
 	public String EstimatesDirectListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesDirectList\" pour Pro est demandée");
@@ -135,6 +135,21 @@ public class ProEstimateController {
 	}
 
 	// accepted estimates list
+	@GetMapping("/pro/estimatesAcceptedList")
+	public String EstimatesAcceptedList(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesAcceptedList\" pour Pro est demandée");
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE, pro);
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+
+		model.addAttribute("mode", "accepted");
+
+		return "pro/proEstimatesList";
+	}
+
+	// converted estimates list
 	@GetMapping("/pro/estimatesConvertedList")
 	public String EstimatesConvertedListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesConvertedList\" pour Pro est demandée");
