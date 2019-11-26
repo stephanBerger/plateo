@@ -91,20 +91,7 @@
 												th:errors="*{proPostcode}" class="text-danger"> </span>
 										</div>
 										<div class="form-group">
-											<label for="proPassword" class="white labelForm">Mot
-												de passe</label> <input type="password" id="passwordInput"
-												placeholder="Champs Obligatoire"
-												class="form-email form-control" th:field="*{proPassword}"
-												 tabindex="7" />
-										</div>
-										<div class="form-group">
-											<label for="confirmproPassword" class="white labelForm">Confirmer
-												votre mot de passe</label> <input type="password"
-												id="confirmPasswordInput" placeholder="Champs Obligatoire"
-												class="form-email form-control" name="confirmProPassword"
-												 tabindex="8" /> <span
-												th:if="${#fields.hasErrors('proPassword')}"
-												th:errors="*{proPassword}" class="text-danger"> </span>
+											<input type="hidden" th:field="*{proPassword}"/>
 										</div>
 									</div>
 								</div>
@@ -126,17 +113,18 @@
 											th:text="${profession.name}"> </label>
 									</div>
 								</div>
-								<div>
-									<button type="submit" class="btn width-form-box">Modifiez</button></div>
-				
-									<div align="center" th:if="${msgok eq 'ok'}"
-										class="alert alert-success">
-										<strong>Modification du mot de passe réussie avec succès</strong>
-									</div>
-									<div>
-										<a href="#loginModal" role="button" data-toggle="modal"><button>Modifier
-												mon mot de passe</button></a>
-									</div>
+								
+									 <div class="zoneBoutonsEdit">
+			                    		<a href="/pro/proDashboard" class="btn btnRetour bggreyClair">Retour</a>
+			                    		<button type="submit" class="btn">Sauvegarder les Modifications</button>
+			                        </div>
+			                        <div class="middle-border-horizontal width-form-box"></div>
+			                        <div class="form-group">
+										<a class="btn btnMDP " href="#loginModal"
+												data-toggle="modal">
+											Modifier mon mot de passe
+										</a>
+			                        </div>
 							</form>
 						</div>
 					</div>
