@@ -54,18 +54,19 @@ public class IndexController {
 	public Integer proId() {
 		return null;
 	}
-	
+
 	// facebook login
 	@RequestMapping("/login-facebook")
-	public String loginFacebook(@ModelAttribute("proId") Integer proId,HttpServletRequest request, Model model) throws ClientProtocolException, IOException {
+	public String loginFacebook(@ModelAttribute("proId") Integer proId, HttpServletRequest request,
+			Model model) throws ClientProtocolException, IOException {
 		String code = request.getParameter("code");
 
 		if (code == null || code.isEmpty()) {
 			return "/errors/403";
 		}
 
-		String accessToken = facebookService.getToken(code);
-		User user = facebookService.getUserInfo(accessToken);
+		String accessToken = this.facebookService.getToken(code);
+		User user = this.facebookService.getUserInfo(accessToken);
 
 		Client existing = this.clientService.findEmail(user.getEmail());
 		if (existing == null) {
@@ -75,7 +76,6 @@ public class IndexController {
 			client.setClientFirstname(user.getFirstName());
 			client.setClientLastname(user.getLastName());
 			client.setClientEmailAddress(user.getEmail());
-
 			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 			String password = crypt.encode(user.getId());
 			client.setClientPassword(password);
@@ -87,7 +87,8 @@ public class IndexController {
 			client.setEnabled(true);
 
 			this.clientService.create(client);
-			this.LOGGER.info("Le client FACEBOOK " + client.getClientFirstname() + " " + client.getClientLastname()
+			this.LOGGER.info("Le client FACEBOOK " + client.getClientFirstname() + " "
+					+ client.getClientLastname()
 					+ " a été rajouté avec succés - redirect sur la page valid_client");
 
 			String text = "Bonjour " + user.getFirstName() + " " + user.getLastName() + ","
@@ -99,13 +100,14 @@ public class IndexController {
 
 		}
 
-		UserDetails userDetail = facebookService.buildUser(user);
-		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetail, null,
+		UserDetails userDetail = this.facebookService.buildUser(user);
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+				userDetail, null,
 				userDetail.getAuthorities());
 		authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		if (proId == null) {		
+		if (proId == null) {
 			return "redirect:/clients/clientDashboard";
 		} else {
 			return "redirect:clients/estimateRequest";
