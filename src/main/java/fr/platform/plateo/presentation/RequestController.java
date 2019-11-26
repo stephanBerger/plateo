@@ -89,16 +89,16 @@ public class RequestController {
 		estimate.setWorkAddress(client.getClientAddress());
 		estimate.setWorkPostcode(client.getClientPostcode());
 		estimate.setWorkCity(client.getClientCity());
-		estimate.setEstimateStatus(EstimateStatus.DRAFT_REQUEST_CLIENT);
+		estimate.setEstimateStatus(EstimateStatus.DEMANDE_BROUILLON);
 
 		Client client2 = new Client();
 		client2.setId(client.getId());
 		estimate.setClient(client2);
 
-		if (req.getHeader("referer") != null && req.getHeader("referer").contains("proProfile")) {
+		if (req.getHeader("referer") != null && req.getHeader("referer").contains("ProProfile")) {
 			String[] elementsUrl = req.getHeader("referer").split("/");
 			proId = Integer.valueOf(elementsUrl[elementsUrl.length - 1]);
-			 
+
 			if (proId != null) {
 				Pro pro = new Pro();
 				pro.setId(proId);
@@ -236,7 +236,7 @@ public class RequestController {
 		if (estimateid != null) {
 
 			if (prestation.contentEquals("endprestation")) {
-				estimate.setEstimateStatus(EstimateStatus.REQUEST_CLIENT);
+				estimate.setEstimateStatus(EstimateStatus.DEMANDE);
 				estimate.setRequestDate(LocalDateTime.now());
 			}
 

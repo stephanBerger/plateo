@@ -30,6 +30,21 @@ public class ClientEstimateController {
 	@Autowired
 	private EstimateService estimateService;
 
+	// all estimates draft list
+	@GetMapping("/clients/estimatesDraftList")
+	public String EstimatesDraftListClient(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesDraftList\" client est demandée");
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
+				client);
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+
+		model.addAttribute("mode", "draft");
+
+		return "clients/ClientEstimatesList";
+	}
+
 	// all estimates list
 	@GetMapping("/clients/estimatesAllList")
 	public String EstimatesAllListClient(Model model, Principal principal) {
@@ -50,8 +65,9 @@ public class ClientEstimateController {
 		this.LOGGER.info("La page \"estimatesRequestList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.REQUEST_CLIENT);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "request");
@@ -59,17 +75,42 @@ public class ClientEstimateController {
 		return "clients/ClientEstimatesList";
 	}
 
-	// awaiting estimates list
-	@GetMapping("/clients/estimatesAwaitingList")
-	public String EstimatesAwaitingListClient(Model model, Principal principal) {
-		this.LOGGER.info("La page \"estimatesAwaitingList\" client est demandée");
+	// request + draft estimates list
+	@GetMapping("/clients/estimatesAllRequestList")
+
+	public String EstimatesAllRequestListClient(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesRequestList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
+		List<Estimate> estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
+				client);
+
+		System.out.println(estimatesStatusList1.addAll(estimatesStatusList2));
+
+		model.addAttribute("estimatesStatusList", estimatesStatusList1);
+
+		model.addAttribute("mode", "allRequest");
+
+		return "clients/ClientEstimatesList";
+	}
+
+	// awaiting and accepted estimates list
+	@GetMapping("/clients/estimatesAwaitingAcceptedList")
+	public String EstimatesAwaitingListClient(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesAwaitingAcceptedList\" client est demandée");
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+
 		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.AWAITING_APPROVAL_CLIENT);
+				.readByStatusClient(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, client);
+		List<Estimate> estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+
+		estimatesStatusList.addAll(estimatesStatusList2);
+
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
-		model.addAttribute("mode", "awaiting");
+		model.addAttribute("mode", "awaitingAccepted");
 
 		return "clients/ClientEstimatesList";
 	}
@@ -80,8 +121,9 @@ public class ClientEstimateController {
 		this.LOGGER.info("La page \"estimatesAcceptedList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.ACCEPTED);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "accepted");
@@ -95,8 +137,8 @@ public class ClientEstimateController {
 		this.LOGGER.info("La page \"estimatesConvertedList\" client est demandée");
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatus(EstimateStatus.CONVERTED);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.FACTURE, client);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "converted");
@@ -116,21 +158,24 @@ public class ClientEstimateController {
 		List<Estimate> estimatesStatusList;
 
 		if (url.contains("Request")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
 			model.addAttribute("mode", "request");
 		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService
-					.readByStatus(EstimateStatus.AWAITING_APPROVAL_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT,
+					client);
 			model.addAttribute("mode", "awaiting");
 		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
 			model.addAttribute("mode", "accepted");
 		} else if (url.contains("Converted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.CONVERTED);
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.FACTURE, client);
 			model.addAttribute("mode", "converted");
+		} else if (url.contains("Draft")) {
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+			model.addAttribute("mode", "draft");
 		} else {
-			estimatesStatusList = this.estimateService.readAll();
-			model.addAttribute("mode", "all");
+			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+			model.addAttribute("mode", "request");
 		}
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
@@ -139,8 +184,7 @@ public class ClientEstimateController {
 
 	// delete estimate à partir du dashboard
 	@GetMapping("/clients/EstimateDeleteFromDashboard/{id}")
-	public String EstimateDeleteFromDashboard(@PathVariable Integer id, Model model,
-			Principal principal,
+	public String EstimateDeleteFromDashboard(@PathVariable Integer id, Model model, Principal principal,
 			HttpServletRequest req) {
 		this.LOGGER.info("Liste devis client: Suppression du devis numéro " + id);
 		this.estimateService.delete(id);
@@ -150,17 +194,16 @@ public class ClientEstimateController {
 		List<Estimate> estimatesStatusList;
 
 		if (url.contains("Request")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 			model.addAttribute("mode", "request");
 		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService
-					.readByStatus(EstimateStatus.AWAITING_APPROVAL_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT);
 			model.addAttribute("mode", "awaiting");
 		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ACCEPTED);
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ACCEPTE);
 			model.addAttribute("mode", "accepted");
 		} else if (url.contains("Converted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.CONVERTED);
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.FACTURE);
 			model.addAttribute("mode", "converted");
 		} else {
 			estimatesStatusList = this.estimateService.readAll();
