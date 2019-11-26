@@ -2,12 +2,13 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-   <link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
+  <!-- <link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css"> --> 
    <link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css">
    <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
 </head>
-<body class="BgBlue">
+<body>
 	<header th:replace="pro/headerdashboard :: header"></header>
+	
 	<div class="row text-center border-top border-bottom pt-2 pb-2 top-content">
 		<div class="offset-3 col-1">
 			 <img th:src="${logo}" class="w-100">
