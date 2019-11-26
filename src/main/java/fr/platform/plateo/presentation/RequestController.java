@@ -117,7 +117,7 @@ public class RequestController {
 		model.addAttribute("professions", this.professionService.getAll());
 
 		return "clients/estimateRequest";
-
+		
 	}
 
 	// client a validé un devis avec 1 prestation, il continue en rajotant une
