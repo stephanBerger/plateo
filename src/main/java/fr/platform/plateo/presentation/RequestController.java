@@ -76,7 +76,6 @@ public class RequestController {
 	public String estimateRequest(Model model, HttpServletRequest req, @ModelAttribute("assigneeId") Integer assigneeId,
 			Principal principal, @ModelAttribute("proId") Integer proId, HttpSession session) {
 
-		System.out.println(proId);
 		Client client = this.clientService.loadUserByUsername(req.getUserPrincipal().getName());
 		model.addAttribute("client", client);
 
@@ -118,7 +117,7 @@ public class RequestController {
 		model.addAttribute("professions", this.professionService.getAll());
 
 		return "clients/estimateRequest";
-
+		
 	}
 
 	// client a validé un devis avec 1 prestation, il continue en rajotant une
@@ -202,8 +201,7 @@ public class RequestController {
 			Client client = this.clientService.findId(assigneeId)
 					.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
 			Estimate estimate2 = this.estimateService.readOne(estimateid);
-			estimate2.setWorkAddress(client.getClientAddress());
-
+	
 			model.addAttribute("estimateid", estimateid);
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("estimate", estimate2);

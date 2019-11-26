@@ -52,7 +52,7 @@ public class ProController {
 	public Integer proId() {
 		return null;
 	}
-	
+
 	// Affichage de la modification du professionnel
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
@@ -103,10 +103,12 @@ public class ProController {
 			role.setId(1);
 			pro.setRole(role);
 
-			try {
-				pro.setLogo(logo.getBytes());
-			} catch (IOException e) {
-				this.LOGGER.error("Can't turn logo into bytes.");
+			if (!logo.isEmpty()) {
+				try {
+					pro.setLogo(logo.getBytes());
+				} catch (IOException e) {
+					this.LOGGER.error("Can't turn logo into bytes.");
+				}
 			}
 
 			this.proService.create(pro);
@@ -148,7 +150,7 @@ public class ProController {
 
 	// Profil pro vu par tout le monde
 	@GetMapping("/public/publicProProfile/{id}")
-	public String publicProProfile(@ModelAttribute("proId") Integer proId,@PathVariable Integer id, Model model) {
+	public String publicProProfile(@ModelAttribute("proId") Integer proId, @PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -163,7 +165,7 @@ public class ProController {
 			encodings.add(encoding);
 		}
 		proId = pro.getId();
-		System.out.println(proId);
+
 		model.addAttribute("proId", proId);
 		model.addAttribute("photos", encodings);
 		return "/public/publicProProfile";
@@ -223,17 +225,18 @@ public class ProController {
 
 	@PostMapping("/public/proForm")
 	public String save(@Valid Pro pro, BindingResult result,
-			@RequestParam(value = "confirmProPassword") String confirmPasswordInput) {
+			@RequestParam(value = "confirmProPassword") String confirmPasswordInput, Model model) {
 		pro.setSiret(pro.getSiret().replaceAll("[^0-9]", ""));
+		model.addAttribute("listProfessions", this.professionService.getAll());
 		if (result.hasErrors()) {
 			this.LOGGER.info("Erreur dans le formulaire" + pro.getCompanyName());
 			System.out.println(result.toString());
-			return null;
+			return "/public/proForm";
 
 		} else if (this.proService.loadUserByUsername(pro.getProEmailAddress()) != null) {
 			this.LOGGER.info("Utilisateur existe déjà ");
 			result.rejectValue("proEmailAddress", null, "Cette adresse email est déjà utilisée.");
-			return null;
+			return "/public/proForm";
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
 			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
@@ -243,7 +246,7 @@ public class ProController {
 			// Test de la longueur du SIRET et test sur la validité du siren
 		} else if (pro.getSiret().length() != 14) {
 			result.rejectValue("siret", null, "Le Siret doit contenir 14 chiffres.");
-			return null;
+			return "/public/proForm";
 
 		} else if (pro.getSiret() != null) {
 
@@ -268,7 +271,7 @@ public class ProController {
 				// Mon SIRET 82154303000026 devrait fonctionner mais ce n'est
 				// pas le cas !
 				result.rejectValue("siret", null, "Le Siret n'est pas valide.");
-				return null;
+				return "/public/proForm";
 			}
 
 			// si ok rajoute le client et redirect sur valid client
@@ -297,8 +300,7 @@ public class ProController {
 			return "pro/proValid";
 
 		}
-		return null;
-
+		return "/public/proForm";
 	}
 
 	// modification du mot de passe professionnel method post

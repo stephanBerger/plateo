@@ -17,7 +17,7 @@
 				<div class="container containerMaxWidth">
 					<div class="row centrer">
 						<div class="col-sm-8 col-sm-offset-2 text centrer">
-							<h1>Modifiez <strong>mon Profil</strong></h1>
+							<h1>Modifier <strong>mon Profil</strong></h1>
 						</div>
 					</div>
 				<div class="row centrer">
@@ -34,7 +34,7 @@
 												th:field="*{companyName}" placeholder="Champs Obligatoire"
 												class="form-first-name form-control" required tabindex="1" />
 											<span th:if="${#fields.hasErrors('companyName')}"
-												th:errors="*{companyName}" class="text-danger"> </span>
+												th:errors="*{companyName}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="managerLastname" class="white labelForm">Nom
@@ -43,7 +43,7 @@
 												placeholder="Champs Obligatoire"
 												class="form-first-name form-control" required tabindex="2" />
 											<span th:if="${#fields.hasErrors('managerLastname')}"
-												th:errors="*{managerLastname}" class="text-danger"> </span>
+												th:errors="*{managerLastname}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="proEmailAddress" class="white labelForm">Email</label>
@@ -52,7 +52,7 @@
 												placeholder="Champs obligatoire"
 												class="form-first-name form-control" required tabindex="3" />
 											<span th:if="${#fields.hasErrors('proEmailAddress')}"
-												th:errors="*{proEmailAddress}" class="text-danger"> </span>
+												th:errors="*{proEmailAddress}" class="text-white"> </span>
 											<input type="hidden" id="OldEmail" name="OldEmail"
 														th:value="*{proEmailAddress}" />
 										</div>
@@ -62,7 +62,7 @@
 												placeholder="Champs obligatoire"
 												class="form-last-name form-control" required tabindex="4" />
 											<span th:if="${#fields.hasErrors('proCity')}"
-												th:errors="*{proCity}" class="text-danger"> </span>
+												th:errors="*{proCity}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="siret" class="white labelForm">SIRET</label> <input
@@ -70,7 +70,7 @@
 												placeholder="Champs Obligatoire"
 												class="form-email form-control" required tabindex="5" /> <span
 												th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}"
-												class="text-danger"> </span>
+												class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="managerFirstname" class="white labelForm">Prénom
@@ -79,7 +79,7 @@
 												placeholder="Champs obligatoire"
 												class="form-email form-control" required tabindex="6" /> <span
 												th:if="${#fields.hasErrors('managerFirstname')}"
-												th:errors="*{managerFirstname}" class="text-danger">
+												th:errors="*{managerFirstname}" class="text-white">
 											</span>
 										</div>
 										<div class="form-group">
@@ -89,11 +89,12 @@
 												class="form-email form-control" pattern="[0-9]{5}" required
 												tabindex="7" /> <span
 												th:if="${#fields.hasErrors('proPostcode')}"
-												th:errors="*{proPostcode}" class="text-danger"> </span>
+												th:errors="*{proPostcode}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="getLogo" class="white labelForm">Logo</label>
 			 								<img th:src="${afficheLogo}" id="logoProEdit">
+			 								<input type="hidden" th:field="*{logo}"/>
 			 								<input type="file" id="getLogo" name="getLogo" accept="image/png, image/jpeg"/>
 										</div>
 										<div class="form-group">
