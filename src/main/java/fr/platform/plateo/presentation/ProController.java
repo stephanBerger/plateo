@@ -1,5 +1,6 @@
 package fr.platform.plateo.presentation;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -58,8 +59,13 @@ public class ProController {
 		Pro pro = this.proService.findId(id)
 				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
+
+		if (pro.getLogo() != null) {
+			Base64.Encoder encoder = Base64.getEncoder();
+			model.addAttribute("afficheLogo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+		}
 		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-				+ " a demander la modification des ses infos");
+				+ " a demandé la modification de ses infos");
 		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/pro/proEdit";
 	}
@@ -67,7 +73,8 @@ public class ProController {
 	// bouton modifier du formulaire professionnel
 	@PostMapping("/pro/proEdit/{id}")
 	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
-			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
+			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes,
+			@RequestParam("getLogo") MultipartFile logo) {
 
 		if (!OldEmail.equals(pro.getProEmailAddress())) {
 			// verifie si l'adresse email est déja dans la BDD
@@ -96,14 +103,20 @@ public class ProController {
 			role.setId(1);
 			pro.setRole(role);
 
+			try {
+				pro.setLogo(logo.getBytes());
+			} catch (IOException e) {
+				this.LOGGER.error("Can't turn logo into bytes.");
+			}
+
 			this.proService.create(pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
 			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-					+ " a modifié sa fiche avec succés");
+					+ " a modifié sa fiche avec succès");
 
 			if (!OldEmail.equals(pro.getProEmailAddress())) {
 				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-						+ " a modifié son email - deconnexion obligatoire");
+						+ " a modifié son email - déconnexion obligatoire");
 
 				return "redirect:/exit";
 			}

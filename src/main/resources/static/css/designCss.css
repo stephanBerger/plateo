@@ -1,4 +1,6 @@
-
+#logoProEdit{
+	width:100px;
+}
 /*--------------VERSION MOBILE si ecran egal ou plus grand que 1200px   */
 @media screen and (min-width: 1200px){
 	/*.containerMaxWidth {
