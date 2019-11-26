@@ -29,7 +29,7 @@
 					                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
 					                        			required tabindex="1"/>
 					                       		<span th:if="${#fields.hasErrors('clientLastname')}"
-					                       				th:errors="*{clientLastname}" class="text-danger"> </span>
+					                       				th:errors="*{clientLastname}" class="text-white"> </span>
 					                        </div>
 					                        <div class="form-group">
 					                    		<label for="clientFirstname" class="white labelForm">Prénom</label>
@@ -37,7 +37,7 @@
 					                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
 					                        			required tabindex="2"/>
 					                        	<span th:if="${#fields.hasErrors('clientFirstname')}"
-														th:errors="*{clientFirstname}" class="text-danger"> </span>
+														th:errors="*{clientFirstname}" class="text-white"> </span>
 					                        </div>
 					                    	<div class="form-group">
 					                    		<label for="clientAddress" class="white labelForm">Adresse</label>
@@ -45,7 +45,7 @@
 					                        			placeholder="" class="form-first-name form-control"
 					                        			tabindex="3"/>
 					                        	<span th:if="${#fields.hasErrors('clientAddress')}"
-														th:errors="*{clientAddress}" class="text-danger"> </span>
+														th:errors="*{clientAddress}" class="text-white"> </span>
 					                        </div>
 					                        <div class="form-group">
 					                        	<label for="clientCity" class="white labelForm">Ville</label>
@@ -53,7 +53,7 @@
 					                        			placeholder="" class="form-last-name form-control"
 					                        			tabindex="4"/>
 					                        	<span th:if="${#fields.hasErrors('clientCity')}"
-														th:errors="*{clientCity}" class="text-danger"> </span>
+														th:errors="*{clientCity}" class="text-white"> </span>
 					                        </div>
 					                        <div class="form-group">
 					                        	<label for="clientPostcode" class="white labelForm">Code postal</label>
@@ -61,7 +61,7 @@
 					                        			placeholder="" class="form-email form-control"
 					                        			tabindex="5"/>
 					                        	<span th:if="${#fields.hasErrors('clientPostcode')}"
-														th:errors="*{clientPostcode}" class="text-danger"> </span>
+														th:errors="*{clientPostcode}" class="text-white"> </span>
 					                        </div>
 					                    	<div class="form-group">
 					                        	<label for="clientEmailAddress" class="white labelForm">Email</label>
@@ -69,7 +69,7 @@
 					                        			placeholder="Champs Obligatoire" class="form-email form-control"
 					                        			required tabindex="6" />
 					                        	<span th:if="${#fields.hasErrors('clientEmailAddress')}"
-														th:errors="*{clientEmailAddress}" class="text-danger"> </span>
+														th:errors="*{clientEmailAddress}" class="text-white"> </span>
 					                        </div> 
 					                        <div class="form-group">
 					                        	<label for="clientPhoneNumber" class="white labelForm">Téléphone</label>
@@ -77,7 +77,7 @@
 					                        			placeholder="" class="form-email form-control"
 					                        			tabindex="7" />
 					                        	<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
-														th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
+														th:errors="*{clientPhoneNumber}" class="text-white"> </span>
 					                        </div>
 					                        <div class="form-group">
 					                        	<label for="clientPassword" class="white labelForm">Mot de passe</label>
@@ -85,7 +85,7 @@
 														placeholder="Champs Obligatoire" class="form-email form-control"
 														required tabindex="8" />
 												<span th:if="${#fields.hasErrors('clientPassword')}"
-														th:errors="*{clientPassword}" class="text-danger"> </span>
+														th:errors="*{clientPassword}" class="text-white"> </span>
 					                        </div>
 					                        <div class="form-group">
 					                        	<label for="confirmPasswordInput" class="white labelForm">Confirmer votre mot de passe</label>
