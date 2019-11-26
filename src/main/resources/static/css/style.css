@@ -235,7 +235,11 @@ greyClair ul{
     justify-content:center;
     align-items:center;
     margin-right: 50px;
+    
   }
+.menu .dropdown {
+	
+}
 
   .dropdown li{
   	margin-right: 0px !important;
