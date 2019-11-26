@@ -72,13 +72,14 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
-	// request estimates list
+	// direct estimates list
 	@GetMapping("/pro/estimatesDirectList")
 	public String EstimatesDirectListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesDirectList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.REQUEST_CLIENT, pro);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.DEMANDE, pro);
+
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "direct");
@@ -86,14 +87,14 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
-	// direct request estimates list
+	// request estimates list
 	@GetMapping("/pro/estimatesRequestList")
 	public String EstimatesRequestListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesRequestList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
 
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "request");
@@ -108,7 +109,7 @@ public class ProEstimateController {
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
 		List<Estimate> estimatesStatusList = this.estimateService
-				.readByStatusPro(EstimateStatus.AWAITING_APPROVAL_CLIENT, pro);
+				.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "awaiting");
@@ -116,13 +117,31 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
+	// awaiting and request estimates list
+	@GetMapping("/pro/estimatesRequestAwaitingList")
+	public String EstimatesAcceptedListPro(Model model, Principal principal) {
+		this.LOGGER.info("La page \"estimatesRequestAwaitingList\" pour Pro est demandée");
+		Pro pro = this.proService.findEmail(principal.getName());
+		model.addAttribute("pro", pro);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
+		List<Estimate> estimatesStatusList2 = this.estimateService
+				.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
+		estimatesStatusList.addAll(estimatesStatusList2);
+		model.addAttribute("estimatesStatusList", estimatesStatusList);
+
+		model.addAttribute("mode", "requestAwaiting");
+
+		return "pro/proEstimatesList";
+	}
+
 	// accepted estimates list
 	@GetMapping("/pro/estimatesAcceptedList")
-	public String EstimatesAcceptedListPro(Model model, Principal principal) {
+	public String EstimatesAcceptedList(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesAcceptedList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTED, pro);
+
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "accepted");
@@ -130,13 +149,13 @@ public class ProEstimateController {
 		return "pro/proEstimatesList";
 	}
 
-	// accepted estimates list
+	// converted estimates list
 	@GetMapping("/pro/estimatesConvertedList")
 	public String EstimatesConvertedListPro(Model model, Principal principal) {
 		this.LOGGER.info("La page \"estimatesConvertedList\" pour Pro est demandée");
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.CONVERTED, pro);
+		List<Estimate> estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.FACTURE, pro);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "converted");
@@ -152,25 +171,28 @@ public class ProEstimateController {
 		this.estimateService.delete(id);
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
-		// List<Profession> professionsList = pro.getListProProfessions();
+
 		String url = req.getHeader("referer");
 		List<Estimate> estimatesStatusList;
 
 		if (url.contains("Request")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
 			model.addAttribute("mode", "request");
 		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.AWAITING_APPROVAL_CLIENT, pro);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
 			model.addAttribute("mode", "awaiting");
 		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTED, pro);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE, pro);
 			model.addAttribute("mode", "accepted");
 		} else if (url.contains("Converted")) {
-			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.CONVERTED, pro);
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.FACTURE, pro);
 			model.addAttribute("mode", "converted");
 		} else {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.REQUEST_CLIENT);
-			model.addAttribute("mode", "request");
+			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
+			estimatesStatusList
+					.addAll(this.estimateService.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro));
+
+			model.addAttribute("mode", "requestAwaiting");
 		}
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
