@@ -42,7 +42,7 @@
 					                    	<div class="form-group">
 					                    		<label for="clientAddress" class="white labelForm">Adresse</label>
 					                        	<input type="text" id="clientAddress" th:field="*{clientAddress}"
-					                        			placeholder="" class="form-first-name form-control"
+					                        			placeholder="Votre adresse" class="form-first-name form-control"
 					                        			tabindex="3"/>
 					                        	<span th:if="${#fields.hasErrors('clientAddress')}"
 														th:errors="*{clientAddress}" class="text-danger"> </span>
@@ -50,7 +50,7 @@
 					                        <div class="form-group">
 					                        	<label for="clientCity" class="white labelForm">Ville</label>
 					                        	<input type="text" id="clientCity" th:field="*{clientCity}"
-					                        			placeholder="" class="form-last-name form-control"
+					                        			placeholder="Votre ville" class="form-last-name form-control"
 					                        			tabindex="4"/>
 					                        	<span th:if="${#fields.hasErrors('clientCity')}"
 														th:errors="*{clientCity}" class="text-danger"> </span>
@@ -58,7 +58,7 @@
 					                        <div class="form-group">
 					                        	<label for="clientPostcode" class="white labelForm">Code postal</label>
 					                        	<input type="text" id="clientPostcode" pattern="[0-9]{5}" th:field="*{clientPostcode}"
-					                        			placeholder="" class="form-email form-control"
+					                        			placeholder="Votre code postal" class="form-email form-control"
 					                        			tabindex="5"/>
 					                        	<span th:if="${#fields.hasErrors('clientPostcode')}"
 														th:errors="*{clientPostcode}" class="text-danger"> </span>
@@ -74,7 +74,7 @@
 					                        <div class="form-group">
 					                        	<label for="clientPhoneNumber" class="white labelForm">Téléphone</label>
 					                        	<input type="text" id="clientPhoneNumber" pattern="[0-9]{10}" th:field="*{clientPhoneNumber}"
-					                        			placeholder="" class="form-email form-control"
+					                        			placeholder="Votre numéro de téléphone" class="form-email form-control"
 					                        			tabindex="7" />
 					                        	<span th:if="${#fields.hasErrors('clientPhoneNumber')}"
 														th:errors="*{clientPhoneNumber}" class="text-danger"> </span>
