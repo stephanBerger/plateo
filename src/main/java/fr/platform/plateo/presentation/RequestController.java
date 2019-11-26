@@ -201,8 +201,7 @@ public class RequestController {
 			Client client = this.clientService.findId(assigneeId)
 					.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
 			Estimate estimate2 = this.estimateService.readOne(estimateid);
-			estimate2.setWorkAddress(client.getClientAddress());
-
+	
 			model.addAttribute("estimateid", estimateid);
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("estimate", estimate2);
