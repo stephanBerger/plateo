@@ -3,107 +3,157 @@
 <head th:replace="public/head :: head"></head>
 <head>
   <!-- <link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css"> --> 
-   <link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css">
-   <link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
+  <!--  <link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css"> --> 
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="pro/headerdashboard :: header"></header>
 	
-	<div class="row text-center border-top border-bottom pt-2 pb-2 top-content">
-		<div class="offset-3 col-1">
-			 <img th:src="${logo}" class="w-100">
+	 <div class="top-content">
+            <div class="inner-bg">
+                <div class="container containerMaxWidth">
+                    <div class="row centrer">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
+                            <h1>Mon <strong>Profil</strong></h1>
+                        </div>
+                    </div>
+                    <div class="row centrer">
+                       	<div class="form-box">
+                            <div class="form-bottom">
+                            <!----------------- AJOUT DE CODE ------------------>
+                            	<div class="">
+									<div class="offset-3 col-1">
+										 <img th:src="${logo}" class="w-100">
+									</div>
+									<div class="col-4">
+										<div class="blue h3" th:text="${pro.companyName}">Nom de la société</div>
+										<div>
+											<span th:text="${pro.proAddress}">,</span>
+											<span th:text="${pro.proCity}"></span>
+											<span th:text="${pro.proPostcode}"></span>
+										</div>
+									</div>
+								</div>
+								 <!----------------- AJOUT DE CODE ------------------>
+			                    <form class="registration-form" role="form" action="#" th:action="@{/public/proForm}"
+										th:object="${pro}" method="post" >
+				                    	<div class="rowFormulaire">
+					                    	<div class="sousColumnFormulaire">
+					                    		<div class="form-group">
+					                    			<label for="companyName" class="white labelForm">Dénomination sociale</label>
+						                        	<input type="text" id="companyName" th:field="*{companyName}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="1"/>
+						                       		<span th:if="${#fields.hasErrors('companyName')}"
+															th:errors="*{companyName}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                    		<label for="managerLastname" class="white labelForm">Nom du gérant</label>
+						                        	<input type="text" id="managerLastname" th:field="*{managerLastname}"
+						                        			placeholder="Champs Obligatoire" class="form-first-name form-control"
+						                        			required tabindex="3"/>
+						                        	<span th:if="${#fields.hasErrors('managerLastname')}"
+															th:errors="*{managerLastname}" class="text-danger"> </span>
+						                        </div>
+						                    	<div class="form-group">
+						                    		<label for="proEmailAddress" class="white labelForm">Email</label>
+						                        	<input type="email" id="proEmailAddress" th:field="*{proEmailAddress}"
+						                        			placeholder="Champs obligatoire" class="form-first-name form-control"
+						                        			required tabindex="5" />
+						                        	<span th:if="${#fields.hasErrors('proEmailAddress')}"
+															th:errors="*{proEmailAddress}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proCity" class="white labelForm">Ville</label>
+						                        	<input type="text" id="proCity" th:field="*{proCity}"
+						                        			placeholder="Champs obligatoire" class="form-last-name form-control"
+						                        			required tabindex="9"/>
+						                        	<span th:if="${#fields.hasErrors('proCity')}" th:errors="*{proCity}"
+															class="text-danger"> </span>
+						                        </div>
+						                    	<div class="form-group">
+						                        	<label for="siret" class="white labelForm">SIRET</label>
+						                        	<input type="text" id="siret" th:field="*{siret}"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+						                        			required tabindex="2" />
+						                        	<span th:if="${#fields.hasErrors('siret')}"
+															th:errors="*{siret}" class="text-danger"> </span>
+						                        </div> 
+						                        <div class="form-group">
+						                        	<label for="managerFirstname" class="white labelForm">Prénom du gérant</label>
+						                        	<input type="text" id="managerFirstname" th:field="*{managerFirstname}"
+						                        			placeholder="Champs obligatoire" class="form-email form-control"
+						                        			required tabindex="4" />
+						                        	<span th:if="${#fields.hasErrors('managerFirstname')}"
+															th:errors="*{managerFirstname}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proPostcode" class="white labelForm">Code Postal</label>
+						                        	<input type="text" id="proPostcode" th:field="*{proPostcode}"
+															placeholder="Champs Obligatoire" class="form-email form-control"
+															pattern="[0-9]{5}" required tabindex="6" />
+													<span th:if="${#fields.hasErrors('proPostcode')}"
+															th:errors="*{proPostcode}" class="text-danger"> </span>
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="proPassword" class="white labelForm">Mot de passe</label>
+						                        	<input type="password" id="passwordInput"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+															th:field="*{proPassword}" required tabindex="7" />
+						                        </div>
+						                        <div class="form-group">
+						                        	<label for="confirmproPassword" class="white labelForm">Confirmer votre mot de passe</label>
+						                        	<input type="password" id="confirmPasswordInput"
+						                        			placeholder="Champs Obligatoire" class="form-email form-control"
+															name="confirmProPassword" required tabindex="8" />
+													<span th:if="${#fields.hasErrors('proPassword')}"
+															th:errors="*{proPassword}" class="text-danger"> </span>
+						                        </div>
+					                    	</div>
+					                    </div>
+			                    	<div class="middle-border-horizontal width-form-box"></div>
+			                    	<label for="listProfession" class="white labelForm width-form-box">Listes des corps d'états</label>
+			                    	<div class="PopoverColumn width-form-box">
+										<div class="custom-control custom-switch" th:each="profession : ${listProfessions}">
+											<input type="checkbox" class="custom-control-input" th:id="${{profession.id}}"
+													th:value="${{profession}}" th:field="*{listProProfessions}" />
+											<!-- petite fenêtre blanche -->
+											<label  class="custom-control-label white" th:for="${{profession.id}}"
+													data-toggle="popover" data-placement="top" th:title="${profession.name}"
+													th:data-content="${profession.description}" th:text="${profession.name}">
+											</label>
+										</div>
+									</div>	
+			                    	<div>
+			                    		<button type="submit" class="btn width-form-box">Validez</button>
+			                        </div> 
+			                        
+			                    </form>
+		                    </div>
+                       	</div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
 		</div>
-		<div class="col-4">
-			<div class="blue h3" th:text="${pro.companyName}">Nom de la société</div>
-			<div>
-				<span th:text="${pro.proAddress}">,</span>
-				<span th:text="${pro.proCity}"></span>
-				<span th:text="${pro.proPostcode}"></span>
-			</div>
-		</div>
-	</div>
-	<div class="mt-5">
-		<div class="row">
-			<div class="col-7 offset-1">
-				<div th:if="${not #lists.isEmpty(photos)}">
-					<div>
-						<span th:each="photo, iterStat: ${photos}">
-	   	    				<img th:src="${photo[0]}" th:id="@{'img-wrapper'}+${iterStat.index}" style="width:200px;" class="b-1">
-						</span>
-					</div>
-					<div>
-						<input id="mySlider" type="range" min="0" max="5" value="0" step="any" oninput="resizeImage();" style="width:500px;">
-					</div>
-				</div>
-			  	<div class="mt-3" th:if="${pro.proEmailAddress == username}">
-					<form th:object="${pro}" th:action="@{/public/proAddPhoto/{id}(id=${pro.id})}" method="POST" enctype="multipart/form-data">
-						<div>
-							<label for="proPhotos">Sélectionner le fichier à envoyer</label>
-						</div>
-						<input type="file" id="listProPhotos" name="listProPhotos" accept="image/png, image/jpeg" multiple required>
-						<div class="mt-1">
-							<button>Envoyer</button>
-							<button onClick="this.form.reset()">Annuler</button>
-						</div>
-						<button type="button" data-toggle="modal" data-target="#deletePics">
-  						Supprimer photos
-						</button>
-						<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Veuillez ajouter une photo</strong>
-						</div>
-					</form>
-				</div>
-			</div>
-		<div class="col-3"> 
-			<div class="border border-primary p-1" th:object="${pro}">
-				<div th:text="*{managerLastname}">Description de l'activité</div>
-				<div th:text="*{managerFirstname}">Adresse email</div>
-				<div th:text="*{proEmailAddress}">Adresse email</div>
-				<div th:text="*{proPhoneNumber}">Numéro de téléphone</div>
-				<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data=}+${pro.proEmailAddress}+${pro.managerLastname}" alt="Scannez-moi" title="QRcode" />
-			</div> 
-			<!--<div class="border border-info">Notes</div>-->
-			</div>
-		</div>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="deletePics" tabindex="-1" role="dialog" aria-labelledby="deletePicsLabel" aria-hidden="true">
- 		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Suppression de photos</h5>
-        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          				<span aria-hidden="true">&times;</span>
-        			</button>
-      			</div>
-      			<div class="modal-body">
-	        		<div th:each="photo : ${photos}" class="border-bottom">
-				  		<img th:src="${photo[0]}" class="d-block w-25 mb-1 mt-1">
-				  		<a th:href="@{/pro/proDeletePhotos/}+ ${photo[1]}">Supprimer</a>
-					</div>
-	      		</div>
-    		</div>
-  		</div>
-	</div>
-<script th:inline="javascript">
-/*<![CDATA[*/
-function setImage() {
-	  var e = document.getElementById('mySelect');
-	  document.getElementById('myImage').src = e.options[e.selectedIndex].value;
-	}
-function resizeImage(){
-	var i = 0;
-	var image;
-    /*[# th:each="photo: ${photos}"]*/
-        image = document.getElementById('img-wrapper'+i),
-	    ranger = document.getElementById('mySlider');
-        image.style.width = (200+(mySlider.value / 1)*100)+'px';
-	  	i++;
-    /*[/]*/
-
-}
-/*]]>*/
-</script>
+        <!-- Footer -->
+        <footer th:replace="public/footer :: footer"></footer>
+        
+        <script th:src="@{/js/scripts.js}"></script>
+        <script>
+			$(function () {
+				  $('[data-toggle="popover"]').popover({ trigger:'hover',animation: true, delay: {show: 150, hide: 100} })
+				});
+			  $(function () {
+			    $('label').popover()
+			  });
+			
+		</script>
 </body>
 </html>
