@@ -52,7 +52,7 @@ public class ProController {
 	public Integer proId() {
 		return null;
 	}
-	
+
 	// Affichage de la modification du professionnel
 	@GetMapping("/pro/proEdit/{id}")
 	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
@@ -103,10 +103,12 @@ public class ProController {
 			role.setId(1);
 			pro.setRole(role);
 
-			try {
-				pro.setLogo(logo.getBytes());
-			} catch (IOException e) {
-				this.LOGGER.error("Can't turn logo into bytes.");
+			if (!logo.isEmpty()) {
+				try {
+					pro.setLogo(logo.getBytes());
+				} catch (IOException e) {
+					this.LOGGER.error("Can't turn logo into bytes.");
+				}
 			}
 
 			this.proService.create(pro);
@@ -148,7 +150,7 @@ public class ProController {
 
 	// Profil pro vu par tout le monde
 	@GetMapping("/public/publicProProfile/{id}")
-	public String publicProProfile(@ModelAttribute("proId") Integer proId,@PathVariable Integer id, Model model) {
+	public String publicProProfile(@ModelAttribute("proId") Integer proId, @PathVariable Integer id, Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();

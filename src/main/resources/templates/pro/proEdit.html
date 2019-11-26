@@ -17,7 +17,7 @@
 				<div class="container containerMaxWidth">
 					<div class="row centrer">
 						<div class="col-sm-8 col-sm-offset-2 text centrer">
-							<h1>Modifiez <strong>mon Profil</strong></h1>
+							<h1>Modifier <strong>mon Profil</strong></h1>
 						</div>
 					</div>
 				<div class="row centrer">
@@ -94,6 +94,7 @@
 										<div class="form-group">
 											<label for="getLogo" class="white labelForm">Logo</label>
 			 								<img th:src="${afficheLogo}" id="logoProEdit">
+			 								<input type="hidden" th:field="*{logo}"/>
 			 								<input type="file" id="getLogo" name="getLogo" accept="image/png, image/jpeg"/>
 										</div>
 										<div class="form-group">
