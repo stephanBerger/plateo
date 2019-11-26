@@ -18,7 +18,8 @@
 		<img class="indexImg" th:src="@{/img/img-index.jpg}">
 	</section>-->
 
-	<!-- --> <section th:fragment="sectionIndex"
+	<!-- -->
+	<section th:fragment="sectionIndex"
 		class="sectionIdentifier sectionplusProduits section100pour100 centrer">
 		<div class="plusProduits centrer section100pour100">
 			<img class="imgindex" alt="index Plateo"
@@ -26,62 +27,67 @@
 		</div>
 		<div class="divVide"></div>
 	</section>
-	
-		<div class="modal fade" id="loginClientModal" data-keyboard="false" data-backdrop="static" >
-			<div class="modal-dialog">
-				<div class="modal-content overFlowHidden">
-					<div class="bggreyClair headermodal">
-						<h3 class="white centrer"><strong>PARTICULIER</strong></h3>
-						<button type="button" class="close btnModal" data-dismiss="modal">
-							<span>&times;</span>
-						</button>	
-					</div>
-					<div class="modal-body">
-						<div class="identifier-login centrer">
-							<h2 class="blue">Identifiez-vous</h2>
 
-							<form class="formIdentifier centrer" th:action="@{/clients/login}"
+	<div class="modal fade" id="loginClientModal" data-keyboard="false"
+		data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content overFlowHidden">
+				<div class="bggreyClair headermodal">
+					<h3 class="white centrer">
+						<strong>PARTICULIER</strong>
+					</h3>
+					<button type="button" class="close btnModal" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="identifier-login centrer">
+						<h2 class="blue">Identifiez-vous</h2>
+						<!-- ------------MODIFICATION DU PASSWORD REUSSIE------------- -->
+						<div align="center" th:if="${msg eq 'ok'}"
+							class="alert alert-success">
+							<strong>Vous avez modifié votre adresse email</strong><br> <strong>Vous
+								devez vous reconnecter</strong>
+						</div>
+						<form class="formIdentifier centrer" th:action="@{/clients/login}"
 							method="post">
 
-								<input type="email" name="email" class="champsFormulaire"
-								placeholder="Saisir adresse email" required>
-								<input type="password" name="password" class="champsFormulaire"
-								placeholder="Saisir mot de passe" required>
-								
-								<a class="mdpOublie" th:href="@{/password/clientForgotPassword}">
-									Mot de passe oublié ?
-								</a>
-								
-								<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
-								<a
-								href="https://www.facebook.com/dialog/oauth?client_id=536071257190563&redirect_uri=http://localhost:8080/login-facebook" class="btn bgBlue btnWidthLong btnFB" type="submit">
-									<img class="logoFB" alt="Logo Facebook"
-										th:src="@{/img/logo-facebook.svg}">
-									<p class="textFB">Connexion Via Facebook</p>
-								</a>
-								
-								<div th:if="${param.error}" class="alert alert-danger"
-								role="alert">
-									Utilisateur ou mot de passe incorrect
-								</div>
+							<input type="email" name="email" class="champsFormulaire"
+								placeholder="Saisir adresse email" required> <input
+								type="password" name="password" class="champsFormulaire"
+								placeholder="Saisir mot de passe" required> <a
+								class="mdpOublie" th:href="@{/password/clientForgotPassword}">
+								Mot de passe oublié ? </a>
 
-								<div th:if="${param.logout}" class="alert alert-success"
-								role="alert">
-									Vous avez été déconnecté avec succès
-								</div>
-							</form>
-
-							<h4 class="greyClair">‒ ou ‒</h4>
-
-							<a th:href="@{/public/clientForm}">
-								<button class="btn btnPro btnWidthLong bgBlue">Créez un compte</button>
+							<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
+							<a
+								href="https://www.facebook.com/dialog/oauth?client_id=536071257190563&redirect_uri=http://localhost:8080/login-facebook"
+								class="btn bgBlue btnWidthLong btnFB" type="submit"> <img
+								class="logoFB" alt="Logo Facebook"
+								th:src="@{/img/logo-facebook.svg}">
+								<p class="textFB">Connexion Via Facebook</p>
 							</a>
 
-						</div>
+							<div th:if="${param.error}" class="alert alert-danger"
+								role="alert">Utilisateur ou mot de passe incorrect</div>
+
+							<div th:if="${param.logout}" class="alert alert-success"
+								role="alert">Vous avez été déconnecté avec succès</div>
+						</form>
+
+						<h4 class="greyClair">‒ ou ‒</h4>
+
+						<a th:href="@{/public/clientForm}">
+							<button class="btn btnPro btnWidthLong bgBlue">Créez un
+								compte</button>
+						</a>
+
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 	<div class="modal fade" id="loginProModal" data-keyboard="false"
@@ -105,16 +111,14 @@
 							th:object="${pro}" method="post">
 
 							<input type="email" name="email" class="champsFormulaire"
-								placeholder="Saisir adresse email" required>
-							<input type="password" name="password" class="champsFormulaire"
-								placeholder="Saisir mot de passe" required>
-							
-							<a class="mdpOublie" th:href="@{/password/proForgotPassword}">
-									Mot de passe oublié ?
-							</a>
-							
+								placeholder="Saisir adresse email" required> <input
+								type="password" name="password" class="champsFormulaire"
+								placeholder="Saisir mot de passe" required> <a
+								class="mdpOublie" th:href="@{/password/proForgotPassword}">
+								Mot de passe oublié ? </a>
+
 							<button class="btn bgOrange btnWidthLong" type="submit">Connexion</button>
-							
+
 							<div th:if="${param.error}" class="alert alert-danger"
 								role="alert">Utilisateur ou mot de passe incorrect</div>
 
@@ -133,7 +137,7 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 	<footer th:replace="public/footer :: footer"></footer>
 
 
