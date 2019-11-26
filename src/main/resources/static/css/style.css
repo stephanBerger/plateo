@@ -234,8 +234,11 @@ greyClair ul{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    margin-right: 50px;
+    
   }
+.menu .dropdown {
+	padding-right: 50px;
+}
 
   .dropdown li{
   	margin-right: 0px !important;
