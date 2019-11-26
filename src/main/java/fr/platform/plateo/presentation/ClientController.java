@@ -226,17 +226,17 @@ public class ClientController {
 			client.setRole(role);
 
 			this.clientService.create(client);
-			redirectAttributes.addFlashAttribute("msgok", "ok");
+			
 			this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 					+ " a modifié sa fiche avec succés");
 
 			if (!OldEmail.equals(client.getClientEmailAddress())) {
 				this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 						+ " a modifié son email - deconnexion obligatoire");
-
 				return "redirect:/exit";
 			}
 		}
+		redirectAttributes.addFlashAttribute("msgok", "ok");
 		return "redirect:/clients/clientDashboard";
 	}
 

@@ -165,7 +165,7 @@ public class ProController {
 			encodings.add(encoding);
 		}
 		proId = pro.getId();
-		System.out.println(proId);
+
 		model.addAttribute("proId", proId);
 		model.addAttribute("photos", encodings);
 		return "/public/publicProProfile";
