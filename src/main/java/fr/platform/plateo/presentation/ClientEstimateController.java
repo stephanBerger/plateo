@@ -232,4 +232,15 @@ public class ClientEstimateController {
 
 	}
 
+	// estimate validation
+	@GetMapping("clients/clientEstimateValid")
+	public String clientEstimateValid(Principal principal, Model model) {
+		this.LOGGER.info("La page \"clientEstimateValid\" client est demandée");
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+
+		return "clients/clientEstimateValid";
+
+	}
+
 }

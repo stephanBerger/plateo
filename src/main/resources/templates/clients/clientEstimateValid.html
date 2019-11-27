@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:replace="public/head :: head"></head>
+<head>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet"
+	type="text/css">
+</head>
+<body>
+	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
+
+	<section class="sectionNouvClient section100pour100 centrer">
+
+				<div style="background-color: #ff9500; margin-top: 40px; margin-bottom: 40px">
+					<h1 class="blue titre-formulaires ">Demande de travaux</h1>
+				</div>
+
+		<div class="centrer carreBlanc">
+				
+			
+					
+			<form class="centrer sectionFormClient" th:action="@{/clients/clientDashBoard}"
+				 method="post">
+				
+				<div style="margin-bottom: 40px; display: flex; justify-content: flex-start">
+					<h2 style="margin-right: 440px;" >date du jour: 28/11/19</h2>
+					<h2 class="blue titre-formulaires ">Devis numéro: 12 </h2>
+				</div>				  
+					
+				
+				<div>
+					<h2 class="blue titre-formulaires ">Informations du professionnel</h2>
+				</div>
+				
+				<div class="sectionForm" style="margin-left: 40px; border: 2px solid black">
+
+					<div class="formIdentifierRight">
+				
+								
+						<div class="formIdentifier left">
+								<!--<span class="col-form-label labelForm" th:text="'numéro client : ' + ${client.id}"></span>-->
+								<span class="col-form-label labelForm">SARL ENTREPRISE GRL</span>  						 
+								<span class="col-form-label labelForm">
+								Quartier le Douard – RD8, ZI P.A. Plaine de Jouques, 13420 Gémenos</span>
+								<span class="col-form-label labelForm">Gérante : France Gall</span>
+								<span class="col-form-label labelForm">Siret : 430 402 123 00037</span>
+								<span class="col-form-label labelForm">numéro TVA: FR 40 123456824</span>
+								<span class="col-form-label labelForm">Tél: 04 91 17 28 34</span>
+								<span class="col-form-label labelForm">e-mail:  serviceclient@grl.fr</span> 
+						</div>
+					</div>
+				</div>
+				
+				
+				<div style="margin-top: 50px">
+					<h2 class="blue titre-formulaires ">Informations du client</h2>
+				</div>
+				
+				<div class="sectionForm" style="margin-left: 40px; border: 2px solid black">
+
+					<div class="formIdentifierRight">
+				
+								
+						<div class="formIdentifier left">
+								<span class="col-form-label labelForm">M. Jean Dupont</span>  						 
+								<span class="col-form-label labelForm">
+								12, rue keller 13006 Marseille</span> 
+								<span class="col-form-label labelForm">
+								Tél: 06 54 34 67 12</span>
+								<span class="col-form-label labelForm">
+								e-mail: j14.dupont@gmail.com</span> 
+						</div>
+					</div>
+				</div>
+				
+					<div>
+						<h2 class="blue titre-formulaires " style="margin-top: 100px;">Prestations demandées et prix unitaires</h2>
+					</div>
+					  							
+					<div class="container">
+							<div>
+								<h2 style="margin-top: 30px; margin-bottom: 30px">Peinture</h2>
+								
+								<label for="mur"
+										 class="col-form-label blue labelForm">Plafond/Mur</label> 
+								<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
+								placeholder="totalHT" value="Mur"><br> 
+								<label for="quantité"
+										 class="col-form-label blue labelForm">Quantité</label> 
+								<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
+								placeholder="totalHT" value="1"><br> 
+								<label for="mur"
+										 class="col-form-label blue labelForm">Surface(m²)</label> 
+								<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
+								placeholder="totalHT" value="100"><br>
+								<label for="mur" th:text="Prix"
+										 class="col-form-label blue labelForm">Prix</label> 
+								<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
+								placeholder="totalHT" value="15€ HT / m²"><br> 
+							</div>					
+
+							<label for="totalHT" class="col-form-label blue labelForm">Total HT : </label>
+							<input type="text" id="totalHT" name="totalHT" class="champsFormulaire"
+								placeholder="totalHT" value="1500 €"><br>
+							<label for="totalTVA" class="col-form-label blue labelForm">Total TVA (10%) : </label>
+							<input type="text" id="totalTVA" name="totalTVA" class="champsFormulaire"
+								placeholder="totalTva" value="150 €"><br>
+							<label for="totalTTC" class="col-form-label blue labelForm">Total TTC : </label>
+							<input type="text" id="totalTTC" name="totalTTC" class="champsFormulaire"
+								placeholder="totalTTC" value="1650 €"><br>
+							<label for="validityDate" class="col-form-label blue labelForm">Date de validité :</label>
+							<input type="text" value="01/04/2020" id="validityDate" name="validityDate" class="champsFormulaire"
+							><br>
+							<label for="validityDate" class="col-form-label blue labelForm">Conditions de paiement :</label>
+							<input type="text" value="Virement Pay Pal" id="validityDate" name="validityDate" class="champsFormulaire"
+							><br>
+							
+							
+					</div>
+									
+				
+				
+				<div style="margin-top: 60px; margin-bottom: 30px">
+					<h2 class="blue titre-formulaires ">Informations complémentaires</h2>
+				</div>
+
+				<div class="centrer sectionForm">
+
+					<div class="formIdentifierLeft">
+						
+						<div class="form-group formIdentifier left">
+							<label for="workAddress" class="col-form-label blue labelForm">Adresse
+								du chantier</label> <input type="text" id="workAddress"
+								name="workAddress" value="45 rue centrale"
+								class="champsFormulaire" disabled />
+						</div>
+
+						<div class="form-group formIdentifier left">
+							<label for="workPostcode" class="col-form-label blue labelForm">Code
+								postal</label> <input type="text" pattern="[0-9]{5}" id="workPostcode"
+								name="workPostcode" value="13013"
+								placeholder="Saisir code postal" class="champsFormulaire"
+								disabled />
+						</div>
+
+						<div class="form-group formIdentifier left">
+							<label for="workCity" class="col-form-label blue labelForm">Ville</label>
+							<input type="text" id="workCity" value="Marseille"
+								name="workCity" class="champsFormulaire"
+								placeholder="Saisir ville" disabled />
+						</div>
+
+						<div class="form-group formIdentifier left">
+							<label for="workComment" class="col-form-label blue labelForm">Commentaires</label>
+							<textarea rows="5" cols="50" maxlength="255" id="workComment"
+								 class="champsFormulaire"
+								placeholder="Commentaires" disabled></textarea>
+						</div>
+						
+					</div>
+					
+					
+
+					<div class="formIdentifierRight">
+						<div class="form-group formIdentifier left">
+							<label for="beginDate" class="col-form-label blue labelForm">Date
+								début chantier</label> <input type="text" id="beginDate"
+								value="03/12/20" class="champsFormulaire"
+								placeholder="Saisir date début chantier" disabled />
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="workDeadline" class="col-form-label blue labelForm">Date
+								fin chantier prévue</label> <input type="text" id="workDeadline"
+								value="03/12/20" class="champsFormulaire"
+								placeholder="Saisir date fin chantier prévu" disabled />
+						</div>
+						<div class="form-group formIdentifier left">
+							<label for="accessDescription"
+								class="col-form-label blue labelForm">Description accès</label>
+							<input type="text" id="accessDescription"
+								value="Porte D" class="champsFormulaire"
+								placeholder="Description accès" disabled/>
+						</div>
+						
+						<div class="form-group formIdentifier left">
+							<label for="usableParkingSpace"
+								class="col-form-label blue labelForm">Parking</label> <input
+								type="text" 
+								id="usableParkingSpace" class="champsFormulaire"
+								placeholder="Parking" value="Pas de Parking" disabled/>
+						</div>
+																		
+					</div>					
+				</div>
+					<div align="center">
+
+							<a th:href="@{/clients/clientDashboard}" class="btn btn-primary" style="margin-bottom: 50px;">Validation du devis</a>
+
+				</div>
+					
+			</form>
+		</div>
+	</section>
+
+</body>
+</html>
