@@ -86,23 +86,22 @@
   		</div>
 	</div>
 <script th:inline="javascript">
-/*<![CDATA[*/
-function setImage() {
-	  var e = document.getElementById('mySelect');
-	  document.getElementById('myImage').src = e.options[e.selectedIndex].value;
+	/*<![CDATA[*/
+	function setImage() {
+		  var e = document.getElementById('mySelect');
+		  document.getElementById('myImage').src = e.options[e.selectedIndex].value;
+		}
+	function resizeImage(){
+		var i = 0;
+		var image;
+	    /*[# th:each="photo: ${photos}"]*/
+	        image = document.getElementById('img-wrapper'+i),
+		    ranger = document.getElementById('mySlider');
+	        image.style.width = (200+(mySlider.value / 1)*100)+'px';
+		  	i++;
+	    /*[/]*/
 	}
-function resizeImage(){
-	var i = 0;
-	var image;
-    /*[# th:each="photo: ${photos}"]*/
-        image = document.getElementById('img-wrapper'+i),
-	    ranger = document.getElementById('mySlider');
-        image.style.width = (200+(mySlider.value / 1)*100)+'px';
-	  	i++;
-    /*[/]*/
-
-}
-/*]]>*/
+	/*]]>*/
 </script>
 </body>
 </html>
