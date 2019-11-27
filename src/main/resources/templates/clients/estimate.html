@@ -2,120 +2,133 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
-<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet"
-	type="text/css">
+	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	<section class="sectionNouvClient section100pour100 centrer">
-
-		<div class="centrer carreBlanc">
-
-			<form class="centrer sectionFormClient" th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${serviceId}"
-				th:object="${estimate}" method="post">
-
-				<!-- message error date-->
-				<div align="center" th:if="${msg eq 'datesup'}"
-					class="alert alert-danger alert-dismissable">
-					<strong>La date de début de chantier est supérieure à la date
-						de fin chantier</strong>
-				</div>
-
-				<div>
-					<h2 class="blue titre-formulaires ">Création de la demande de devis</h2>
-				</div>
-
-				<div class="centrer sectionForm">
-
-					<div class="formIdentifierLeft">
-
-						<div class="form-group formIdentifier left">
-							<label for="workAddress" class="col-form-label blue labelForm">Adresse
-								du chantier</label> <input type="text" id="workAddress"
-								name="workAddress" th:field="*{workAddress}"
-								class="champsFormulaire" required />
-						</div>
-
-						<div class="form-group formIdentifier left">
-							<label for="workPostcode" class="col-form-label blue labelForm">Code
-								postal</label> <input type="text" pattern="[0-9]{5}" id="workPostcode"
-								name="workPostcode" th:field="*{workPostcode}"
-								placeholder="Saisir code postal" class="champsFormulaire"
-								required />
-						</div>
-
-						<div class="form-group formIdentifier left">
-							<label for="workCity" class="col-form-label blue labelForm">Ville</label>
-							<input type="text" id="workCity" th:field="*{workCity}"
-								name="workCity" class="champsFormulaire"
-								placeholder="Saisir ville" required />
-						</div>
-
-						<div class="form-group formIdentifier left">
-							<label for="workComment" class="col-form-label blue labelForm">Commentaires</label>
-							<textarea rows="5" cols="50" maxlength="255" id="workComment"
-								th:field="*{workComment}" class="champsFormulaire"
-								placeholder="Commentaires"></textarea>
-						</div>
-						<div align="center">
-							<button type="submit" name="prestation" value="otherprestation"
-								class="btn btn-primary">Rajouter une prestation</button>
-						</div>
+	<div class="top-content">
+        <div class="inner-bg">
+            <div class="container containerMaxWidth">
+                <div class="row centrer">
+                    <div class="col-sm-8 col-sm-offset-2 text centrer">
+                        <h1>Création de la <strong>demande de devis</strong></h1>
+                    </div>
+                </div>
+                <div class="row centrer">
+                   	<div class="form-box">
+                        <div class="form-bottom">
+			              <form class="registration-form" th:action="@{/clients/valideEstimate/} + ${processInstanceId} + '/' + ${estimateid} + '/' + ${serviceId}"
+								th:object="${estimate}" method="post">
+							<!-- message error date-->
+							<div align="center" th:if="${msg eq 'datesup'}"
+								class="alert alert-danger alert-dismissable">
+								<strong>La date de début de chantier est supérieure à la date
+									de fin chantier</strong>
+							</div>
+							<div class="rowFormulaire">
+		                    	<div class="sousColumnFormulaire columnEstimate">
+		                    		<div class="form-group">
+										<label for="workAddress" class="white labelForm">
+											Adresse du chantier
+										</label>
+										<input type="text" id="workAddress" name="workAddress" th:field="*{workAddress}"
+												class="form-first-name form-control" required />
+									</div>
+									<div class="form-group">
+										<label for="workPostcode" class="white labelForm">
+											Code postal
+										</label>
+										<input type="text" pattern="[0-9]{5}" id="workPostcode"
+												name="workPostcode" th:field="*{workPostcode}"
+												placeholder="Saisir code postal" class="form-first-name form-control"
+												required />
+									</div>
+									<div class="form-group">
+										<label for="workCity" class="white labelForm">
+											Ville
+										</label>
+										<input type="text" id="workCity" th:field="*{workCity}"
+												name="workCity" class="form-first-name form-control"
+												placeholder="Saisir ville" required />
+									</div>
+									<div class="form-group">
+										<label for="workComment" class="white labelForm">Commentaires</label>
+										<textarea rows="5" maxlength="255" id="workComment"
+												th:field="*{workComment}" class="form-first-name form-control"
+												placeholder="Commentaires"></textarea>
+									</div>
+									<div class="form-group">
+										<label for="beginDate" class="white labelForm">
+											Date début chantier
+										</label>
+										<input type="date" id="beginDate"
+												th:field="*{beginDate}" class="form-first-name form-control"
+												placeholder="Saisir date début chantier" required />
+									</div>
+									<div class="form-group">
+										<label for="workDeadline" class="white labelForm">
+											Date fin chantier prévu
+										</label>
+										<input type="date" id="workDeadline"
+												th:field="*{workDeadline}" class="form-first-name form-control"
+												placeholder="Saisir date fin chantier prévu" required />
+									</div>
+									<div class="form-group">
+										<label for="accessDescription"
+												class="white labelForm">Description accès</label>
+										<input type="text" id="accessDescription"
+												th:field="*{accessDescription}" class="form-first-name form-control"
+												placeholder="Description accès" />
+									</div>
+									<div class="form-group">
+										<label for="usableParkingSpace"
+												class="white labelForm">Parking</label>
+										<input type="text" th:field="*{usableParkingSpace}"
+												id="usableParkingSpace" class="form-first-name form-control"
+												placeholder="Parking" />
+									</div>
+									<div class="form-group">
+										<input type="hidden" th:field="*{id}" id="id"
+												class="form-first-name form-control" />
+									</div>
+									<div class="form-group">
+										<input type="hidden" th:field="*{client.id}" id="clientid"
+												class="form-first-name form-control" />
+									</div>
+		                    	</div>
+	                    	</div>
+	                    	<div class="zoneBoutonsEdit">
+	                    		<button type="submit" name="prestation" value="otherprestation"
+										class="btn width-form-box">
+									Ajouter une prestation
+								</button>
+								<button type="submit" name="prestation" value="endprestation"
+										class="btn width-form-box">
+									Terminer la demande
+								</button>
+	                        </div> 
+	                    </form>
 					</div>
-
-					<div class="formIdentifierRight">
-						<div class="form-group formIdentifier left">
-							<label for="beginDate" class="col-form-label blue labelForm">Date
-								début chantier</label> <input type="date" id="beginDate"
-								th:field="*{beginDate}" class="champsFormulaire"
-								placeholder="Saisir date début chantier" required />
-
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="workDeadline" class="col-form-label blue labelForm">Date
-								fin chantier prévu</label> <input type="date" id="workDeadline"
-								th:field="*{workDeadline}" class="champsFormulaire"
-								placeholder="Saisir date fin chantier prévu" required />
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="accessDescription"
-								class="col-form-label blue labelForm">Description accès</label>
-							<input type="text" id="accessDescription"
-								th:field="*{accessDescription}" class="champsFormulaire"
-								placeholder="Description accès" />
-
-						</div>
-						<div class="form-group formIdentifier left">
-							<label for="usableParkingSpace"
-								class="col-form-label blue labelForm">Parking</label> <input
-								type="text" th:field="*{usableParkingSpace}"
-								id="usableParkingSpace" class="champsFormulaire"
-								placeholder="Parking" />
-						</div>
-
-
-						<div class="form-group formIdentifier left">
-							<input type="hidden" th:field="*{id}" id="id"
-								class="champsFormulaire" />
-						</div>
-						<div class="form-group formIdentifier left">
-							<input type="hidden" th:field="*{client.id}" id="clientid"
-								class="champsFormulaire" />
-						</div>
-						
-						<div align="center">
-							<button type="submit" name="prestation" value="endprestation"
-								class="btn btn-primary">Terminer la demande</button>
-						</div>
-					</div>
-
-				</div>
-
-			</form>
-
+                </div>
+            </div>
+        </div>
+    </div>
+            
+        </div>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
 		</div>
-	</section>
+        <!-- Footer -->
+        <footer th:replace="public/footer :: footer"></footer>
+        
+        <script th:src="@{/js/scripts.js}"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
 </body>
 </html>
