@@ -2,10 +2,19 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body class="BgBlue">
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
 <div th:replace="public/publicProProfile :: proProfile"></div>
+	<div class="backstretch">
+		<img src="/img/1.jpg">
+	</div>
+       <!-- Footer -->
+       <footer th:replace="public/footer :: footer"></footer>
+       
+       <script th:src="@{/js/scripts.js}"></script>
 </body>
 </html>
