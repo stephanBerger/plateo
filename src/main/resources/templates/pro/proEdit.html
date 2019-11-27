@@ -49,7 +49,7 @@
 												du gérant</label> <input type="text" id="managerLastname"
 												th:field="*{managerLastname}"
 												placeholder="Champs Obligatoire"
-												class="form-first-name form-control" required tabindex="2" />
+												class="form-first-name form-control" required tabindex="3" />
 											<span th:if="${#fields.hasErrors('managerLastname')}"
 												th:errors="*{managerLastname}" class="text-white"> </span>
 										</div>
@@ -58,7 +58,7 @@
 												du gérant</label> <input type="text" id="managerFirstname"
 												th:field="*{managerFirstname}"
 												placeholder="Champs obligatoire"
-												class="form-email form-control" required tabindex="6" /> <span
+												class="form-email form-control" required tabindex="4" /> <span
 												th:if="${#fields.hasErrors('managerFirstname')}"
 												th:errors="*{managerFirstname}" class="text-danger">
 											</span>
@@ -68,7 +68,7 @@
 											<input type="email" id="proEmailAddress"
 												th:field="*{proEmailAddress}"
 												placeholder="Champs obligatoire"
-												class="form-first-name form-control" required tabindex="3" />
+												class="form-first-name form-control" required tabindex="5" />
 											<span th:if="${#fields.hasErrors('proEmailAddress')}"
 												th:errors="*{proEmailAddress}" class="text-white"> </span>
 											<input type="hidden" id="OldEmail" name="OldEmail"
@@ -78,7 +78,7 @@
 											<label for="proAddress" class="white labelForm">Adresse</label> <input
 												type="text" id="proAddress" th:field="*{proAddress}"
 												placeholder="Ajoutez ou modifiez votre adresse"
-												class="form-last-name form-control" required tabindex="4" />
+												class="form-last-name form-control" tabindex="6" />
 											<span th:if="${#fields.hasErrors('proAddress')}"
 												th:errors="*{proAddress}" class="text-danger"> </span>
 										</div>
@@ -86,7 +86,7 @@
 											<label for="proCity" class="white labelForm">Ville</label> <input
 												type="text" id="proCity" th:field="*{proCity}"
 												placeholder="Champs obligatoire"
-												class="form-last-name form-control" required tabindex="5" />
+												class="form-last-name form-control" required tabindex="7" />
 											<span th:if="${#fields.hasErrors('proCity')}"
 												th:errors="*{proCity}" class="text-white"> </span>
 										</div>
@@ -95,7 +95,7 @@
 												Postal</label> <input type="text" id="proPostcode"
 												th:field="*{proPostcode}" placeholder="Champs Obligatoire"
 												class="form-email form-control" pattern="[0-9]{5}" required
-												tabindex="7" /> <span
+												tabindex="8" /> <span
 												th:if="${#fields.hasErrors('proPostcode')}"
 												th:errors="*{proPostcode}" class="text-white"> </span>
 										</div>
@@ -105,7 +105,7 @@
 											</label>
 											<textarea cols="15" id="activityDescription" th:field="*{activityDescription}"
 													placeholder="Modifiez ou entrez une description" class="form-email form-control"
-													required tabindex="7"></textarea>
+													tabindex="9"></textarea>
 											<span th:if="${#fields.hasErrors('activityDescription')}"
 													th:errors="*{activityDescription}" class="text-danger"> </span>
 										</div>
@@ -144,6 +144,35 @@
 											th:text="${profession.name}"> </label>
 									</div>
 								</div>
+								<div class="middle-border-horizontal width-form-box"></div>
+			<!----------------- Ajouter une PHOTO ------------------>
+								<div>
+								<!-- -------liste photos -->
+									<div class=" divDeletePhoto flexRow">
+										<div th:each="photo : ${photos}" class="imgPlustext">
+									  		<img th:src="${photo[0]}" class="deletePhotosProEdit">
+									  		<br/>
+									  		<a class="white" th:href="@{/pro/proDeletePhotos/}+ ${photo[1]}">Supprimer</a>
+										</div>
+									</div>
+									<!-- -------modifications photos -->
+									<div class=" divModifPhoto flexColumn">
+										<label for="listProfession" class="white labelForm width-form-box">
+											Ajouter ou Modifier des images
+										</label>
+										<div class="flexRow btnProEdit">
+											<input class="inputFile"type="file" id="listProPhotos" name="listProPhotos" accept="image/png, image/jpeg" multiple required>
+											<button class="btn">Envoyer</button>
+											<button class="btn" onClick="this.form.reset()">Annuler</button>
+										</div>
+										<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											<strong>Veuillez ajouter une photo</strong>
+										</div>	
+									</div>
+								</div>
+								<div class="middle-border-horizontal width-form-box"></div>
+								
 								
 									 <div class="zoneBoutonsEdit">
 			                    		<a href="/pro/proDashboard" class="btn btnRetour bggreyClair">Retour</a>
