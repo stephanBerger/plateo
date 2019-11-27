@@ -2,7 +2,7 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-  <!-- <link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css"> --> 
+  	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css"> 
   <!--  <link th:href="@{/css/styleEditPro.css}" rel="stylesheet" type="text/css"> --> 
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/stylePro.css}" rel="stylesheet" type="text/css" >
@@ -87,20 +87,21 @@
 										<br/>
 									</div> 
 									téléchargez les coordonnées en scannant le QRCODE :
-									<button class="btn btnQrcode" type="button" data-toggle="modal" data-target="#modalQrcode">Affichez le QRCODE</button>
+									<button class="btn btnQrcode" type="button" data-toggle="modal" data-target="#modalQrcode">Afficher le QRCODE</button>
 								</div>
 							</div>
 		<!----------------- MODAL QRCODE ------------------>
-							<div class="modal fade" id="modalQrcode">
+							<div class="modal fade" id="modalQrcode" data-keyboard="false"
+									data-backdrop="static">
 						 		<div class="modal-dialog">
-						    		<div class="modal-content">
+						    		<div class="modal-content overFlowHidden">
 						    			<div class="bggreyClair headermodal">
 											<h3 class="white centrer"><strong>QRCODE</strong></h3>
 											<button type="button" class="close btnModal" data-dismiss="modal">
 												<span>&times;</span>
 											</button>	
 										</div>
-						      			<div class="modal-body">
+						      			<div id="modalQ" class="modal-body">
 						      				<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data=}+${pro.proEmailAddress}+${pro.managerLastname}"
 						      						alt="Scannez-moi" title="QRcode" />
 							      		</div>
