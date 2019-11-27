@@ -35,7 +35,7 @@
 									<thead>
 										<tr>
 											<th scope="col">Numéro Devis</th>
-											<th scope="col">Date</th>
+											<th scope="col">Date de création</th>
 											<th scope="col">Ville</th>
 											<th scope="col">Code postal</th>
 											<th scope="col">Statut</th>
@@ -46,12 +46,13 @@
 									<tbody>
 										<tr th:each="estimate : ${estimatesStatusList}">
 											<td th:text="${estimate.id}"></td>
-											<td th:text="${estimate.requestDate}"></td>
+											<td th:text="${#temporals.format(estimate.requestDate, 'dd-MM-yyyy HH:mm')}"></td>
 											<td th:text="${estimate.workCity}"></td>
 											<td th:text="${estimate.workPostcode}"></td>
 											<td th:text="${estimate.estimateStatus}"></td>
 											<td><a href="#">Edit</a></td>
-											<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
+											<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>  
+											    	      
 										</tr>
 									</tbody>
 								</table>	
