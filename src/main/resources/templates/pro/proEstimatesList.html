@@ -24,8 +24,9 @@
         <section class="sectionIdentifier sectionplusProduits section100pour100 centrer">
            <div class="plusProduits list">
 	       
-	       <h1 class="centrer" th:if="${mode eq 'direct'}">Demandes de devis dédiées</h1>
+	       
 	       <h1 class="centrer" th:if="${mode eq 'requestAwaiting'}">Liste totale des demandes de devis</h1>
+	       <h1 class="centrer" th:if="${mode eq 'direct'}">Demandes de devis dédiées</h1>
 	       <h1 class="centrer" th:if="${mode eq 'accepted'}">Mes devis acceptés</h1>
 	       <h1 class="centrer" th:if="${mode eq 'converted'}">Mes factures</h1>
 		
@@ -33,7 +34,7 @@
 	           <thead>
             	    <tr>
             	      <th scope="col">numéro Devis</th>
-            	      <th scope="col">Date</th>
+            	      <th scope="col">Date de création</th>
             	      <th scope="col">Ville</th>
             	      <th scope="col">Code postal</th>
             	      <th scope="col">Statut</th>

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import fr.platform.plateo.business.entity.Client;
 import fr.platform.plateo.business.entity.Estimate;
 import fr.platform.plateo.business.entity.EstimateStatus;
+import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.service.ClientService;
 import fr.platform.plateo.business.service.EstimateService;
+import fr.platform.plateo.business.service.ProService;
 
 @Controller
 public class ClientEstimateController {
@@ -27,6 +29,9 @@ public class ClientEstimateController {
 
 	@Autowired
 	private ClientService clientService;
+
+	@Autowired
+	private ProService proService;
 
 	@Autowired
 	private EstimateService estimateService;
@@ -69,10 +74,8 @@ public class ClientEstimateController {
 		model.addAttribute("client", client);
 
 		List<Estimate> estimatesStatusList = new ArrayList<>();
-		List<Estimate> estimatesStatusDraftList = new ArrayList<>();
 		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-		estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
-		estimatesStatusList.addAll(estimatesStatusDraftList);
+
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "request");
@@ -169,25 +172,30 @@ public class ClientEstimateController {
 		String url = req.getHeader("referer");
 		List<Estimate> estimatesStatusList = new ArrayList<>();
 
-		if (url.contains("Request")) {
+		if (url.contains("AllRequest")) {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-			model.addAttribute("mode", "request");
-		} else if (url.contains("Awaiting")) {
+			List<Estimate> estimatesStatusDraftList = new ArrayList<>();
+			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
+					client);
+			estimatesStatusList.addAll(estimatesStatusDraftList);
+			model.addAttribute("mode", "allRequest");
+		} else if (url.contains("AwaitingAccepted")) {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT,
 					client);
-			model.addAttribute("mode", "awaiting");
-		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
-			model.addAttribute("mode", "accepted");
+			List<Estimate> estimatesStatusAcceptedList = new ArrayList<>();
+			estimatesStatusAcceptedList = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+			estimatesStatusList.addAll(estimatesStatusAcceptedList);
+			model.addAttribute("mode", "awaitingAccepted");
 		} else if (url.contains("Converted")) {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.FACTURE, client);
 			model.addAttribute("mode", "converted");
-		} else if (url.contains("Draft")) {
-			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
-			model.addAttribute("mode", "draft");
 		} else {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-			model.addAttribute("mode", "request");
+			List<Estimate> estimatesStatusDraftList = new ArrayList<>();
+			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
+					client);
+			estimatesStatusList.addAll(estimatesStatusDraftList);
+			model.addAttribute("mode", "allRequest");
 		}
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
@@ -202,28 +210,26 @@ public class ClientEstimateController {
 		this.estimateService.delete(id);
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
-		String url = req.getHeader("referer");
-		List<Estimate> estimatesStatusList = new ArrayList<>();
+		// AJOUT POUR LISTER LES DEMANDES DE DEVIS EN COURS
+		model.addAttribute("client", client);
+		List<Estimate> estimatesStatusList1 = new ArrayList<>();
+		List<Estimate> estimatesStatusList2 = new ArrayList<>();
+		estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
+		estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusList2.addAll(estimatesStatusList1);
 
-		if (url.contains("Request")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
-			model.addAttribute("mode", "request");
-		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT);
-			model.addAttribute("mode", "awaiting");
-		} else if (url.contains("Accepted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.ACCEPTE);
-			model.addAttribute("mode", "accepted");
-		} else if (url.contains("Converted")) {
-			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.FACTURE);
-			model.addAttribute("mode", "converted");
-		} else {
-			estimatesStatusList = this.estimateService.readAll();
-			model.addAttribute("mode", "all");
-		}
-		model.addAttribute("estimatesStatusList", estimatesStatusList);
+		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
+		model.addAttribute("mode", "allRequest");
+		// AJOUT DES DEVIS ACCEPTEES
+		List<Estimate> estimatesStatusList3 = this.estimateService.readByStatusClient(EstimateStatus.ACCEPTE, client);
+		model.addAttribute("MesDevisAcceptes", estimatesStatusList3);
+		model.addAttribute("mode", "accepted");
+		// AJOUT POUR PROLIST
+		List<Pro> proList = this.proService.readAll();
+		model.addAttribute("proList", proList);
 
-		return "redirect:/clients/clientDashboard";
+		return "/clients/clientDashboard";
+
 	}
 
 }

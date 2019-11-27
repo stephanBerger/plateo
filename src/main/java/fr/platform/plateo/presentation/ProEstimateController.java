@@ -187,12 +187,15 @@ public class ProEstimateController {
 		String url = req.getHeader("referer");
 		List<Estimate> estimatesStatusList = new ArrayList<>();
 
-		if (url.contains("Request")) {
+		if (url.contains("RequestAwaiting")) {
+			List<Estimate> estimatesStatusAwaitingList = new ArrayList<>();
+			estimatesStatusAwaitingList = this.estimateService.readByStatus(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT);
 			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
-			model.addAttribute("mode", "request");
-		} else if (url.contains("Awaiting")) {
-			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
-			model.addAttribute("mode", "awaiting");
+			estimatesStatusList.addAll(estimatesStatusAwaitingList);
+			model.addAttribute("mode", "requestAwaiting");
+		} else if (url.contains("Direct")) {
+			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.DEMANDE, pro);
+			model.addAttribute("mode", "direct");
 		} else if (url.contains("Accepted")) {
 			estimatesStatusList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE, pro);
 			model.addAttribute("mode", "accepted");
@@ -201,9 +204,10 @@ public class ProEstimateController {
 			model.addAttribute("mode", "converted");
 		} else {
 			estimatesStatusList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
-			estimatesStatusList
-					.addAll(this.estimateService.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro));
-
+			List<Estimate> estimatesStatusAwaitingList = new ArrayList<>();
+			estimatesStatusAwaitingList = this.estimateService
+					.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
+			estimatesStatusList.addAll(estimatesStatusAwaitingList);
 			model.addAttribute("mode", "requestAwaiting");
 		}
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
