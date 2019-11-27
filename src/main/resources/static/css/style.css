@@ -836,3 +836,7 @@ ul{
 .page-item.active .page-link {
 	z-index: 0 !important;
 }
+.nomSocieteProfil{
+	font-weight: 600;
+	font-size:2.8rem;
+}
