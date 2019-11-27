@@ -247,9 +247,6 @@ greyClair ul{
     margin-right: 50px;
     
   }
-.menu .dropdown {
-	
-}
 
   .dropdown li{
   	margin-right: 0px !important;
@@ -296,7 +293,7 @@ greyClair ul{
   float: left;
 }
 .dropdown {
-  font-size: 1rem;
+  font-size: 1.1rem;
   border: none;
   outline: none;
   color: white;
@@ -712,7 +709,7 @@ ul{
 	}
 	/*-------MENU----------*/
 	.menu nav ul{
-	    font-size:1rem;
+	   /* font-size:1rem;*/
 	}
 	.menu li {
 	    margin-right: 40px;
