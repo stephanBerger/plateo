@@ -57,10 +57,10 @@
 						<div th:each="service: ${services}">							
 								<h2 th:text="${service.key.name}" style="margin-top: 30px; margin-bottom: 30px"></h2>
 								<div th:each="prop: ${service.value}" style="margin-top: 15px;">
-									<fieldset>
+									<fieldset th:if="${prop.value}">
 										<label for="${prop.key}" th:text="${prop.key} + ' :'"
-										 class="col-form-label blue labelForm"></label> <span th:text="${prop.value}"></span>
-										<input th:if="${prop.value}" type="text" id="${prop.key}" class="champsFormulaire"
+										 class="col-form-label blue labelForm"></label> 
+										<input type="text" id="${prop.key}" class="champsFormulaire"
 										placeholder="Prix Unitaire(HT)" name="${prop.key}"/><br>
 									</fieldset>
 								</div>	
