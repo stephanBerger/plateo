@@ -435,3 +435,24 @@ textarea.form-control{
 .btnProEdit.btn{
 	
 }
+
+.popover {
+	color:white !important;
+  	background-color: #ff9500; /*substitute 'red' with your color of choice*/
+  	border-color: #ff9500;
+}
+
+.popover-content {
+	font-size: 14px :important;
+	color:white !important;
+  	background-color: #ff9500;
+}
+.popover.right>.arrow:after {
+  border-right-color: #ff9500;
+}
+
+
+
+  	
+  	
+}
