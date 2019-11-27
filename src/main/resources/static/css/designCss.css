@@ -74,6 +74,10 @@ strong {
 	max-height: 400px !important;
 }
 
+.columnEstimate{
+	max-height: 460px !important;
+}
+
 input[type="text"], 
 input[type="password"], 
 input[type="email"],

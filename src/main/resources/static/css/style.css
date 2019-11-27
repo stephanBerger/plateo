@@ -12,6 +12,9 @@ body {
     align-items: stretch;
     justify-content: space-between;
 }
+textarea{
+	resize:none;
+}
 
 a:hover{
 	text-decoration: none;
