@@ -73,7 +73,14 @@ a:hover{
   	justify-content: flex-start;
 }
 
-
+.flexColumn{
+	display: flex;
+	flex-direction: column;
+}
+.flexRow{
+	display: flex;
+	flex-direction: row;
+}
 /*-----------------------------HEADER-----------------------------------------*/
 
 /*----------ANIMATIONS JS HEADER-------------------*/

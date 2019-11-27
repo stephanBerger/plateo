@@ -413,3 +413,25 @@ textarea.form-control{
 	justify-content:space-between;
 	align-items:center;
 }
+
+.deletePhotosProEdit{
+	height:100px;
+	margin-left:20px;
+}
+.divDeletePhoto{
+	flex-wrap:wrap;
+}
+.divModifPhoto label, .divModifPhoto input {
+	margin-top:20px;
+}
+.divModifPhoto button, .divModifPhoto input{
+	margin-left:20px;
+	margin-right:20px;
+}
+.imgPlustext{
+	text-align: center;
+}
+
+.btnProEdit.btn{
+	
+}
