@@ -17,14 +17,12 @@ import fr.platform.plateo.business.service.ProService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-	private static final String[] RESOURCES = new String[] { "/include/**",
-			"/css/**", "/icons/**", "/img/**", "/js/**", "/layer/**",
-			"/resources/**", "/static/**", "/webjars/**", "/photos/**" };
+	private static final String[] RESOURCES = new String[] { "/include/**", "/css/**", "/icons/**", "/img/**", "/js/**",
+			"/layer/**", "/resources/**", "/static/**", "/webjars/**", "/photos/**" };
 
 	@Configuration
 	@Order(1)
-	public static class App1ConfigurationAdapter
-			extends WebSecurityConfigurerAdapter {
+	public static class App1ConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
 		@Autowired
 		private ClientService clientAuthService;
@@ -34,35 +32,27 @@ public class SecurityConfig {
 
 		@Override
 		@Autowired
-		public void configure(AuthenticationManagerBuilder auth)
-				throws Exception {
-			auth.userDetailsService(this.clientAuthService)
-					.passwordEncoder(this.decrypt);
+		public void configure(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(this.clientAuthService).passwordEncoder(this.decrypt);
 		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.antMatcher("/clients/**").authorizeRequests()
-			.antMatchers("/clients/**").hasRole("CLIENT")
-			.antMatchers("/pro/**").hasRole("PRO").anyRequest().authenticated().and()
+			http.antMatcher("/clients/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
+					.anyRequest().hasAuthority("CLIENT").and()
 
-					.formLogin().loginPage("/clients/login").permitAll()
-					.failureUrl("/clients/login?error=loginError")
-					.defaultSuccessUrl("/clients/clientDashboard")
-					.usernameParameter("email").and()
-					.exceptionHandling().accessDeniedPage("/403")
-					.and()
+					.formLogin().loginPage("/clients/login").permitAll().failureUrl("/clients/login?error=loginError")
+					.defaultSuccessUrl("/clients/clientDashboard").usernameParameter("email").and().exceptionHandling()
+					.accessDeniedPage("/403").and()
 
-					.logout().logoutUrl("/clients/logout")
-					.logoutSuccessUrl("/").permitAll();
+					.logout().logoutUrl("/clients/logout").logoutSuccessUrl("/").permitAll();
 		}
 
 	}
 
 	@Configuration
 	@Order(2)
-	public static class App2ConfigurationAdapter
-			extends WebSecurityConfigurerAdapter {
+	public static class App2ConfigurationAdapter extends WebSecurityConfigurerAdapter {
 		public App2ConfigurationAdapter() {
 			super();
 		}
@@ -75,25 +65,20 @@ public class SecurityConfig {
 
 		@Override
 		@Autowired
-		public void configure(AuthenticationManagerBuilder auth)
-				throws Exception {
-			auth.userDetailsService(this.proAuthService)
-					.passwordEncoder(this.decrypt);
+		public void configure(AuthenticationManagerBuilder auth) throws Exception {
+			auth.userDetailsService(this.proAuthService).passwordEncoder(this.decrypt);
 		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			http.authorizeRequests().antMatchers("/pro/**").hasRole("PRO").and()
+			http.antMatcher("/pro/**").authorizeRequests().antMatchers(SecurityConfig.RESOURCES).permitAll()
+					.anyRequest().hasAuthority("PRO").and()
 
-					.formLogin().loginPage("/pro/login").permitAll()
-					.failureUrl("/pro/login?error=loginError")
-					.defaultSuccessUrl("/pro/proDashboard")
-					.usernameParameter("email").and()
-					.exceptionHandling().accessDeniedPage("/403")
-					.and()
+					.formLogin().loginPage("/pro/login").permitAll().failureUrl("/pro/login?error=loginError")
+					.defaultSuccessUrl("/pro/proDashboard").usernameParameter("email").and().exceptionHandling()
+					.accessDeniedPage("/403").and()
 
-					.logout().logoutUrl("/pro/logout")
-					.logoutSuccessUrl("/").permitAll();
+					.logout().logoutUrl("/pro/logout").logoutSuccessUrl("/").permitAll();
 		}
 	}
 
