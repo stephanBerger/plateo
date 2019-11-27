@@ -27,7 +27,7 @@
 								th:action="@{/pro/proEdit/{id}(id=${pro.id})}"
 								th:object="${pro}" method="post" enctype="multipart/form-data">
 								<div class="rowFormulaire">
-									<div class="sousColumnFormulaire">
+									<div class="sousColumnFormulaire proEdit">
 										<div class="form-group">
 											<label for="companyName" class="white labelForm">Dénomination
 												sociale</label> <input type="text" id="companyName"
@@ -37,65 +37,89 @@
 												th:errors="*{companyName}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
+											<label for="siret" class="white labelForm">SIRET</label> <input
+												type="text" id="siret" th:field="*{siret}"
+												placeholder="Champs Obligatoire"
+												class="form-email form-control" required tabindex="2" /> <span
+												th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}"
+												class="text-danger"> </span>
+										</div>
+										<div class="form-group">
 											<label for="managerLastname" class="white labelForm">Nom
 												du gérant</label> <input type="text" id="managerLastname"
 												th:field="*{managerLastname}"
 												placeholder="Champs Obligatoire"
-												class="form-first-name form-control" required tabindex="2" />
+												class="form-first-name form-control" required tabindex="3" />
 											<span th:if="${#fields.hasErrors('managerLastname')}"
 												th:errors="*{managerLastname}" class="text-white"> </span>
-										</div>
-										<div class="form-group">
-											<label for="proEmailAddress" class="white labelForm">Email</label>
-											<input type="email" id="proEmailAddress"
-												th:field="*{proEmailAddress}"
-												placeholder="Champs obligatoire"
-												class="form-first-name form-control" required tabindex="3" />
-											<span th:if="${#fields.hasErrors('proEmailAddress')}"
-												th:errors="*{proEmailAddress}" class="text-white"> </span>
-											<input type="hidden" id="OldEmail" name="OldEmail"
-														th:value="*{proEmailAddress}" />
-										</div>
-										<div class="form-group">
-											<label for="proCity" class="white labelForm">Ville</label> <input
-												type="text" id="proCity" th:field="*{proCity}"
-												placeholder="Champs obligatoire"
-												class="form-last-name form-control" required tabindex="4" />
-											<span th:if="${#fields.hasErrors('proCity')}"
-												th:errors="*{proCity}" class="text-white"> </span>
-										</div>
-										<div class="form-group">
-											<label for="siret" class="white labelForm">SIRET</label> <input
-												type="text" id="siret" th:field="*{siret}"
-												placeholder="Champs Obligatoire"
-												class="form-email form-control" required tabindex="5" /> <span
-												th:if="${#fields.hasErrors('siret')}" th:errors="*{siret}"
-												class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="managerFirstname" class="white labelForm">Prénom
 												du gérant</label> <input type="text" id="managerFirstname"
 												th:field="*{managerFirstname}"
 												placeholder="Champs obligatoire"
-												class="form-email form-control" required tabindex="6" /> <span
+												class="form-email form-control" required tabindex="4" /> <span
 												th:if="${#fields.hasErrors('managerFirstname')}"
-												th:errors="*{managerFirstname}" class="text-white">
+												th:errors="*{managerFirstname}" class="text-danger">
 											</span>
+										</div>
+										<div class="form-group">
+											<label for="proEmailAddress" class="white labelForm">Email</label>
+											<input type="email" id="proEmailAddress"
+												th:field="*{proEmailAddress}"
+												placeholder="Champs obligatoire"
+												class="form-first-name form-control" required tabindex="5" />
+											<span th:if="${#fields.hasErrors('proEmailAddress')}"
+												th:errors="*{proEmailAddress}" class="text-white"> </span>
+											<input type="hidden" id="OldEmail" name="OldEmail"
+														th:value="*{proEmailAddress}" />
+										</div>
+										<div class="form-group">
+											<label for="proAddress" class="white labelForm">Adresse</label> <input
+												type="text" id="proAddress" th:field="*{proAddress}"
+												placeholder="Ajoutez ou modifiez votre adresse"
+												class="form-last-name form-control" tabindex="6" />
+											<span th:if="${#fields.hasErrors('proAddress')}"
+												th:errors="*{proAddress}" class="text-danger"> </span>
+										</div>
+										<div class="form-group">
+											<label for="proCity" class="white labelForm">Ville</label> <input
+												type="text" id="proCity" th:field="*{proCity}"
+												placeholder="Champs obligatoire"
+												class="form-last-name form-control" required tabindex="7" />
+											<span th:if="${#fields.hasErrors('proCity')}"
+												th:errors="*{proCity}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
 											<label for="proPostcode" class="white labelForm">Code
 												Postal</label> <input type="text" id="proPostcode"
 												th:field="*{proPostcode}" placeholder="Champs Obligatoire"
 												class="form-email form-control" pattern="[0-9]{5}" required
-												tabindex="7" /> <span
+												tabindex="8" /> <span
 												th:if="${#fields.hasErrors('proPostcode')}"
 												th:errors="*{proPostcode}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
-											<label for="getLogo" class="white labelForm">Logo</label>
-			 								<img th:src="${afficheLogo}" id="logoProEdit">
-			 								<input type="hidden" th:field="*{logo}"/>
-			 								<input type="file" id="getLogo" name="getLogo" accept="image/png, image/jpeg"/>
+											<label for="activityDescription" class="white labelForm">
+												Description de l'activité
+											</label>
+											<textarea cols="15" id="activityDescription" th:field="*{activityDescription}"
+													placeholder="Modifiez ou entrez une description" class="form-email form-control"
+													tabindex="9"></textarea>
+											<span th:if="${#fields.hasErrors('activityDescription')}"
+													th:errors="*{activityDescription}" class="text-danger"> </span>
+										</div>
+										
+										<div class="form-group">
+											<label for="getLogo" class="white labelForm">Logo de l'entreprise</label>
+			 								<br/>
+			 								<div class="divLogoInputFile">
+			 									<img id="logoProEdit" th:src="${afficheLogo}" >
+			 									<input type="hidden" th:field="*{logo}"/>
+			 									<input class="inputFile" type="file" id="getLogo" name="getLogo" accept="image/png, image/jpeg"/>
+			 								</div>
+			 								
+			 								
 										</div>
 										<div class="form-group">
 											<input type="hidden" th:field="*{proPassword}"/>
@@ -120,18 +144,47 @@
 											th:text="${profession.name}"> </label>
 									</div>
 								</div>
-								
-									 <div class="zoneBoutonsEdit">
-			                    		<a href="/pro/proDashboard" class="btn btnRetour bggreyClair">Retour</a>
-			                    		<button type="submit" class="btn">Sauvegarder les Modifications</button>
-			                        </div>
-			                        <div class="middle-border-horizontal width-form-box"></div>
-			                        <div class="form-group">
-										<a class="btn btnMDP " href="#loginModal"
-												data-toggle="modal">
-											Modifier mon mot de passe
-										</a>
-			                        </div>
+								<div class="middle-border-horizontal width-form-box"></div>
+								 <div class="zoneBoutonsEdit">
+		                    		<a href="/pro/proDashboard" class="btn btnRetour bggreyClair">Retour</a>
+		                    		<button type="submit" class="btn">Sauvegarder les Modifications</button>
+		                        </div>
+		                        <div class="middle-border-horizontal width-form-box"></div>
+		                        <div class="form-group">
+									<a class="btn btnMDP " href="#loginModal"
+											data-toggle="modal">
+										Modifier mon mot de passe
+									</a>
+		                        </div>
+							</form>
+							<div class="middle-border-horizontal width-form-box"></div>
+			<!----------------- Ajouter une PHOTO ------------------>
+								<form th:object="${pro}" th:action="@{/public/proAddPhoto/{id}(id=${pro.id})}" method="POST" enctype="multipart/form-data">
+								<div>
+								<!-- -------liste photos -->
+									<div class=" divDeletePhoto flexRow">
+										<div th:each="photo : ${photos}" class="imgPlustext">
+									  		<img th:src="${photo[0]}" class="deletePhotosProEdit">
+									  		<br/>
+									  		<a class="white" th:href="@{/pro/proDeletePhotos/}+ ${photo[1]}">Supprimer</a>
+										</div>
+									</div>
+									<!-- -------modifications photos -->
+									<div class=" divModifPhoto flexColumn">
+										<label for="listProfession" class="white labelForm width-form-box">
+											Ajouter ou Modifier des images
+										</label>
+										<div class="flexRow btnProEdit">
+											<input class="inputFile"type="file" id="listProPhotos" name="listProPhotos" accept="image/png, image/jpeg" multiple required>
+											<button class="btn">Envoyer</button>
+											<button class="btn" onClick="this.form.reset()">Annuler</button>
+										</div>
+										<div th:if="${msg eq 'plsPhot'}" class="alert alert-danger alert-dismissable">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											<strong>Veuillez ajouter une photo</strong>
+										</div>	
+									</div>
+								</div>
 							</form>
 						</div>
 					</div>

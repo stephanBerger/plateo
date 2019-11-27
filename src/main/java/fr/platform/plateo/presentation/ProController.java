@@ -60,8 +60,17 @@ public class ProController {
 				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
 
+		Base64.Encoder encoder = Base64.getEncoder();
+
+		List<String[]> encodings = new ArrayList<>();
+		for (ProPhotos photo : pro.getListProPhotos()) {
+			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			encodings.add(new String[] { encoding, photo.getId() + "" });
+		}
+
+		model.addAttribute("photos", encodings);
+
 		if (pro.getLogo() != null) {
-			Base64.Encoder encoder = Base64.getEncoder();
 			model.addAttribute("afficheLogo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()

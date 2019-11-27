@@ -12,6 +12,9 @@ body {
     align-items: stretch;
     justify-content: space-between;
 }
+textarea{
+	resize:none;
+}
 
 a:hover{
 	text-decoration: none;
@@ -73,7 +76,14 @@ a:hover{
   	justify-content: flex-start;
 }
 
-
+.flexColumn{
+	display: flex;
+	flex-direction: column;
+}
+.flexRow{
+	display: flex;
+	flex-direction: row;
+}
 /*-----------------------------HEADER-----------------------------------------*/
 
 /*----------ANIMATIONS JS HEADER-------------------*/
@@ -237,9 +247,6 @@ greyClair ul{
     margin-right: 50px;
     
   }
-.menu .dropdown {
-	
-}
 
   .dropdown li{
   	margin-right: 0px !important;
@@ -286,7 +293,7 @@ greyClair ul{
   float: left;
 }
 .dropdown {
-  font-size: 1rem;
+  font-size: 1.1rem;
   border: none;
   outline: none;
   color: white;
@@ -702,7 +709,7 @@ ul{
 	}
 	/*-------MENU----------*/
 	.menu nav ul{
-	    font-size:1rem;
+	   /* font-size:1rem;*/
 	}
 	.menu li {
 	    margin-right: 40px;
@@ -835,4 +842,8 @@ ul{
 
 .page-item.active .page-link {
 	z-index: 0 !important;
+}
+.nomSocieteProfil{
+	font-weight: 600;
+	font-size:2.8rem;
 }
