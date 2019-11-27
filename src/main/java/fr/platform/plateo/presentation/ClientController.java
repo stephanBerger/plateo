@@ -34,7 +34,6 @@ import fr.platform.plateo.business.service.EmailService;
 import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 
-
 /**
  *
  */
@@ -101,7 +100,7 @@ public class ClientController {
 		List<Estimate> estimatesStatusList1 = new ArrayList<>();
 		List<Estimate> estimatesStatusList2 = new ArrayList<>();
 		estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-		estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 		estimatesStatusList2.addAll(estimatesStatusList1);
 
 		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
@@ -226,7 +225,7 @@ public class ClientController {
 			client.setRole(role);
 
 			this.clientService.create(client);
-			
+
 			this.LOGGER.info("Le client " + client.getClientFirstname() + " " + client.getClientLastname()
 					+ " a modifié sa fiche avec succés");
 
