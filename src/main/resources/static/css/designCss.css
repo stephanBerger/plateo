@@ -74,10 +74,6 @@ strong {
 	max-height: 400px !important;
 }
 
-.columnEstimate{
-	max-height: 460px !important;
-}
-
 input[type="text"], 
 input[type="password"], 
 input[type="email"],
@@ -441,8 +437,8 @@ textarea.form-control{
 }
 
 .popover {
-	color:white !important;
-  	background-color: #ff9500; /*substitute 'red' with your color of choice*/
+	color:#bdbdbd;
+	background-color: #ff9500;
   	border-color: #ff9500;
 }
 
