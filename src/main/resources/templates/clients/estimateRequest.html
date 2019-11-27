@@ -2,21 +2,53 @@
 <html xmlns:th="www.thymeleaf.org">
 <head th:replace="public/head :: head"></head>
 <head>
-<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleClient.css}" rel="stylesheet" type="text/css" >
+	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<header th:replace="clients/headerdashboard :: headerdashboard"></header>
-	<h1 class="text-center top-content">Demande de devis</h1>
-	<h4 class="text-center">
-		Vous remplissez le formulaire de demande de devis
-	</h4>
-	<div class="list-group container">
-		<a th:each="prof,stat : ${professions}"
-			th:href="@{/clients/professionRequest/} + ${prof.id} + '/' + ${estimateid}" th:text="${prof.name}"
-			th:classappend="${(prof.enabled ? '' : 'disabled')}"
-			class="list-group-item list-group-item-action list-group-item-primary"></a>
-	</div>
-	
-	<footer th:replace="public/footer :: footer"></footer>
+	<div class="top-content">
+            <div class="inner-bg">
+                <div class="container containerMaxWidth">
+                    <div class="row centrer">
+                        <div class="col-sm-8 col-sm-offset-2 text centrer">
+                            <h1>Demander un <strong>devis</strong></h1>
+                        </div>
+                    </div>
+					<div class="row centrer">
+                       	<div class="form-box">
+                            <div class="form-bottom">
+								<div class="list-group container"> <!--  class="registration-form"  -->
+									<a th:each="prof,stat : ${professions}"
+										th:href="@{/clients/professionRequest/} + ${prof.id} + '/' + ${estimateid}" th:text="${prof.name}"
+										th:classappend="${(prof.enabled? '' : 'disabled')}"
+										class="list-group-item list-group-item-action list-group-item-primary"></a>
+								</div>
+							</div>
+                       	</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+		<div class="backstretch">
+			<img src="/img/1.jpg">
+		</div>
+        <!-- Footer -->
+        <footer th:replace="public/footer :: footer"></footer>
+        
+        <script th:src="@{/js/scripts.js}"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+        
+		<!--  <th:block th:if="${msg}">
+			<script>
+				$('#loginModal').modal('show')
+			</script>
+		</th:block>-->
 </body>
 </html>
