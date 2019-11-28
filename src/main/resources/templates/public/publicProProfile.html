@@ -4,8 +4,9 @@
 <head>
 	<link th:href="@{/css/styleFormulaireClient.css}" rel="stylesheet" type="text/css">
 	<link th:href="@{/css/designCss.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/styleLogin.css}" rel="stylesheet" type="text/css"> 
 </head>
-<body class="BgBlue">
+<body>
 	<header th:replace="public/header :: header"></header>
 	
 	 <div class="top-content" th:fragment="proProfile">
@@ -88,16 +89,17 @@
 								</div>
 							</div>
 		<!----------------- MODAL QRCODE ------------------>
-							<div class="modal fade" id="modalQrcode">
+							<div class="modal fade" id="modalQrcode" data-keyboard="false"
+									data-backdrop="static">
 						 		<div class="modal-dialog">
-						    		<div class="modal-content">
+						    		<div class="modal-content overFlowHidden">
 						    			<div class="bggreyClair headermodal">
 											<h3 class="white centrer"><strong>QRCODE</strong></h3>
 											<button type="button" class="close btnModal" data-dismiss="modal">
 												<span>&times;</span>
 											</button>	
 										</div>
-						      			<div class="modal-body">
+						      			<div id="modalQ" class="modal-body">
 						      				<img th:src="@{https://api.qrserver.com/v1/create-qr-code/?data=}+${pro.proEmailAddress}+${pro.managerLastname}"
 						      						alt="Scannez-moi" title="QRcode" />
 							      		</div>
