@@ -55,34 +55,48 @@ public class ProController {
 
 	// Affichage de la modification du professionnel
 	@GetMapping("/pro/proEdit/{id}")
-	public String showUpdatePro(@PathVariable("id") Integer id, Model model) {
+	public String showUpdatePro(@PathVariable("id") Integer id, Model model,
+			@ModelAttribute("proId") Integer proId, Principal principal) {
 		Pro pro = this.proService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
+				.orElseThrow(
+						() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
 
+		Pro pro2 = this.proService.findEmail(principal.getName());
+
+		this.LOGGER.info("proId: " + proId + " id :" + id + " prodId2 : " + pro2.getId());
+		// test si le pro est sur son id
+		if (id != pro2.getId()) {
+			return "/errors/403";
+		}
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		List<String[]> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64,"
+					+ encoder.encodeToString(photo.getProPhoto());
 			encodings.add(new String[] { encoding, photo.getId() + "" });
 		}
 
 		model.addAttribute("photos", encodings);
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("afficheLogo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("afficheLogo",
+					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
-		this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-				+ " a demandé la modification de ses infos");
+		this.LOGGER.info(
+				"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+						+ " a demandé la modification de ses infos");
 		model.addAttribute("listProfessions", this.professionService.getAll());
 		return "/pro/proEdit";
 	}
 
 	// bouton modifier du formulaire professionnel
 	@PostMapping("/pro/proEdit/{id}")
-	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail, @PathVariable("id") Integer id,
-			@Valid Pro pro, BindingResult result, Model model, final RedirectAttributes redirectAttributes,
+	public String updatePro(@RequestParam(value = "OldEmail") String OldEmail,
+			@PathVariable("id") Integer id,
+			@Valid Pro pro, BindingResult result, Model model,
+			final RedirectAttributes redirectAttributes,
 			@RequestParam("getLogo") MultipartFile logo) {
 
 		if (!OldEmail.equals(pro.getProEmailAddress())) {
@@ -122,17 +136,19 @@ public class ProController {
 
 			this.proService.create(pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
-			this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
-					+ " a modifié sa fiche avec succès");
+			this.LOGGER.info(
+					"Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+							+ " a modifié sa fiche avec succès");
 
 			if (!OldEmail.equals(pro.getProEmailAddress())) {
-				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+				this.LOGGER.info("Le professionnel " + pro.getManagerFirstname() + " "
+						+ pro.getManagerLastname()
 						+ " a modifié son email - déconnexion obligatoire");
 
 				return "redirect:/exit";
 			}
 		}
-		return "redirect:/pro/proDashboard";
+		return "redirect:/pro/proEdit/" + id;
 	}
 
 	// Profil pro vu par le pro
@@ -143,12 +159,14 @@ public class ProController {
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo",
+					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String[]> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64,"
+					+ encoder.encodeToString(photo.getProPhoto());
 			encodings.add(new String[] { encoding, photo.getId() + "" });
 		}
 
@@ -159,18 +177,21 @@ public class ProController {
 
 	// Profil pro vu par tout le monde
 	@GetMapping("/public/publicProProfile/{id}")
-	public String publicProProfile(@ModelAttribute("proId") Integer proId, @PathVariable Integer id, Model model) {
+	public String publicProProfile(@ModelAttribute("proId") Integer proId, @PathVariable Integer id,
+			Model model) {
 		Pro pro = this.proService.read(id);
 		model.addAttribute("pro", pro);
 		Base64.Encoder encoder = Base64.getEncoder();
 
 		if (pro.getLogo() != null) {
-			model.addAttribute("logo", "data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
+			model.addAttribute("logo",
+					"data:image/png;base64," + encoder.encodeToString(pro.getLogo()));
 		}
 
 		List<String> encodings = new ArrayList<>();
 		for (ProPhotos photo : pro.getListProPhotos()) {
-			String encoding = "data:image/png;base64," + encoder.encodeToString(photo.getProPhoto());
+			String encoding = "data:image/png;base64,"
+					+ encoder.encodeToString(photo.getProPhoto());
 			encodings.add(encoding);
 		}
 		proId = pro.getId();
@@ -187,7 +208,8 @@ public class ProController {
 	}
 
 	@PostMapping("/public/proAddPhoto/{id}")
-	public String proAddPhoto(@PathVariable Integer id, @RequestParam("listProPhotos") List<MultipartFile> photos,
+	public String proAddPhoto(@PathVariable Integer id,
+			@RequestParam("listProPhotos") List<MultipartFile> photos,
 			RedirectAttributes redirectAttributes) {
 		if (photos.isEmpty()) {
 			redirectAttributes.addFlashAttribute("message", "plsPhot");
@@ -248,7 +270,8 @@ public class ProController {
 			return "/public/proForm";
 
 		} else if (!confirmPasswordInput.equals(pro.getProPassword())) {
-			this.LOGGER.info("Les 2 passwords ne sont pas identiques " + confirmPasswordInput.toString() + " "
+			this.LOGGER.info("Les 2 passwords ne sont pas identiques "
+					+ confirmPasswordInput.toString() + " "
 					+ pro.getProPassword());
 			result.rejectValue("proPassword", null, "Les passwords ne sont pas identiques");
 			return null;
@@ -300,7 +323,8 @@ public class ProController {
 			this.proService.create(pro);
 
 			// envoi email inscription
-			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
+			String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname()
+					+ ","
 					+ "\n\nVotre incription a bien été prise en compte."
 					+ "\n\nPLATEO vous remercie de votre confiance.";
 
@@ -335,7 +359,8 @@ public class ProController {
 
 		if (pro.getId() != null) {
 			Pro pro2 = this.proService.findId(pro.getId())
-					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide"));
+					.orElseThrow(() -> new IllegalArgumentException(
+							"L' Id du particulier est invalide"));
 			// si tout est ok on modifie le mot de passe
 			BCryptPasswordEncoder crypt = new BCryptPasswordEncoder(4);
 			String cryptpassword = crypt.encode(password);
@@ -343,7 +368,8 @@ public class ProController {
 			this.LOGGER.info("Cryptage du mot de passe OK");
 
 			this.proService.create(pro2);
-			this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " " + pro2.getManagerLastname()
+			this.LOGGER.info("Le professionnel " + pro2.getManagerFirstname() + " "
+					+ pro2.getManagerLastname()
 					+ " a modifié son mot de passe avec succés");
 			model.addAttribute("pro", pro);
 			redirectAttributes.addFlashAttribute("msgok", "ok");
