@@ -100,12 +100,20 @@
 												th:errors="*{proPostcode}" class="text-white"> </span>
 										</div>
 										<div class="form-group">
+											<label for="proPhoneNumber" class="white labelForm">Numéro de téléphone</label> <input type="text" id="proPhoneNumber"
+												th:field="*{proPhoneNumber}" placeholder="ex: 0607080910"
+												class="form-email form-control" pattern="[0-9]{10}"
+												tabindex="9" /> <span
+												th:if="${#fields.hasErrors('proPhoneNumber')}"
+												th:errors="*{proPhoneNumber}" class="text-white"> </span>
+										</div>
+										<div class="form-group">
 											<label for="activityDescription" class="white labelForm">
 												Description de l'activité
 											</label>
 											<textarea cols="15" id="activityDescription" th:field="*{activityDescription}"
 													placeholder="Modifiez ou entrez une description" class="form-email form-control"
-													tabindex="9"></textarea>
+													tabindex="10"></textarea>
 											<span th:if="${#fields.hasErrors('activityDescription')}"
 													th:errors="*{activityDescription}" class="text-danger"> </span>
 										</div>
