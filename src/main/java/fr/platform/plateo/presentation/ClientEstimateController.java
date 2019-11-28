@@ -43,7 +43,7 @@ public class ClientEstimateController {
 		Client client = this.clientService.findEmail(principal.getName());
 		model.addAttribute("client", client);
 		List<Estimate> estimatesStatusList = new ArrayList<>();
-		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 		model.addAttribute("estimatesStatusList", estimatesStatusList);
 
 		model.addAttribute("mode", "draft");
@@ -95,7 +95,7 @@ public class ClientEstimateController {
 		List<Estimate> estimatesStatusList = new ArrayList<>();
 		List<Estimate> estimatesStatusDraftList = new ArrayList<>();
 		estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-		estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 
 		estimatesStatusList.addAll(estimatesStatusDraftList);
 
@@ -175,8 +175,7 @@ public class ClientEstimateController {
 		if (url.contains("AllRequest")) {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
 			List<Estimate> estimatesStatusDraftList = new ArrayList<>();
-			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
-					client);
+			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 			estimatesStatusList.addAll(estimatesStatusDraftList);
 			model.addAttribute("mode", "allRequest");
 		} else if (url.contains("AwaitingAccepted")) {
@@ -192,8 +191,7 @@ public class ClientEstimateController {
 		} else {
 			estimatesStatusList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
 			List<Estimate> estimatesStatusDraftList = new ArrayList<>();
-			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON,
-					client);
+			estimatesStatusDraftList = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 			estimatesStatusList.addAll(estimatesStatusDraftList);
 			model.addAttribute("mode", "allRequest");
 		}
@@ -215,7 +213,7 @@ public class ClientEstimateController {
 		List<Estimate> estimatesStatusList1 = new ArrayList<>();
 		List<Estimate> estimatesStatusList2 = new ArrayList<>();
 		estimatesStatusList2 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE, client);
-		estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.DEMANDE_BROUILLON, client);
+		estimatesStatusList1 = this.estimateService.readByStatusClient(EstimateStatus.BROUILLON, client);
 		estimatesStatusList2.addAll(estimatesStatusList1);
 
 		model.addAttribute("MesDemandesDevis", estimatesStatusList2);
@@ -229,6 +227,17 @@ public class ClientEstimateController {
 		model.addAttribute("proList", proList);
 
 		return "/clients/clientDashboard";
+
+	}
+
+	// estimate validation
+	@GetMapping("clients/clientEstimateValid")
+	public String clientEstimateValid(Principal principal, Model model) {
+		this.LOGGER.info("La page \"clientEstimateValid\" client est demandée");
+		Client client = this.clientService.findEmail(principal.getName());
+		model.addAttribute("client", client);
+
+		return "clients/clientEstimateValid";
 
 	}
 

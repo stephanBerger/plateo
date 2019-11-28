@@ -24,10 +24,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.platform.plateo.business.entity.Estimate;
+import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
@@ -47,6 +50,9 @@ public class ProController {
 
 	@Autowired
 	private ProfessionService professionService;
+
+	@Autowired
+	private EstimateService estimateService;
 
 	@ModelAttribute("proId")
 	public Integer proId() {
@@ -209,6 +215,17 @@ public class ProController {
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
 		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+
+		// AJOUT POUR LISTER LES DEVIS ENVOYÉS
+		List<Estimate> estimatesStatusSendList = new ArrayList<>();
+		estimatesStatusSendList = this.estimateService.readByStatusPro(EstimateStatus.ATTENTE_ACCEPTATION_CLIENT, pro);
+		model.addAttribute("MesDevisEnvoyes", estimatesStatusSendList);
+
+		// AJOUT DES DEVIS ACCEPTEES
+		List<Estimate> estimatesStatusAcceptedList = new ArrayList<>();
+		estimatesStatusAcceptedList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE, pro);
+		model.addAttribute("MesDevisAcceptes", estimatesStatusAcceptedList);
+
 		return "/pro/proDashboard";
 	}
 

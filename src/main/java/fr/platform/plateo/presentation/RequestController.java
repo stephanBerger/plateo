@@ -89,7 +89,7 @@ public class RequestController {
 		estimate.setWorkAddress(client.getClientAddress());
 		estimate.setWorkPostcode(client.getClientPostcode());
 		estimate.setWorkCity(client.getClientCity());
-		estimate.setEstimateStatus(EstimateStatus.DEMANDE_BROUILLON);
+		estimate.setEstimateStatus(EstimateStatus.BROUILLON);
 
 		Client client2 = new Client();
 		client2.setId(client.getId());
@@ -117,7 +117,7 @@ public class RequestController {
 		model.addAttribute("professions", this.professionService.getAll());
 
 		return "clients/estimateRequest";
-		
+
 	}
 
 	// client a validé un devis avec 1 prestation, il continue en rajotant une
@@ -201,7 +201,7 @@ public class RequestController {
 			Client client = this.clientService.findId(assigneeId)
 					.orElseThrow(() -> new IllegalArgumentException("L' Id est invalide"));
 			Estimate estimate2 = this.estimateService.readOne(estimateid);
-	
+
 			model.addAttribute("estimateid", estimateid);
 			model.addAttribute("serviceId", serviceId);
 			model.addAttribute("estimate", estimate2);

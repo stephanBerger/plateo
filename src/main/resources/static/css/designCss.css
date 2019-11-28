@@ -74,10 +74,6 @@ strong {
 	max-height: 400px !important;
 }
 
-.columnEstimate{
-	max-height: 460px !important;
-}
-
 input[type="text"], 
 input[type="password"], 
 input[type="email"],
@@ -439,3 +435,23 @@ textarea.form-control{
 .btnProEdit.btn{
 	
 }
+
+.popover {
+	color:#bdbdbd;
+	background-color: #ff9500;
+  	border-color: #ff9500;
+}
+
+.popover-content {
+	font-size: 14px :important;
+	color:white !important;
+  	background-color: #ff9500;
+}
+
+.popover.right>.arrow:after {
+  border-right-color: #ff9500;
+}
+
+
+  	
+  	
