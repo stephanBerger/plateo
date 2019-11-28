@@ -24,10 +24,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.platform.plateo.business.entity.Estimate;
+import fr.platform.plateo.business.entity.EstimateStatus;
 import fr.platform.plateo.business.entity.Pro;
 import fr.platform.plateo.business.entity.ProPhotos;
 import fr.platform.plateo.business.entity.Role;
 import fr.platform.plateo.business.service.EmailService;
+import fr.platform.plateo.business.service.EstimateService;
 import fr.platform.plateo.business.service.ProService;
 import fr.platform.plateo.business.service.ProfessionService;
 
@@ -48,6 +51,9 @@ public class ProController {
 	@Autowired
 	private ProfessionService professionService;
 
+	@Autowired
+	private EstimateService estimateService;
+
 	@ModelAttribute("proId")
 	public Integer proId() {
 		return null;
@@ -61,13 +67,13 @@ public class ProController {
 				.orElseThrow(
 						() -> new IllegalArgumentException("L' Id du professionnel est invalide"));
 		model.addAttribute("pro", pro);
-
+		// on recupere l'id du pro connecté par la session principal
 		Pro pro2 = this.proService.findEmail(principal.getName());
 
 		this.LOGGER.info("proId: " + proId + " id :" + id + " prodId2 : " + pro2.getId());
 		// test si le pro est sur son id
 		if (id != pro2.getId()) {
-			return "/errors/403";
+			return "redirect:/pro/proEdit/" + pro2.getId();
 		}
 		Base64.Encoder encoder = Base64.getEncoder();
 
@@ -231,6 +237,18 @@ public class ProController {
 		Pro pro = this.proService.findEmail(principal.getName());
 		model.addAttribute("pro", pro);
 		this.LOGGER.info("Authentification ok - redirect sur clientDashboard");
+
+		// AJOUT POUR LISTER LES DEVIS DEMANDES
+		List<Estimate> estimatesStatusSendList = new ArrayList<>();
+		estimatesStatusSendList = this.estimateService.readByStatus(EstimateStatus.DEMANDE);
+		model.addAttribute("MesDemandesDevis", estimatesStatusSendList);
+
+		// AJOUT DES DEVIS ACCEPTEES
+		List<Estimate> estimatesStatusAcceptedList = new ArrayList<>();
+		estimatesStatusAcceptedList = this.estimateService.readByStatusPro(EstimateStatus.ACCEPTE,
+				pro);
+		model.addAttribute("MesDevisAcceptes", estimatesStatusAcceptedList);
+
 		return "/pro/proDashboard";
 	}
 

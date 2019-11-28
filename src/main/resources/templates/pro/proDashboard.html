@@ -13,7 +13,6 @@
 	$(document).ready(function() {
 		$('#MesDemandesDevis').dataTable();
 		$('#MesDevisAcceptes').dataTable();
-		$('#proList').dataTable();
 	} );
 	</script>
 </head>
@@ -34,9 +33,9 @@
 		       		<!-- ---------------PREMIERE ROW DEMANDE DEVIS--------------------- -->
 		        	<div class="rowMesDemandesDevis">
 		        		<div class="row centrer">
-			                <div class=" text centrer">
-			                    <h1>Mes <strong>devis</strong> envoyés</h1>
-			                </div>
+			                	<div class="col-sm-8 col-sm-offset-2 text centrer">
+			                    	<h1>Mes demandes de <strong>devis</strong></h1>
+			                	</div>
 			            </div>
 			            <div class="row centrer">
 			            	<div class="form-box">
@@ -45,6 +44,7 @@
 										<thead>
 											<tr>
 												<th scope="col">numéro Devis</th>
+												<th scope="col">Date de création</th>
 												<th scope="col">Ville</th>
 												<th scope="col">Code postal</th>
 												<th scope="col">Edition</th>
@@ -54,9 +54,10 @@
 										<tbody>
 											<tr th:each="estimate : ${MesDemandesDevis}">
 												<td th:text="${estimate.id}"></td>
+												<td th:text="${#temporals.format(estimate.estimateDate, 'dd-MM-yyyy HH:mm')}"></td>
 												<td th:text="${estimate.workCity}"></td>
 												<td th:text="${estimate.workPostcode}"></td>
-												<td>  <a href="#">Edit</a></td>
+												<td><a th:href="@{/pro/EstimateDetails/{id}(id=${estimate.id})}">Edit</a></td>
 												<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
 											</tr>
 										</tbody>
@@ -78,7 +79,8 @@
 									<table th:fragment="devis" id="MesDevisAcceptes" class="table table-striped table-bordered">
 										<thead>
 											<tr>
-												<th scope="col">numéro Devis</th>
+												<th scope="col">Numéro Devis</th>
+												<th scope="col">Date de création</th>
 												<th scope="col">Ville</th>
 												<th scope="col">Code postal</th>
 												<th scope="col">Edition</th>
@@ -88,9 +90,9 @@
 										<tbody>
 											<tr th:each="estimate : ${MesDevisAcceptes}">
 												<td th:text="${estimate.id}"></td>
+												<td th:text="${#temporals.format(estimate.estimateDate, 'dd-MM-yyyy HH:mm')}"></td>
 												<td th:text="${estimate.workCity}"></td>
 												<td th:text="${estimate.workPostcode}"></td>
-												<!--<td>  <a th:href="@{/clients/estimate/{id}(id=${estimate.id})}">Edit</a></td>-->
 												<td>  <a href="#">Edit</a></td>
 												<td><a th:href="@{/clients/EstimateDelete/{id}(id=${estimate.id})}">Delete</a></td>      	      
 											</tr>
