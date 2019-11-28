@@ -12,10 +12,6 @@
 	border-radius: .5rem;
 }
 
-
-
-
-
 .divVide{
 	height:0px;
 }
@@ -41,4 +37,52 @@ input[type="email"],input[type="text"],input[type="password"], select.champsForm
   /*margin-top:5px;*/
 }
  /*--------------------FIN FORMULAIRE INSCRIPTION CLIENT-------------------------------*/ 
+ 
+ 
+ /*--------------------PAGE DEVIS ET VALIDATION-------------------------------*/ 
+ 
+ .alignRight{
+ color:white;
+ text-align: right;
+}
+ 
+.clientEstimateValid .titre-formulaires{
+	color:white;
+	font-size:1.8rem;
+}
+.clientEstimateValid strong span{
+	font-weight: 600;	
+}
+.clientEstimateValid .labelForm{
+	/*line-height:1rem;*/
+	padding: .2rem 0 !important;
+}
+.clientEstimateValid .rowFormulaire{
+	margin:25px 10px 0 10px;
+}
+.soustitre-formulaires{
+	color:white;
+	margin-left:10px;
+	margin-bottom:15px;
+}
+
+
+.blocInfosEstimate{
+	background-color: #ECF6FC;
+	border-radius: 10px;
+	display:flex;
+	flex-direction:column;
+	padding:15px;
+	width:500px;
+} 
+.doubleRowEstimate{
+	display:flex;
+	flex-direction:row;
+	flex-wrap:wrap;
+	justify-content:space-between;
+}
+
+.boutonEstimate{
+	width:calc(100% - 40px);
+}
    
