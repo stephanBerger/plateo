@@ -83,6 +83,7 @@ public class Pro implements UserDetails {
 	private byte[] logo;
 
 	@Column(name = "activity_description")
+	@Lob
 	private String activityDescription;
 
 	@Column(name = "identity_card")

@@ -1,68 +1,76 @@
 package fr.platform.plateo.business.entity;
 
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 @Entity
-@Table( name = "resetpasswordclient" )
+@Table(name = "resetpasswordclient")
 public class ResetPasswordClient {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    @Column(nullable = false, unique = true)
-    private String token;
+	@Column(nullable = false, unique = true)
+	private String token;
 
-    @Column(nullable = false)
-    private Date expiryDate;
-    
-    @OneToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
-   
-    private Client client;
+	@Column(nullable = false)
+	private Date expiryDate;
 
-    public Integer getId() {
-        return id;
-    }
+	@OneToOne(targetEntity = Client.class, fetch = FetchType.EAGER)
+	@JoinColumn(nullable = false, name = "user_id")
+	private Client client;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+	public String getToken() {
+		return this.token;
+	}
 
-    public Client getClient() {
-        return client;
-    }
+	public void setToken(String token) {
+		this.token = token;
+	}
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
+	public Client getClient() {
+		return this.client;
+	}
 
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
-    }
+	public Date getExpiryDate() {
+		return this.expiryDate;
+	}
 
-    public void setExpiryDate(int minutes){
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, minutes);
-        this.expiryDate = now.getTime();
-    }
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
 
-    public boolean isExpired() {
-        return new Date().after(this.expiryDate);
-    }
+	public void setExpiryDate(int minutes) {
+		Calendar now = Calendar.getInstance();
+		now.add(Calendar.MINUTE, minutes);
+		this.expiryDate = now.getTime();
+	}
+
+	public boolean isExpired() {
+		return new Date().after(this.expiryDate);
+	}
 
 }

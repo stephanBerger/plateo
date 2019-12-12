@@ -58,8 +58,9 @@ public class PasswordController {
 
 	// formulaire forgot password CLIENT method post
 	@PostMapping("/password/clientForgotPassword")
-	public String ValidForgotPassword(Model model, HttpServletRequest request, 
-			@RequestParam(value = "email") String email, final RedirectAttributes redirectAttributes) {
+	public String ValidForgotPassword(Model model, HttpServletRequest request,
+			@RequestParam(value = "email") String email,
+			final RedirectAttributes redirectAttributes) {
 
 		// verif si email existe dans BDD
 		Client client = this.clientService.findEmail(email);
@@ -77,16 +78,20 @@ public class PasswordController {
 		this.resetRepository.save(token);
 
 		// creation de URL reset password
-		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+		String url = request.getScheme() + "://" + request.getServerName() + ":"
+				+ request.getServerPort();
 		String url2 = url + "/password/clientResetPassword?token=" + token.getToken();
 		PasswordController.LOGGER.info("URL reset password : " + url2);
 
 		// envoi email réinitialisation du password
-		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname() + ","
-				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+		String text = "Bonjour " + client.getClientFirstname() + " " + client.getClientLastname()
+				+ ","
+				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe"
+				+ "\n\n"
 				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
-		this.emailService.sendEmail(client.getClientEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
+		this.emailService.sendEmail(client.getClientEmailAddress(),
+				"PLATEO - REINITIALISATION DU MOT DE PASSE", text);
 
 		PasswordController.LOGGER.info("Email envoyé au client pour réinitialisation du password");
 
@@ -118,9 +123,11 @@ public class PasswordController {
 			Integer id = resetToken.getClient().getId();
 
 			Client client = this.clientService.findId(id)
-					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide n° : " + id));
-			PasswordController.LOGGER.info("Demande de réinitialisation du password par le client : "
-					+ client.getClientFirstname() + " " + client.getClientLastname());
+					.orElseThrow(() -> new IllegalArgumentException(
+							"L' Id du particulier est invalide n° : " + id));
+			PasswordController.LOGGER
+					.info("Demande de réinitialisation du password par le client : "
+							+ client.getClientFirstname() + " " + client.getClientLastname());
 			model.addAttribute("client", client);
 			model.addAttribute("condition1IsTrue", Boolean.TRUE);
 		}
@@ -130,7 +137,8 @@ public class PasswordController {
 
 	// reset du password CLIENT method post lorsquil click sur le lien recu par mail
 	@PostMapping("/password/clientvalidresetpassword")
-	public String ValidResetPassword(Client client, BindingResult result,Model model, @RequestParam("id") Integer id,
+	public String ValidResetPassword(Client client, BindingResult result, Model model,
+			@RequestParam("id") Integer id,
 			@RequestParam("clientPassword") String clientPassword,
 			@RequestParam("confirmPasswordInput") String confirmPasswordInput) {
 
@@ -145,7 +153,8 @@ public class PasswordController {
 		}
 
 		Client client2 = this.clientService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide n° : " + id));
+				.orElseThrow(() -> new IllegalArgumentException(
+						"L' Id du particulier est invalide n° : " + id));
 
 		String cryptPassword = this.passwordEncoder.encode(clientPassword);
 		client2.setClientPassword(cryptPassword);
@@ -155,19 +164,6 @@ public class PasswordController {
 		return "/password/clientResetPassword";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// formulaire forgot password PRO method get
 	@GetMapping("/password/proForgotPassword")
 	public String proForgotPassword(Model model) {
@@ -177,7 +173,8 @@ public class PasswordController {
 
 	// formulaire forgot password PRO method post
 	@PostMapping("/password/proForgotPassword")
-	public String proValidForgotPassword(Model model, HttpServletRequest request, @RequestParam(value = "email") String email,
+	public String proValidForgotPassword(Model model, HttpServletRequest request,
+			@RequestParam(value = "email") String email,
 			final RedirectAttributes redirectAttributes) {
 
 		// verif si email existe dans BDD
@@ -197,16 +194,19 @@ public class PasswordController {
 		this.resetProRepository.save(token);
 
 		// creation de URL reset password
-		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+		String url = request.getScheme() + "://" + request.getServerName() + ":"
+				+ request.getServerPort();
 		String url2 = url + "/password/proResetPassword?token=" + token.getToken();
 		PasswordController.LOGGER.info("URL reset password : " + url2);
 
 		// envoi email réinitialisation du password
 		String text = "Bonjour " + pro.getManagerFirstname() + " " + pro.getManagerLastname() + ","
-				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe" + "\n\n"
+				+ "\n\nVeuiller cliquer sur le lien ci-dessous pour la réinitialisation de votre mot de passe"
+				+ "\n\n"
 				+ url2 + "\n\nPLATEO vous remercie de votre confiance.";
 
-		this.emailService.sendEmail(pro.getProEmailAddress(), "PLATEO - REINITIALISATION DU MOT DE PASSE", text);
+		this.emailService.sendEmail(pro.getProEmailAddress(),
+				"PLATEO - REINITIALISATION DU MOT DE PASSE", text);
 
 		PasswordController.LOGGER.info("Email envoyé au pro pour réinitialisation du mot de passe");
 
@@ -220,7 +220,7 @@ public class PasswordController {
 	public String proResetPassword(@RequestParam(required = false) String token, Model model) {
 		System.out.println(token);
 		ResetPasswordPro resetToken = this.resetProRepository.findByToken(token);
-		
+
 		// verifie si token existe
 		if (resetToken == null) {
 			model.addAttribute("msgnotoken", "ok");
@@ -238,7 +238,8 @@ public class PasswordController {
 			Integer id = resetToken.getPro().getId();
 
 			Pro pro = this.proService.findId(id)
-					.orElseThrow(() -> new IllegalArgumentException("L' Id du particulier est invalide n° : " + id));
+					.orElseThrow(() -> new IllegalArgumentException(
+							"L' Id du particulier est invalide n° : " + id));
 			PasswordController.LOGGER.info("Demande de réinitialisation du password par le pro : "
 					+ pro.getManagerFirstname() + " " + pro.getManagerLastname());
 			model.addAttribute("pro", pro);
@@ -250,7 +251,8 @@ public class PasswordController {
 
 	// formulaire reset password PRO method post
 	@PostMapping("/password/proValidResetPassword")
-	public String proValidResetPassword(Pro pro, BindingResult result,Model model,@RequestParam("id") Integer id, @RequestParam("proPassword") String proPassword,
+	public String proValidResetPassword(Pro pro, BindingResult result, Model model,
+			@RequestParam("id") Integer id, @RequestParam("proPassword") String proPassword,
 			@RequestParam("confirmPasswordInput") String confirmPasswordInput) {
 
 		// verifie si les 2 mots de passe pareils
@@ -264,7 +266,8 @@ public class PasswordController {
 		}
 
 		Pro pro2 = this.proService.findId(id)
-				.orElseThrow(() -> new IllegalArgumentException("L' Id du pro est invalide n° : " + id));
+				.orElseThrow(
+						() -> new IllegalArgumentException("L' Id du pro est invalide n° : " + id));
 
 		String cryptPassword = this.passwordEncoder.encode(proPassword);
 		pro2.setProPassword(cryptPassword);
